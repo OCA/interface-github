@@ -5,3 +5,16 @@ Interface Github
 ================
 
 Modules that allows Odoo to connect with Git / Github systems.
+
+After the configuration step, you'll get meta-datas like :
+
+* organizations,
+* repositories,
+* teams,
+* members
+
+You'll able to follow :
+
+* commits,
+* diff,
+* ...
