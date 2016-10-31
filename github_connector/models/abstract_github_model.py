@@ -149,7 +149,7 @@ class AbtractGithubModel(models.AbstractModel):
                 # Github doesn't provides api to load an issue by id
                 res = github_model.get(
                     [item.repository_id.github_login, item.github_login])
-            elif item._model._name =='github.organization':
+            elif item._model._name == 'github.organization':
                 # Github doesn't provides api to load an organization by id
                 res = github_model.get([item.github_login])
             else:
@@ -164,10 +164,10 @@ class AbtractGithubModel(models.AbstractModel):
         for i in range(max_try):
             try:
                 stream = urllib.urlopen(url).read()
-                break # success
+                break
             except Exception as err:
                 _logger.warning("URL Call Error. %s" % (err.__str__()))
-        else: # all ntries failed
+        else:
             raise err
         return base64.standard_b64encode(stream)
 
@@ -195,13 +195,11 @@ class AbtractGithubModel(models.AbstractModel):
 
     @api.multi
     def get_github_for(self, github_type):
-        company = self.env.user.company_id
         if (not tools.config.get('github_login') or
-            not tools.config.get('github_password')):
-            raise exceptions.Warning(
-                _("Configuration Error"),
-                _("Please add 'github_login' and 'github_password' "
-                  "in Odoo configuration file."))
+                not tools.config.get('github_password')):
+            raise exceptions.Warning(_("Configuration Error"), _(
+                "Please add 'github_login' and 'github_password' "
+                "in Odoo configuration file."))
         return Github(
             github_type,
             tools.config['github_login'],

@@ -41,7 +41,6 @@ class GithubOrganization(models.Model):
         "pos\n"
         "server-tools\n")
 
-
     member_ids = fields.Many2many(
         string='Members', comodel_name='res.partner',
         relation='github_organization_partner_rel', column1='organization_id',

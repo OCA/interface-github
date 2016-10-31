@@ -105,8 +105,8 @@ class GithubRepository(models.Model):
                 # Cloning the repository
                 os.makedirs(branch.local_path)
 
-                command = ("cd %s &&"\
-                    + "git clone %s%s/%s.git -b %s .") % (
+                command = (
+                    "cd %s && git clone %s%s/%s.git -b %s .") % (
                         branch.local_path,
                         _GITHUB_URL,
                         branch.repository_id.organization_id.github_login,
@@ -170,7 +170,6 @@ class GithubRepository(models.Model):
             except:
                 _logger.warning(
                     "Warning : unable to eval the size of '%s'." % (file_path))
-
 
         # Analyse Commits
         new_commits = 0
