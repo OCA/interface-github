@@ -15,8 +15,9 @@ Configuration
 =============
 
 Once installed, you have to:
+
 * Open your openerp.cfg file and add extra settings to mention github
- credencials:
+  credentials:
     * Add the following entries
 
 github_login = your_github_login
