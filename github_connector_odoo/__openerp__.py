@@ -5,13 +5,10 @@
 {
     'name': 'Github Connector - Odoo',
     'summary': 'Analyze Odoo Modules Informations from github repositories',
-    'version': '8.0.0.0.0',
-    'category': 'Custom',
-    'author': [
-        'Odoo Community Association (OCA)',
-        'Sylvain LE GAL',
-        'GRAP',
-    ],
+    'version': '8.0.1.0.0',
+    'category': 'Connector',
+    'license': 'AGPL-3',
+    'author': 'Odoo Community Association (OCA), Sylvain LE GAL, GRAP',
     'depends': [
         'github_connector',
     ],

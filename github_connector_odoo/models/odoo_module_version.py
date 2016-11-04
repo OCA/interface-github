@@ -3,11 +3,16 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import logging
+
 from docutils.core import publish_string
 
 from openerp import models, fields, api, _
 from openerp.tools import html_sanitize
 from openerp.addons.base.module.module import MyWriter
+from openerp.tools.safe_eval import safe_eval
+
+_logger = logging.getLogger(__name__)
 
 
 class OdooModuleVersion(models.Model):
@@ -163,7 +168,7 @@ class OdooModuleVersion(models.Model):
         for version in self:
             python_libs = []
             bin_libs = []
-            my_eval = eval(version.external_dependencies)
+            my_eval = safe_eval(version.external_dependencies)
             for python_name in my_eval.get('python', []):
                 python_libs.append(
                     lib_python_obj.create_if_not_exist(python_name))

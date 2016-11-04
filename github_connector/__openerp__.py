@@ -6,13 +6,12 @@
 {
     'name': 'Github Connector',
     'summary': 'Recover information from github repositories',
-    'version': '8.0.0.0.0',
-    'category': 'Custom',
-    'author': [
-        'GRAP',
-        'Akretion',
-        'Odoo Community Association (OCA)',
-    ],
+    'version': '8.0.1.0.0',
+    'category': 'Connector',
+    'license': 'AGPL-3',
+    'author':
+        'Odoo Community Association (OCA), GRAP, Akretion'
+        ', Sylvain LE GAL',
     'depends': [
         'base',
     ],

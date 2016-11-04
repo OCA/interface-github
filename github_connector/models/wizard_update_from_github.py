@@ -4,6 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp import models, fields, api
+from openerp.tools.safe_eval import safe_eval
 
 
 class WizardUpdateFromGithub(models.TransientModel):
@@ -14,7 +15,7 @@ class WizardUpdateFromGithub(models.TransientModel):
 
     @api.multi
     def button_update_from_github(self):
-        partial_commit = eval(
+        partial_commit = safe_eval(
             self.env['ir.config_parameter'].get_param(
                 'git.partial_commit_during_analyze'))
         for wizard in self:

@@ -3,9 +3,16 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import markdown
+import logging
 
 from openerp import models, fields, api
+
+_logger = logging.getLogger(__name__)
+
+try:
+    import markdown
+except ImportError:
+    _logger.debug("Cannot import 'markdown' python librairy.")
 
 
 class GithubIssue(models.Model):

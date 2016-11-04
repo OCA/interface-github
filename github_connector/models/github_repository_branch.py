@@ -6,15 +6,19 @@
 import logging
 import os
 
-from git import Repo
-
 from subprocess import check_output
 from datetime import datetime
 
 from .github import _GITHUB_URL
 from openerp import models, fields, api
+from openerp.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
+
+try:
+    from git import Repo
+except ImportError:
+    _logger.debug("Cannot import 'git' python librairy.")
 
 
 class GithubRepository(models.Model):
@@ -202,7 +206,7 @@ class GithubRepository(models.Model):
 
     @api.multi
     def _analyze_code(self):
-        partial_commit = eval(
+        partial_commit = safe_eval(
             self.env['ir.config_parameter'].get_param(
                 'git.partial_commit_during_analyze'))
         for branch in self:

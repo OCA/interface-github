@@ -20,12 +20,12 @@ class OdooLicense(models.Model):
 
     module_version_qty = fields.Integer(
         string='Module Versions Quantity',
-        compute='compute_module_version_qty', store=True)
+        compute='_compute_module_version_qty', store=True)
 
     # Compute Section
     @api.multi
     @api.depends('module_version_ids.license_id')
-    def compute_module_version_qty(self):
+    def _compute_module_version_qty(self):
         for module in self:
             module.module_version_qty = len(module.module_version_ids)
 
