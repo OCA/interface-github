@@ -12,7 +12,7 @@ _logger = logging.getLogger(__name__)
 try:
     import markdown
 except ImportError:
-    _logger.debug("Cannot import 'markdown' python librairy.")
+    _logger.debug("Cannot import 'markdown' python library.")
 
 
 class GithubIssue(models.Model):

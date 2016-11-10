@@ -18,7 +18,7 @@ _logger = logging.getLogger(__name__)
 try:
     from git import Repo
 except ImportError:
-    _logger.debug("Cannot import 'git' python librairy.")
+    _logger.debug("Cannot import 'git' python library.")
 
 
 class GithubRepository(models.Model):
