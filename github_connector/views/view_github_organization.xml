@@ -74,22 +74,25 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                         <field name="location"/>
                     </group>
                     <notebook>
-                        <page name="member" string="Members">
-                            <group col="4">
-                                <field name="member_ids" colspan="4" nolabel="1"/>
-                            </group>
-                        </page>
-                        <page name="repository" string="Repositories">
-                            <group col="4">
-                                <field name="repository_ids" colspan="4" nolabel="1"/>
-                            </group>
-                        </page>
-                        <page name="extra_setting" string="Extra Settings">
+                        <page name="extra_setting" string="Settings">
                             <group col="4" string="Ignored Repositories">
                                 <field name="ignored_repository_names" colspan="4"/>
                             </group>
                             <group col="4" string="Specific Repositories">
                                 <field name="specific_repository_names" colspan="4"/>
+                            </group>
+                        </page>
+                        <page string="Organization Series">
+                            <field name="organization_serie_ids" colspan="4" nolabel="1">
+                                <tree string="organization_serie_ids" editable="bottom">
+                                    <field name="sequence"/>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="repository" string="Repositories">
+                            <group col="4">
+                                <field name="repository_ids" colspan="4" nolabel="1"/>
                             </group>
                         </page>
                         <page name="github" string="Github">
@@ -105,14 +108,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 <button name="button_update_from_github_full" type="object" string="Full Sync" icon="STOCK_REFRESH"
                                     groups="github_connector.group_github_connector_manager"/>
                             </group>
-                        </page>
-
-                        <page string="Organization Series">
-                            <field name="organization_serie_ids" colspan="4" nolabel="1">
-                                <tree string="organization_serie_ids" editable="bottom">
-                                    <field name="name"/>
-                                </tree>
-                            </field>
                         </page>
                     </notebook>
                 </sheet>

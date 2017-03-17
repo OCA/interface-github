@@ -11,7 +11,10 @@ from os.path import join as opj
 from openerp import models, fields, api
 
 from openerp.modules import load_information_from_description_file
-from openerp.modules.module import MANIFEST
+
+# Hard define this value to make this module working with or without
+# the patch (that backports V10 manifests analysis code.
+MANIFEST_NAMES = ('__manifest__.py', '__openerp__.py')
 
 _logger = logging.getLogger(__name__)
 
@@ -185,7 +188,8 @@ class GithubRepositoryBranch(models.Model):
             return name
 
         def is_really_module(name):
-            manifest_name = opj(dir, name, MANIFEST)
-            return os.path.isfile(manifest_name)
+            for mname in MANIFEST_NAMES:
+                if os.path.isfile(opj(dir, name, mname)):
+                    return True
 
         return map(clean, filter(is_really_module, os.listdir(dir)))

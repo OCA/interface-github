@@ -24,7 +24,7 @@ except ImportError:
 class GithubRepository(models.Model):
     _name = 'github.repository.branch'
     _inherit = ['abstract.github.model']
-    _order = 'complete_name'
+    _order = 'repository_id, sequence_serie'
 
     _github_type = 'repository_branches'
     _github_login_field = False
@@ -59,6 +59,10 @@ class GithubRepository(models.Model):
     organization_serie_id = fields.Many2one(
         comodel_name='github.organization.serie', string='Organization Serie',
         compute='_compute_organization_serie_id', store=True)
+
+    sequence_serie = fields.Integer(
+        string='Sequence Serie', store=True,
+        related='organization_serie_id.sequence')
 
     local_path = fields.Char(
         string='Local Path', compute='_compute_local_path')
@@ -255,6 +259,7 @@ class GithubRepository(models.Model):
         path = self.env['ir.config_parameter'].get_param(
             'git.source_code_local_path')
         for branch in self:
-            branch.local_path = path\
-                + branch.repository_id.organization_id.github_login + '/'\
-                + branch.complete_name
+            branch.local_path = os.path.join(
+                path,
+                branch.repository_id.organization_id.github_login,
+                branch.complete_name)

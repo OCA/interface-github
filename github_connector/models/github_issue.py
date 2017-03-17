@@ -76,10 +76,9 @@ class GithubIssue(models.Model):
     @api.depends('comment_ids.opinion')
     def _compute_opinion(self):
         for issue in self:
-            issue.approved_comment_qty =\
-                issue.mapped('comment_ids.opinion').count('approved')
-            issue.disapproved_comment_qty =\
-                issue.mapped('comment_ids.opinion').count('disapproved')
+            opinions = issue.mapped('comment_ids.opinion')
+            issue.approved_comment_qty = opinions.count('approved')
+            issue.disapproved_comment_qty = opinions.count('disapproved')
 
     # Overloadable Section
     def get_odoo_data_from_github(self, data):

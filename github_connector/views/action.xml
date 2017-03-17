@@ -102,6 +102,25 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">github.repository.branch</field>
     </record>
 
+    <record id="action_wizard_update_branch_list" model="ir.actions.act_window">
+        <field name="name">Update Branch List</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wizard.update.branch.list</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="multi">True</field>
+    </record>
+
+    <record id="value_wizard_update_branch_list" model="ir.values">
+        <field name="model_id" ref="model_github_repository" />
+        <field name="name">Update Branch List</field>
+        <field name="key2">client_action_multi</field>
+        <field name="value" eval="'ir.actions.act_window,' + str(ref('action_wizard_update_branch_list'))" />
+        <field name="key">action</field>
+        <field name="model">github.repository</field>
+    </record>
+
 
     <!-- Settings Part -->
     <record id="action_wizard_load_github_model" model="ir.actions.act_window">

@@ -92,14 +92,31 @@ class AbtractGithubModel(models.AbstractModel):
                 {'id': 7600578, 'url': 'https://api.github.com/orgs/OCA'})
         """
         extra_data = extra_data and extra_data or {}
-        res = self.search([('github_id', '=', data['id'])])
-        if not res:
-            if self._need_individual_call:
-                github_model = self.get_github_for(self.github_type())
-                data = github_model.get_by_url(data['url'])
-            return self._create_from_github_data(data, extra_data)
-        else:
-            return res
+
+        # We try to search object by id
+        existing_object = self.search([('github_id', '=', data['id'])])
+        if existing_object:
+            return existing_object
+
+        # We try to see if object exist by name (instead of id)
+        if self._github_login_field:
+            existing_object = self.search([
+                ('github_login', '=', data[self._github_login_field])])
+            if existing_object:
+                # Update the existing object with the id
+                existing_object.github_id = data['id']
+                _logger.info(
+                    "Existing object %s#%d with github name '%s' has been"
+                    " updated with unique github id %s#%s" % (
+                        self._name, existing_object.id,
+                        data[self._github_login_field], data['id'],
+                        self.github_type()))
+                return existing_object
+
+        if self._need_individual_call:
+            github_model = self.get_github_for(self.github_type())
+            data = github_model.get_by_url(data['url'])
+        return self._create_from_github_data(data, extra_data)
 
     @api.model
     def create_from_name(self, name):
@@ -121,10 +138,6 @@ class AbtractGithubModel(models.AbstractModel):
         if not current_object:
             # Create the object
             return self._create_from_github_data(res)
-        else:
-            # Manage the special case when the name changed...
-            # TODO
-            pass
 
     @api.multi
     def button_update_from_github_light(self):
@@ -188,6 +201,8 @@ class AbtractGithubModel(models.AbstractModel):
             # process, we realize a write only if data changed
             to_write = {}
             for k, v in vals.iteritems():
+                # TODO : improve, this line raise a warning on many2one
+                # comparison "Comparing apples and oranges..."
                 if item[k] != v:
                     to_write[k] = v
             if to_write:

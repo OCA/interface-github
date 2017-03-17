@@ -9,7 +9,10 @@ Analyze Odoo Modules Informations from github repositories
 Installation
 ============
 
-Nothing special is needed to install this module.
+This module will not analyse correctly V10 branches, except if you get
+a patch, available on that branch, to analyse correctly new manifest files.
+
+https://github.com/grap/OCB/tree/8.0_BACKPORT_V10_analysis
 
 Configuration
 =============

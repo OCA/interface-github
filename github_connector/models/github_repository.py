@@ -149,6 +149,12 @@ class GithubRepository(models.Model):
         for repository in self:
             repository.issue_ids.button_sync_comment()
 
+    @api.model
+    def cron_update_branch_list(self):
+        branches = self.search([])
+        branches.button_sync_branch()
+        return True
+
     @api.multi
     def button_sync_branch(self):
         github_branch = self.get_github_for('repository_branches')

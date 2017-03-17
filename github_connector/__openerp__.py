@@ -24,6 +24,7 @@
         'views/view_wizard_load_github_model.xml',
         'views/view_wizard_update_from_github.xml',
         'views/view_wizard_update_company_author.xml',
+        'views/view_wizard_update_branch_list.xml',
         'views/view_reporting.xml',
         'views/action.xml',
         'views/view_git_author.xml',

@@ -8,11 +8,18 @@ from openerp import models, fields
 
 class GithubOrganizationSerie(models.Model):
     _name = 'github.organization.serie'
-    _order = 'name'
+    _order = 'sequence, name'
 
     # Columns Section
     name = fields.Char(string='Name', required=True)
 
+    sequence = fields.Integer(string='Sequence', required=True)
+
     organization_id = fields.Many2one(
         comodel_name='github.organization', string='Organization',
         required=True)
+
+    _sql_constraints = [
+        ('sequence_organization_uniq', 'unique(organization_id, sequence)',
+         ("Sequence serie must be unique by organization."))
+    ]
