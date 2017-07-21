@@ -32,23 +32,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="view_mode">tree,form</field>
     </record>
 
-    <!-- Git Part -->
-    <record id="action_git_commit" model="ir.actions.act_window">
-        <field name="name">Commits</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">git.commit</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <record id="action_git_author" model="ir.actions.act_window">
-        <field name="name">Authors</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">git.author</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
     <!-- Repository Part -->
     <record id="action_github_repository" model="ir.actions.act_window">
         <field name="name">Repositories</field>
@@ -62,22 +45,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="name">Repository Branches</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.repository.branch</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-
-    <record id="action_github_issue" model="ir.actions.act_window">
-        <field name="name">Issues + PR</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">github.issue</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form,graph</field>
-    </record>
-
-    <record id="action_github_comment" model="ir.actions.act_window">
-        <field name="name">Comments</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">github.comment</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
@@ -121,7 +88,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">github.repository</field>
     </record>
 
-
     <!-- Settings Part -->
     <record id="action_wizard_load_github_model" model="ir.actions.act_window">
         <field name="name">Load from Github Wizard</field>
@@ -132,15 +98,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="target">new</field>
     </record>
 
-    <record id="action_git_author_partner_company" model="ir.actions.act_window">
-        <field name="name">Git Authors</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">git.author</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="view_git_author_partner_company"/>
-    </record>
-
     <record id="action_wizard_update_from_github" model="ir.actions.act_window" >
         <field name="name">Update from Github</field>
         <field name="res_model">wizard.update.from.github</field>
@@ -148,36 +105,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="target">new</field>
     </record>
 
-    <record id="action_wizard_update_company_author" model="ir.actions.act_window" >
-        <field name="name">Update Company Author</field>
-        <field name="res_model">wizard.update.company.author</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-    </record>
-
     <!-- Reporting Part -->
-    <record id="action_github_issue_by_company" model="ir.actions.act_window">
-        <field name="name">Issues + PR by Company</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">github.issue</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">graph</field>
-        <field name="context">{'search_default_group_by_company_author_id': True}</field>
-        <field name="domain">[('company_author_id', '!=', False)]</field>
-        <field name="view_id" ref="view_github_issue_by_company_graph" />
-    </record>
-
-    <record id="action_github_comment_by_company" model="ir.actions.act_window">
-        <field name="name">Comments by Company</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">github.comment</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">graph</field>
-        <field name="context">{'search_default_group_by_company_author_id': True}</field>
-        <field name="domain">[('company_author_id', '!=', False)]</field>
-        <field name="view_id" ref="view_github_comment_by_company_graph" />
-    </record>
-
     <record id="action_github_branch_by_serie" model="ir.actions.act_window">
         <field name="name">Branches by Serie</field>
         <field name="type">ir.actions.act_window</field>
@@ -196,33 +124,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="view_mode">graph</field>
         <field name="context">{'search_default_group_by_organization_serie_id': True}</field>
         <field name="view_id" ref="view_github_size_by_serie_graph" />
-    </record>
-
-    <record id="action_git_commit_by_company" model="ir.actions.act_window">
-        <field name="name">Commits by Company</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">git.commit</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">graph</field>
-        <field name="view_id" ref="view_git_commit_by_company_graph" />
-    </record>
-
-    <record id="action_git_commit_by_repository" model="ir.actions.act_window">
-        <field name="name">Commits by Repository</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">git.commit</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">graph</field>
-        <field name="view_id" ref="view_git_commit_by_repository_graph" />
-    </record>
-
-    <record id="action_git_commit_by_month_and_serie" model="ir.actions.act_window">
-        <field name="name">Commits by Month and Serie</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">git.commit</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">graph</field>
-        <field name="view_id" ref="view_git_commit_by_month_and_serie_graph" />
     </record>
 
 </odoo>

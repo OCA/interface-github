@@ -8,15 +8,9 @@ from openerp import api, models, _
 UNIQUE_ID_MODEL = (
     1121141111061019911695109111100112349951161119511226115107)
 
-UNIQUE_ID_MODEL_AUTHOR = (
-    1121112322221101991169510911110011234995949400560026115107)
-
 
 GITHUB_MODEL = [
-    'res.partner', 'github.organization', 'github.team', 'github.repository',
-    'github.issue', 'github.comment']
-
-GITHUB_MODEL_AUTHOR = ['github.issue', 'github.comment']
+    'res.partner', 'github.organization', 'github.team', 'github.repository']
 
 
 class IrValues(models.Model):
@@ -33,12 +27,6 @@ class IrValues(models.Model):
             value = (UNIQUE_ID_MODEL, 'github_connector', action)
             res.insert(0, value)
 
-        if action_slot == 'client_action_multi'\
-                and model in GITHUB_MODEL_AUTHOR:
-            action = self.add_update_company_author_action(
-                model, res_id=res_id)
-            value = (UNIQUE_ID_MODEL_AUTHOR, 'github_connector', action)
-            res.insert(0, value)
         return res
 
     @api.model
@@ -49,19 +37,6 @@ class IrValues(models.Model):
             'id': action.id,
             'name': _('Update From Github'),
             'res_model': u'wizard.update.from.github',
-            'src_model': model,
-            'type': u'ir.actions.act_window',
-            'target': 'new',
-        }
-
-    @api.model
-    def add_update_company_author_action(self, model, res_id=False):
-        action = self.env.ref(
-            'github_connector.action_wizard_update_company_author')
-        return {
-            'id': action.id,
-            'name': _('Update Company Author'),
-            'res_model': u'wizard.update.company.author',
             'src_model': model,
             'type': u'ir.actions.act_window',
             'target': 'new',

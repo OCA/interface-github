@@ -1,16 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_git_author_reader,git_author reader,model_git_author,,1,0,0,0
-access_git_author_manager,git_author manager,model_git_author,github_connector.group_github_connector_manager,1,1,1,1
-,,,,,,,
-access_git_commit_reader,git_commit reader,model_git_commit,,1,0,0,0
-access_git_commit_manager,git_commit manager,model_git_commit,github_connector.group_github_connector_manager,1,1,1,1
-,,,,,,,
-access_github_comment_reader,github_comment reader,model_github_comment,,1,0,0,0
-access_github_comment_manager,github_comment manager,model_github_comment,github_connector.group_github_connector_manager,1,1,1,1
-,,,,,,,
-access_github_issue_reader,github_issue reader,model_github_issue,,1,0,0,0
-access_github_issue_manager,github_issue manager,model_github_issue,github_connector.group_github_connector_manager,1,1,1,1
-,,,,,,,
 access_github_organization_reader,github_organization reader,model_github_organization,,1,0,0,0
 access_github_organization_manager,github_organization manager,model_github_organization,github_connector.group_github_connector_manager,1,1,1,1
 ,,,,,,,
