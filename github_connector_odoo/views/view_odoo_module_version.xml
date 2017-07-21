@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_odoo_module_version_search" model="ir.ui.view">
+        <field name="model">odoo.module.version</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="complete_name"/>
+                <field name="summary"/>
+                <field name="description_rst"/>
+                <field name="dependency_module_ids" />
+                <field name="module_id"/>
+                <field name="repository_branch_id"/>
+                <field name="repository_id"/>
+                <field name="license_id"/>
+                <field name="author_ids"/>
+                <field name="organization_serie_id"/>
+                <filter string="Odoo Type" context="{'group_by' : 'odoo_type'}"/>
+                <filter string="License" context="{'group_by' : 'license_id'}"/>
+                <filter string="Module" context="{'group_by' : 'module_id'}"/>
+                <filter string="Repository Branch" context="{'group_by' : 'repository_branch_id'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_odoo_module_version_tree" model="ir.ui.view">
+        <field name="model">odoo.module.version</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="technical_name"/>
+                <field name="repository_id"/>
+                <field name="organization_serie_id" string="Serie"/>
+                <field name="author_ids"/>
+                <field name="lib_python_ids" widget="many2many_tags" string="Python"/>
+                <field name="lib_bin_ids" widget="many2many_tags" string="Bin"/>
+                <field name="license_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_odoo_module_version_form" model="ir.ui.view">
+        <field name="model">odoo.module.version</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                        <h2><field name="technical_name"/></h2>
+                    </div>
+                    <div class="oe_clear"/>
+                    <h3 class="oe_fade">
+                        <field name="summary" class="oe_inline"/>
+                    </h3>
+                    <div class="oe_clear"/>
+                    <notebook>
+                        <page string="Information">
+                            <group col="4">
+                                <field name="technical_name"/>
+                                <field name="module_id"/>
+                                <field name="license_id"/>
+                                <field name="repository_id"/>
+                                <field name="repository_branch_id"/>
+                                <field name="organization_serie_id"/>
+                                <newline />
+                                <field name="author_ids" widget="many2many_tags" colspan="4"/>
+                                <field name="dependency_module_ids" widget="many2many_tags" colspan="4"/>
+                                <field name="lib_python_ids" widget="many2many_tags" colspan="2"/>
+                                <field name="lib_bin_ids" widget="many2many_tags" colspan="2"/>
+                                <newline />
+                                <hr colspan="4" />
+                                <field name="description_rst_html" nolabel="1" class="oe_styling_v8" colspan="4"/>
+                            </group>
+                        </page>
+                        <page string="Technical information (Manifest)">
+                            <group col="4">
+                                <field name="author"/>
+                                <field name="license"/>
+                                <field name="website"/>
+                                <field name="depends"/>
+                                <field name="external_dependencies" />
+                                <newline />
+                                <field name="description_rst" nolabel="1" colspan="4" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>
