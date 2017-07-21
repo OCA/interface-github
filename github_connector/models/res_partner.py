@@ -14,19 +14,20 @@ class ResPartner(models.Model):
     _github_type = 'user'
     _github_login_field = 'login'
     _need_individual_call = True
+    _field_list_prevent_overwrite = ['name', 'website', 'email', 'image']
 
     # Column Section
     is_bot_account = fields.Boolean(
         string='Is Bot Github Account', help="Check this box if this"
         "account is a bot, or something similar.")
 
-    team_ids = fields.Many2many(
-        string='Teams', comodel_name='github.team',
-        relation='github_team_partner_rel', column1='partner_id',
-        column2='team_id', readonly=True)
+    github_team_ids = fields.Many2many(
+        string='Teams', comodel_name='github.team.partner',
+        inverse_name='partner_id', readonly=True)
 
-    team_qty = fields.Integer(
-        string='Teams Quantity', compute='_compute_team_qty', store=True)
+    github_team_qty = fields.Integer(
+        string='Teams Quantity', compute='_compute_github_team_qty',
+        store=True)
 
     organization_ids = fields.Many2many(
         string='Organizations', comodel_name='github.organization',
@@ -36,13 +37,6 @@ class ResPartner(models.Model):
     organization_qty = fields.Integer(
         string='Organizations Quantity', compute='_compute_organization_qty',
         store=True)
-
-    # Compute Section
-    @api.multi
-    @api.depends('organization_ids', 'organization_ids.member_ids')
-    def _compute_organization_qty(self):
-        for partner in self:
-            partner.organization_qty = len(partner.organization_ids)
 
     # Constraints Section
     _sql_constraints = [
@@ -63,10 +57,16 @@ class ResPartner(models.Model):
 
     # Compute Section
     @api.multi
-    @api.depends('team_ids', 'team_ids.member_ids')
-    def _compute_team_qty(self):
+    @api.depends('organization_ids', 'organization_ids.member_ids')
+    def _compute_organization_qty(self):
         for partner in self:
-            partner.team_qty = len(partner.team_ids)
+            partner.organization_qty = len(partner.organization_ids)
+
+    @api.multi
+    @api.depends('github_team_ids')
+    def _compute_github_team_qty(self):
+        for partner in self:
+            partner.github_team_qty = len(partner.github_team_ids)
 
     # Custom Section
     @api.model
