@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_odoo_module_search" model="ir.ui.view">
+        <field name="model">odoo.module</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="technical_name"/>
+                <field name="author_ids"/>
+                <field name="organization_serie_ids"/>
+                <field name="description_rst"/>
+                <filter name="filter_with_version" string="With Version" domain="[('module_version_qty', '!=', 0)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_odoo_module_tree" model="ir.ui.view">
+        <field name="model">odoo.module</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="technical_name"/>
+                <field name="organization_serie_list"/>
+                <field name="author_list"/>
+                <field name="module_version_qty"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_odoo_module_form" model="ir.ui.view">
+        <field name="model">odoo.module</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                        <h2><field name="technical_name"/></h2>
+                    </div>
+                    <div class="oe_clear"/>
+                    <group col="4">
+                        <field name="organization_serie_ids" widget="many2many_tags" string="Available for"/>
+                        <field name="dependence_module_version_qty"/>
+                        <field name="author_ids" widget="many2many_tags"/>
+                    </group>
+                    <notebook>
+                        <page string="Descriptions">
+                            <group col="4">
+                                <field name="description_rst_html" colspan="4" nolabel="1" class="oe_styling_v8"/>
+                            </group>
+                        </page>
+                        <page string="Versions">
+                            <group col="4">
+                                <field name="module_version_ids" colspan="4" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page string="Modules that depend on this module"
+                                attrs="{'invisible': [('dependence_module_version_qty', '=', 0)]}">
+                            <group col="4">
+                                <field name="dependence_module_version_ids" colspan="4" nolabel="1"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>
