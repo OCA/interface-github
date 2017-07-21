@@ -31,13 +31,10 @@ _GITHUB_TYPE_URL = {
     'user': {'url': 'users/%s', 'url_by_id': 'user/%s'},
     'repository': {'url': 'repos/%s', 'url_by_id': 'repositories/%s'},
     'team': {'url_by_id': 'teams/%s'},
-    'issue': {'url': 'repos/%s/issues/%s'},
     'organization_members': {'url': 'orgs/%s/members'},
     'organization_repositories': {'url': 'orgs/%s/repos'},
     'organization_teams': {'url': 'orgs/%s/teams'},
     'team_members': {'url': 'teams/%s/members'},
-    'repository_issues': {'url': 'repos/%s/issues?state=all'},
-    'issue_comments': {'url': 'repos/%s/issues/%s/comments'},
     'repository_branches': {'url': 'repos/%s/branches'},
 }
 

@@ -37,70 +37,12 @@ class ResPartner(models.Model):
         string='Organizations Quantity', compute='_compute_organization_qty',
         store=True)
 
-    issue_ids = fields.One2many(
-        string='Issues + PR', comodel_name='github.issue',
-        inverse_name='author_id', readonly=True)
-
-    issue_qty = fields.Integer(
-        string='Issues + PR Quantity', compute='_compute_issue_qty',
-        store=True)
-
-    corporate_issue_ids = fields.One2many(
-        string='Corporate Issues + PR', comodel_name='github.issue',
-        inverse_name='company_author_id', readonly=True)
-
-    corporate_issue_qty = fields.Integer(
-        string='Corporate Issues + PR Quantity',
-        compute='_compute_corporate_issue_qty', store=True)
-
-    comment_ids = fields.One2many(
-        string='Commnents', comodel_name='github.comment',
-        inverse_name='author_id', readonly=True)
-
-    comment_qty = fields.Integer(
-        string='Comments Quantity', compute='_compute_comment_qty',
-        store=True)
-
-    corporate_comment_ids = fields.One2many(
-        string='Corporate Commnents', comodel_name='github.comment',
-        inverse_name='company_author_id', readonly=True)
-
-    corporate_comment_qty = fields.Integer(
-        string='Corporate Comments Quantity',
-        compute='_compute_corporate_comment_qty', store=True)
-
     # Compute Section
     @api.multi
     @api.depends('organization_ids', 'organization_ids.member_ids')
     def _compute_organization_qty(self):
         for partner in self:
             partner.organization_qty = len(partner.organization_ids)
-
-    @api.multi
-    @api.depends('issue_ids', 'issue_ids.author_id')
-    def _compute_issue_qty(self):
-        for partner in self:
-            partner.issue_qty = len(partner.issue_ids)
-
-    @api.multi
-    @api.depends(
-        'corporate_issue_ids', 'corporate_issue_ids.company_author_id')
-    def _compute_corporate_issue_qty(self):
-        for partner in self:
-            partner.corporate_issue_qty = len(partner.corporate_issue_ids)
-
-    @api.multi
-    @api.depends('comment_ids', 'comment_ids.author_id')
-    def _compute_comment_qty(self):
-        for partner in self:
-            partner.comment_qty = len(partner.comment_ids)
-
-    @api.multi
-    @api.depends(
-        'corporate_comment_ids', 'corporate_comment_ids.company_author_id')
-    def _compute_corporate_comment_qty(self):
-        for partner in self:
-            partner.corporate_comment_qty = len(partner.corporate_comment_ids)
 
     # Constraints Section
     _sql_constraints = [
