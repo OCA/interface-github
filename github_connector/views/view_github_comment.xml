@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<openerp><data>
+
+    <record id="view_github_comment_search" model="ir.ui.view">
+        <field name="model">github.comment</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="body" string="Body"
+                    filter_domain="[('body', 'ilike', self)]"/>
+                <field name="issue_id"/>
+                <field name="author_id"/>
+                <field name="company_author_id"/>
+                <filter name="filter_approved_comment" string="Approved" domain="[('opinion', '=', 'approved')]"/>
+                <filter name="filter_disapproved_comment" string="Dispproved" domain="[('opinion', '=', 'disapproved')]"/>
+                <group expand="1" string="Group By">
+                    <filter name="group_by_author_id" string="Author" context="{'group_by': 'author_id'}" />
+                    <filter name="group_by_company_author_id" string="Author Company" context="{'group_by': 'company_author_id'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_github_comment_tree" model="ir.ui.view">
+        <field name="model">github.comment</field>
+        <field name="arch" type="xml">
+            <tree colors="gray:is_bot_comment == True; red:opinion=='disapproved'; green:opinion=='approved';">
+                <field name="github_create_date" string="Date"/>
+                <field name="author_id"/>
+                <!-- TODO
+                    - PR against Odoo / OCB to fix html widget that doesn't work on tree view;
+                    - replace "body" by "html_body" and widget="html"-->
+                <field name="body"/>
+                <field name="company_author_id"/>
+                <field name="opinion" invisible="1"/>
+                <field name="is_bot_comment" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_github_comment_form" model="ir.ui.view">
+        <field name="model">github.comment</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_clear"/>
+                        <group col="4">
+                            <field name="issue_id"/>
+                            <field name="author_id"/>
+                            <field name="company_author_id"/>
+                            <field name="opinion"/>
+                            <newline/>
+                            <field name="html_body" widget="html" colspan="4" nolabel="1"/>
+                        </group>
+                    <notebook>
+                        <page name="github" string="Github">
+                            <group col="4">
+                                <field name="github_url" widget="url" colspan="4"/>
+                                <field name="github_id" />
+                                <field name="github_login" />
+                                <field name="github_last_sync_date" />
+                                <button name="button_update_from_github_light" type="object" string="Light Sync" icon="STOCK_REFRESH"
+                                    groups="github_connector.group_github_connector_manager"/>
+                                <button name="button_update_from_github_full" type="object" string="Full Sync" icon="STOCK_REFRESH"
+                                    groups="github_connector.group_github_connector_manager"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+</data></openerp>
