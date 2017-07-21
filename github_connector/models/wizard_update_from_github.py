@@ -23,4 +23,4 @@ class WizardUpdateFromGithub(models.TransientModel):
             for item in model_obj.browse(self._context['active_ids']):
                 item.update_from_github(wizard.child_update)
                 if partial_commit:
-                    self._cr.commit()
+                    self._cr.commit()  # pylint: disable=invalid-commit
