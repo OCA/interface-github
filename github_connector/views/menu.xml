@@ -59,30 +59,32 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         name="Sync Object"
         action="action_wizard_load_github_model"/>
 
+    <menuitem id="menu_wizard_create_team"
+        parent="menu_github_settings"
+        sequence="2"
+        name="Create Team in Github"
+        action="action_wizard_create_team"/>
+
+    <menuitem id="menu_wizard_create_repository"
+        parent="menu_github_settings"
+        sequence="2"
+        name="Create Repo in Github"
+        action="action_wizard_create_repository"/>
+
     <!-- Reporting Part -->
     <menuitem id="menu_reporting"
         parent="menu_github"
         sequence="40"
         name="Reports"/>
 
-    <menuitem id="menu_github_reporting"
-        sequence="10"
+    <menuitem id="menu_branch_by_milestone"
         parent="menu_reporting"
-        name="Github"/>
+        sequence="1"
+        action="action_github_branch_by_milestone"/>
 
-    <menuitem id="menu_branch_by_serie"
-        parent="menu_github_reporting"
-        sequence="3"
-        action="action_github_branch_by_serie"/>
-
-    <menuitem id="menu_size_by_serie"
-        parent="menu_github_reporting"
-        sequence="4"
-        action="action_github_size_by_serie"/>
-
-    <menuitem id="menu_git_reporting"
+    <menuitem id="menu_size_by_milestone"
         parent="menu_reporting"
-        sequence="11"
-        name="Git"/>
+        sequence="2"
+        action="action_github_size_by_milestone"/>
 
 </odoo>
