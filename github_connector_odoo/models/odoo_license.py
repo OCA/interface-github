@@ -8,7 +8,7 @@ from openerp import models, fields, api
 
 class OdooLicense(models.Model):
     _name = 'odoo.license'
-    _order = 'module_version_qty desc, name'
+    _order = 'name'
 
     # Column Section
     name = fields.Char(
@@ -21,6 +21,19 @@ class OdooLicense(models.Model):
     module_version_qty = fields.Integer(
         string='Module Versions Quantity',
         compute='_compute_module_version_qty', store=True)
+
+    website = fields.Char(string='Website')
+
+    image = fields.Binary(string='Icon Image')
+
+    description = fields.Text(string='Description')
+
+    active = fields.Boolean(string='Active', default=True)
+
+    # Constrains Section
+    _sql_constraints = [
+        ('name_uniq', 'unique (name)', "Name already exists !"),
+    ]
 
     # Compute Section
     @api.multi

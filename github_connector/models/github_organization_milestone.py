@@ -7,7 +7,7 @@ from openerp import models, fields
 
 
 class GithubOrganizationSerie(models.Model):
-    _name = 'github.organization.serie'
+    _name = 'github.organization.milestone'
     _order = 'sequence, name'
 
     # Columns Section
@@ -21,5 +21,5 @@ class GithubOrganizationSerie(models.Model):
 
     _sql_constraints = [
         ('sequence_organization_uniq', 'unique(organization_id, sequence)',
-         ("Sequence serie must be unique by organization."))
+         ("Sequence milestone must be unique by organization."))
     ]
