@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<openerp><data>
+
+    <record id="view_github_issue_search" model="ir.ui.view">
+        <field name="model">github.issue</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="title" string="Title or Body"
+                    filter_domain="['|', ('title', 'ilike', self), ('body', 'ilike', self)]"/>
+                <field name="github_login"/>
+                <field name="issue_type"/>
+                <field name="repository_id"/>
+                <field name="author_id"/>
+                <field name="company_author_id"/>
+                <field name="state"/>
+                <filter name="filter_open_issue" string="Open Issues + PR" domain="[('state', '=', 'open')]"/>
+                <filter name="filter_with_company" string="Company Defined" domain="[('company_author_id', '!=', False)]"/>
+                <group expand="1" string="Group By">
+                    <filter name="group_by_author_id" string="Author" context="{'group_by': 'author_id'}" />
+                    <filter name="group_by_company_author_id" string="Company" context="{'group_by': 'company_author_id'}" />
+                    <filter name="group_by_repository_id" string="Repository" context="{'group_by': 'repository_id'}" />
+                    <filter name="group_by_issue_type" string="Type" context="{'group_by': 'issue_type'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_github_issue_tree" model="ir.ui.view">
+        <field name="model">github.issue</field>
+        <field name="arch" type="xml">
+            <tree colors="gray:state=='closed'; red:issue_type=='issue'; black:issue_type=='pull_request'">
+                <field name="github_create_date"/>
+                <field name="title"/>
+                <field name="comment_qty"/>
+                <field name="approved_comment_qty" string="+1"/>
+                <field name="disapproved_comment_qty"  string="-1"/>
+                <field name="state" invisible="1"/>
+                <field name="issue_type"/>
+                <field name="repository_id"/>
+                <field name="author_id"/>
+                <field name="company_author_id"/>
+            </tree>
+            
+        </field>
+    </record>
+
+    <record id="view_github_issue_graph" model="ir.ui.view">
+        <field name="model">github.issue</field>
+        <field name="arch" type="xml">
+            <graph type="bar">
+                <field name="author_id" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_github_issue_form" model="ir.ui.view">
+        <field name="model">github.issue</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="title"/></h1>
+                    </div>
+                    <div class="oe_right oe_button_box" name="buttons">
+                        <button type="action" class="oe_stat_button" icon=" fa-thumbs-o-up" name="%(action_github_comment)d"
+                            context="{'search_default_issue_id': active_id, 'search_default_filter_approved_comment': 1}">
+                            <div><strong><field name="approved_comment_qty"/></strong></div>
+                        </button>
+                        <button type="action" class="oe_stat_button" icon=" fa-thumbs-o-down" name="%(action_github_comment)d"
+                            context="{'search_default_issue_id': active_id, 'search_default_filter_disapproved_comment': 1}">
+                            <div><strong><field name="disapproved_comment_qty"/></strong></div>
+                        </button>
+                        <button type="action" class="oe_stat_button" icon="fa-comment" name="%(action_github_comment)d"
+                            context="{'search_default_issue_id': active_id}">
+                            <div><strong><field name="comment_qty"/></strong><br/>Comments</div>
+                        </button>
+                    </div>
+                    <div class="oe_clear"/>
+                    <group col="4">
+                        <field name="issue_type"/>
+                        <field name="repository_id"/>
+                        <field name="author_id"/>
+                        <field name="company_author_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Comments">
+                            <field name="html_body" colspan="4" nolabel="1" widget="html"/>
+                            <field name="comment_ids" colspan="4" nolabel="1"/>
+                        </page>
+                        <page name="github" string="Github">
+                            <group col="4">
+                                <field name="github_url" widget="url" colspan="4"/>
+                                <field name="github_id" />
+                                <field name="github_login" />
+                                <field name="github_create_date" />
+                                <field name="github_write_date" />
+                                <field name="github_last_sync_date" />
+                                <button name="button_update_from_github_light" type="object" string="Light Sync" icon="STOCK_REFRESH"
+                                    groups="github_connector.group_github_connector_manager"/>
+                                <button name="button_update_from_github_full" type="object" string="Full Sync" icon="STOCK_REFRESH"
+                                    groups="github_connector.group_github_connector_manager"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</data></openerp>
