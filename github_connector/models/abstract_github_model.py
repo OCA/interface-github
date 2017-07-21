@@ -27,10 +27,10 @@ class AbtractGithubModel(models.AbstractModel):
     _need_individual_call = False
 
     github_id = fields.Char(
-        string='Github Id', readonly=True, select=True)
+        string='Github Id', readonly=True, index=True)
 
     github_login = fields.Char(
-        string='Github Technical Name', readonly=True, select=True)
+        string='Github Technical Name', readonly=True, index=True)
 
     github_url = fields.Char(
         string='Github URL', readonly=True)

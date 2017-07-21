@@ -13,7 +13,7 @@ class GitCommit(models.Model):
 
     # Column Section
     name = fields.Char(
-        string='Name', readonly=True, select=True)
+        string='Name', readonly=True, index=True)
 
     summary = fields.Char(
         string='Summary', readonly=True)
@@ -23,7 +23,7 @@ class GitCommit(models.Model):
 
     author_id = fields.Many2one(
         string='Git Author', comodel_name='git.author', required=True,
-        select=True, ondelete='cascade', readonly=True)
+        index=True, ondelete='cascade', readonly=True)
 
     partner_id = fields.Many2one(
         comodel_name='res.partner', string='Partner',
@@ -38,7 +38,7 @@ class GitCommit(models.Model):
 
     repository_branch_id = fields.Many2one(
         string='Repository Branch', comodel_name='github.repository.branch',
-        required=True, select=True, ondelete='cascade', readonly=True)
+        required=True, index=True, ondelete='cascade', readonly=True)
 
     repository_id = fields.Many2one(
         comodel_name='github.repository', string='Repository',
