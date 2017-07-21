@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<openerp><data>
+
+    <record id="view_github_issue_by_company_graph" model="ir.ui.view">
+        <field name="model">github.issue</field>
+        <field name="arch" type="xml">
+            <graph type="bar" stacked="True">
+                <field name="company_author_id" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_github_comment_by_company_graph" model="ir.ui.view">
+        <field name="model">github.comment</field>
+        <field name="arch" type="xml">
+            <graph type="bar" stacked="True">
+                <field name="company_author_id" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_github_branch_by_serie_graph" model="ir.ui.view">
+        <field name="model">github.repository.branch</field>
+        <field name="arch" type="xml">
+            <graph type="bar" stacked="True">
+                <field name="organization_serie_id" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_github_size_by_serie_graph" model="ir.ui.view">
+        <field name="model">github.repository.branch</field>
+        <field name="arch" type="xml">
+            <graph type="bar" stacked="True">
+                <field name="organization_serie_id" type="row"/>
+                <field name="mb_size" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_git_commit_by_company_graph" model="ir.ui.view">
+        <field name="model">git.commit</field>
+        <field name="arch" type="xml">
+            <graph type="bar">
+                <field name="company_partner_id" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_git_commit_by_repository_graph" model="ir.ui.view">
+        <field name="model">git.commit</field>
+        <field name="arch" type="xml">
+            <graph type="bar">
+                <field name="repository_id" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_git_commit_by_month_and_serie_graph" model="ir.ui.view">
+        <field name="model">git.commit</field>
+        <field name="arch" type="xml">
+            <graph type="bar" stacked="True">
+                <field name="authored_date" type="row"/>
+                <field name="organization_serie_id" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="view_git_author_partner_company" model="ir.ui.view">
+        <field name="model">git.author</field>
+        <field name="priority">50</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="commit_qty"/>
+                <field name="partner_id"/>
+                <field name="company_partner_id"/>
+            </tree>
+        </field>
+    </record>
+
+</data></openerp>
