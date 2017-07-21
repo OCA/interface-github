@@ -11,7 +11,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="inherit_id" ref="github_connector.view_github_repository_form"/>
         <field name="arch" type="xml">
             <field name="website" position="after">
-                <field name="ci_id"/>
+                <field name="runbot_id_external"/>
             </field>
         </field>
     </record>

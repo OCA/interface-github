@@ -7,7 +7,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 <odoo>
 
     <record id="github_connector.oca_organization" model="github.organization">
-        <field name="ci_url">https://raw.githubusercontent.com/OCA/maintainer-tools/master/tools/repos_with_ids.txt</field>
+        <field name="runbot_parse_url">https://raw.githubusercontent.com/OCA/maintainer-tools/master/tools/repos_with_ids.txt</field>
+        <field name="default_author_text">Odoo Community Association (OCA)</field>
+        <field name="runbot_url_pattern">https://runbot.odoo-community.org/runbot/{runbot_id_external}/{branch_name}</field>
     </record>
 
 </odoo>
