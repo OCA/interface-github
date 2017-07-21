@@ -21,10 +21,10 @@ class GithubRepository(models.Model):
     # Column Section
     organization_id = fields.Many2one(
         comodel_name='github.organization', string='Organization',
-        required=True, select=True, readonly=True, ondelete='cascade')
+        required=True, index=True, readonly=True, ondelete='cascade')
 
     name = fields.Char(
-        string='Name', select=True, required=True, readonly=True)
+        string='Name', index=True, required=True, readonly=True)
 
     complete_name = fields.Char(
         string='Complete Name', readonly=True,
