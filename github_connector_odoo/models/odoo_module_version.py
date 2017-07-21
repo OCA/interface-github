@@ -35,10 +35,10 @@ class OdooModuleVersion(models.Model):
     ]
 
     # Column Section
-    name = fields.Char(string='Name', readonly=True, select=True)
+    name = fields.Char(string='Name', readonly=True, index=True)
 
     technical_name = fields.Char(
-        string='Technical Name', readonly=True, select=True,
+        string='Technical Name', readonly=True, index=True,
         help="Technical Name of the Module. (Folder name)")
 
     complete_name = fields.Char(
@@ -50,7 +50,7 @@ class OdooModuleVersion(models.Model):
 
     module_id = fields.Many2one(
         comodel_name='odoo.module', string='Module', required=True,
-        ondelete='cascade', select=True, auto_join=True, readonly=True)
+        ondelete='cascade', index=True, auto_join=True, readonly=True)
 
     repository_branch_id = fields.Many2one(
         comodel_name='github.repository.branch', string='Repository Branch',

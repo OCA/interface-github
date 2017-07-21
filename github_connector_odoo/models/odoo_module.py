@@ -16,7 +16,7 @@ class OdooModule(models.Model):
         string='Name', store=True, readonly=True, compute='_compute_name')
 
     technical_name = fields.Char(
-        string='Technical Name', select=True, required=True, readonly=True)
+        string='Technical Name', index=True, required=True, readonly=True)
 
     module_version_ids = fields.One2many(
         comodel_name='odoo.module.version', inverse_name='module_id',
