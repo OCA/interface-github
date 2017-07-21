@@ -30,22 +30,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         sequence="3"
         action="action_res_partner"/>
 
-    <!-- Git Part -->
-    <menuitem id="menu_git"
-        parent="menu_github"
-        sequence="25"
-        name="Git"/>
-
-    <menuitem id="menu_git_commit"
-        parent="menu_git"
-        sequence="1"
-        action="action_git_commit"/>
-
-    <menuitem id="menu_git_author"
-        parent="menu_git"
-        sequence="2"
-        action="action_git_author"/>
-
     <!-- Repository Part -->
     <menuitem id="menu_github_repository_root"
         parent="menu_github"
@@ -62,16 +46,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         sequence="2"
         action="action_github_repository_branch"/>
 
-    <menuitem id="menu_github_issue"
-        parent="menu_github_repository_root"
-        sequence="3 "
-        action="action_github_issue"/>
-
-    <menuitem id="menu_github_comment"
-        parent="menu_github_repository_root"
-        sequence="4"
-        action="action_github_comment"/>
-
     <!-- Settings Part -->
     <menuitem id="menu_github_settings"
         parent="menu_github"
@@ -85,12 +59,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         name="Sync Object"
         action="action_wizard_load_github_model"/>
 
-    <menuitem id="menu_git_author_partner_company"
-        parent="menu_github_settings"
-        sequence="2"
-        name="Git Authors"
-        action="action_git_author_partner_company"/>
-
     <!-- Reporting Part -->
     <menuitem id="menu_reporting"
         parent="menu_github"
@@ -101,16 +69,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         sequence="10"
         parent="menu_reporting"
         name="Github"/>
-
-    <menuitem id="menu_issue_by_company"
-        parent="menu_github_reporting"
-        sequence="1"
-        action="action_github_issue_by_company"/>
-
-    <menuitem id="menu_comment_by_company"
-        parent="menu_github_reporting"
-        sequence="2"
-        action="action_github_comment_by_company"/>
 
     <menuitem id="menu_branch_by_serie"
         parent="menu_github_reporting"
@@ -126,20 +84,5 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         parent="menu_reporting"
         sequence="11"
         name="Git"/>
-
-    <menuitem id="menu_git_commit_by_company"
-        parent="menu_git_reporting"
-        sequence="1"
-        action="action_git_commit_by_company"/>
-
-    <menuitem id="menu_git_commit_by_repository"
-        parent="menu_git_reporting"
-        sequence="2"
-        action="action_git_commit_by_repository"/>
-
-    <menuitem id="menu_git_commit_by_month_and_serie"
-        parent="menu_git_reporting"
-        sequence="3"
-        action="action_git_commit_by_month_and_serie"/>
 
 </odoo>

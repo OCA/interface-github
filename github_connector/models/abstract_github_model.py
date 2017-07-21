@@ -158,11 +158,7 @@ class AbtractGithubModel(models.AbstractModel):
         """
         github_model = self.get_github_for(self.github_type())
         for item in self:
-            if item._model._name == 'github.issue':
-                # Github doesn't provides api to load an issue by id
-                res = github_model.get(
-                    [item.repository_id.github_login, item.github_login])
-            elif item._model._name == 'github.organization':
+            if item._model._name == 'github.organization':
                 # Github doesn't provides api to load an organization by id
                 res = github_model.get([item.github_login])
             else:
