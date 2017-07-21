@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<openerp><data>
+
+    <record id="view_wizard_update_branch_list_form" model="ir.ui.view">
+        <field name="model">wizard.update.branch.list</field>
+        <field name="arch" type="xml">
+            <form>
+                <footer>
+                    <button name="button_update_branch_list" string="Update Branch List" type="object" class="oe_highlight" />
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</data></openerp>
