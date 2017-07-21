@@ -10,7 +10,7 @@ from subprocess import check_output
 from datetime import datetime
 
 from .github import _GITHUB_URL
-from openerp import models, fields, api
+from openerp import _, api, exceptions, fields, models, modules, tools
 from openerp.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
@@ -24,7 +24,7 @@ except ImportError:
 class GithubRepository(models.Model):
     _name = 'github.repository.branch'
     _inherit = ['abstract.github.model']
-    _order = 'repository_id, sequence_serie'
+    _order = 'repository_id, sequence_milestone'
 
     _github_type = 'repository_branches'
     _github_login_field = False
@@ -56,13 +56,14 @@ class GithubRepository(models.Model):
         comodel_name='github.organization', string='Organization',
         related='repository_id.organization_id', store=True, readonly=True)
 
-    organization_serie_id = fields.Many2one(
-        comodel_name='github.organization.serie', string='Organization Serie',
-        compute='_compute_organization_serie_id', store=True)
+    organization_milestone_id = fields.Many2one(
+        comodel_name='github.organization.milestone',
+        string='Organization Serie', store=True,
+        compute='_compute_organization_milestone_id')
 
-    sequence_serie = fields.Integer(
+    sequence_milestone = fields.Integer(
         string='Sequence Serie', store=True,
-        related='organization_serie_id.sequence')
+        related='organization_milestone_id.sequence')
 
     local_path = fields.Char(
         string='Local Path', compute='_compute_local_path')
@@ -73,6 +74,22 @@ class GithubRepository(models.Model):
     last_download_date = fields.Datetime(string='Last Download Date')
 
     last_analyze_date = fields.Datetime(string='Last Analyze Date')
+
+    coverage_url = fields.Char(
+        string='Coverage Url', store=True, compute='_compute_coverage')
+
+    ci_url = fields.Char(
+        string='CI Url', store=True, compute='_compute_ci')
+
+    github_url = fields.Char(
+        string='Github Url', store=True, compute='_compute_github_url')
+
+    # Init Section
+    def __init__(self, pool, cr):
+        source_path = tools.config.get('source_code_local_path', False)
+        if source_path and source_path not in modules.module.ad_paths:
+            modules.module.ad_paths.append(source_path)
+        super(GithubRepository, self).__init__(pool, cr)
 
     # Action Section
     @api.multi
@@ -111,15 +128,21 @@ class GithubRepository(models.Model):
                 _logger.info(
                     "Cloning new repository into %s ..." % (branch.local_path))
                 # Cloning the repository
-                os.makedirs(branch.local_path)
+                try:
+                    os.makedirs(branch.local_path)
+                except:
+                    raise exceptions.Warning(_(
+                        "Error when trying to create the new folder %s\n"
+                        " Please check Odoo Access Rights.") % (
+                            branch.local_path))
 
                 command = (
-                    "cd %s && git clone %s%s/%s.git -b %s .") % (
-                        branch.local_path,
+                    "git clone %s%s/%s.git -b %s %s") % (
                         _GITHUB_URL,
                         branch.repository_id.organization_id.github_login,
                         branch.repository_id.name,
-                        branch.name)
+                        branch.name,
+                        branch.local_path)
                 os.system(command)
                 branch.write({
                     'last_download_date': datetime.today(),
@@ -145,10 +168,10 @@ class GithubRepository(models.Model):
                             })
                 except:
                     # Trying to clean the local folder
-                    _logger.warning(
+                    _logger.warning(_(
                         "Error when updating the branch %s in the local folder"
                         " %s.\n Deleting the local folder and trying"
-                        " again." % (branch.name, branch.local_path))
+                        " again.") % (branch.name, branch.local_path))
                     command = ("rm -r %s") % (branch.local_path)
                     os.system(command)
                     branch._download_code()
@@ -179,7 +202,7 @@ class GithubRepository(models.Model):
                     "Warning : unable to eval the size of '%s'." % (file_path))
 
         try:
-            repo = Repo(path)
+            Repo(path)
         except:
             # If it's not a correct repository, we flag the branch
             # to be downloaded again
@@ -208,7 +231,7 @@ class GithubRepository(models.Model):
                 # Mark the branch as analyzed
                 branch.write(vals)
                 if partial_commit:
-                    self._cr.commit()
+                    self._cr.commit()  # pylint: disable=invalid-commit
         return True
 
     # Compute Section
@@ -217,7 +240,7 @@ class GithubRepository(models.Model):
     def _compute_complete_name(self):
         for branch in self:
             branch.complete_name =\
-                branch.repository_id.name + '/' + branch.name
+                branch.repository_id.complete_name + '/' + branch.name
 
     @api.multi
     @api.depends('size')
@@ -227,19 +250,50 @@ class GithubRepository(models.Model):
 
     @api.multi
     @api.depends('organization_id', 'name')
-    def _compute_organization_serie_id(self):
+    def _compute_organization_milestone_id(self):
         for branch in self:
-            for serie in branch.organization_id.organization_serie_ids:
-                if serie.name == branch.name:
-                    branch.organization_serie_id = serie
+            for milestone in branch.organization_id.organization_milestone_ids:
+                if milestone.name == branch.name:
+                    branch.organization_milestone_id = milestone
 
     @api.multi
     @api.depends('complete_name')
     def _compute_local_path(self):
-        path = self.env['ir.config_parameter'].get_param(
-            'git.source_code_local_path')
+        source_path = tools.config.get('source_code_local_path', False)
         for branch in self:
             branch.local_path = os.path.join(
-                path,
-                branch.repository_id.organization_id.github_login,
+                source_path,
                 branch.complete_name)
+
+    @api.multi
+    @api.depends(
+        'name', 'repository_id.name', 'organization_id.github_login',
+        'organization_id.coverage_url_pattern')
+    def _compute_coverage(self):
+        for branch in self:
+            branch.coverage_url =\
+                branch.organization_id.coverage_url_pattern.format(
+                    organization_name=branch.organization_id.github_login,
+                    repository_name=branch.repository_id.name,
+                    branch_name=branch.name)
+
+    @api.multi
+    @api.depends(
+        'name', 'repository_id.name', 'organization_id.github_login',
+        'organization_id.ci_url_pattern')
+    def _compute_ci(self):
+        for branch in self:
+            branch.ci_url =\
+                branch.organization_id.ci_url_pattern.format(
+                    organization_name=branch.organization_id.github_login,
+                    repository_name=branch.repository_id.name,
+                    branch_name=branch.name)
+
+    @api.multi
+    @api.depends('name', 'repository_id.complete_name')
+    def _compute_github_url(self):
+        for branch in self:
+            branch.github_url =\
+                'https://github.com/' +\
+                branch.repository_id.complete_name +\
+                '/tree/' + branch.name

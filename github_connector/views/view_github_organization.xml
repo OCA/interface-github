@@ -20,8 +20,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">github.organization</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name"/>
                 <field name="github_login"/>
+                <field name="name"/>
                 <field name="member_qty"/>
                 <field name="repository_qty"/>
                 <field name="team_qty"/>
@@ -34,12 +34,15 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="button_sync_member" type="object" string="Members Sync." icon="STOCK_REFRESH"
-                        groups="github_connector.group_github_connector_manager"/>
-                    <button name="button_sync_repository" type="object" string="Repositories Sync." icon="STOCK_REFRESH"
-                        groups="github_connector.group_github_connector_manager"/>
-                    <button name="button_sync_team" type="object" string="Teams Sync." icon="STOCK_REFRESH"
-                        groups="github_connector.group_github_connector_manager"/>
+                    <button name="button_sync_member" type="object" string="Members Sync."
+                            class="btn btn-default" icon="fa-chevron-right"
+                            groups="github_connector.group_github_connector_manager"/>
+                    <button name="button_sync_repository" type="object" string="Repositories Sync."
+                            class="btn btn-default" icon="fa-chevron-right"
+                            groups="github_connector.group_github_connector_manager"/>
+                    <button name="button_sync_team" type="object" string="Teams Sync."
+                            class="btn btn-default" icon="fa-chevron-right"
+                            groups="github_connector.group_github_connector_manager"/>
                 </header>
                 <sheet>
                     <field name="image" widget="image" class="oe_avatar oe_left"/>
@@ -51,20 +54,19 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     </div>
                     <div class="oe_right oe_button_box" name="buttons">
                         <button type="action" class="oe_stat_button" icon="fa-folder-o" name="%(action_github_repository)d"
-                            attrs="{'invisible': [('repository_qty', '=', False)]}"
-                            context="{'search_default_organization_id': active_id}">
-                            <div><strong><field name="repository_qty"/></strong><br/>Repositories</div>
+                                attrs="{'invisible': [('repository_qty', '=', False)]}"
+                                context="{'search_default_organization_id': active_id}">
+                            <field name="repository_qty" string="Repositories" widget="statinfo" />
                         </button>
                         <button type="action" class="oe_stat_button" icon="fa-users" name="%(action_github_team)d"
-                            attrs="{'invisible': [('team_qty', '=', False)]}"
-                            context="{'search_default_organization_id': active_id}">
-                            <div><strong><field name="team_qty"/></strong><br/>Teams</div>
+                                attrs="{'invisible': [('team_qty', '=', False)]}"
+                                context="{'search_default_organization_id': active_id}">
+                            <field name="team_qty" string="Teams" widget="statinfo" />
                         </button>
-                        <!-- TODO Improve me, when clicking on this button, the filter display the id of organization and not the name -->
                         <button type="action" class="oe_stat_button" icon="fa-user" name="%(action_res_partner)d"
-                            attrs="{'invisible': [('member_qty', '=', False)]}"
-                            context="{'search_default_organization_ids': active_id}">
-                            <div><strong><field name="member_qty"/></strong><br/>Members</div>
+                                attrs="{'invisible': [('member_qty', '=', False)]}"
+                                context="{'search_default_organization_ids': active_id}">
+                            <field name="member_qty" string="Members" widget="statinfo" />
                         </button>
                     </div>
                     <div class="oe_clear"/>
@@ -75,38 +77,36 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     </group>
                     <notebook>
                         <page name="extra_setting" string="Settings">
-                            <group col="4" string="Ignored Repositories">
-                                <field name="ignored_repository_names" colspan="4"/>
+                            <group cols="4" string="Ignored Repositories">
+                                <field name="ignored_repository_names" colspan="4" nolabel="1"/>
                             </group>
-                            <group col="4" string="Specific Repositories">
-                                <field name="specific_repository_names" colspan="4"/>
+                            <group name="external_services" cols="4" string="External Services">
+                                <field name="coverage_url_pattern"/>
+                                <field name="ci_url_pattern"/>
                             </group>
                         </page>
-                        <page string="Organization Series">
-                            <field name="organization_serie_ids" colspan="4" nolabel="1">
-                                <tree string="organization_serie_ids" editable="bottom">
+                        <page string="Organization Milestones">
+                            <field name="organization_milestone_ids" colspan="4" nolabel="1">
+                                <tree string="organization_milestone_ids" editable="bottom">
                                     <field name="sequence"/>
                                     <field name="name"/>
                                 </tree>
                             </field>
                         </page>
-                        <page name="repository" string="Repositories">
-                            <group col="4">
-                                <field name="repository_ids" colspan="4" nolabel="1"/>
-                            </group>
-                        </page>
                         <page name="github" string="Github">
                             <group col="4">
                                 <field name="github_url" widget="url" colspan="4"/>
-                                <field name="github_id" />
+                                <field name="github_id_external" />
                                 <field name="github_login" />
                                 <field name="github_create_date" />
                                 <field name="github_write_date" />
                                 <field name="github_last_sync_date" />
-                                <button name="button_update_from_github_light" type="object" string="Light Sync" icon="STOCK_REFRESH"
-                                    groups="github_connector.group_github_connector_manager"/>
-                                <button name="button_update_from_github_full" type="object" string="Full Sync" icon="STOCK_REFRESH"
-                                    groups="github_connector.group_github_connector_manager"/>
+                                <button name="button_update_from_github_light" type="object" string="Light Sync"
+                                        class="btn btn-default" icon="fa-angle-right"
+                                        groups="github_connector.group_github_connector_manager"/>
+                                <button name="button_update_from_github_full" type="object" string="Full Sync"
+                                        class="btn btn-default" icon="fa-angle-double-right"
+                                        groups="github_connector.group_github_connector_manager"/>
                             </group>
                         </page>
                     </notebook>
@@ -114,5 +114,57 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             </form>
         </field>
     </record>
+
+    <record id="view_github_organization_kanban" model="ir.ui.view">
+        <field name="model">github.organization</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="image"/>
+                <field name="name"/>
+                <field name="github_login"/>
+                <field name="github_url"/>
+                <field name="website_url" />
+                <field name="repository_qty" />
+                <field name="member_qty" />
+                <field name="team_qty" />
+                <field name="email"/>
+                <field name="location"/>
+                
+                <templates>
+                    <t t-name="kanban-box">
+                    <div class="oe_module_vignette oe_kanban_global_click">
+                        <img t-att-src="'data:image/png;base64,'+record.image.raw_value" class="oe_module_icon"/>
+                        <div class="oe_module_desc">
+                            <h3><field name="name"/></h3>
+                            <h4><field name="github_login"/></h4>
+                            <p class="oe_module_name">
+                                <t t-if="record.website_url.raw_value">
+                                    <a target="_blank" t-att-href="record.website_url.value">
+                                        <field name="website_url"/>
+                                    </a>
+                                </t><br/>
+                                <t t-if="record.email.raw_value"><field name="email"/></t><br/>
+                                <t t-if="record.location.raw_value"><field name="location"/></t><br/>
+                            </p>
+                            <a target="_blank" t-att-href="record.github_url.value">
+                                <span class="badge"><i class="fa fa-fw fa-github-alt"/></span>
+                            </a>
+                            <span class="badge">
+                                <i class="fa fa-fw fa-folder-o"/><t t-esc="record.repository_qty.value"/>
+                            </span>
+                            <span class="badge">
+                                <i class="fa fa-fw fa-users"/><t t-esc="record.team_qty.value"/>
+                            </span>
+                            <span class="badge">
+                                <i class="fa fa-fw fa-user"/><t t-esc="record.member_qty.value"/>
+                            </span>
+                        </div>
+                    </div>
+                    </t>
+              </templates>
+            </kanban>
+        </field>
+    </record>
+
 
 </odoo>

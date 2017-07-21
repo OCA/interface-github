@@ -9,6 +9,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="oca_organization" model="github.organization">
         <field name="name">Odoo Community Association</field>
         <field name="github_login">OCA</field>
+        <field name="coverage_url_pattern">https://codecov.io/gh/{organization_name}/{repository_name}/branch/{branch_name}</field>
+        <field name="ci_url_pattern">https://travis-ci.org/{organization_name}/{repository_name}</field>
+
         <field name="ignored_repository_names"><![CDATA[contribute-md-template
 maintainer-quality-tools
 maintainer-tools
@@ -19,11 +22,6 @@ OCB
 openupgradelib
 pylint-odoo
 l10n-peru]]></field>
-        <field name="specific_repository_names"><![CDATA[pos
-l10n-france
-web
-server-tools
-]]></field>
     </record>
 
 </odoo>

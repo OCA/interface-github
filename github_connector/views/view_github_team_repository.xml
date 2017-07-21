@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="view_github_team_repository_search" model="ir.ui.view">
+        <field name="model">github.team.repository</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="team_id"/>
+                <field name="repository_id"/>
+                <field name="permission"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_github_team_repository_tree" model="ir.ui.view">
+        <field name="model">github.team.repository</field>
+        <field name="arch" type="xml">
+            <tree colors="brown: permission == 'admin'; blue: permission == 'read'">
+                <field name="team_id" invisible="context.get('search_default_team_id')"/>
+                <field name="repository_id" invisible="context.get('search_default_repository_id')"/>
+                <field name="permission"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_github_team_permission_form" model="ir.ui.view">
+        <field name="model">github.team.repository</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box"/>
+                    <div class="oe_title">
+                        <h1><field name="team_id"/></h1>
+                        <h2><field name="repository_id"/></h2>
+                    </div>
+                    <field name="permission"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_github_team_repository_from_team_kanban" model="ir.ui.view">
+        <field name="model">github.team.repository</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="repository_id"/>
+                <field name="permission"/>
+                <templates>
+                    <t t-name="kanban-box">
+                    <div class="o_res_partner_kanban oe_kanban_global_click">
+                        <div class="oe_module_desc">
+                            <h3><field name="repository_id"/></h3>
+                            <t t-if="record.permission.raw_value == 'undefined'">
+                                <span class="badge">
+                                    <i class="fa fa-fw fa-question"/><t t-esc="record.permission.value"/>
+                                </span>
+                            </t>
+                            <t t-if="record.permission.raw_value == 'read'">
+                                <span class="badge">
+                                    <i class="fa fa-fw fa-file-o"/><t t-esc="record.permission.value"/>
+                                </span>
+                            </t>
+                            <t t-if="record.permission.raw_value == 'write'">
+                                <span class="badge">
+                                    <i class="fa fa-fw fa-save"/><t t-esc="record.permission.value"/>
+                                </span>
+                            </t>
+                            <t t-if="record.permission.raw_value == 'admin'">
+                                <span class="badge">
+                                    <i class="fa fa-fw fa-cog"/><t t-esc="record.permission.value"/>
+                                </span>
+                            </t>
+                        </div>
+                    </div>
+                    </t>
+              </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_github_team_repository_from_repository_kanban" model="ir.ui.view">
+        <field name="model">github.team.repository</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="team_id"/>
+                <field name="permission"/>
+                <templates>
+                    <t t-name="kanban-box">
+                    <div class="o_res_partner_kanban oe_kanban_global_click">
+                        <div class="oe_module_desc">
+                            <h3><field name="team_id"/></h3>
+                            <t t-if="record.permission.raw_value == 'undefined'">
+                                <span class="badge">
+                                    <i class="fa fa-fw fa-question"/><t t-esc="record.permission.value"/>
+                                </span>
+                            </t>
+                            <t t-if="record.permission.raw_value == 'read'">
+                                <span class="badge">
+                                    <i class="fa fa-fw fa-file-o"/><t t-esc="record.permission.value"/>
+                                </span>
+                            </t>
+                            <t t-if="record.permission.raw_value == 'write'">
+                                <span class="badge">
+                                    <i class="fa fa-fw fa-save"/><t t-esc="record.permission.value"/>
+                                </span>
+                            </t>
+                            <t t-if="record.permission.raw_value == 'admin'">
+                                <span class="badge">
+                                    <i class="fa fa-fw fa-cog"/><t t-esc="record.permission.value"/>
+                                </span>
+                            </t>
+                        </div>
+                    </div>
+                    </t>
+              </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+</odoo>
+
+
+
+
