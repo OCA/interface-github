@@ -42,34 +42,6 @@ class GithubRepository(models.Model):
         string='Branches Quantity', compute='_compute_repository_branch_qty',
         store=True)
 
-    issue_ids = fields.One2many(
-        string='Issues + PR', comodel_name='github.issue',
-        inverse_name='repository_id', readonly=True)
-
-    issue_qty = fields.Integer(
-        string='Issue + PR Quantity', compute='_compute_issue_qty',
-        multi='issue', store=True)
-
-    open_issue_qty = fields.Integer(
-        string='Open Issue + PR Quantity', compute='_compute_issue_qty',
-        multi='issue', store=True)
-
-    only_issue_qty = fields.Integer(
-        string='Issue Quantity', compute='_compute_issue_qty',
-        multi='issue', store=True)
-
-    only_open_issue_qty = fields.Integer(
-        string='Open Issue Quantity', compute='_compute_issue_qty',
-        multi='issue', store=True)
-
-    only_pull_request_qty = fields.Integer(
-        string='PR Quantity', compute='_compute_issue_qty',
-        multi='issue', store=True)
-
-    only_open_pull_request_qty = fields.Integer(
-        string='Open PR Quantity', compute='_compute_issue_qty',
-        multi='issue', store=True)
-
     # Compute Section
     @api.multi
     @api.depends('name', 'organization_id.github_login')
@@ -77,31 +49,6 @@ class GithubRepository(models.Model):
         for repository in self:
             repository.complete_name =\
                 repository.organization_id.github_login + '/' + repository.name
-
-    @api.multi
-    @api.depends('issue_ids.repository_id')
-    def _compute_issue_qty(self):
-        for repository in self:
-            only_issue_qty = 0
-            only_open_issue_qty = 0
-            only_pull_request_qty = 0
-            only_open_pull_request_qty = 0
-            for issue in repository.issue_ids:
-                if issue.issue_type == 'issue':
-                    only_issue_qty += 1
-                    if issue.state == 'open':
-                        only_open_issue_qty += 1
-                else:
-                    only_pull_request_qty += 1
-                    if issue.state == 'open':
-                        only_open_pull_request_qty += 1
-            repository.only_issue_qty = only_issue_qty
-            repository.only_open_issue_qty = only_open_issue_qty
-            repository.only_pull_request_qty = only_pull_request_qty
-            repository.only_open_pull_request_qty = only_open_pull_request_qty
-            repository.issue_qty = only_issue_qty + only_pull_request_qty
-            repository.open_issue_qty =\
-                only_open_issue_qty + only_open_pull_request_qty
 
     @api.multi
     @api.depends('repository_branch_ids.repository_id')
@@ -127,27 +74,7 @@ class GithubRepository(models.Model):
 
     @api.multi
     def full_update(self):
-        self.button_sync_issue()
         self.button_sync_branch()
-
-    # Action section
-    @api.multi
-    def button_sync_issue(self):
-        github_issue = self.get_github_for('repository_issues')
-        issue_obj = self.env['github.issue']
-        for repository in self:
-            issue_ids = []
-            for data in github_issue.list([repository.github_login]):
-                issue = issue_obj.get_from_id_or_create(
-                    data, {'repository_id': repository.id})
-                issue_ids.append(issue.id)
-            repository.issue_ids = issue_ids
-
-    @api.multi
-    def button_sync_issue_with_comment(self):
-        self.button_sync_issue()
-        for repository in self:
-            repository.issue_ids.button_sync_comment()
 
     @api.model
     def cron_update_branch_list(self):

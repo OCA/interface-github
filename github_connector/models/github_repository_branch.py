@@ -186,36 +186,6 @@ class GithubRepository(models.Model):
             self.state = 'to_download'
             return {'size': 0}
 
-        # Analyse Commits
-        commit_lst = list(repo.iter_commits(branch.name))
-        _logger.info(
-            "Found %d commits ..." % (len(commit_lst)))
-
-        # here is commits of all branches, to avoid to duplicate commits :
-        # all commits done on a 8.0 serie will be present on the 9.0 when the
-        # 9.0 serie is created. To avoid that side effect we consider that 9.0
-        # commits are only ones that are not present on 8.0 serie.
-
-        # Note : FIXME
-        # this algorithm works correctly for version 9.0 and before, but not
-        # for the 10.0 version.
-        # TODO : investigate.
-
-        # The following lines has been disabled for perfomance reasons.
-        # and because it doesn't work for 10.0 version.
-        # ignore_branches = self.search([
-        #    ('repository_id', '=', branch.repository_id.id),
-        #    ('name', '<=', branch.name)])
-        # existing_commits = self.env['git.commit'].search([
-        #    ('repository_branch_id', 'in', ignore_branches.ids)])
-        # existing_names = [x.name for x in existing_commits]
-        # new_commits = 0
-        # for commit in commit_lst:
-        #    if commit.hexsha not in existing_names:
-        #        new_commits += 1
-        #        self.env['git.commit'].create_or_replace_with_git_data(
-        #           commit, branch)
-        # _logger.info("%d new commits created." % (new_commits))
         return {'size': size}
 
     @api.multi
