@@ -6,7 +6,7 @@
 {
     'name': 'Github Connector',
     'summary': 'Recover information from github repositories',
-    'version': '8.0.1.0.0',
+    'version': '10.0.1.0.0',
     'category': 'Connector',
     'license': 'AGPL-3',
     'author':
@@ -14,6 +14,7 @@
         ', Sylvain LE GAL',
     'depends': [
         'base',
+        'web_kanban',
     ],
     'data': [
         'security/ir_model_category.xml',
@@ -25,6 +26,8 @@
         'views/view_wizard_update_from_github.xml',
         'views/view_wizard_update_branch_list.xml',
         'views/view_reporting.xml',
+        'views/view_github_team_partner.xml',
+        'views/view_github_team_repository.xml',
         'views/action.xml',
         'views/view_res_partner.xml',
         'views/view_github_organization.xml',
@@ -33,11 +36,13 @@
         'views/view_github_repository_branch.xml',
         'views/view_github_team.xml',
         'views/menu.xml',
+        'views/view_wizard_create_team.xml',
+        'views/view_wizard_create_repository.xml',
     ],
     'demo': [
         'demo/res_groups.xml',
         'demo/github_organization.xml',
-        'demo/github_organization_serie.xml',
+        'demo/github_organization_milestone.xml',
     ],
     'installable': True,
     'external_dependencies': {
