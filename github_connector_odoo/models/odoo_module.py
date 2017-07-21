@@ -29,12 +29,12 @@ class OdooModule(models.Model):
     author_ids = fields.Many2many(
         string='Authors', comodel_name='odoo.author',
         compute='_compute_author', relation='github_module_author_rel',
-        column1='module_id', column2='author_id', multi='author',
-        store=True)
+        column1='module_id', column2='author_id', multi='author')
+    # , store=True : Commented to optimize analysis.
 
     author_list = fields.Char(
-        string='Authors List', compute='_compute_author', multi='author',
-        store=True)
+        string='Authors List', compute='_compute_author', multi='author')
+    # , store=True : Commented to optimize analysis.
 
     organization_serie_ids = fields.Many2many(
         string='Series', comodel_name='github.organization.serie',
@@ -63,7 +63,8 @@ class OdooModule(models.Model):
 
     dependence_module_version_qty = fields.Integer(
         string='Quantity of Module Versions that depend on this module',
-        compute='_compute_dependence_module_version_qty', store=True)
+        compute='_compute_dependence_module_version_qty')
+    # , store=True : Commented to optimize analysis.
 
     # Compute Section
     @api.multi

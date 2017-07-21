@@ -27,6 +27,13 @@ class OdooModuleVersion(models.Model):
         'xml_declaration': False,
     }
 
+    _ODOO_TYPE_SELECTION = [
+        ('verticalization', 'Verticalization'),
+        ('localization', 'Localization'),
+        ('connector', 'Connector'),
+        ('other', 'Other'),
+    ]
+
     # Column Section
     name = fields.Char(string='Name', readonly=True, select=True)
 
@@ -71,7 +78,8 @@ class OdooModuleVersion(models.Model):
         comodel_name='odoo.module', string='Dependencies',
         relation='module_version_dependency_rel', column1='module_version_id',
         column2='dependency_module_id',
-        compute='_compute_dependency_module_ids', store=True)
+        compute='_compute_dependency_module_ids')
+    # , store=True : Commented to optimize analysis.
 
     website = fields.Char(string='Website (Manifest)', readonly=True)
 
@@ -93,7 +101,8 @@ class OdooModuleVersion(models.Model):
         string='Authors', comodel_name='odoo.author',
         relation='github_module_version_author_rel',
         column1='module_version_id', column2='author_id',
-        compute='_compute_author_ids', store=True)
+        compute='_compute_author_ids')
+    # , store=True : Commented to optimize analysis.
 
     lib_python_ids = fields.Many2many(
         comodel_name='odoo.lib.python', string='Python Lib Dependencies',
@@ -105,6 +114,10 @@ class OdooModuleVersion(models.Model):
         comodel_name='odoo.lib.bin', string='Bin Lib Dependencies',
         relation='module_version_lib_bin_rel', column1='module_version_id',
         column2='lib_bin_id', multi='lib', compute='_compute_lib', store=True)
+
+    odoo_type = fields.Selection(
+        string='Odoo Type', selection=_ODOO_TYPE_SELECTION, store=True,
+        compute='_compute_odoo_type')
 
     # Overload Section
     @api.multi
@@ -118,6 +131,20 @@ class OdooModuleVersion(models.Model):
         return super(OdooModuleVersion, self).unlink()
 
     # Compute Section
+    @api.multi
+    @api.depends('repository_branch_id.repository_id.name')
+    def _compute_odoo_type(self):
+        for version in self:
+            repository_name = version.repository_branch_id.repository_id.name
+            if repository_name.startswith('l10n-'):
+                version.odoo_type = 'localization'
+            elif repository_name.startswith('connector-'):
+                version.odoo_type = 'connector'
+            elif repository_name.startswith('vertical-'):
+                version.odoo_type = 'verticalization'
+            else:
+                version.odoo_type = 'other'
+
     @api.multi
     @api.depends('technical_name', 'repository_branch_id.complete_name')
     def _compute_complete_name(self):
@@ -219,6 +246,7 @@ class OdooModuleVersion(models.Model):
     def manifest_2_odoo(self, info, repository_branch, module):
         author_list =\
             (type(info['author']) == list) and info['author'] or\
+            (type(info['author']) == tuple) and [x for x in info['author']] or\
             info['author'].split(',')
         res = {
             'name': info['name'],
