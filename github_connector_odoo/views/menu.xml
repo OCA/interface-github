@@ -21,53 +21,30 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         sequence="2"
         action="action_odoo_module_version"/>
 
-<!--TODO Finish evalation module-->
-<!--    <menuitem id="menu_odoo_module_evaluation"-->
-<!--        parent="menu_odoo"-->
-<!--        sequence="3"-->
-<!--        action="action_odoo_module_evaluation"/>-->
-
-    <!-- SubMenu "Copyright" -->
-    <menuitem id="menu_odoo_copyright"
-        parent="menu_odoo"
-        sequence="4"
-        name="Copyright"/>
-
     <menuitem id="menu_odoo_license"
-        parent="menu_odoo_copyright"
-        sequence="1"
+        parent="menu_odoo"
+        sequence="3"
         action="action_odoo_license"/>
 
     <menuitem id="menu_odoo_author"
-        parent="menu_odoo_copyright"
-        sequence="2"
+        parent="menu_odoo"
+        sequence="4"
         action="action_odoo_author"/>
 
-    <!-- SubMenu "Lib Dependencies" -->
-    <menuitem id="menu_odoo_lib"
+    <menuitem id="menu_odoo_lib_bin"
         parent="menu_odoo"
         sequence="5"
-        name="Lib Dependencies"/>
-
-    <menuitem id="menu_odoo_lib_bin"
-        parent="menu_odoo_lib"
-        sequence="1"
         action="action_odoo_lib_bin"/>
 
     <menuitem id="menu_odoo_lib_python"
-        parent="menu_odoo_lib"
-        sequence="2"
+        parent="menu_odoo"
+        sequence="6"
         action="action_odoo_lib_python"/>
 
     <!-- Reporting Part -->
-    <menuitem id="menu_odoo_reporting"
-        parent="base.menu_reporting"
-        sequence="11"
-        name="Odoo"/>
-
     <menuitem id="menu_odoo_module_version_by_serie"
-        parent="menu_odoo_reporting"
-        sequence="1"
+        parent="github_connector.menu_reporting"
+        sequence="10"
         action="action_odoo_module_version_by_serie"/>
 
 </odoo>

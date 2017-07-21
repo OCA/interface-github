@@ -10,9 +10,15 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">github.organization</field>
         <field name="inherit_id" ref="github_connector.view_github_organization_form"/>
         <field name="arch" type="xml">
-            <field name="repository_ids" position="before">
-                <field name="ci_url" colspan="4"/>
+            <field name="ci_url_pattern" position="after">
+                <field name="runbot_url_pattern"/>
+                <field name="runbot_parse_url"/>
             </field>
+            <group name="external_services" position="before">
+                <group name="odoo_settings" string="Odoo Settings">
+                    <field name="default_author_text"/>
+                </group>
+            </group>
         </field>
     </record>
 
