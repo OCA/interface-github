@@ -23,11 +23,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="view_odoo_module_tree" model="ir.ui.view">
         <field name="model">odoo.module</field>
         <field name="arch" type="xml">
-            <tree>
-                <field name="name"/>
+            <tree colors="gray: module_version_qty == 0;">
                 <field name="technical_name"/>
-                <field name="organization_serie_list"/>
-                <field name="author_list"/>
+                <field name="name"/>
+                <field name="organization_serie_ids_description"/>
+                <field name="author_ids_description"/>
                 <field name="module_version_qty"/>
             </tree>
         </field>
@@ -38,14 +38,25 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="arch" type="xml">
             <form>
                 <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="action" class="oe_stat_button" icon="fa-cube" name="%(action_odoo_module_version)d"
+                                attrs="{'invisible': [('module_version_qty', '=', False)]}"
+                                context="{'search_default_module_id': active_id}">
+                            <field name="module_version_qty" string="Versions" widget="statinfo" />
+                        </button>
+                        <button type="action" class="oe_stat_button" icon="fa-arrows-v" name="%(action_odoo_module_version)d"
+                                attrs="{'invisible': [('dependence_module_version_qty', '=', False)]}"
+                                context="{'search_default_dependency_module_ids': active_id}">
+                            <field name="dependence_module_version_qty" string="Dependencies" widget="statinfo" />
+                        </button>
+                    </div>
                     <div class="oe_title">
                         <h1><field name="name"/></h1>
                         <h2><field name="technical_name"/></h2>
                     </div>
-                    <div class="oe_clear"/>
-                    <group col="4">
+                    <group cols="4">
                         <field name="organization_serie_ids" widget="many2many_tags" string="Available for"/>
-                        <field name="dependence_module_version_qty"/>
                         <field name="author_ids" widget="many2many_tags"/>
                     </group>
                     <notebook>
@@ -54,20 +65,41 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 <field name="description_rst_html" colspan="4" nolabel="1" class="oe_styling_v8"/>
                             </group>
                         </page>
-                        <page string="Versions">
-                            <group col="4">
-                                <field name="module_version_ids" colspan="4" nolabel="1"/>
-                            </group>
-                        </page>
-                        <page string="Modules that depend on this module"
-                                attrs="{'invisible': [('dependence_module_version_qty', '=', 0)]}">
-                            <group col="4">
-                                <field name="dependence_module_version_ids" colspan="4" nolabel="1"/>
-                            </group>
-                        </page>
                     </notebook>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <record id="view_odoo_module_kanban" model="ir.ui.view">
+        <field name="model">odoo.module</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="image"/>
+                <field name="name"/>
+                <field name="technical_name"/>
+                <field name="organization_serie_ids_description" />
+                <templates>
+                    <t t-name="kanban-box">
+                    <div class="oe_module_vignette oe_kanban_global_click">
+                        <t t-if="record.image.raw_value">
+                            <img t-att-src="'data:image/png;base64,'+record.image.raw_value" class="oe_module_icon"/>
+                        </t>
+                        <t t-if="!record.image.raw_value">
+                            <img t-att-src='_s + "/github_connector_odoo/static/src/img/default_image_module.png"' class="oe_module_icon"/>
+                        </t>
+                        <div class="oe_module_desc">
+                            <h4><field name="name"/></h4>
+                            <p class="oe_module_name">
+                                <t t-if="record.technical_name.raw_value"><field name="technical_name"/><br/></t>
+                                <span class="badge" t-if="record.organization_serie_ids_description.raw_value"><t t-esc="record.organization_serie_ids_description.value"/></span><br/>
+                                <i><field name="author_ids_description"/></i>
+                            </p>
+                        </div>
+                    </div>
+                    </t>
+              </templates>
+            </kanban>
         </field>
     </record>
 
