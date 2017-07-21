@@ -45,8 +45,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <field name="display_name" position="after">
                 <field name="github_login" />
                 <field name="team_qty" />
-                <field name="issue_qty"/>
-                <field name="comment_qty"/>
             </field>
         </field>
     </record>
@@ -57,16 +55,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
             <div name="button_box" position="inside">
-                <button type="action" class="oe_stat_button" icon="fa-comment" name="%(action_github_comment)d"
-                    attrs="{'invisible': ['|', ('github_login', '=', False), ('is_company', '=', True)]}"
-                    context="{'search_default_author_id': active_id}">
-                    <div><strong><field name="comment_qty"/></strong><br/>Comments</div>
-                </button>
-                <button type="action" class="oe_stat_button" icon="fa-tasks" name="%(action_github_issue)d"
-                    attrs="{'invisible': ['|', ('github_login', '=', False), ('is_company', '=', True)]}"
-                    context="{'search_default_author_id': active_id}">
-                    <div><strong><field name="issue_qty"/></strong><br/>Issues + PR</div>
-                </button>
 <!--                 TODO Improve me, when clicking on this button, the filter display the id of the partner and not the name -->
                 <button type="action" class="oe_stat_button" icon="fa-institution" name="%(action_github_organization)d"
                     attrs="{'invisible': ['|', ('github_login', '=', False), ('is_company', '=', True)]}"
@@ -78,17 +66,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     attrs="{'invisible': ['|', ('github_login', '=', False), ('is_company', '=', True)]}"
                     context="{'search_default_member_ids': active_id}">
                     <div><strong><field name="team_qty"/></strong><br/>Teams</div>
-                </button>
-<!--                 Corporate Part -->
-                <button type="action" class="oe_stat_button" icon="fa-comment" name="%(action_github_comment)d"
-                    attrs="{'invisible': [('is_company', '=', False)]}"
-                    context="{'search_default_company_author_id': active_id}">
-                    <div><strong><field name="corporate_comment_qty"/></strong><br/>Corporate Comments</div>
-                </button>
-                <button type="action" class="oe_stat_button" icon="fa-tasks" name="%(action_github_issue)d"
-                    attrs="{'invisible': [('is_company', '=', False)]}"
-                    context="{'search_default_company_author_id': active_id}">
-                    <div><strong><field name="corporate_issue_qty"/></strong><br/>Corporate Issues + PR</div>
                 </button>
             </div>
 
