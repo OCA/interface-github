@@ -9,7 +9,7 @@ from openerp.tools import html_sanitize
 
 class OdooModule(models.Model):
     _name = 'odoo.module'
-    _order = 'name, technical_name'
+    _order = 'technical_name, name'
 
     # Column Section
     name = fields.Char(
@@ -23,29 +23,30 @@ class OdooModule(models.Model):
         string='Versions', readonly=True)
 
     module_version_qty = fields.Integer(
-        string='Module Version Quantity',
+        string='Number of Module Versions',
         compute='_compute_module_version_qty', store=True)
 
     author_ids = fields.Many2many(
         string='Authors', comodel_name='odoo.author',
         compute='_compute_author', relation='github_module_author_rel',
-        column1='module_id', column2='author_id', multi='author')
-    # , store=True : Commented to optimize analysis.
+        column1='module_id', column2='author_id', multi='author',
+        store=True)
 
-    author_list = fields.Char(
-        string='Authors List', compute='_compute_author', multi='author')
-    # , store=True : Commented to optimize analysis.
+    author_ids_description = fields.Char(
+        string='Authors (Text)', compute='_compute_author', multi='author',
+        store=True)
 
     organization_serie_ids = fields.Many2many(
         string='Series', comodel_name='github.organization.serie',
-        compute='_compute_organization_serie', multi='organization_serie',
+        compute='_compute_organization_serie',
+        multi='organization_serie', store=True,
         relation='github_module_organization_serie_rel',
-        column1='module_id', column2='organization_serie_id', store=True)
+        column1='module_id', column2='organization_serie_id')
 
-    organization_serie_list = fields.Char(
-        string='Series List',
-        compute='_compute_organization_serie', multi='organization_serie',
-        store=True)
+    organization_serie_ids_description = fields.Char(
+        string='Series (Text)', store=True,
+        compute='_compute_organization_serie',
+        multi='organization_serie')
 
     description_rst = fields.Char(
         string='RST Description of the last Version', store=True,
@@ -62,11 +63,26 @@ class OdooModule(models.Model):
         column1='dependency_module_id', column2='module_version_id')
 
     dependence_module_version_qty = fields.Integer(
-        string='Quantity of Module Versions that depend on this module',
-        compute='_compute_dependence_module_version_qty')
-    # , store=True : Commented to optimize analysis.
+        string='Number of Module Versions that depend on this module',
+        compute='_compute_dependence_module_version_qty', store=True)
+
+    image = fields.Binary(
+        string='Icon Image', compute='_compute_image', store=True,
+        reaonly=True)
 
     # Compute Section
+    @api.multi
+    @api.depends('module_version_ids.image')
+    def _compute_image(self):
+        module_version_obj = self.env['odoo.module.version']
+        for module in self:
+            version_ids = module.module_version_ids.ids
+            last_version = module_version_obj.search(
+                [('id', 'in', version_ids)],
+                order='organization_serie_id desc', limit=1)
+            if last_version:
+                module.image = last_version.image
+
     @api.multi
     @api.depends('technical_name', 'module_version_ids.name')
     def _compute_name(self):
@@ -123,7 +139,8 @@ class OdooModule(models.Model):
                 authors += version.author_ids
             authors = set(authors)
             module.author_ids = [x.id for x in authors]
-            module.author_list = ', '.join(sorted([x.name for x in authors]))
+            module.author_ids_description =\
+                ', '.join(sorted([x.name for x in authors]))
 
     @api.multi
     @api.depends('module_version_ids.organization_serie_id')
@@ -135,8 +152,9 @@ class OdooModule(models.Model):
             organization_series = set(organization_series)
             module.organization_serie_ids =\
                 [x.id for x in organization_series]
-            module.organization_serie_list =\
-                ', '.join(sorted([x.name for x in organization_series]))
+            module.organization_serie_ids_description =\
+                ' - '.join([x.name for x in sorted(
+                    organization_series, key=lambda x: x.sequence)])
 
     # Custom Section
     @api.model
@@ -146,6 +164,6 @@ class OdooModule(models.Model):
             module = self.create({'technical_name': technical_name})
         return module
 
-    @api.one
+    @api.multi
     def name_get(self):
-        return [self.id, self.technical_name]
+        return [(module.id, module.technical_name) for module in self]

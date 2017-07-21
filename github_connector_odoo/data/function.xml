@@ -6,6 +6,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo noupdate="1">
 
-    <function model="github.repository.branch" name="_set_state_to_analyse"/>
+    <function model="github.repository.branch" name="_set_state_to_analyze"/>
 
 </odoo>
