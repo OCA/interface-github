@@ -4,7 +4,7 @@ Copyright (C) 2016-Today: Odoo Community Association (OCA)
 @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
-<openerp><data>
+<odoo>
 
     <!-- Source Code Part -->
     <record id="action_odoo_module" model="ir.actions.act_window">
@@ -71,4 +71,4 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="view_id" ref="view_odoo_module_version_by_serie_graph" />
     </record>
 
-</data></openerp>
+</odoo>

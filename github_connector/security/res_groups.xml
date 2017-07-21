@@ -4,7 +4,7 @@ Copyright (C) 2016-Today: Odoo Community Association (OCA)
 @author: Benoit GUILLOT <benoit.guillot@akretion.com>
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
-<openerp><data>
+<odoo>
 
     <record id="group_github_connector_manager" model="res.groups">
         <field name="name">Connector Github Manager</field>
@@ -12,4 +12,4 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
     </record>
 
-</data></openerp>
+</odoo>
