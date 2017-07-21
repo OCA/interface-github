@@ -37,7 +37,7 @@ class GithubRepository(models.Model):
 
     # Column Section
     name = fields.Char(
-        string='Name', readonly=True, select=True)
+        string='Name', readonly=True, index=True)
 
     size = fields.Integer(
         string='Size (Byte) ', readonly=True)
@@ -50,7 +50,7 @@ class GithubRepository(models.Model):
 
     repository_id = fields.Many2one(
         comodel_name='github.repository', string='Repository',
-        required=True, select=True, readonly=True, ondelete='cascade')
+        required=True, index=True, readonly=True, ondelete='cascade')
 
     organization_id = fields.Many2one(
         comodel_name='github.organization', string='Organization',
