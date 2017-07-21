@@ -30,16 +30,11 @@ class GithubOrganization(models.Model):
 
     ignored_repository_names = fields.Text(
         string='Ignored Repositories', help="Set here repository names you"
-        " you want to ignore. One repository per line. Exemple:\n"
-        "odoo-community.org\n"
-        "OpenUpgrade\n")
-
-    specific_repository_names = fields.Text(
-        string='Specific Repositories', help="Set here repository names you"
-        " you want download. One repository per line. The other will be"
-        " ignored. Exemple:\n"
-        "pos\n"
-        "server-tools\n")
+        " you want to ignore. One repository per line."
+        " If set, the repositories will be created, but branches"
+        " synchronization, and source code download will be disabled."
+        " Exemple:\n"
+        "odoo-community.org\nOCB\nOpenUpgrade\n")
 
     member_ids = fields.Many2many(
         string='Members', comodel_name='res.partner',
@@ -66,14 +61,18 @@ class GithubOrganization(models.Model):
         string='Team Quantity', compute='_compute_team_qty',
         store=True)
 
-    organization_serie_ids = fields.One2many(
+    organization_milestone_ids = fields.One2many(
         string='Organization Series',
-        comodel_name='github.organization.serie',
+        comodel_name='github.organization.milestone',
         inverse_name='organization_id')
 
-    organization_serie_qty = fields.Integer(
-        string='Series Quantity', compute='_compute_organization_serie_qty',
-        store=True)
+    organization_milestone_qty = fields.Integer(
+        string='Series Quantity', store=True,
+        compute='_compute_organization_milestone_qty')
+
+    coverage_url_pattern = fields.Char(string='Coverage URL')
+
+    ci_url_pattern = fields.Char(string='CI URL')
 
     # Overloadable Section
     @api.model
@@ -95,6 +94,13 @@ class GithubOrganization(models.Model):
         self.button_sync_repository()
         self.button_sync_team()
 
+    @api.model
+    def cron_update_organization_team(self):
+        organizations = self.search([])
+        organizations.full_update()
+        organizations.mapped('team_ids').full_update()
+        return True
+
     # Compute Section
     @api.multi
     @api.depends('member_ids', 'member_ids.organization_ids')
@@ -115,16 +121,16 @@ class GithubOrganization(models.Model):
             organization.team_qty = len(organization.team_ids)
 
     @api.multi
-    @api.depends('organization_serie_ids.organization_id')
-    def _compute_organization_serie_qty(self):
+    @api.depends('organization_milestone_ids.organization_id')
+    def _compute_organization_milestone_qty(self):
         for organization in self:
-            organization.organization_serie_qty =\
-                len(organization.organization_serie_ids)
+            organization.organization_milestone_qty =\
+                len(organization.organization_milestone_ids)
 
     # Action section
     @api.multi
     def button_sync_member(self):
-        github_member = self.get_github_for('organization_members')
+        github_member = self.get_github_connector('organization_members')
         partner_obj = self.env['res.partner']
         for organization in self:
             member_ids = []
@@ -136,24 +142,18 @@ class GithubOrganization(models.Model):
     @api.multi
     def button_sync_repository(self):
         repository_obj = self.env['github.repository']
-        github_repo = self.get_github_for('organization_repositories')
+        github_repo = self.get_github_connector('organization_repositories')
         for organization in self:
             repository_ids = []
-            ignored_list = organization.ignored_repository_names and\
-                organization.ignored_repository_names.split("\n") or []
-            specific_list = organization.specific_repository_names and\
-                organization.specific_repository_names.split("\n") or []
             for data in github_repo.list([organization.github_login]):
-                if data['name'] not in ignored_list:
-                    if not specific_list or data['name'] in specific_list:
-                        repository = repository_obj.get_from_id_or_create(data)
-                        repository_ids.append(repository.id)
+                repository = repository_obj.get_from_id_or_create(data)
+                repository_ids.append(repository.id)
             organization.repository_ids = repository_ids
 
     @api.multi
     def button_sync_team(self):
         team_obj = self.env['github.team']
-        github_team = self.get_github_for('organization_teams')
+        github_team = self.get_github_connector('organization_teams')
         for organization in self:
             team_ids = []
             for data in github_team.list([organization.github_login]):

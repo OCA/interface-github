@@ -6,7 +6,6 @@
 import base64
 import urllib
 import logging
-from datetime import datetime
 
 from openerp import tools, api, fields, models, exceptions, _
 from .github import Github
@@ -25,9 +24,10 @@ class AbtractGithubModel(models.AbstractModel):
     _github_type = None
     _github_login_field = None
     _need_individual_call = False
+    _field_list_prevent_overwrite = []
 
-    github_id = fields.Char(
-        string='Github Id', readonly=True, index=True)
+    github_id_external = fields.Char(
+        string='Github Id', readonly=True, index=True, oldname='github_id')
 
     github_login = fields.Char(
         string='Github Technical Name', readonly=True, index=True)
@@ -63,18 +63,43 @@ class AbtractGithubModel(models.AbstractModel):
 
     @api.model
     def get_odoo_data_from_github(self, data):
+        """Prepare function that map Github data to create in Odoo"""
         return {
-            'github_id': data['id'],
+            'github_id_external': data['id'],
             'github_url': data.get('html_url', False),
             'github_login': data.get(self.github_login_field(), False),
             'github_create_date': data.get('created_at', False),
             'github_write_date': data.get('updated_at', False),
-            'github_last_sync_date':
-            datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            'github_last_sync_date': fields.Datetime.now(),
         }
 
     @api.multi
+    def get_github_data_from_odoo(self):
+        """Prepare function that map Odoo data to create in Github.
+        Usefull only if your model implement creation in github"""
+        self.ensure_one()
+        raise exceptions.Warning(_("Unimplemented Feature"), _(
+            "Please define get_github_data_from_odoo function in child"
+            " model."))
+
+    @api.multi
+    def get_github_args_for_creation(self):
+        """Should Return list of arguments required to create the given item
+        in Github.
+        Usefull only if your model implement creation in github"""
+        self.ensure_one()
+        raise exceptions.Warning(_("Unimplemented Feature"), _(
+            "Please define get_github_args_for_creation function in child"
+            " model."))
+
+    @api.multi
     def full_update(self):
+        pass
+
+    @api.multi
+    def _hook_after_github_creation(self):
+        """Hook that will be called, after a creation in github.
+        Overload this function to add custom script"""
         pass
 
     # Custom Public Function
@@ -94,7 +119,8 @@ class AbtractGithubModel(models.AbstractModel):
         extra_data = extra_data and extra_data or {}
 
         # We try to search object by id
-        existing_object = self.search([('github_id', '=', data['id'])])
+        existing_object = self.search(
+            [('github_id_external', '=', data['id'])])
         if existing_object:
             return existing_object
 
@@ -104,7 +130,7 @@ class AbtractGithubModel(models.AbstractModel):
                 ('github_login', '=', data[self._github_login_field])])
             if existing_object:
                 # Update the existing object with the id
-                existing_object.github_id = data['id']
+                existing_object.github_id_external = data['id']
                 _logger.info(
                     "Existing object %s#%d with github name '%s' has been"
                     " updated with unique github id %s#%s" % (
@@ -114,8 +140,8 @@ class AbtractGithubModel(models.AbstractModel):
                 return existing_object
 
         if self._need_individual_call:
-            github_model = self.get_github_for(self.github_type())
-            data = github_model.get_by_url(data['url'])
+            github_connector = self.get_github_connector(self.github_type())
+            data = github_connector.get_by_url(data['url'])
         return self._create_from_github_data(data, extra_data)
 
     @api.model
@@ -131,10 +157,10 @@ class AbtractGithubModel(models.AbstractModel):
             >>> self.env['github_organization'].create_from_name('OCA')
             >>> self.env['github_repository'].create_from_name('OCA/web')
         """
-        github_model = self.get_github_for(self.github_type())
-        res = github_model.get([name])
+        github_connector = self.get_github_connector(self.github_type())
+        res = github_connector.get([name])
         # search if ID doesn't exist in database
-        current_object = self.search([('github_id', '=', res['id'])])
+        current_object = self.search([('github_id_external', '=', res['id'])])
         if not current_object:
             # Create the object
             return self._create_from_github_data(res)
@@ -156,13 +182,14 @@ class AbtractGithubModel(models.AbstractModel):
             :param child_update: set to True if you want to reload childs
                 Objects linked to this object. (like members for teams)
         """
-        github_model = self.get_github_for(self.github_type())
+        github_connector = self.get_github_connector(self.github_type())
         for item in self:
-            if item._model._name == 'github.organization':
+            if item._name == 'github.organization':
                 # Github doesn't provides api to load an organization by id
-                res = github_model.get([item.github_login])
+                res = github_connector.get([item.github_login])
             else:
-                res = github_model.get([item.github_id], by_id=True)
+                res = github_connector.get(
+                    [item.github_id_external], by_id=True)
             item._update_from_github_data(res)
         if child_update:
             self.full_update()
@@ -197,18 +224,23 @@ class AbtractGithubModel(models.AbstractModel):
             # process, we realize a write only if data changed
             to_write = {}
             for k, v in vals.iteritems():
-                # TODO : improve, this line raise a warning on many2one
-                # comparison "Comparing apples and oranges..."
-                if item[k] != v:
+                if hasattr(item[k], 'id'):
+                    to_compare = item[k].id
+                else:
+                    to_compare = item[k]
+                # do not overwrite existing values for some given fields
+                if to_compare != v and (
+                        k not in self._field_list_prevent_overwrite or
+                        to_compare is False):
                     to_write[k] = v
             if to_write:
                 item.write(to_write)
 
     @api.multi
-    def get_github_for(self, github_type):
+    def get_github_connector(self, github_type):
         if (not tools.config.get('github_login') or
                 not tools.config.get('github_password')):
-            raise exceptions.Warning(_("Configuration Error"), _(
+            raise exceptions.Warning(_(
                 "Please add 'github_login' and 'github_password' "
                 "in Odoo configuration file."))
         return Github(
@@ -216,3 +248,28 @@ class AbtractGithubModel(models.AbstractModel):
             tools.config['github_login'],
             tools.config['github_password'],
             int(self.env['ir.config_parameter'].get_param('github.max_try')))
+
+    @api.multi
+    def create_in_github(self, model_obj):
+        self.ensure_one()
+        github_connector = self.get_github_connector(self.github_type())
+        # Create in Github
+        response = github_connector.create(
+            self.get_github_args_for_creation(),
+            self.get_github_data_from_odoo())
+        # Create in Odoo with the returned data and update object
+        new_item = model_obj._create_from_github_data(response)
+        new_item.full_update()
+        new_item._hook_after_github_creation()
+        return new_item
+
+    @api.multi
+    def get_action(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': self.name,
+            'view_mode': 'form',
+            'res_model': self._name,
+            'res_id': self.id,
+        }

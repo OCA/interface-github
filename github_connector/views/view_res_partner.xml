@@ -16,7 +16,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <field name="name" position="after">
                 <field name="github_login" string="Github Login" filter_domain="[('github_login','ilike', self)]"/>
                 <field name="organization_ids"/>
-                <field name="team_ids"/>
+                <field name="github_team_ids"/>
             </field>
         </field>
     </record>
@@ -44,54 +44,46 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="arch" type="xml">
             <field name="display_name" position="after">
                 <field name="github_login" />
-                <field name="team_qty" />
+                <field name="github_team_qty" />
             </field>
         </field>
     </record>
 
-    <!-- TODO Add a button to let possible to set github_login on existing partner-->
     <record id="view_res_partner_form" model="ir.ui.view">
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
             <div name="button_box" position="inside">
-<!--                 TODO Improve me, when clicking on this button, the filter display the id of the partner and not the name -->
                 <button type="action" class="oe_stat_button" icon="fa-institution" name="%(action_github_organization)d"
-                    attrs="{'invisible': ['|', ('github_login', '=', False), ('is_company', '=', True)]}"
-                    context="{'search_default_member_ids': active_id}">
-                    <div><strong><field name="organization_qty"/></strong><br/>Organizations</div>
+                        attrs="{'invisible': ['|', ('github_login', '=', False), ('is_company', '=', True)]}"
+                        context="{'search_default_team_ids': active_id}">
+                    <field name="organization_qty" string="Organizations" widget="statinfo" />
                 </button>
-<!--                 TODO Improve me, when clicking on this button, the filter display the id of team and not the name -->
-                <button type="action" class="oe_stat_button" icon="fa-users" name="%(action_github_team)d"
-                    attrs="{'invisible': ['|', ('github_login', '=', False), ('is_company', '=', True)]}"
-                    context="{'search_default_member_ids': active_id}">
-                    <div><strong><field name="team_qty"/></strong><br/>Teams</div>
+                <button type="action" class="oe_stat_button" icon="fa-users" name="%(action_github_team_partner_from_partner)d"
+                        attrs="{'invisible': ['|', ('github_login', '=', False), ('is_company', '=', True)]}"
+                        context="{'search_default_partner_id': active_id}">
+                    <field name="github_team_qty" string="Teams" widget="statinfo" />
                 </button>
             </div>
 
             <page name="internal_notes" position="before">
-                <page name="github" string="Github Memberships"
-                        attrs="{'invisible': [('github_login', '=', False)]}">
-                    <group col="4">
-                        <field name="organization_ids" colspan="4" widget="many2many_tags"/>
-                        <field name="team_ids" nolabel="1" colspan="4"/>
-                    </group>
-                </page>
                 <page name="github" string="Github"
                         attrs="{'invisible': [('github_login', '=', False)]}">
                     <group col="4">
                         <field name="is_bot_account"/>
                         <newline />
                         <field name="github_url" widget="url" colspan="4"/>
-                        <field name="github_id" />
+                        <field name="github_id_external" />
                         <field name="github_login" />
                         <field name="github_create_date" />
                         <field name="github_write_date" />
                         <field name="github_last_sync_date" />
-                        <button name="button_update_from_github_light" type="object" string="Light Sync" icon="STOCK_REFRESH"
-                            groups="github_connector.group_github_connector_manager"/>
-                        <button name="button_update_from_github_full" type="object" string="Full Sync" icon="STOCK_REFRESH"
-                            groups="github_connector.group_github_connector_manager"/>
+                        <button name="button_update_from_github_light" type="object" string="Light Sync"
+                                class="btn btn-default" icon="fa-angle-right"
+                                groups="github_connector.group_github_connector_manager"/>
+                        <button name="button_update_from_github_full" type="object" string="Full Sync"
+                                class="btn btn-default" icon="fa-angle-double-right"
+                                groups="github_connector.group_github_connector_manager"/>
                     </group>
                 </page>
             </page>
