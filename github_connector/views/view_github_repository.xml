@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<openerp><data>
+
+    <record id="view_github_repository_search" model="ir.ui.view">
+        <field name="model">github.repository</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Name or Description"
+                    filter_domain="['|', ('name', 'ilike', self), ('description', 'ilike', self)]"/>
+                <field name="organization_id"/>
+                <group expand="1" string="Group By">
+                    <filter string="Organization" context="{'group_by' : 'organization_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_github_repository_tree" model="ir.ui.view">
+        <field name="model">github.repository</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="description"/>
+                <field name="repository_branch_qty" string="# Branches"/>
+                <field name="issue_qty" string="# Issues + PR"/>
+                <field name="only_issue_qty" string="# Issues"/>
+                <field name="only_pull_request_qty" string="# PR"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_github_repository_form" model="ir.ui.view">
+        <field name="model">github.repository</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="button_sync_branch" type="object" string="Branches Sync." icon="STOCK_REFRESH"
+                        groups="github_connector.group_github_connector_manager"/>
+                    <button name="button_sync_issue" type="object" string="Issues + PR Sync." icon="STOCK_REFRESH"
+                        groups="github_connector.group_github_connector_manager"/>
+                    <button name="button_sync_issue_with_comment" type="object" string="Issues + PR and Comments Sync." icon="STOCK_REFRESH"
+                        groups="github_connector.group_github_connector_manager"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                        <h3 class="oe_fade">
+                            <field name="description" class="oe_inline"/>
+                        </h3>
+                    </div>
+                    <div class="oe_right oe_button_box" name="buttons">
+                        <button type="action" class="oe_stat_button" icon="fa-list-ol" name="%(action_github_repository_branch)d"
+                            attrs="{'invisible': [('repository_branch_qty', '=', False)]}"
+                            context="{'search_default_repository_id': active_id}">
+                            <div><strong><field name="repository_branch_qty"/></strong><br/>Branches</div>
+                        </button>
+
+                        <button type="action" class="oe_stat_button" icon="fa-bug" name="%(action_github_issue)d"
+                            attrs="{'invisible': [('only_issue_qty', '=', False)]}"
+                            context="{'search_default_repository_id': active_id, 'search_default_issue_type': 'issue'}">
+                            <div><strong><field name="only_open_issue_qty"/> / <field name="only_issue_qty"/></strong><br/>Issues</div>
+                        </button>
+                        <button type="action" class="oe_stat_button" icon="fa-plus" name="%(action_github_issue)d"
+                            attrs="{'invisible': [('only_pull_request_qty', '=', False)]}"
+                            context="{'search_default_repository_id': active_id, 'search_default_issue_type': 'pull_request'}">
+                            <div><strong><field name="only_open_pull_request_qty"/> / <field name="only_pull_request_qty"/></strong><br/>PR</div>
+                        </button>
+                        <button type="action" class="oe_stat_button" icon="fa-tasks" name="%(action_github_issue)d"
+                            attrs="{'invisible': [('issue_qty', '=', False)]}"
+                            context="{'search_default_repository_id': active_id}">
+                            <div><strong><field name="open_issue_qty"/> / <field name="issue_qty"/></strong><br/>Issues + PR</div>
+                        </button>
+                    </div>
+                    <div class="oe_clear"/>
+                    <group col="4">
+                        <field name="organization_id"/>
+                        <field name="website" widget="url"/>
+                    </group>
+                    <notebook>
+                        <page name="github" string="Github">
+                            <group col="4">
+                                <field name="github_url" widget="url" colspan="4"/>
+                                <field name="github_id" />
+                                <field name="github_login" />
+                                <field name="github_create_date" />
+                                <field name="github_write_date" />
+                                <field name="github_last_sync_date" />
+                                <button name="button_update_from_github_light" type="object" string="Light Sync" icon="STOCK_REFRESH"
+                                    groups="github_connector.group_github_connector_manager"/>
+                                <button name="button_update_from_github_full" type="object" string="Full Sync" icon="STOCK_REFRESH"
+                                    groups="github_connector.group_github_connector_manager"/>
+                            </group>
+                        </page>
+                        <page string="Branches">
+                            <field name="repository_branch_ids" colspan="4" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</data></openerp>
