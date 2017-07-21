@@ -4,7 +4,7 @@ Copyright (C) 2016-Today: Odoo Community Association (OCA)
 @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
-<openerp><data>
+<odoo>
 
     <record id="view_github_repository_branch_search" model="ir.ui.view">
         <field name="model">github.repository.branch</field>
@@ -93,4 +93,4 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         </field>
     </record>
 
-</data></openerp>
+</odoo>
