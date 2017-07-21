@@ -61,7 +61,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <!-- Reporting Part -->
     <menuitem id="menu_odoo_reporting"
-        parent="base.menu_reporting"
+        parent="github_connector.menu_reporting"
         sequence="11"
         name="Odoo"/>
 
