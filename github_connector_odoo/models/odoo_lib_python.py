@@ -12,7 +12,7 @@ class OdooLibPython(models.Model):
 
     # Column Section
     name = fields.Char(
-        string='Name', select=True, required=True, readonly=True)
+        string='Name', index=True, required=True, readonly=True)
 
     module_version_ids = fields.Many2many(
         comodel_name='odoo.module.version', string='Module Versions',

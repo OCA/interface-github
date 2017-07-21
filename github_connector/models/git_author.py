@@ -12,10 +12,10 @@ class GitAuthor(models.Model):
 
     # Column Section
     name = fields.Char(
-        string='Name', store=True, select=True, readonly=True)
+        string='Name', store=True, index=True, readonly=True)
 
     email = fields.Char(
-        string='Email', store=True, readonly=True, select=True)
+        string='Email', store=True, readonly=True, index=True)
 
     partner_id = fields.Many2one(
         string='Partner', comodel_name='res.partner')
