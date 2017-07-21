@@ -12,12 +12,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="group_ids" eval="[(4, ref('github_connector.group_github_connector_manager'))]" />
     </record>
 
-    <record id="git_source_code_local_path" model="ir.config_parameter">
-        <field name="key">git.source_code_local_path</field>
-        <field name="value">/tmp/</field>
-        <field name="group_ids" eval="[(4, ref('github_connector.group_github_connector_manager'))]" />
-    </record>
-
     <record id="git_partial_commit_during_analyze" model="ir.config_parameter">
         <field name="key">git.partial_commit_during_analyze</field>
         <field name="value">True</field>

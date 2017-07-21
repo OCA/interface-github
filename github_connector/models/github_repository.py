@@ -42,13 +42,47 @@ class GithubRepository(models.Model):
         string='Branches Quantity', compute='_compute_repository_branch_qty',
         store=True)
 
+    team_ids = fields.One2many(
+        string='Teams', comodel_name='github.team.repository',
+        inverse_name='repository_id', readonly=True)
+
+    team_qty = fields.Integer(
+        string='Teams Quantity', compute='_compute_team_qty',
+        store=True)
+# store=True,
+    is_ignored = fields.Boolean(
+        string='Is Ignored', compute='_compute_ignore', multi='ignore',
+        help="If checked, the branches will not be synchronized, and the"
+        " code source so will not be downloaded and analyzed. To ignore"
+        " a repository, go to it organization and fill the file"
+        " 'Ignored Repositories'.")
+
+    color = fields.Integer(
+        string='Color Index', multi='ignore', compute='_compute_ignore')
+
     # Compute Section
+    @api.multi
+    @api.depends('organization_id.ignored_repository_names')
+    def _compute_ignore(self):
+        for repository in self:
+            ignored_txt = repository.organization_id.ignored_repository_names
+            repository.is_ignored =\
+                ignored_txt and repository.name in ignored_txt.split("\n")
+            repository.color = repository.is_ignored and 1 or 0
+
+    @api.multi
+    @api.depends('team_ids')
+    def _compute_team_qty(self):
+        for repository in self:
+            repository.team_qty = len(repository.team_ids)
+
     @api.multi
     @api.depends('name', 'organization_id.github_login')
     def _compute_complete_name(self):
         for repository in self:
             repository.complete_name =\
-                repository.organization_id.github_login + '/' + repository.name
+                repository.organization_id.github_login + '/' +\
+                repository.name and repository.name or ''
 
     @api.multi
     @api.depends('repository_branch_ids.repository_id')
@@ -73,6 +107,22 @@ class GithubRepository(models.Model):
         return res
 
     @api.multi
+    def get_github_data_from_odoo(self):
+        self.ensure_one()
+        return {
+            'name': self.name,
+            'description': self.description and self.description or '',
+            'homepage': self.website,
+        }
+
+    @api.multi
+    def get_github_args_for_creation(self):
+        self.ensure_one()
+        return [
+            self.organization_id.github_login,
+        ]
+
+    @api.multi
     def full_update(self):
         self.button_sync_branch()
 
@@ -84,19 +134,21 @@ class GithubRepository(models.Model):
 
     @api.multi
     def button_sync_branch(self):
-        github_branch = self.get_github_for('repository_branches')
+        github_branch = self.get_github_connector('repository_branches')
         branch_obj = self.env['github.repository.branch']
         for repository in self:
             branch_ids = []
-            correct_series =\
-                repository.organization_id.organization_serie_ids\
+            correct_milestones =\
+                repository.organization_id.organization_milestone_ids\
                 .mapped('name')
 
             for data in github_branch.list([repository.github_login]):
-                # We don't use get_from_id_or_create because repository
-                # branches does not have any ids. (very basic object in the
-                # Github API)
-                if data['name'] in correct_series:
+                if repository.is_ignored:
+                    pass
+                elif data['name'] in correct_milestones:
+                    # We don't use get_from_id_or_create because repository
+                    # branches does not have any ids. (very basic object in the
+                    # Github API)
                     branch = branch_obj.create_or_update_from_name(
                         repository.id, data['name'])
                     branch_ids.append(branch.id)

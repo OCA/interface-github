@@ -12,7 +12,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.organization</field>
         <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">kanban,tree,form</field>
     </record>
 
     <record id="action_res_partner" model="ir.actions.act_window">
@@ -20,7 +20,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.partner</field>
         <field name="view_type">form</field>
-        <field name="view_mode">tree,form,kanban</field>
+        <field name="view_mode">kanban,tree,form</field>
         <field name="context">{'search_default_has_github_account':1}</field>
     </record>
 
@@ -29,7 +29,43 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.team</field>
         <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <record id="action_github_team_partner_from_partner" model="ir.actions.act_window">
+        <field name="name">Teams</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">github.team.partner</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="view_github_team_partner_from_partner_kanban"/>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <record id="action_github_team_partner_from_team" model="ir.actions.act_window">
+        <field name="name">Members</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">github.team.partner</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="view_github_team_partner_from_team_kanban"/>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <record id="action_github_team_repository_from_repository" model="ir.actions.act_window">
+        <field name="name">Team</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">github.team.repository</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="view_github_team_repository_from_repository_kanban"/>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <record id="action_github_team_repository_from_team" model="ir.actions.act_window">
+        <field name="name">Repositories</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">github.team.repository</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="view_github_team_repository_from_team_kanban"/>
+        <field name="view_mode">kanban,tree,form</field>
     </record>
 
     <!-- Repository Part -->
@@ -38,7 +74,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.repository</field>
         <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">kanban,tree,form</field>
     </record>
 
     <record id="action_github_repository_branch" model="ir.actions.act_window">
@@ -46,7 +82,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.repository.branch</field>
         <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">kanban,tree,form</field>
     </record>
 
     <!-- Extra Button Parts -->
@@ -98,6 +134,24 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="target">new</field>
     </record>
 
+    <record id="action_wizard_create_team" model="ir.actions.act_window">
+        <field name="name">Create Team in Github Wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wizard.create.team</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_wizard_create_repository" model="ir.actions.act_window">
+        <field name="name">Create Repo in Github Wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wizard.create.repository</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
     <record id="action_wizard_update_from_github" model="ir.actions.act_window" >
         <field name="name">Update from Github</field>
         <field name="res_model">wizard.update.from.github</field>
@@ -106,24 +160,24 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     </record>
 
     <!-- Reporting Part -->
-    <record id="action_github_branch_by_serie" model="ir.actions.act_window">
-        <field name="name">Branches by Serie</field>
+    <record id="action_github_branch_by_milestone" model="ir.actions.act_window">
+        <field name="name">Branches by Milestone</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.repository.branch</field>
         <field name="view_type">form</field>
-        <field name="view_mode">graph</field>
-        <field name="context">{'search_default_group_by_organization_serie_id': True}</field>
-        <field name="view_id" ref="view_github_branch_by_serie_graph" />
+        <field name="view_mode">graph,pivot</field>
+        <field name="context">{'search_default_group_by_organization_milestone_id': True}</field>
+        <field name="view_id" ref="view_github_branch_by_milestone_graph" />
     </record>
 
-    <record id="action_github_size_by_serie" model="ir.actions.act_window">
-        <field name="name">Sizes by Serie (Megabyte)</field>
+    <record id="action_github_size_by_milestone" model="ir.actions.act_window">
+        <field name="name">Sizes by Milestone</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.repository.branch</field>
         <field name="view_type">form</field>
-        <field name="view_mode">graph</field>
-        <field name="context">{'search_default_group_by_organization_serie_id': True}</field>
-        <field name="view_id" ref="view_github_size_by_serie_graph" />
+        <field name="view_mode">graph,pivot</field>
+        <field name="context">{'search_default_group_by_organization_milestone_id': True}</field>
+        <field name="view_id" ref="view_github_size_by_milestone_graph" />
     </record>
 
 </odoo>
