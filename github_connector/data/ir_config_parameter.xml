@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<openerp><data noupdate="1">
+
+    <record id="github_max_try" model="ir.config_parameter">
+        <field name="key">github.max_try</field>
+        <field name="value">5</field>
+        <field name="group_ids" eval="[(4, ref('github_connector.group_github_connector_manager'))]" />
+    </record>
+
+    <record id="git_source_code_local_path" model="ir.config_parameter">
+        <field name="key">git.source_code_local_path</field>
+        <field name="value">/tmp/</field>
+        <field name="group_ids" eval="[(4, ref('github_connector.group_github_connector_manager'))]" />
+    </record>
+
+    <record id="git_partial_commit_during_analyze" model="ir.config_parameter">
+        <field name="key">git.partial_commit_during_analyze</field>
+        <field name="value">True</field>
+        <field name="group_ids" eval="[(4, ref('github_connector.group_github_connector_manager'))]" />
+    </record>
+
+</data></openerp>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<openerp><data>
+
+    <record id="view_wizard_download_analyze_branch_form" model="ir.ui.view">
+        <field name="name">Download and Analyze Source Code</field>
+        <field name="model">wizard.download.analyze.branch</field>
+        <field name="arch" type="xml">
+            <form string="Download Source Code">
+                <group>
+                    <field name="download_source_code" />
+                    <field name="analyze_source_code" />
+                </group>
+                <footer>
+                    <button name="apply" string="Apply" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+           </form>
+        </field>
+    </record>
+
+</data></openerp>

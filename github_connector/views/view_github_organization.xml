@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<openerp><data>
+
+    <record id="view_github_organization_search" model="ir.ui.view">
+        <field name="model">github.organization</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Name or Github Name"
+                    filter_domain="['|', ('name', 'ilike', self), ('github_login', 'ilike', self)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_github_organization_tree" model="ir.ui.view">
+        <field name="model">github.organization</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="github_login"/>
+                <field name="member_qty"/>
+                <field name="repository_qty"/>
+                <field name="team_qty"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_github_organization_form" model="ir.ui.view">
+        <field name="model">github.organization</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="button_sync_member" type="object" string="Members Sync." icon="STOCK_REFRESH"
+                        groups="github_connector.group_github_connector_manager"/>
+                    <button name="button_sync_repository" type="object" string="Repositories Sync." icon="STOCK_REFRESH"
+                        groups="github_connector.group_github_connector_manager"/>
+                    <button name="button_sync_team" type="object" string="Teams Sync." icon="STOCK_REFRESH"
+                        groups="github_connector.group_github_connector_manager"/>
+                </header>
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar oe_left"/>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                        <h3 class="oe_fade">
+                            <field name="description" class="oe_inline"/>
+                        </h3>
+                    </div>
+                    <div class="oe_right oe_button_box" name="buttons">
+                        <button type="action" class="oe_stat_button" icon="fa-folder-o" name="%(action_github_repository)d"
+                            attrs="{'invisible': [('repository_qty', '=', False)]}"
+                            context="{'search_default_organization_id': active_id}">
+                            <div><strong><field name="repository_qty"/></strong><br/>Repositories</div>
+                        </button>
+                        <button type="action" class="oe_stat_button" icon="fa-users" name="%(action_github_team)d"
+                            attrs="{'invisible': [('team_qty', '=', False)]}"
+                            context="{'search_default_organization_id': active_id}">
+                            <div><strong><field name="team_qty"/></strong><br/>Teams</div>
+                        </button>
+                        <!-- TODO Improve me, when clicking on this button, the filter display the id of organization and not the name -->
+                        <button type="action" class="oe_stat_button" icon="fa-user" name="%(action_res_partner)d"
+                            attrs="{'invisible': [('member_qty', '=', False)]}"
+                            context="{'search_default_organization_ids': active_id}">
+                            <div><strong><field name="member_qty"/></strong><br/>Members</div>
+                        </button>
+                    </div>
+                    <div class="oe_clear"/>
+                    <group col="4">
+                        <field name="email" widget="email"/>
+                        <field name="website_url" widget="url"/>
+                        <field name="location"/>
+                    </group>
+                    <notebook>
+                        <page name="extra_setting" string="Settings">
+                            <group col="4" string="Ignored Repositories">
+                                <field name="ignored_repository_names" colspan="4"/>
+                            </group>
+                            <group col="4" string="Specific Repositories">
+                                <field name="specific_repository_names" colspan="4"/>
+                            </group>
+                        </page>
+                        <page string="Organization Series">
+                            <field name="organization_serie_ids" colspan="4" nolabel="1">
+                                <tree string="organization_serie_ids" editable="bottom">
+                                    <field name="sequence"/>
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="repository" string="Repositories">
+                            <group col="4">
+                                <field name="repository_ids" colspan="4" nolabel="1"/>
+                            </group>
+                        </page>
+                        <page name="github" string="Github">
+                            <group col="4">
+                                <field name="github_url" widget="url" colspan="4"/>
+                                <field name="github_id" />
+                                <field name="github_login" />
+                                <field name="github_create_date" />
+                                <field name="github_write_date" />
+                                <field name="github_last_sync_date" />
+                                <button name="button_update_from_github_light" type="object" string="Light Sync" icon="STOCK_REFRESH"
+                                    groups="github_connector.group_github_connector_manager"/>
+                                <button name="button_update_from_github_full" type="object" string="Full Sync" icon="STOCK_REFRESH"
+                                    groups="github_connector.group_github_connector_manager"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</data></openerp>
