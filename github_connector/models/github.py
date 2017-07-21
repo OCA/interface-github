@@ -27,15 +27,43 @@ _GITHUB_TYPE = [
 ]
 
 _GITHUB_TYPE_URL = {
-    'organization': {'url': 'orgs/%s'},
-    'user': {'url': 'users/%s', 'url_by_id': 'user/%s'},
-    'repository': {'url': 'repos/%s', 'url_by_id': 'repositories/%s'},
-    'team': {'url_by_id': 'teams/%s'},
-    'organization_members': {'url': 'orgs/%s/members'},
-    'organization_repositories': {'url': 'orgs/%s/repos'},
-    'organization_teams': {'url': 'orgs/%s/teams'},
-    'team_members': {'url': 'teams/%s/members'},
-    'repository_branches': {'url': 'repos/%s/branches'},
+    'organization': {
+        'url_get_by_name': 'orgs/%s',
+    },
+    'user': {
+        'url_get_by_id': 'user/%s',
+        'url_get_by_name': 'users/%s',
+    },
+    'repository': {
+        'url_get_by_id': 'repositories/%s',
+        'url_get_by_name': 'repos/%s',
+        'url_create': 'orgs/%s/repos',
+    },
+    'team': {
+        'url_get_by_id': 'teams/%s',
+        'url_create': 'orgs/%s/teams',
+    },
+    'organization_members': {
+        'url_get_by_name': 'orgs/%s/members',
+    },
+    'organization_repositories': {
+        'url_get_by_name': 'orgs/%s/repos',
+    },
+    'organization_teams': {
+        'url_get_by_name': 'orgs/%s/teams',
+    },
+    'team_members_member': {
+        'url_get_by_name': 'teams/%s/members?role=member',
+    },
+    'team_members_maintainer': {
+        'url_get_by_name': 'teams/%s/members?role=maintainer',
+    },
+    'team_repositories': {
+        'url_get_by_name': 'teams/%s/repos',
+    },
+    'repository_branches': {
+        'url_get_by_name': 'repos/%s/branches',
+    },
 }
 
 
@@ -47,6 +75,19 @@ class Github(object):
         self.login = login
         self.password = password
         self.max_try = max_try
+
+    def _build_url(self, arguments, url_type, page):
+        arguments = arguments and arguments or {}
+        url = _GITHUB_TYPE_URL[self.github_type][url_type]
+        if self.github_type not in _GITHUB_TYPE_URL.keys():
+            raise exceptions.Warning(
+                _("'%s' is not implemented.") % (self.github_type))
+        complete_url = _BASE_URL + url % tuple(arguments)
+
+        if page:
+            complete_url += ('?' in complete_url and '&' or '?') +\
+                'per_page=%d&page=%d' % (_MAX_NUMBER_REQUEST, page)
+        return complete_url
 
     def list(self, arguments):
         page = 1
@@ -60,13 +101,20 @@ class Github(object):
             page += 1
         return datas
 
-    def get_by_url(self, url):
+    def get_by_url(self, url, call_type, data=False):
         _logger.info("Calling %s" % (url))
         for i in range(self.max_try):
             try:
-                response = requests.get(
-                    url, auth=HTTPBasicAuth(self.login, self.password))
-                break
+                if call_type == 'get':
+                    response = requests.get(
+                        url, auth=HTTPBasicAuth(self.login, self.password))
+                    break
+                elif call_type == 'post':
+                    json_data = json.dumps(data)
+                    response = requests.post(
+                        url, auth=HTTPBasicAuth(self.login, self.password),
+                        data=json_data)
+                    break
             except Exception as err:
                 _logger.warning("URL Call Error. %d/%d. URL: %s" % (
                     i, self.max_try, err.__str__()))
@@ -74,14 +122,21 @@ class Github(object):
             raise err
 
         if response.status_code == 401:
+            raise exceptions.Warning(_(
+                "401 - Unable to authenticate to Github with the login '%s'.\n"
+                "You should Check your credentials in the Odoo"
+                " configuration file.") % (self.login))
+        if response.status_code == 403:
+            raise exceptions.Warning(_(
+                "Unable to realize the current operation. The login '%s'"
+                " should not have the correct access rights.") % (self.login))
+        if response.status_code == 422:
+            raise exceptions.Warning(_(
+                "Unable to realize the current operation. Possible reasons:\n"
+                " * You try to create a duplicated item\n"
+                " * Some of the arguments are incorrects"))
+        elif response.status_code not in [200, 201]:
             raise exceptions.Warning(
-                _("Github Access Error"),
-                _("Unable to authenticate to Github with the login '%s'.\n"
-                    "You should Check your credentials in the Odoo"
-                    " configuration file.") % (self.login))
-        elif response.status_code != 200:
-            raise exceptions.Warning(
-                _("Github Error"),
                 _("The call to '%s' failed:\n"
                     "- Status Code: %d\n"
                     "- Reason: %s") % (
@@ -89,21 +144,11 @@ class Github(object):
         return json.loads(response.content)
 
     def get(self, arguments, by_id=False, page=None):
-        url = self._build_url(arguments, by_id, page)
-        return self.get_by_url(url)
+        url = self._build_url(
+            arguments, by_id and 'url_get_by_id' or 'url_get_by_name', page)
+        return self.get_by_url(url, 'get')
 
-    def _build_url(self, arguments, by_id, page):
-        if by_id:
-            url = _GITHUB_TYPE_URL[self.github_type]['url_by_id']
-        else:
-            url = _GITHUB_TYPE_URL[self.github_type]['url']
-        if self.github_type not in _GITHUB_TYPE_URL.keys():
-            raise exceptions.Warning(
-                _("Unimplemented Connection"),
-                _("'%s' is not implemented.") % (self.github_type))
-        complete_url = _BASE_URL + url % tuple(arguments)
-
-        if page:
-            complete_url += ('?' in complete_url and '&' or '?') +\
-                'per_page=%d&page=%d' % (_MAX_NUMBER_REQUEST, page)
-        return complete_url
+    def create(self, arguments, data):
+        url = self._build_url(arguments, 'url_create', None)
+        res = self.get_by_url(url, 'post', data)
+        return res

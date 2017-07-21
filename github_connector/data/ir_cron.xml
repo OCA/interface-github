@@ -6,8 +6,21 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo noupdate="1">
 
+        <record model="ir.cron" id="cron_update_organization">
+            <field name="name">Synchronize All Organizations and Teams</field>
+            <field name="interval_number">1</field>
+            <field name="active" eval="False"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model" eval="'github.organization'"/>
+            <field name="function" eval="'cron_update_organization_team'"/>
+            <field name="args" eval="'()'"/>
+        </record>
+
         <record model="ir.cron" id="cron_update_branch_list">
-            <field name="name">Download Branches List for All repositories</field>
+            <field name="name">Synchronize Branches List for All repositories</field>
             <field name="interval_number">1</field>
             <field name="active" eval="False"/>
             <field name="user_id" ref="base.user_root"/>
@@ -20,7 +33,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         </record>
 
         <record model="ir.cron" id="cron_download_code">
-            <field name="name">Download Source Code from All Github Branches</field>
+            <field name="name">Download Source Code for All Github Branches</field>
             <field name="interval_number">1</field>
             <field name="active" eval="False"/>
             <field name="user_id" ref="base.user_root"/>
@@ -33,7 +46,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         </record>
 
         <record model="ir.cron" id="cron_analyze_code">
-            <field name="name">Analyze All Github Branches</field>
+            <field name="name">Analyze Source Code for All Github Branches</field>
             <field name="interval_number">1</field>
             <field name="active" eval="False"/>
             <field name="user_id" ref="base.user_root"/>
