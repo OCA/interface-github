@@ -20,7 +20,7 @@ class OdooLibBin(models.Model):
         column2='module_version_id', readonly=True)
 
     module_version_qty = fields.Integer(
-        string='Module Versions Quantity',
+        string='Number of Module Versions',
         compute='_compute_module_version_qty', store=True)
 
     # Compute Section

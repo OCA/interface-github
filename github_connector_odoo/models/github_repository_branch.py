@@ -25,7 +25,7 @@ class GithubRepositoryBranch(models.Model):
     module_paths = fields.Text(
         string='Module Paths', help="Set here extra relative paths"
         " you want to scan to find modules. If not set, root path will be"
-        " scanned. One repository per line. Exemple:\n"
+        " scanned. One repository per line. Example:\n"
         "./addons/\n"
         "./openerp/addons/")
 
@@ -34,79 +34,27 @@ class GithubRepositoryBranch(models.Model):
         inverse_name='repository_branch_id', string='Module Versions')
 
     module_version_qty = fields.Integer(
-        string='Module Versions Quantity',
+        string='Number of Module Versions',
         compute='_compute_module_version_qty')
 
-    coverage_url = fields.Char(
-        string='Coverage Url', store=True, multi='complete_name',
-        compute='_compute_multi_from_complete_name')
-
-    coverage_image_url = fields.Char(
-        string='Coverage Image Url', store=True, multi='complete_name',
-        compute='_compute_multi_from_complete_name')
-
-    integration_service_url = fields.Char(
-        string='Integration Service Url', store=True, multi='complete_name',
-        compute='_compute_multi_from_complete_name')
-
-    integration_service_image_url = fields.Char(
-        string='Integration Service Image Url', store=True,
-        multi='complete_name',
-        compute='_compute_multi_from_complete_name')
-
     runbot_url = fields.Char(
-        string='Runbot Url', multi='complete_name',
-        compute='_compute_multi_from_complete_name')
-
-    runbot_image_url = fields.Char(
-        string='Runbot Image Url',
-        multi='complete_name',
-        compute='_compute_multi_from_complete_name')
-
-    github_url = fields.Char(
-        string='Github Url', store=True,
-        multi='complete_name',
-        compute='_compute_multi_from_complete_name')
+        string='Runbot URL', compute='_compute_runbot_url')
 
     # Compute Section
     @api.multi
-    @api.depends('name', 'repository_id.complete_name', 'repository_id.ci_id')
-    def _compute_multi_from_complete_name(self):
+    @api.depends(
+        'name', 'repository_id.runbot_id_external',
+        'organization_id.runbot_url_pattern')
+    def _compute_runbot_url(self):
         for branch in self:
-            # Compute Coverage Service Url and Image Url
-            branch.coverage_url =\
-                'https://coveralls.io/github/' +\
-                branch.repository_id.complete_name +\
-                '?branch=' + branch.name
-            branch.coverage_image_url =\
-                'https://coveralls.io/repos/github/' +\
-                branch.repository_id.complete_name +\
-                '/badge.svg?branch=' + branch.name
-
-            # Compute Integration Service Url and Image Url
-            branch.integration_service_url =\
-                'https://travis-ci.org/' +\
-                branch.repository_id.complete_name
-            branch.integration_service_image_url =\
-                'https://travis-ci.org/' +\
-                branch.repository_id.complete_name +\
-                '.svg?branch=' + branch.name
-
-            # Compute Github Url
-            branch.github_url =\
-                'https://github.com/' +\
-                branch.repository_id.complete_name +\
-                '/tree/' + branch.name
-
-            # Compute Runbot Service Url and Image Url
-            branch.runbot_url =\
-                'https://runbot.odoo-community.org/runbot/' +\
-                str(branch.repository_id.ci_id) + '/' +\
-                branch.name
-            branch.runbot_image_url =\
-                'https://runbot.odoo-community.org/runbot/badge/flat/' +\
-                str(branch.repository_id.ci_id) + '/' +\
-                branch.name + '.svg'
+            if not branch.repository_id.runbot_id_external:
+                branch.runbot_url = False
+            else:
+                branch.runbot_url =\
+                    branch.organization_id.runbot_url_pattern.format(
+                        runbot_id_external=str(
+                            branch.repository_id.runbot_id_external),
+                        branch_name=branch.name)
 
     @api.multi
     @api.depends(
@@ -118,7 +66,7 @@ class GithubRepositoryBranch(models.Model):
 
     # Custom Section
     @api.model
-    def _set_state_to_analyse(self):
+    def _set_state_to_analyze(self):
         """ function called when the module is installed to set all branches
         to analyze again.
         """
@@ -148,7 +96,7 @@ class GithubRepositoryBranch(models.Model):
                 paths = []
                 for path in branch.module_paths.split('\n'):
                     if path.strip():
-                        paths.append(branch.local_path + '/' + path)
+                        paths.append(os.path.join(branch.local_path, path))
             else:
                 paths = [branch.local_path]
 
@@ -162,15 +110,16 @@ class GithubRepositoryBranch(models.Model):
                     # Analyze folders and create module versions
                     _logger.info("Analyzing repository %s ..." % (path))
                     for module_name in self.listdir(path):
+                        full_module_path = os.path.join(path, module_name)
                         module_info = load_information_from_description_file(
-                            module_name, path + '/' + module_name)
+                            module_name, full_module_path)
 
                         # Create module version, if the module is installable
                         # in the serie
                         if module_info.get('installable', False):
                             module_info['technical_name'] = module_name
                             module_version_obj.create_or_update_from_manifest(
-                                module_info, branch)
+                                module_info, branch, full_module_path)
         finally:
             # Reset Original level for module logger
             logger1.setLevel(currentLevel1)
