@@ -3,9 +3,6 @@
 [![codecov](https://codecov.io/gh/OCA/interface-github/branch/10.0/graph/badge.svg)](https://codecov.io/gh/OCA/interface-github)
 
 
-# Business Requirement Management
-
-
 # Interface Github
 
 Modules that allows Odoo to connect with Github API.
