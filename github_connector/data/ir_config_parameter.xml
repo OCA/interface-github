@@ -12,8 +12,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="group_ids" eval="[(4, ref('github_connector.group_github_connector_manager'))]" />
     </record>
 
-    <record id="git_partial_commit_during_analyze" model="ir.config_parameter">
-        <field name="key">git.partial_commit_during_analyze</field>
+    <record id="git_partial_commit_during_analysis" model="ir.config_parameter">
+        <field name="key">git.partial_commit_during_analysis</field>
         <field name="value">True</field>
         <field name="group_ids" eval="[(4, ref('github_connector.group_github_connector_manager'))]" />
     </record>
