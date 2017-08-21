@@ -19,14 +19,14 @@ class ResPartner(models.Model):
     # Column Section
     is_bot_account = fields.Boolean(
         string='Is Bot Github Account', help="Check this box if this"
-        "account is a bot, or something similar.")
+        "account is a bot or similar.")
 
     github_team_ids = fields.Many2many(
         string='Teams', comodel_name='github.team.partner',
         inverse_name='partner_id', readonly=True)
 
     github_team_qty = fields.Integer(
-        string='Teams Quantity', compute='_compute_github_team_qty',
+        string='Number of Teams', compute='_compute_github_team_qty',
         store=True)
 
     organization_ids = fields.Many2many(
@@ -35,15 +35,14 @@ class ResPartner(models.Model):
         column2='organization_id', readonly=True)
 
     organization_qty = fields.Integer(
-        string='Organizations Quantity', compute='_compute_organization_qty',
+        string='Number of Organizations', compute='_compute_organization_qty',
         store=True)
 
     # Constraints Section
     _sql_constraints = [
         (
             'github_login_uniq', 'unique(github_login)',
-            "Two partners with the same Github Login ?"
-            " Dude, it is impossible !")
+             "Two different partners cannot have the same Github Login")
     ]
 
     @api.multi
@@ -52,8 +51,8 @@ class ResPartner(models.Model):
         for partner in self:
             if partner.is_company and partner.github_login:
                 raise Warning(_(
-                    "The company '%s' can not have a github login.") % (
-                    partner.name))
+                    "A company ('%s') can not have a Github login"
+                    " associated.") % (partner.name))
 
     # Compute Section
     @api.multi
