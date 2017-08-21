@@ -32,7 +32,7 @@ Once installed, you have to:
    #. ``github.max_try``: number of call to the API before an error
       is raised. The more unstable/slow tyour connection, the higher should be
       this value
-   #. ``git.partial_commit_during_analyze``: Set to ``True`` if you want to
+   #. ``git.partial_commit_during_analysis``: Set to ``True`` if you want to
       commit the result of the analysis in the database after each repository
       analysis. We recommend to set to ``True`` when you perform the initial
       download (potentially with a lot of repositories) in order to reduce the

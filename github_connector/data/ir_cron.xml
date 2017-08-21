@@ -20,7 +20,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         </record>
 
         <record model="ir.cron" id="cron_update_branch_list">
-            <field name="name">Synchronize Branches List for All repositories</field>
+            <field name="name">Synchronize Branches List for All Repositories</field>
             <field name="interval_number">1</field>
             <field name="active" eval="False"/>
             <field name="user_id" ref="base.user_root"/>

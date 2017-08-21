@@ -39,7 +39,7 @@ class GithubRepository(models.Model):
         inverse_name='repository_id', string='Branches', readonly=True)
 
     repository_branch_qty = fields.Integer(
-        string='Branches Quantity', compute='_compute_repository_branch_qty',
+        string='Number of Branches', compute='_compute_repository_branch_qty',
         store=True)
 
     team_ids = fields.One2many(
@@ -47,9 +47,9 @@ class GithubRepository(models.Model):
         inverse_name='repository_id', readonly=True)
 
     team_qty = fields.Integer(
-        string='Teams Quantity', compute='_compute_team_qty',
+        string='Number of Teams', compute='_compute_team_qty',
         store=True)
-# store=True,
+
     is_ignored = fields.Boolean(
         string='Is Ignored', compute='_compute_ignore', multi='ignore',
         help="If checked, the branches will not be synchronized, and the"
