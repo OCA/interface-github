@@ -6,7 +6,7 @@
 from openerp import models, fields
 
 
-class GithubOrganizationSerie(models.Model):
+class GithubOrganizationMilestone(models.Model):
     _name = 'github.organization.milestone'
     _order = 'sequence, name'
 
