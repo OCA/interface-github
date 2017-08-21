@@ -14,3 +14,5 @@ class GithubOrganization(models.Model):
         string='URL For Runbot Ids', oldname='runbot_url')
 
     default_author_text = fields.Char(string='Default Author Text')
+
+    runbot_url_pattern = fields.Char(string='Runbot URL Pattern')

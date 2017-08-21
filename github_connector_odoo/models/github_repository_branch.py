@@ -34,23 +34,24 @@ class GithubRepositoryBranch(models.Model):
         inverse_name='repository_branch_id', string='Module Versions')
 
     module_version_qty = fields.Integer(
-        string='Module Versions Quantity',
+        string='Number of Module Versions',
         compute='_compute_module_version_qty')
 
     runbot_url = fields.Char(
-        string='Runbot Url', multi='complete_name',
-        compute='_compute_multi_from_complete_name')
+        string='Runbot URL', compute='_compute_runbot_url')
 
     # Compute Section
     @api.multi
     @api.depends(
-        'name', 'repository_id.runbot_id_external')
-    def _compute_multi_from_complete_name(self):
+        'name', 'repository_id.runbot_id_external',
+        'organization_id.runbot_url_pattern')
+    def _compute_runbot_url(self):
         for branch in self:
             branch.runbot_url =\
-                'https://runbot.odoo-community.org/runbot/' +\
-                str(branch.repository_id.runbot_id_external) + '/' +\
-                branch.name
+                branch.organization_id.runbot_url_pattern.format(
+                    runbot_id_external=str(
+                        branch.repository_id.runbot_id_external),
+                    branch_name=branch.name)
 
     @api.multi
     @api.depends(
@@ -62,7 +63,7 @@ class GithubRepositoryBranch(models.Model):
 
     # Custom Section
     @api.model
-    def _set_state_to_analyse(self):
+    def _set_state_to_analyze(self):
         """ function called when the module is installed to set all branches
         to analyze again.
         """
