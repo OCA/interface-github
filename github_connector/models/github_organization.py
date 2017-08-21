@@ -42,7 +42,7 @@ class GithubOrganization(models.Model):
         column2='partner_id', readonly=True)
 
     member_qty = fields.Integer(
-        string='Members Quantity', compute='_compute_member_qty',
+        string='Number of Members', compute='_compute_member_qty',
         store=True)
 
     repository_ids = fields.One2many(
@@ -50,7 +50,7 @@ class GithubOrganization(models.Model):
         ondelete='cascade', inverse_name='organization_id', readonly=True)
 
     repository_qty = fields.Integer(
-        string='Repositories Quantity', compute='_compute_repository_qty',
+        string='Number of Repositories', compute='_compute_repository_qty',
         store=True)
 
     team_ids = fields.One2many(
@@ -58,21 +58,21 @@ class GithubOrganization(models.Model):
         inverse_name='organization_id', readonly=True)
 
     team_qty = fields.Integer(
-        string='Team Quantity', compute='_compute_team_qty',
+        string='Number of Teams', compute='_compute_team_qty',
         store=True)
 
     organization_milestone_ids = fields.One2many(
-        string='Organization Series',
+        string='Organization Milestones',
         comodel_name='github.organization.milestone',
         inverse_name='organization_id')
 
     organization_milestone_qty = fields.Integer(
-        string='Series Quantity', store=True,
+        string='Number of Milestones', store=True,
         compute='_compute_organization_milestone_qty')
 
-    coverage_url_pattern = fields.Char(string='Coverage URL')
+    coverage_url_pattern = fields.Char(string='Coverage URL Pattern')
 
-    ci_url_pattern = fields.Char(string='CI URL')
+    ci_url_pattern = fields.Char(string='CI URL Pattern')
 
     # Overloadable Section
     @api.model
