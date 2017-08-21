@@ -43,7 +43,7 @@ class GithubTeam(models.Model):
         inverse_name='team_id', readonly=True)
 
     partner_qty = fields.Integer(
-        string='Members Quantity', compute='_compute_partner_qty',
+        string='Number of Members', compute='_compute_partner_qty',
         store=True)
 
     repository_ids = fields.One2many(
@@ -51,7 +51,7 @@ class GithubTeam(models.Model):
         inverse_name='team_id', readonly=True)
 
     repository_qty = fields.Integer(
-        string='Repositories Quantity', compute='_compute_repository_qty',
+        string='Number of Repositories', compute='_compute_repository_qty',
         store=True)
 
     description = fields.Char(string='Description', readonly=True)
