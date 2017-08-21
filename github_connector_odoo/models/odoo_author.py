@@ -25,7 +25,7 @@ class OdooAuthor(models.Model):
         column1='author_id', column2='module_id', readonly=True)
 
     module_qty = fields.Integer(
-        string='Modules Quantity',
+        string='Number of Modules',
         compute='_compute_module_qty', store=True)
 
     @api.multi
