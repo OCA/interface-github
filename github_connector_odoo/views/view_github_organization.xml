@@ -11,6 +11,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="inherit_id" ref="github_connector.view_github_organization_form"/>
         <field name="arch" type="xml">
             <field name="ci_url_pattern" position="after">
+                <field name="runbot_url_pattern"/>
                 <field name="runbot_parse_url"/>
             </field>
             <group name="external_services" position="before">

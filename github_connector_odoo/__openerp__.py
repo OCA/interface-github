@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     'name': 'Github Connector - Odoo',
-    'summary': 'Analyze Odoo Modules Informations from github repositories',
+    'summary': 'Analyze Odoo modules information from Github repositories',
     'version': '10.0.1.0.0',
     'category': 'Connector',
     'license': 'AGPL-3',

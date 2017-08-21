@@ -19,7 +19,7 @@ class OdooLicense(models.Model):
         string='Module Versions')
 
     module_version_qty = fields.Integer(
-        string='Module Versions Quantity',
+        string='Number of Module Versions',
         compute='_compute_module_version_qty', store=True)
 
     website = fields.Char(string='Website')

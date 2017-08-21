@@ -34,7 +34,7 @@ class OdooModuleVersion(models.Model):
     }
 
     _ODOO_TYPE_SELECTION = [
-        ('verticalization', 'Verticalization'),
+        ('verticalization', 'Vertical Solutions'),
         ('localization', 'Localization'),
         ('connector', 'Connector'),
         ('other', 'Other'),
@@ -45,7 +45,7 @@ class OdooModuleVersion(models.Model):
 
     technical_name = fields.Char(
         string='Technical Name', readonly=True, index=True,
-        help="Technical Name of the Module. (Folder name)")
+        help="Technical Name of the Module (Folder name).")
 
     complete_name = fields.Char(
         string='Complete Name', compute='_compute_complete_name', store=True)
@@ -68,7 +68,7 @@ class OdooModuleVersion(models.Model):
 
     organization_milestone_id = fields.Many2one(
         comodel_name='github.organization.milestone',
-        string='Organization Serie', readonly=True, store=True,
+        string='Organization Milestone', readonly=True, store=True,
         compute='_compute_organization_milestone_id')
 
     license = fields.Char(string='License (Manifest)', readonly=True)

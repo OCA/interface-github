@@ -1,9 +1,9 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
-==========================================================
-Analyze Odoo Modules Informations from github repositories
-==========================================================
+=========================================================
+Analyze Odoo modules information from Github repositories
+=========================================================
 
 This module was written to extend the functionality of 'Github Connector' Module
 if your repositories contain Odoo Modules.
@@ -131,4 +131,4 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-To contribute to this module, please visit http://odoo-community.org.
+To contribute to this module, please visit https://odoo-community.org.

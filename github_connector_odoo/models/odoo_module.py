@@ -23,7 +23,7 @@ class OdooModule(models.Model):
         string='Versions', readonly=True)
 
     module_version_qty = fields.Integer(
-        string='Module Version Quantity',
+        string='Number of Module Versions',
         compute='_compute_module_version_qty', store=True)
 
     author_ids = fields.Many2many(
@@ -63,7 +63,7 @@ class OdooModule(models.Model):
         column1='dependency_module_id', column2='module_version_id')
 
     dependence_module_version_qty = fields.Integer(
-        string='Quantity of Module Versions that depend on this module',
+        string='Number of Module Versions that depend on this module',
         compute='_compute_dependence_module_version_qty', store=True)
 
     image = fields.Binary(
