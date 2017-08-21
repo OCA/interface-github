@@ -146,7 +146,7 @@ class AbtractGithubModel(models.AbstractModel):
 
     @api.model
     def create_from_name(self, name):
-        """Call Github API, using a url using github name. Load data and
+        """Call Github API, using a URL using github name. Load data and
             Create Odoo object accordingly, if the odoo object doesn't exist.
 
             :param name: the github name to load
@@ -175,7 +175,7 @@ class AbtractGithubModel(models.AbstractModel):
 
     @api.multi
     def update_from_github(self, child_update):
-        """Call Github API, using a url using github id. Load data and
+        """Call Github API, using a URL using github id. Load data and
             update Odoo object accordingly, if the odoo object is obsolete.
             (Based on last write dates)
 

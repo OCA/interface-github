@@ -58,11 +58,11 @@ class GithubRepository(models.Model):
 
     organization_milestone_id = fields.Many2one(
         comodel_name='github.organization.milestone',
-        string='Organization Serie', store=True,
+        string='Organization Milestone', store=True,
         compute='_compute_organization_milestone_id')
 
     sequence_milestone = fields.Integer(
-        string='Sequence Serie', store=True,
+        string='Sequence Milestone', store=True,
         related='organization_milestone_id.sequence')
 
     local_path = fields.Char(
@@ -76,13 +76,13 @@ class GithubRepository(models.Model):
     last_analyze_date = fields.Datetime(string='Last Analyze Date')
 
     coverage_url = fields.Char(
-        string='Coverage Url', store=True, compute='_compute_coverage')
+        string='Coverage URL', store=True, compute='_compute_coverage')
 
     ci_url = fields.Char(
-        string='CI Url', store=True, compute='_compute_ci')
+        string='CI URL', store=True, compute='_compute_ci')
 
     github_url = fields.Char(
-        string='Github Url', store=True, compute='_compute_github_url')
+        string='Github URL', store=True, compute='_compute_github_url')
 
     # Init Section
     def __init__(self, pool, cr):
@@ -215,7 +215,7 @@ class GithubRepository(models.Model):
     def _analyze_code(self):
         partial_commit = safe_eval(
             self.env['ir.config_parameter'].get_param(
-                'git.partial_commit_during_analyze'))
+                'git.partial_commit_during_analysis'))
         for branch in self:
             path = branch.local_path
             if not os.path.exists(path):
