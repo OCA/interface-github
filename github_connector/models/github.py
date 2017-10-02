@@ -149,6 +149,7 @@ class Github(object):
         return self.get_by_url(url, 'get')
 
     def create(self, arguments, data):
+        super(Github, self).__create__(arguments, data)
         url = self._build_url(arguments, 'url_create', None)
         res = self.get_by_url(url, 'post', data)
         return res
