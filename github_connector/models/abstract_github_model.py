@@ -141,7 +141,7 @@ class AbtractGithubModel(models.AbstractModel):
 
         if self._need_individual_call:
             github_connector = self.get_github_connector(self.github_type())
-            data = github_connector.get_by_url(data['url'])
+            data = github_connector.get_by_url(data['url'], 'get')
         return self._create_from_github_data(data, extra_data)
 
     @api.model
