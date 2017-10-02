@@ -125,7 +125,7 @@ class AbtractGithubModel(models.AbstractModel):
             return existing_object
 
         # We try to see if object exist by name (instead of id)
-        if self._github_login_field:
+        if self._github_login_field and self._github_login_field in data:
             existing_object = self.search([
                 ('github_login', '=', data[self._github_login_field])])
             if existing_object:
@@ -141,7 +141,7 @@ class AbtractGithubModel(models.AbstractModel):
 
         if self._need_individual_call:
             github_connector = self.get_github_connector(self.github_type())
-            data = github_connector.get_by_url(data['url'])
+            data = github_connector.get_by_url(data['url'], 'get')
         return self._create_from_github_data(data, extra_data)
 
     @api.model
