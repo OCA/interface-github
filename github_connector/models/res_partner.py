@@ -42,7 +42,8 @@ class ResPartner(models.Model):
     _sql_constraints = [
         (
             'github_login_uniq', 'unique(github_login)',
-             "Two different partners cannot have the same Github Login")
+            "Two different partners cannot have the same Github Login"
+        )
     ]
 
     @api.multi
