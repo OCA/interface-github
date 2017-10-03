@@ -61,14 +61,14 @@ class GithubOrganization(models.Model):
         string='Number of Teams', compute='_compute_team_qty',
         store=True)
 
-    organization_milestone_ids = fields.One2many(
-        string='Organization Milestones',
-        comodel_name='github.organization.milestone',
+    organization_serie_ids = fields.One2many(
+        string='Organization Series',
+        comodel_name='github.organization.serie',
         inverse_name='organization_id')
 
-    organization_milestone_qty = fields.Integer(
-        string='Number of Milestones', store=True,
-        compute='_compute_organization_milestone_qty')
+    organization_serie_qty = fields.Integer(
+        string='Number of Series', store=True,
+        compute='_compute_organization_serie_qty')
 
     coverage_url_pattern = fields.Char(string='Coverage URL Pattern')
 
@@ -121,11 +121,11 @@ class GithubOrganization(models.Model):
             organization.team_qty = len(organization.team_ids)
 
     @api.multi
-    @api.depends('organization_milestone_ids.organization_id')
-    def _compute_organization_milestone_qty(self):
+    @api.depends('organization_serie_ids.organization_id')
+    def _compute_organization_serie_qty(self):
         for organization in self:
-            organization.organization_milestone_qty =\
-                len(organization.organization_milestone_ids)
+            organization.organization_serie_qty =\
+                len(organization.organization_serie_ids)
 
     # Action section
     @api.multi

@@ -13,7 +13,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="complete_name" string="Name"
                     filter_domain="[('complete_name', 'ilike', self)]"/>
                 <field name="organization_id"/>
-                <field name="organization_milestone_id"/>
+                <field name="organization_serie_id"/>
                 <field name="repository_id"/>
                 <field name="state"/>
                 <filter string="To Download" name="to_download" domain="[('state','=', 'to_download')]" />
@@ -21,7 +21,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <filter string="Analyzed" name="analyzed" domain="[('state','=', 'analyzed')]" />
                 <group expand="1" string="Group By">
                     <filter string="Organization" context="{'group_by' : 'organization_id'}"/>
-                    <filter string="Milestone" context="{'group_by' : 'organization_milestone_id'}"/>
+                    <filter string="Serie" context="{'group_by' : 'organization_serie_id'}"/>
                     <filter string="Repository" context="{'group_by' : 'repository_id'}"/>
                     <filter string="State" context="{'group_by' : 'state'}"/>
                 </group>
@@ -85,7 +85,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                         <field name="mb_size" />
                         <field name="repository_id"/>
                         <field name="organization_id"/>
-                        <field name="organization_milestone_id"/>
+                        <field name="organization_serie_id"/>
                     </group>
                     <notebook>
                         <page string="External Services">
