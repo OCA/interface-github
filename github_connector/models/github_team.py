@@ -100,7 +100,7 @@ class GithubTeam(models.Model):
             'name': data['name'],
             'description': data['description'],
             'privacy': data['privacy'],
-            'organization_id': self.organization.id,
+            'organization_id': self.organization_id.id,
         })
         return res
 
