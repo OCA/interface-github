@@ -138,14 +138,14 @@ class GithubRepository(models.Model):
         branch_obj = self.env['github.repository.branch']
         for repository in self:
             branch_ids = []
-            correct_milestones =\
-                repository.organization_id.organization_milestone_ids\
+            correct_series =\
+                repository.organization_id.organization_serie_ids\
                 .mapped('name')
 
             for data in github_branch.list([repository.github_login]):
                 if repository.is_ignored:
                     pass
-                elif data['name'] in correct_milestones:
+                elif data['name'] in correct_series:
                     # We don't use get_from_id_or_create because repository
                     # branches does not have any ids. (very basic object in the
                     # Github API)
