@@ -47,17 +47,17 @@ class AbtractGithubModel(models.AbstractModel):
     # Overloadable Section
     def github_type(self):
         if self._github_type is None:
-            raise exceptions.Warning(
-                _("Unimplemented Feature"),
-                _("Please define github_type function in child model."))
+            raise exceptions.Warning(_(
+                "Feature not Implemented : Please define 'github_type'"
+                " function in child model."))
         else:
             return self._github_type
 
     def github_login_field(self):
         if self._github_login_field is None:
-            raise exceptions.Warning(
-                _("Unimplemented Feature"),
-                _("Please define github_login_field function in child model."))
+            raise exceptions.Warning(_(
+                "Feature not Implemented : Please define 'github_login_field'"
+                " function in child model."))
         else:
             return self._github_login_field
 
@@ -78,9 +78,9 @@ class AbtractGithubModel(models.AbstractModel):
         """Prepare function that map Odoo data to create in Github.
         Usefull only if your model implement creation in github"""
         self.ensure_one()
-        raise exceptions.Warning(_("Unimplemented Feature"), _(
-            "Please define get_github_data_from_odoo function in child"
-            " model."))
+        raise exceptions.Warning(_(
+            "Feature not Implemented : Please define"
+            " 'get_github_data_from_odoo' function in child model."))
 
     @api.multi
     def get_github_args_for_creation(self):
@@ -88,18 +88,21 @@ class AbtractGithubModel(models.AbstractModel):
         in Github.
         Usefull only if your model implement creation in github"""
         self.ensure_one()
-        raise exceptions.Warning(_("Unimplemented Feature"), _(
-            "Please define get_github_args_for_creation function in child"
-            " model."))
+        raise exceptions.Warning(_(
+            "Feature not Implemented : Please define"
+            " 'get_github_args_for_creation' function in child model."))
 
     @api.multi
     def full_update(self):
+        """Override this function in models that inherit this abstract
+        to mention which items should be synchronized from github when the
+        user click on 'Full Update' Button"""
         pass
 
     @api.multi
     def _hook_after_github_creation(self):
         """Hook that will be called, after a creation in github.
-        Overload this function to add custom script"""
+        Override this function to add custom logic for after creation."""
         pass
 
     # Custom Public Function

@@ -5,8 +5,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp import api, models, _
-UNIQUE_ID_MODEL = (
-    1121141111061019911695109111100112349951161119511226115107)
 
 
 GITHUB_MODEL = [
@@ -23,9 +21,14 @@ class IrValues(models.Model):
         res = super(IrValues, self).get_actions(
             action_slot, model, res_id=res_id)
         if action_slot == 'client_action_multi' and model in GITHUB_MODEL:
-            action = self.add_update_from_github_action(model, res_id=res_id)
-            value = (UNIQUE_ID_MODEL, 'github_connector', action)
-            res.insert(0, value)
+            action_found = False
+            for item in res:
+                action_found = action_found or (item[1] == 'github_connector')
+            if not action_found:
+                action = self.add_update_from_github_action(
+                    model, res_id=res_id)
+                value = (0, 'github_connector', action)
+                res.insert(0, value)
 
         return res
 
