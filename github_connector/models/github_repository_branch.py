@@ -24,7 +24,7 @@ except ImportError:
 class GithubRepository(models.Model):
     _name = 'github.repository.branch'
     _inherit = ['abstract.github.model']
-    _order = 'repository_id, sequence_milestone'
+    _order = 'repository_id, sequence_serie'
 
     _github_type = 'repository_branches'
     _github_login_field = False
@@ -56,14 +56,14 @@ class GithubRepository(models.Model):
         comodel_name='github.organization', string='Organization',
         related='repository_id.organization_id', store=True, readonly=True)
 
-    organization_milestone_id = fields.Many2one(
-        comodel_name='github.organization.milestone',
-        string='Organization Milestone', store=True,
-        compute='_compute_organization_milestone_id')
+    organization_serie_id = fields.Many2one(
+        comodel_name='github.organization.serie',
+        string='Organization Serie', store=True,
+        compute='_compute_organization_serie_id')
 
-    sequence_milestone = fields.Integer(
-        string='Sequence Milestone', store=True,
-        related='organization_milestone_id.sequence')
+    sequence_serie = fields.Integer(
+        string='Sequence Serie', store=True,
+        related='organization_serie_id.sequence')
 
     local_path = fields.Char(
         string='Local Path', compute='_compute_local_path')
@@ -250,19 +250,23 @@ class GithubRepository(models.Model):
 
     @api.multi
     @api.depends('organization_id', 'name')
-    def _compute_organization_milestone_id(self):
+    def _compute_organization_serie_id(self):
         for branch in self:
-            for milestone in branch.organization_id.organization_milestone_ids:
-                if milestone.name == branch.name:
-                    branch.organization_milestone_id = milestone
+            for serie in branch.organization_id.organization_serie_ids:
+                if serie.name == branch.name:
+                    branch.organization_serie_id = serie
 
     @api.multi
     @api.depends('complete_name')
     def _compute_local_path(self):
         source_path = tools.config.get('source_code_local_path', False)
+        if not source_path:
+            raise exceptions.Warning(_(
+                "source_code_local_path should be defined in your "
+                " configuration file"))
         for branch in self:
             branch.local_path = os.path.join(
-                source_path,
+                source_path, branch.organization_id.github_login,
                 branch.complete_name)
 
     @api.multi
