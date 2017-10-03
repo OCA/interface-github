@@ -271,6 +271,8 @@ class GithubRepository(models.Model):
         'organization_id.coverage_url_pattern')
     def _compute_coverage(self):
         for branch in self:
+            if not branch.organization_id.coverage_url_pattern:
+                continue
             branch.coverage_url =\
                 branch.organization_id.coverage_url_pattern.format(
                     organization_name=branch.organization_id.github_login,
@@ -283,6 +285,8 @@ class GithubRepository(models.Model):
         'organization_id.ci_url_pattern')
     def _compute_ci(self):
         for branch in self:
+            if not branch.organization_id.ci_url_pattern:
+                continue
             branch.ci_url =\
                 branch.organization_id.ci_url_pattern.format(
                     organization_name=branch.organization_id.github_login,
