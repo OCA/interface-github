@@ -62,11 +62,11 @@ To fetch information from Github, you have to:
 
    .. image:: /github_connector/static/description/github_organization_kanban.png
 
-#. Optionally, once organization is created, you can create milestones for your
+#. Optionally, once organization is created, you can create series for your
    projects. Go to 'Github' / 'Organizations' / click on your organization /
-   'Organization Milestones' Tabs
+   'Organization Series' Tabs
 
-   .. image:: /github_connector/static/description/github_organization_milestones.png
+   .. image:: /github_connector/static/description/github_organization_series.png
 
 Select branches to download
 ---------------------------
@@ -173,13 +173,13 @@ Reporting
 
 This module provides several reports
 
-**Branches by Milestone**
+**Branches by Serie**
 
-.. image:: /github_connector/static/description/reporting_branches_by_milestone.png
+.. image:: /github_connector/static/description/reporting_branches_by_serie.png
 
-**Sizes by Milestone**
+**Sizes by Serie**
 
-.. image:: /github_connector/static/description/reporting_sizes_by_milestone.png
+.. image:: /github_connector/static/description/reporting_sizes_by_serie.png
 
 Technical Information
 =====================
@@ -205,7 +205,7 @@ Roadmap / Known Issues
 1. Create a new module github_connector_website, that could display
    teams / repositories / branches informations for non logged users.
 
-2. Analyze commits (author, quantity by milestones, etc...):
+2. Analyze commits (author, quantity by series, etc...):
    this feature has been partially implemented in a V8.0 PR.
 
 3. Synchronize Pull Request, Issues, Comments: 
