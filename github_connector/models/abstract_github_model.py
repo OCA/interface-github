@@ -88,9 +88,9 @@ class AbtractGithubModel(models.AbstractModel):
         in Github.
         Usefull only if your model implement creation in github"""
         self.ensure_one()
-        raise exceptions.Warning(_("Unimplemented Feature"), _(
-            "Please define get_github_args_for_creation function in child"
-            " model."))
+        raise exceptions.Warning(_(
+            "Feature not Implemented : Please define"
+            " 'get_github_args_for_creation' function in child model."))
 
     @api.multi
     def full_update(self):
