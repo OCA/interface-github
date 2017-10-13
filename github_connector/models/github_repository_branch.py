@@ -261,9 +261,11 @@ class GithubRepository(models.Model):
     def _compute_local_path(self):
         source_path = tools.config.get('source_code_local_path', False)
         for branch in self:
-            branch.local_path = os.path.join(
-                source_path,
-                branch.complete_name)
+            if not source_path:
+                branch.local_path = False
+            else:
+                branch.local_path = os.path.join(
+                    source_path, branch.complete_name)
 
     @api.multi
     @api.depends(
