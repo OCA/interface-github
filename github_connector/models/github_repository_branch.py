@@ -260,12 +260,14 @@ class GithubRepository(models.Model):
     @api.depends('complete_name')
     def _compute_local_path(self):
         source_path = tools.config.get('source_code_local_path', False)
+        if not source_path:
+            raise exceptions.Warning(_(
+                "source_code_local_path should be defined in your "
+                " configuration file"))
         for branch in self:
-            if not source_path:
-                branch.local_path = False
-            else:
-                branch.local_path = os.path.join(
-                    source_path, branch.complete_name)
+            branch.local_path = os.path.join(
+                source_path, branch.organization_id.github_login,
+                branch.complete_name)
 
     @api.multi
     @api.depends(
