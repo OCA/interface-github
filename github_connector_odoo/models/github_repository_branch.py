@@ -47,11 +47,14 @@ class GithubRepositoryBranch(models.Model):
         'organization_id.runbot_url_pattern')
     def _compute_runbot_url(self):
         for branch in self:
-            branch.runbot_url =\
-                branch.organization_id.runbot_url_pattern.format(
-                    runbot_id_external=str(
-                        branch.repository_id.runbot_id_external),
-                    branch_name=branch.name)
+            if not branch.repository_id.runbot_id_external:
+                branch.runbot_url = False
+            else:
+                branch.runbot_url =\
+                    branch.organization_id.runbot_url_pattern.format(
+                        runbot_id_external=str(
+                            branch.repository_id.runbot_id_external),
+                        branch_name=branch.name)
 
     @api.multi
     @api.depends(
