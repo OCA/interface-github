@@ -36,17 +36,17 @@ class OdooModule(models.Model):
         string='Authors (Text)', compute='_compute_author', multi='author',
         store=True)
 
-    organization_milestone_ids = fields.Many2many(
-        string='Milestones', comodel_name='github.organization.milestone',
-        compute='_compute_organization_milestone',
-        multi='organization_milestone', store=True,
-        relation='github_module_organization_milestone_rel',
-        column1='module_id', column2='organization_milestone_id')
+    organization_serie_ids = fields.Many2many(
+        string='Series', comodel_name='github.organization.serie',
+        compute='_compute_organization_serie',
+        multi='organization_serie', store=True,
+        relation='github_module_organization_serie_rel',
+        column1='module_id', column2='organization_serie_id')
 
-    organization_milestone_ids_description = fields.Char(
-        string='Milestones (Text)', store=True,
-        compute='_compute_organization_milestone',
-        multi='organization_milestone')
+    organization_serie_ids_description = fields.Char(
+        string='Series (Text)', store=True,
+        compute='_compute_organization_serie',
+        multi='organization_serie')
 
     description_rst = fields.Char(
         string='RST Description of the last Version', store=True,
@@ -79,7 +79,7 @@ class OdooModule(models.Model):
             version_ids = module.module_version_ids.ids
             last_version = module_version_obj.search(
                 [('id', 'in', version_ids)],
-                order='organization_milestone_id desc', limit=1)
+                order='organization_serie_id desc', limit=1)
             if last_version:
                 module.image = last_version.image
 
@@ -91,7 +91,7 @@ class OdooModule(models.Model):
             version_ids = module.module_version_ids.ids
             last_version = module_version_obj.search(
                 [('id', 'in', version_ids)],
-                order='organization_milestone_id desc', limit=1)
+                order='organization_serie_id desc', limit=1)
             if last_version:
                 module.name = last_version.name
             else:
@@ -106,7 +106,7 @@ class OdooModule(models.Model):
             version_ids = module.module_version_ids.ids
             last_version = module_version_obj.search(
                 [('id', 'in', version_ids)],
-                order='organization_milestone_id desc', limit=1)
+                order='organization_serie_id desc', limit=1)
             if last_version:
                 module.description_rst = last_version.description_rst
                 module.description_rst_html = last_version.description_rst_html
@@ -143,18 +143,18 @@ class OdooModule(models.Model):
                 ', '.join(sorted([x.name for x in authors]))
 
     @api.multi
-    @api.depends('module_version_ids.organization_milestone_id')
-    def _compute_organization_milestone(self):
+    @api.depends('module_version_ids.organization_serie_id')
+    def _compute_organization_serie(self):
         for module in self:
-            organization_milestones = []
+            organization_series = []
             for version in module.module_version_ids:
-                organization_milestones += version.organization_milestone_id
-            organization_milestones = set(organization_milestones)
-            module.organization_milestone_ids =\
-                [x.id for x in organization_milestones]
-            module.organization_milestone_ids_description =\
+                organization_series += version.organization_serie_id
+            organization_series = set(organization_series)
+            module.organization_serie_ids =\
+                [x.id for x in organization_series]
+            module.organization_serie_ids_description =\
                 ' - '.join([x.name for x in sorted(
-                    organization_milestones, key=lambda x: x.sequence)])
+                    organization_series, key=lambda x: x.sequence)])
 
     # Custom Section
     @api.model

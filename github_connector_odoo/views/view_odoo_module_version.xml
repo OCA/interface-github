@@ -20,7 +20,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="repository_id"/>
                 <field name="license_id"/>
                 <field name="author_ids"/>
-                <field name="organization_milestone_id"/>
+                <field name="organization_serie_id"/>
                 <filter string="Odoo Type" context="{'group_by' : 'odoo_type'}"/>
                 <filter string="License" context="{'group_by' : 'license_id'}"/>
                 <filter string="Module" context="{'group_by' : 'module_id'}"/>
@@ -34,7 +34,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="arch" type="xml">
             <tree>
                 <field name="repository_id"/>
-                <field name="organization_milestone_id" string="Milestone"/>
+                <field name="organization_serie_id" string="Serie"/>
                 <field name="technical_name"/>
                 <field name="name"/>
                 <field name="author_ids_description"/>

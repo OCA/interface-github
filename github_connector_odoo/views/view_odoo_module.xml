@@ -13,7 +13,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="name"/>
                 <field name="technical_name"/>
                 <field name="author_ids"/>
-                <field name="organization_milestone_ids"/>
+                <field name="organization_serie_ids"/>
                 <field name="description_rst"/>
                 <filter name="filter_with_version" string="With Version" domain="[('module_version_qty', '!=', 0)]"/>
             </search>
@@ -26,7 +26,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <tree colors="gray: module_version_qty == 0;">
                 <field name="technical_name"/>
                 <field name="name"/>
-                <field name="organization_milestone_ids_description"/>
+                <field name="organization_serie_ids_description"/>
                 <field name="author_ids_description"/>
                 <field name="module_version_qty"/>
             </tree>
@@ -56,7 +56,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                         <h2><field name="technical_name"/></h2>
                     </div>
                     <group cols="4">
-                        <field name="organization_milestone_ids" widget="many2many_tags" string="Available for"/>
+                        <field name="organization_serie_ids" widget="many2many_tags" string="Available for"/>
                         <field name="author_ids" widget="many2many_tags"/>
                     </group>
                     <notebook>
@@ -78,7 +78,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="image"/>
                 <field name="name"/>
                 <field name="technical_name"/>
-                <field name="organization_milestone_ids_description" />
+                <field name="organization_serie_ids_description" />
                 <templates>
                     <t t-name="kanban-box">
                     <div class="oe_module_vignette oe_kanban_global_click">
@@ -92,7 +92,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             <h4><field name="name"/></h4>
                             <p class="oe_module_name">
                                 <t t-if="record.technical_name.raw_value"><field name="technical_name"/><br/></t>
-                                <span class="badge" t-if="record.organization_milestone_ids_description.raw_value"><t t-esc="record.organization_milestone_ids_description.value"/></span><br/>
+                                <span class="badge" t-if="record.organization_serie_ids_description.raw_value"><t t-esc="record.organization_serie_ids_description.value"/></span><br/>
                                 <i><field name="author_ids_description"/></i>
                             </p>
                         </div>
