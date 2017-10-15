@@ -42,9 +42,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         action="action_odoo_lib_python"/>
 
     <!-- Reporting Part -->
-    <menuitem id="menu_odoo_module_version_by_milestone"
+    <menuitem id="menu_odoo_module_version_by_serie"
         parent="github_connector.menu_reporting"
         sequence="10"
-        action="action_odoo_module_version_by_milestone"/>
+        action="action_odoo_module_version_by_serie"/>
 
 </odoo>

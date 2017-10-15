@@ -115,7 +115,7 @@ class GithubRepositoryBranch(models.Model):
                             module_name, full_module_path)
 
                         # Create module version, if the module is installable
-                        # in the milestone
+                        # in the serie
                         if module_info.get('installable', False):
                             module_info['technical_name'] = module_name
                             module_version_obj.create_or_update_from_manifest(

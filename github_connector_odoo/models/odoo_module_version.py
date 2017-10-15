@@ -66,10 +66,10 @@ class OdooModuleVersion(models.Model):
         comodel_name='github.repository', string='Repository', readonly=True,
         related='repository_branch_id.repository_id', store=True)
 
-    organization_milestone_id = fields.Many2one(
-        comodel_name='github.organization.milestone',
-        string='Organization Milestone', readonly=True, store=True,
-        compute='_compute_organization_milestone_id')
+    organization_serie_id = fields.Many2one(
+        comodel_name='github.organization.serie',
+        string='Organization Serie', readonly=True, store=True,
+        compute='_compute_organization_serie_id')
 
     license = fields.Char(string='License (Manifest)', readonly=True)
 
@@ -274,16 +274,16 @@ class OdooModuleVersion(models.Model):
     @api.multi
     @api.depends(
         'repository_branch_id', 'repository_branch_id.organization_id',
-        'repository_branch_id.organization_id.organization_milestone_ids',
-        'repository_branch_id.organization_id.organization_milestone_ids.name')
-    def _compute_organization_milestone_id(self):
-        organization_milestone_obj = self.env['github.organization.milestone']
+        'repository_branch_id.organization_id.organization_serie_ids',
+        'repository_branch_id.organization_id.organization_serie_ids.name')
+    def _compute_organization_serie_id(self):
+        organization_serie_obj = self.env['github.organization.serie']
         for module_version in self:
-            res = organization_milestone_obj.search([
+            res = organization_serie_obj.search([
                 ('organization_id', '=',
                     module_version.repository_branch_id.organization_id.id),
                 ('name', '=', module_version.repository_branch_id.name)])
-            module_version.organization_milestone_id =\
+            module_version.organization_serie_id =\
                 res and res[0].id or False
 
     # Custom Section
