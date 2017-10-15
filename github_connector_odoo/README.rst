@@ -36,7 +36,7 @@ Odoo Modules
 .. image:: /github_connector_odoo/static/description/odoo_module_kanban.png
 
 In each module, you can see the description of the module, the authors,
-the available milestones, and the list of the modules that depend on the
+the available series, and the list of the modules that depend on the
 current module.
 
 .. image:: /github_connector_odoo/static/description/odoo_module_form.png
@@ -81,9 +81,9 @@ Reporting
 
 This module provide a new reporting.
 
-**Modules by Milestone (and Licenses)**
+**Modules by Serie (and Licenses)**
 
-.. image:: /github_connector_odoo/static/description/reporting_module_by_milestone.png
+.. image:: /github_connector_odoo/static/description/reporting_module_by_serie.png
 
 Known issues / Roadmap
 ======================
