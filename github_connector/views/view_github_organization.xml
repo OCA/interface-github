@@ -85,9 +85,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 <field name="ci_url_pattern"/>
                             </group>
                         </page>
-                        <page string="Organization Milestones">
-                            <field name="organization_milestone_ids" colspan="4" nolabel="1">
-                                <tree string="organization_milestone_ids" editable="bottom">
+                        <page string="Organization Series">
+                            <field name="organization_serie_ids" colspan="4" nolabel="1">
+                                <tree string="organization_serie_ids" editable="bottom">
                                     <field name="sequence"/>
                                     <field name="name"/>
                                 </tree>

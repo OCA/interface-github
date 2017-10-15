@@ -160,24 +160,24 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     </record>
 
     <!-- Reporting Part -->
-    <record id="action_github_branch_by_milestone" model="ir.actions.act_window">
-        <field name="name">Branches by Milestone</field>
+    <record id="action_github_branch_by_serie" model="ir.actions.act_window">
+        <field name="name">Branches by Serie</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.repository.branch</field>
         <field name="view_type">form</field>
         <field name="view_mode">graph,pivot</field>
-        <field name="context">{'search_default_group_by_organization_milestone_id': True}</field>
-        <field name="view_id" ref="view_github_branch_by_milestone_graph" />
+        <field name="context">{'search_default_group_by_organization_serie_id': True}</field>
+        <field name="view_id" ref="view_github_branch_by_serie_graph" />
     </record>
 
-    <record id="action_github_size_by_milestone" model="ir.actions.act_window">
-        <field name="name">Sizes by Milestone</field>
+    <record id="action_github_size_by_serie" model="ir.actions.act_window">
+        <field name="name">Sizes by Serie</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.repository.branch</field>
         <field name="view_type">form</field>
         <field name="view_mode">graph,pivot</field>
-        <field name="context">{'search_default_group_by_organization_milestone_id': True}</field>
-        <field name="view_id" ref="view_github_size_by_milestone_graph" />
+        <field name="context">{'search_default_group_by_organization_serie_id': True}</field>
+        <field name="view_id" ref="view_github_size_by_serie_graph" />
     </record>
 
 </odoo>

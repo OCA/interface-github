@@ -42,7 +42,7 @@
     'demo': [
         'demo/res_groups.xml',
         'demo/github_organization.xml',
-        'demo/github_organization_milestone.xml',
+        'demo/github_organization_serie.xml',
     ],
     'installable': True,
     'external_dependencies': {
