@@ -16,8 +16,7 @@ class WizardLoadGithubModel(models.TransientModel):
         selection=_GITHUB_TYPE, string='Github Type Name',
         default='organization', required=True)
 
-    name = fields.Char(
-        string='Github Name', required=True, default='OCA')
+    name = fields.Char(string='Github Name', required=True)
 
     child_update = fields.Boolean(string='Update Child Objects', default=False)
 
