@@ -173,6 +173,8 @@ class AbtractGithubModel(models.AbstractModel):
         if not current_object:
             # Create the object
             return self._create_from_github_data(res)
+        else:
+            return current_object
 
     @api.multi
     def button_update_from_github_light(self):
