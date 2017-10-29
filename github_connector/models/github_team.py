@@ -95,12 +95,18 @@ class GithubTeam(models.Model):
 
     # Overloadable Section
     def get_odoo_data_from_github(self, data):
+        organization_obj = self.env['github.organization']
         res = super(GithubTeam, self).get_odoo_data_from_github(data)
+        if data.get('organization', False):
+            organization_id = organization_obj.get_from_id_or_create(
+                data['organization']).id
+        else:
+            organization_id = False
         res.update({
             'name': data['name'],
             'description': data['description'],
             'privacy': data['privacy'],
-            'organization_id': self.organization_id.id,
+            'organization_id': organization_id,
         })
         return res
 
