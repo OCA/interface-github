@@ -131,7 +131,7 @@ class AbtractGithubModel(models.AbstractModel):
         if self._github_login_field and self._github_login_field in data:
             existing_object = self.search([
                 ('github_login', '=', data[self._github_login_field])])
-            if existing_object:
+            if len(existing_object) == 1:
                 # Update the existing object with the id
                 existing_object.github_id_external = data['id']
                 _logger.info(
@@ -141,6 +141,10 @@ class AbtractGithubModel(models.AbstractModel):
                         data[self._github_login_field], data['id'],
                         self.github_type()))
                 return existing_object
+           elif len(existing_object) > 1:
+                _logger.error(
+                    "Duplicate object with github login %s",
+                    data[self._github_login_field])
 
         if self._need_individual_call:
             github_connector = self.get_github_connector(self.github_type())
