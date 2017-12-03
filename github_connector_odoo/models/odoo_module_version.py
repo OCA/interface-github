@@ -215,8 +215,8 @@ class OdooModuleVersion(models.Model):
     @api.depends('depends')
     def _compute_dependency_module_ids(self):
         module_obj = self.env['odoo.module']
-        modules = []
         for version in self:
+            modules = []
             for module_name in version.depends.split(','):
                 if module_name:
                     # Weird case, some times 'depends' field is empty
