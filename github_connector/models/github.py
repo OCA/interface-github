@@ -129,7 +129,7 @@ class Github(object):
         if response.status_code == 403:
             raise exceptions.Warning(_(
                 "Unable to realize the current operation. The login '%s'"
-                " should not have the correct access rights.") % (self.login))
+                " does not have the correct access rights.") % (self.login))
         if response.status_code == 422:
             raise exceptions.Warning(_(
                 "Unable to realize the current operation. Possible reasons:\n"
