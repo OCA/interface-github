@@ -29,10 +29,10 @@ class GithubOrganization(models.Model):
     location = fields.Char(string='Location', readonly=True)
 
     ignored_repository_names = fields.Text(
-        string='Ignored Repositories', help="Set here repository names you"
+        string='Ignored Repositories', help="Set here repository names"
         " you want to ignore. One repository per line."
         " If set, the repositories will be created, but branches"
-        " synchronization, and source code download will be disabled."
+        " synchronization and source code download will be disabled."
         " Exemple:\n"
         "odoo-community.org\nOCB\nOpenUpgrade\n")
 
