@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
@@ -8,9 +7,9 @@ import os
 
 from os.path import join as opj
 
-from openerp import models, fields, api
+from odoo import api, fields, models
 
-from openerp.modules import load_information_from_description_file
+from odoo.modules import load_information_from_description_file
 
 # Hard define this value to make this module working with or without
 # the patch (that backports V10 manifests analysis code.
@@ -108,7 +107,7 @@ class GithubRepositoryBranch(models.Model):
                             path))
                 else:
                     # Analyze folders and create module versions
-                    _logger.info("Analyzing repository %s ..." % (path))
+                    _logger.info("Analyzing repository %s ..." % path)
                     for module_name in self.listdir(path):
                         full_module_path = os.path.join(path, module_name)
                         module_info = load_information_from_description_file(

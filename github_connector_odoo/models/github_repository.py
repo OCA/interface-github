@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import urllib2
+from urllib.request import Request, urlopen
 from collections import defaultdict
 
-from openerp import models, fields, api
+from odoo import api, fields, models
 
 
 class GithubRepository(models.Model):
@@ -25,10 +24,10 @@ class GithubRepository(models.Model):
         for repository in self:
             url_done[repository.organization_id].append(repository)
 
-        for organization_id, repositories in url_done.iteritems():
+        for organization_id, repositories in url_done.items():
             if organization_id.runbot_parse_url:
-                runbot_list = urllib2.urlopen(
-                    urllib2.Request(
+                runbot_list = urlopen(
+                    Request(
                         organization_id.runbot_parse_url)).read().split('\n')
                 for item in runbot_list:
                     for repository in repositories:

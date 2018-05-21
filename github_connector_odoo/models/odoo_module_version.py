@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
@@ -8,10 +7,10 @@ import os
 
 from docutils.core import publish_string
 
-from openerp import api, fields, models, tools, _
-from openerp.tools import html_sanitize
-from openerp.addons.base.module.module import MyWriter
-from openerp.tools.safe_eval import safe_eval
+from odoo import _, api, fields, models, tools
+from odoo.tools import html_sanitize
+from odoo.addons.base.module.module import MyWriter
+from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
@@ -199,7 +198,7 @@ class OdooModuleVersion(models.Model):
                         source=version.description_rst,
                         settings_overrides=self._SETTING_OVERRIDES,
                         writer=MyWriter())
-                except:
+                except Exception:
                     output =\
                         "<h1 style='color:red;'>" +\
                         _("Incorrect RST Description") +\
@@ -346,5 +345,5 @@ class OdooModuleVersion(models.Model):
                     image.encode('base64'), size=(96, 96),
                     encoding='base64', filetype='PNG')
             except Exception:
-                _logger.warn("Unable to read or resize %s" % icon_path)
+                _logger.warning("Unable to read or resize %s" % icon_path)
             module_version.write({'image': resized_image})

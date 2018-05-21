@@ -32,10 +32,15 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <sheet>
                     <field name="image" widget="image" class="oe_avatar"/>
                     <div class="oe_button_box" name="button_box">
-                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                        <button name="toggle_active"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-archive">
                             <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
                         </button>
-                        <button type="action" class="oe_stat_button" icon="fa-cube" name="%(action_odoo_module_version)d"
+                        <button type="action"
+                                name="%(action_odoo_module_version)d"
+                                class="oe_stat_button" icon="fa-cube"
                                 attrs="{'invisible': [('module_version_qty', '=', False)]}"
                                 context="{'search_default_license_id': active_id}">
                             <field name="module_version_qty" string="Modules" widget="statinfo" />
