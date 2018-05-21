@@ -31,7 +31,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <form>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button type="action" class="oe_stat_button" icon="fa-cubes" name="%(action_odoo_module)d"
+                        <button type="action"
+                                name="%(action_odoo_module)d"
+                                class="oe_stat_button" icon="fa-cubes"
                                 attrs="{'invisible': [('module_qty', '=', False)]}"
                                 context="{'search_default_author_ids': active_id}">
                             <field name="module_qty" string="Modules" widget="statinfo" />

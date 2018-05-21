@@ -1,12 +1,13 @@
-.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-    :alt: License: AGPL-3
+.. image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+   :target: https://www.gnu.org/licenses/agpl
+   :alt: License: AGPL-3
 
 =========================================================
 Analyze Odoo modules information from Github repositories
 =========================================================
 
-This module was written to extend the functionality of 'Github Connector' Module
-if your repositories contain Odoo Modules.
+This module was written to extend the functionality of 'Github Connector'
+Module if your repositories contain Odoo Modules.
 
 It extends 'Analysis' features to parse code files (readme / manifest files)
 and add new models and menus.
@@ -18,7 +19,8 @@ Configuration
 
 * Once installed, go to your organization, and set extra settings:
 
-1. The name of your organization in the author keys of the manifest odoo modules
+1. The name of your organization in the author keys of the manifest odoo
+   modules
 2. The URL of the file that contains IDs of your repositories for the runbot
 
 .. image:: /github_connector_odoo/static/description/github_organization_form.png
@@ -74,7 +76,7 @@ manifest file.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/229/10.0
+   :target: https://runbot.odoo-community.org/runbot/229/11.0
 
 Reporting
 =========
@@ -117,6 +119,7 @@ Contributors
 ------------
 
 * Sylvain LE GAL (https://twitter.com/legalsylvain)
+* Vicent Cubells <vicent.cubells@tecnativa.com>
 
 Maintainer
 ----------
