@@ -1,4 +1,3 @@
-# -#- coding: utf-8 -#-
 from . import odoo_author
 from . import odoo_license
 from . import odoo_lib_bin
