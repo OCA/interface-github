@@ -49,12 +49,16 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
-                        <button type="action" class="oe_stat_button" icon="fa-user" name="%(action_github_team_partner_from_team)d"
+                        <button type="action"
+                                name="%(action_github_team_partner_from_team)d"
+                                class="oe_stat_button" icon="fa-user"
                                 attrs="{'invisible': [('partner_qty', '=', False)]}"
                                 context="{'search_default_team_id': active_id}">
                             <field name="partner_qty" string="Members" widget="statinfo" />
                         </button>
-                        <button type="action" class="oe_stat_button" icon="fa-folder-o" name="%(action_github_team_repository_from_team)d"
+                        <button type="action"
+                                name="%(action_github_team_repository_from_team)d"
+                                class="oe_stat_button" icon="fa-folder-o"
                                 attrs="{'invisible': [('repository_qty', '=', False)]}"
                                 context="{'search_default_team_id': active_id}">
                             <field name="repository_qty" string="Repositories" widget="statinfo" />
@@ -77,10 +81,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 <field name="github_id_external" />
                                 <field name="github_login" />
                                 <field name="github_last_sync_date" />
-                                <button name="button_update_from_github_light" type="object" string="Light Sync"
+                                <button name="button_update_from_github_light"
+                                        type="object" string="Light Sync"
                                         class="btn btn-default" icon="fa-angle-right"
                                         groups="github_connector.group_github_connector_manager"/>
-                                <button name="button_update_from_github_full" type="object" string="Full Sync"
+                                <button name="button_update_from_github_full"
+                                        type="object" string="Full Sync"
                                         class="btn btn-default" icon="fa-angle-double-right"
                                         groups="github_connector.group_github_connector_manager"/>
                             </group>

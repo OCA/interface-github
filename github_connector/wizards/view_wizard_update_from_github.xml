@@ -14,9 +14,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     <field name="child_update"/>
                 </group>
                 <footer>
-                    <button name="button_update_from_github" string="Update From Github" type="object" class="oe_highlight"  />
+                    <button name="button_update_from_github"
+                            string="Update From Github"
+                            type="object" class="oe_highlight"/>
                     or
-                    <button string="Cancel" class="oe_link" special="cancel" />
+                    <button string="Cancel" class="oe_link" special="cancel"/>
                 </footer>
             </form>
         </field>
