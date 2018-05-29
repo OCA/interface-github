@@ -1,5 +1,5 @@
-.. figure:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+.. image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+   :target: https://www.gnu.org/licenses/agpl
    :alt: License: AGPL-3
 
 ======================================
@@ -9,7 +9,8 @@ Load Github Data in your Odoo Instance
 This module allows you to:
 
 * Fetch into Odoo social information from Github (Organizations, Teams, Users)
-* Fetch into Odoo Code structure information from Github (Repositories, Branches)
+* Fetch into Odoo Code structure information from Github (Repositories,
+  Branches)
 * Download source code from Github
 
 Configuration
@@ -26,11 +27,11 @@ Once installed, you have to:
 
    Note: make sure that Odoo process has read / write access on that folder
 
-#. go to 'Settings' / 'Technical' / 'Parameters' / 'System Parameters'
+#. Go to 'Settings' / 'Technical' / 'Parameters' / 'System Parameters'
    and define the following values:
 
    #. ``github.max_try``: number of call to the API before an error
-      is raised. The more unstable/slow tyour connection, the higher should be
+      is raised. The more unstable/slow your connection, the higher should be
       this value
    #. ``git.partial_commit_during_analysis``: Set to ``True`` if you want to
       commit the result of the analysis in the database after each repository
@@ -166,7 +167,7 @@ contain Odoo modules.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/229/10.0
+   :target: https://runbot.odoo-community.org/runbot/229/11.0
 
 Reporting
 =========
@@ -208,7 +209,7 @@ Roadmap / Known Issues
 2. Analyze commits (author, quantity by series, etc...):
    this feature has been partially implemented in a V8.0 PR.
 
-3. Synchronize Pull Request, Issues, Comments: 
+3. Synchronize Pull Request, Issues, Comments:
    this feature has been partially implemented in a V8.0 PR.
 
 * Refactor the github connector:
@@ -240,6 +241,7 @@ Contributors
 * Sylvain LE GAL (https://twitter.com/legalsylvain)
 * Sébastien BEAU (sebastien.beau@akretion.com)
 * Benoît GUILLOT (benoit.guillot@akretion.com)
+* Vicent Cubells (vicent.cubells@tecnativa.com)
 
 Maintainer
 ----------
