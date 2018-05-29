@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
@@ -10,8 +9,8 @@ from subprocess import check_output
 from datetime import datetime
 
 from .github import _GITHUB_URL
-from openerp import _, api, exceptions, fields, models, modules, tools
-from openerp.tools.safe_eval import safe_eval
+from odoo import _, api, exceptions, fields, models, modules, tools
+from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
 
@@ -126,13 +125,13 @@ class GithubRepository(models.Model):
         for branch in self:
             if not os.path.exists(branch.local_path):
                 _logger.info(
-                    "Cloning new repository into %s ..." % (branch.local_path))
+                    "Cloning new repository into %s ..." % branch.local_path)
                 # Cloning the repository
                 try:
                     os.makedirs(branch.local_path)
-                except:
+                except Exception:
                     raise exceptions.Warning(_(
-                        "Error when trying to create the new folder %s\n"
+                        "Error when trying to create the folder %s\n"
                         " Please check Odoo Access Rights.") % (
                             branch.local_path))
 
@@ -151,7 +150,7 @@ class GithubRepository(models.Model):
             else:
                 # Update repository
                 _logger.info(
-                    "Pulling existing repository %s ..." % (branch.local_path))
+                    "Pulling existing repository %s ..." % branch.local_path)
                 try:
                     res = check_output(
                         ['git', 'pull', 'origin', branch.name],
@@ -166,13 +165,13 @@ class GithubRepository(models.Model):
                         branch.write({
                             'last_download_date': datetime.today(),
                             })
-                except:
+                except Exception:
                     # Trying to clean the local folder
                     _logger.warning(_(
                         "Error when updating the branch %s in the local folder"
                         " %s.\n Deleting the local folder and trying"
                         " again.") % (branch.name, branch.local_path))
-                    command = ("rm -r %s") % (branch.local_path)
+                    command = "rm -r %s" % branch.local_path
                     os.system(command)
                     branch._download_code()
         return True
@@ -197,13 +196,13 @@ class GithubRepository(models.Model):
         for file_path in self._get_analyzable_files(path):
             try:
                 size += os.path.getsize(file_path)
-            except:
+            except Exception:
                 _logger.warning(
-                    "Warning : unable to eval the size of '%s'." % (file_path))
+                    "Warning : unable to eval the size of '%s'." % file_path)
 
         try:
             Repo(path)
-        except:
+        except Exception:
             # If it's not a correct repository, we flag the branch
             # to be downloaded again
             self.state = 'to_download'
@@ -214,15 +213,15 @@ class GithubRepository(models.Model):
     @api.multi
     def _analyze_code(self):
         partial_commit = safe_eval(
-            self.env['ir.config_parameter'].get_param(
+            self.sudo().env['ir.config_parameter'].get_param(
                 'git.partial_commit_during_analysis'))
         for branch in self:
             path = branch.local_path
             if not os.path.exists(path):
                 _logger.warning(
-                    "Warning Folder %s not found. Analyze skipped." % (path))
+                    "Warning Folder %s not found: Analysis skipped." % path)
             else:
-                _logger.info("Analyzing Source Code in %s ..." % (path))
+                _logger.info("Analyzing Source Code in %s ..." % path)
                 vals = branch.analyze_code_one(branch)
                 vals.update({
                     'last_analyze_date': datetime.today(),
