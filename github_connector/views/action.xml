@@ -96,15 +96,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="multi">True</field>
     </record>
 
-    <record id="value_wizard_download_analyze_branch" model="ir.values">
-        <field name="model_id" ref="model_github_repository_branch" />
-        <field name="name">Download and Analyze Source Code</field>
-        <field name="key2">client_action_multi</field>
-        <field name="value" eval="'ir.actions.act_window,' + str(ref('action_wizard_download_analyze_branch'))" />
-        <field name="key">action</field>
-        <field name="model">github.repository.branch</field>
-    </record>
-
     <record id="action_wizard_update_branch_list" model="ir.actions.act_window">
         <field name="name">Update Branch List</field>
         <field name="type">ir.actions.act_window</field>
@@ -113,15 +104,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="view_mode">form</field>
         <field name="target">new</field>
         <field name="multi">True</field>
-    </record>
-
-    <record id="value_wizard_update_branch_list" model="ir.values">
-        <field name="model_id" ref="model_github_repository" />
-        <field name="name">Update Branch List</field>
-        <field name="key2">client_action_multi</field>
-        <field name="value" eval="'ir.actions.act_window,' + str(ref('action_wizard_update_branch_list'))" />
-        <field name="key">action</field>
-        <field name="model">github.repository</field>
     </record>
 
     <!-- Settings Part -->

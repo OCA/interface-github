@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # @author: Sébastien BEAU <sebastien.beau@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-from openerp import exceptions, _
+from odoo import _, exceptions
 
 from requests.auth import HTTPBasicAuth
 import requests
@@ -66,6 +65,12 @@ _GITHUB_TYPE_URL = {
     },
 }
 
+_CODE_401 = 401
+_CODE_403 = 403
+_CODE_422 = 422
+_CODE_200 = 200
+_CODE_201 = 201
+
 
 class Github(object):
 
@@ -81,7 +86,7 @@ class Github(object):
         url = _GITHUB_TYPE_URL[self.github_type][url_type]
         if self.github_type not in _GITHUB_TYPE_URL.keys():
             raise exceptions.Warning(
-                _("'%s' is not implemented.") % (self.github_type))
+                _("'%s' is not implemented.") % self.github_type)
         complete_url = _BASE_URL + url % tuple(arguments)
 
         if page:
@@ -102,7 +107,7 @@ class Github(object):
         return datas
 
     def get_by_url(self, url, call_type, data=False):
-        _logger.info("Calling %s" % (url))
+        _logger.info("Calling %s" % url)
         for i in range(self.max_try):
             try:
                 if call_type == 'get':
@@ -119,23 +124,23 @@ class Github(object):
                 _logger.warning("URL Call Error. %d/%d. URL: %s" % (
                     i, self.max_try, err.__str__()))
         else:
-            raise err
+            raise exceptions.Warning(_('Maximum attempts reached.'))
 
-        if response.status_code == 401:
+        if response.status_code == _CODE_401:
             raise exceptions.Warning(_(
                 "401 - Unable to authenticate to Github with the login '%s'.\n"
                 "You should check your credentials in the Odoo"
-                " configuration file.") % (self.login))
-        if response.status_code == 403:
+                " configuration file.") % self.login)
+        if response.status_code == _CODE_403:
             raise exceptions.Warning(_(
                 "Unable to realize the current operation. The login '%s'"
-                " does not have the correct access rights.") % (self.login))
-        if response.status_code == 422:
+                " does not have the correct access rights.") % self.login)
+        if response.status_code == _CODE_422:
             raise exceptions.Warning(_(
                 "Unable to realize the current operation. Possible reasons:\n"
                 " * You try to create a duplicated item\n"
-                " * Some of the arguments are incorrects"))
-        elif response.status_code not in [200, 201]:
+                " * Some of the arguments are incorrect"))
+        elif response.status_code not in [_CODE_200, _CODE_201]:
             raise exceptions.Warning(
                 _("The call to '%s' failed:\n"
                     "- Status Code: %d\n"
