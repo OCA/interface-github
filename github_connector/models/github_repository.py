@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
 
-from openerp import models, fields, api
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -53,8 +52,8 @@ class GithubRepository(models.Model):
     is_ignored = fields.Boolean(
         string='Is Ignored', compute='_compute_ignore', multi='ignore',
         help="If checked, the branches will not be synchronized, and the"
-        " code source so will not be downloaded and analyzed. To ignore"
-        " a repository, go to it organization and fill the file"
+        " code source will this way not be downloaded and analyzed. To ignore"
+        " a repository, go to the organization and add the file"
         " 'Ignored Repositories'.")
 
     color = fields.Integer(
@@ -111,7 +110,7 @@ class GithubRepository(models.Model):
         self.ensure_one()
         return {
             'name': self.name,
-            'description': self.description and self.description or '',
+            'description': self.description or '',
             'homepage': self.website,
         }
 

@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import base64
-import urllib
+from urllib.request import urlopen
 import logging
 
-from odoo import tools, api, fields, models, exceptions, _
+from odoo import _, api, exceptions, fields, models, tools
 from odoo.exceptions import UserError
 
 from .github import Github
@@ -15,7 +14,7 @@ from .github import Github
 _logger = logging.getLogger(__name__)
 
 
-class AbtractGithubModel(models.AbstractModel):
+class AbstractGithubModel(models.AbstractModel):
     """
     This abstract model is used to share all features related to github model.
     Note that some fields and function have to be defined in the inherited
@@ -137,15 +136,15 @@ class AbtractGithubModel(models.AbstractModel):
                 # Update the existing object with the id
                 existing_object.github_id_external = data['id']
                 _logger.info(
-                    "Existing object %s#%d with github name '%s' has been"
-                    " updated with unique github id %s#%s",
+                    "Existing object %s#%d with Github name '%s' has been"
+                    " updated with unique Github id %s#%s",
                     self._name, existing_object.id,
                     data[self._github_login_field], data['id'],
                     self.github_type())
                 return existing_object
             elif len(existing_object) > 1:
                 raise UserError(
-                    _("Duplicate object with github login %s") %
+                    _("Duplicate object with Github login %s") %
                     (data[self._github_login_field], ))
 
         if self._need_individual_call:
@@ -207,15 +206,15 @@ class AbtractGithubModel(models.AbstractModel):
 
     def get_base64_image_from_github(self, url):
         max_try = int(
-            self.env['ir.config_parameter'].get_param('github.max_try'))
+            self.sudo().env['ir.config_parameter'].get_param('github.max_try'))
         for i in range(max_try):
             try:
-                stream = urllib.urlopen(url).read()
+                stream = urlopen(url).read()
                 break
             except Exception as err:
                 _logger.warning("URL Call Error. %s" % (err.__str__()))
         else:
-            raise err
+            raise exceptions.Warning(_('Maximum attempts reached.'))
         return base64.standard_b64encode(stream)
 
     # Custom Private Function
@@ -258,7 +257,8 @@ class AbtractGithubModel(models.AbstractModel):
             github_type,
             tools.config['github_login'],
             tools.config['github_password'],
-            int(self.env['ir.config_parameter'].get_param('github.max_try')))
+            int(self.sudo().env['ir.config_parameter'].get_param(
+                'github.max_try')))
 
     @api.multi
     def create_in_github(self, model_obj):

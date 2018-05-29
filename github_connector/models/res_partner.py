@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, models, fields
-from openerp.tools.translate import _
+from odoo import _, api, fields, models
 
 
 class ResPartner(models.Model):
@@ -18,7 +16,7 @@ class ResPartner(models.Model):
 
     # Column Section
     is_bot_account = fields.Boolean(
-        string='Is Bot Github Account', help="Check this box if this"
+        string='Is Bot Github Account', help="Check this box if this "
         "account is a bot or similar.")
 
     github_team_ids = fields.Many2many(
@@ -53,7 +51,7 @@ class ResPartner(models.Model):
             if partner.is_company and partner.github_login:
                 raise Warning(_(
                     "A company ('%s') can not have a Github login"
-                    " associated.") % (partner.name))
+                    " associated.") % partner.name)
 
     # Compute Section
     @api.multi

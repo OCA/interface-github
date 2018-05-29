@@ -39,16 +39,24 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="repository_id" invisible="1"/>
                 <field name="last_download_date"/>
                 <field name="last_analyze_date"/>
-                <button name="button_download_code" type="object" states="to_download" string="Download Source Code"
+                <button name="button_download_code"
+                        type="object" states="to_download"
+                        string="Download Source Code"
                         icon="fa-download"
                         groups="github_connector.group_github_connector_manager"/>
-                <button name="button_download_code" type="object" states="to_analyze,analyzed" string="Update Source Code"
+                <button name="button_download_code"
+                        type="object" states="to_analyze,analyzed"
+                        string="Update Source Code"
                         icon="fa-download"
                         groups="github_connector.group_github_connector_manager"/>
-                <button name="button_analyze_code" type="object" states="to_analyze" string="Analyze Source Code"
+                <button name="button_analyze_code"
+                        type="object" states="to_analyze"
+                        string="Analyze Source Code"
                         icon="fa-refresh"
                         groups="github_connector.group_github_connector_manager"/>
-                <button name="button_analyze_code" type="object" states="analyzed" string="Update Source Code Analyzis"
+                <button name="button_analyze_code"
+                        type="object" states="analyzed"
+                        string="Update Source Code Analyzis"
                         icon="fa-refresh"
                         groups="github_connector.group_github_connector_manager"/>
                 <field name="state"/>
@@ -61,17 +69,25 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="button_download_code" type="object" states="to_download"
-                            string="Download Source Code" class="btn btn-primary" icon="fa-download"
+                    <button name="button_download_code"
+                            type="object" states="to_download"
+                            string="Download Source Code"
+                            class="btn btn-primary" icon="fa-download"
                             groups="github_connector.group_github_connector_manager"/>
-                    <button name="button_download_code" type="object" states="to_analyze,analyzed"
-                            string="Update Source Code" class="btn btn-default" icon="fa-download"
+                    <button name="button_download_code"
+                            type="object" states="to_analyze,analyzed"
+                            string="Update Source Code"
+                            class="btn btn-default" icon="fa-download"
                             groups="github_connector.group_github_connector_manager"/>
-                    <button name="button_analyze_code" type="object" states="to_analyze"
-                            string="Analyze Source Code" class="btn btn-primary" icon="fa-refresh"
+                    <button name="button_analyze_code"
+                            type="object" states="to_analyze"
+                            string="Analyze Source Code"
+                            class="btn btn-primary" icon="fa-refresh"
                             groups="github_connector.group_github_connector_manager"/>
-                    <button name="button_analyze_code" type="object" states="analyzed"
-                            string="Update Source Code Analyzis" class="btn btn-default" icon="fa-refresh"
+                    <button name="button_analyze_code"
+                            type="object" states="analyzed"
+                            string="Update Source Code Analyzis"
+                            class="btn btn-default" icon="fa-refresh"
                             groups="github_connector.group_github_connector_manager"/>
                     <field name="state" widget="statusbar"/>
                 </header>
