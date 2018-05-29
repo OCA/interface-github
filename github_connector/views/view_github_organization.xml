@@ -53,17 +53,20 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                         </h3>
                     </div>
                     <div class="oe_right oe_button_box" name="buttons">
-                        <button type="action" class="oe_stat_button" icon="fa-folder-o" name="%(action_github_repository)d"
+                        <button type="action" name="%(action_github_repository)d"
+                                class="oe_stat_button" icon="fa-folder-o"
                                 attrs="{'invisible': [('repository_qty', '=', False)]}"
                                 context="{'search_default_organization_id': active_id}">
                             <field name="repository_qty" string="Repositories" widget="statinfo" />
                         </button>
-                        <button type="action" class="oe_stat_button" icon="fa-users" name="%(action_github_team)d"
+                        <button type="action" name="%(action_github_team)d"
+                                class="oe_stat_button" icon="fa-users"
                                 attrs="{'invisible': [('team_qty', '=', False)]}"
                                 context="{'search_default_organization_id': active_id}">
                             <field name="team_qty" string="Teams" widget="statinfo" />
                         </button>
-                        <button type="action" class="oe_stat_button" icon="fa-user" name="%(action_res_partner)d"
+                        <button type="action" name="%(action_res_partner)d"
+                                class="oe_stat_button" icon="fa-user"
                                 attrs="{'invisible': [('member_qty', '=', False)]}"
                                 context="{'search_default_organization_ids': active_id}">
                             <field name="member_qty" string="Members" widget="statinfo" />
@@ -101,10 +104,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 <field name="github_create_date" />
                                 <field name="github_write_date" />
                                 <field name="github_last_sync_date" />
-                                <button name="button_update_from_github_light" type="object" string="Light Sync"
+                                <button name="button_update_from_github_light"
+                                        type="object" string="Light Sync"
                                         class="btn btn-default" icon="fa-angle-right"
                                         groups="github_connector.group_github_connector_manager"/>
-                                <button name="button_update_from_github_full" type="object" string="Full Sync"
+                                <button name="button_update_from_github_full"
+                                        type="object" string="Full Sync"
                                         class="btn btn-default" icon="fa-angle-double-right"
                                         groups="github_connector.group_github_connector_manager"/>
                             </group>
@@ -129,7 +134,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="team_qty" />
                 <field name="email"/>
                 <field name="location"/>
-                
+
                 <templates>
                     <t t-name="kanban-box">
                     <div class="oe_module_vignette oe_kanban_global_click">

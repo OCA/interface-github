@@ -14,9 +14,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
             <field name="doall" eval="False"/>
-            <field name="model" eval="'github.organization'"/>
-            <field name="function" eval="'cron_update_organization_team'"/>
-            <field name="args" eval="'()'"/>
+            <field name="state">code</field>
+            <field name="model_id" ref="model_github_organization"/>
+            <field name="code">model.cron_update_organization_team()</field>
         </record>
 
         <record model="ir.cron" id="cron_update_branch_list">
@@ -27,9 +27,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
             <field name="doall" eval="False"/>
-            <field name="model" eval="'github.repository'"/>
-            <field name="function" eval="'cron_update_branch_list'"/>
-            <field name="args" eval="'()'"/>
+            <field name="state">code</field>
+            <field name="model_id" ref="model_github_repository"/>
+            <field name="code">model.cron_update_branch_list()</field>
         </record>
 
         <record model="ir.cron" id="cron_download_code">
@@ -40,9 +40,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
             <field name="doall" eval="False"/>
-            <field name="model" eval="'github.repository.branch'"/>
-            <field name="function" eval="'cron_download_all'"/>
-            <field name="args" eval="'()'"/>
+            <field name="state">code</field>
+            <field name="model_id" ref="model_github_repository_branch"/>
+            <field name="code">model.cron_download_all()</field>
         </record>
 
         <record model="ir.cron" id="cron_analyze_code">
@@ -53,9 +53,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
             <field name="doall" eval="False"/>
-            <field name="model" eval="'github.repository.branch'"/>
-            <field name="function" eval="'cron_analyze_all'"/>
-            <field name="args" eval="'()'"/>
+            <field name="state">code</field>
+            <field name="model_id" ref="model_github_repository_branch"/>
+            <field name="code">model.cron_analyze_all()</field>
         </record>
 
 </odoo>

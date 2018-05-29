@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, fields, api
-from openerp.tools.safe_eval import safe_eval
+from odoo import api, fields, models
+from odoo.tools.safe_eval import safe_eval
 
 
 class WizardUpdateFromGithub(models.TransientModel):
@@ -16,7 +15,7 @@ class WizardUpdateFromGithub(models.TransientModel):
     @api.multi
     def button_update_from_github(self):
         partial_commit = safe_eval(
-            self.env['ir.config_parameter'].get_param(
+            self.sudo().env['ir.config_parameter'].get_param(
                 'git.partial_commit_during_analysis'))
         for wizard in self:
             model_obj = self.env[self._context['active_model']]
