@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, fields
+from odoo import fields, models
 
 
 class GithubOrganizationSerie(models.Model):
@@ -21,5 +20,5 @@ class GithubOrganizationSerie(models.Model):
 
     _sql_constraints = [
         ('sequence_organization_uniq', 'unique(organization_id, sequence)',
-         ("Sequence serie must be unique by organization."))
+         "Sequence serie must be unique by organization.")
     ]

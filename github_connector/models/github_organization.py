@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, models, fields
+from odoo import api, fields, models
 
 
 class GithubOrganization(models.Model):
@@ -34,7 +33,7 @@ class GithubOrganization(models.Model):
         " If set, the repositories will be created, but branches"
         " synchronization and source code download will be disabled."
         " Exemple:\n"
-        "odoo-community.org\nOCB\nOpenUpgrade\n")
+        "purchase-workflow\nOCB\nOpenUpgrade\n")
 
     member_ids = fields.Many2many(
         string='Members', comodel_name='res.partner',
@@ -78,14 +77,14 @@ class GithubOrganization(models.Model):
     @api.model
     def get_odoo_data_from_github(self, data):
         res = super(GithubOrganization, self).get_odoo_data_from_github(data)
-        res.update({
-            'name': data['name'],
-            'description': data['description'],
-            'location': data['location'],
-            'website_url': data['blog'],
-            'email': data['email'],
-            'image': self.get_base64_image_from_github(data['avatar_url']),
-        })
+        keys = ['name', 'description', 'location', 'blog', 'email']
+        for key in keys:
+            if key in data:
+                res.update({key: data[key]})
+        if 'avatar_url' in data:
+            res.update({
+                'image': self.get_base64_image_from_github(data['avatar_url']),
+            })
         return res
 
     @api.multi
