@@ -5,7 +5,7 @@
 {
     'name': 'Github Connector',
     'summary': 'Synchronize information from Github repositories',
-    'version': '11.0.1.0.0',
+    'version': '11.0.1.1.0',
     'category': 'Connector',
     'license': 'AGPL-3',
     'author':
@@ -21,7 +21,6 @@
         'security/ir.model.access.csv',
         'data/ir_config_parameter.xml',
         'data/ir_cron.xml',
-        'data/res_groups.xml',
         'wizards/view_wizard_load_github_model.xml',
         'wizards/view_wizard_update_from_github.xml',
         'wizards/view_wizard_update_branch_list.xml',
