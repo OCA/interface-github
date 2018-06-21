@@ -146,7 +146,7 @@ class Github(object):
                     "- Status Code: %d\n"
                     "- Reason: %s") % (
                     response.url, response.status_code, response.reason))
-        return json.loads(response.content)
+        return response.json()
 
     def get(self, arguments, by_id=False, page=None):
         url = self._build_url(
