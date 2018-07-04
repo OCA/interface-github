@@ -26,6 +26,7 @@
         'views/view_github_organization.xml',
         'views/view_github_repository.xml',
         'views/view_github_repository_branch.xml',
+        'views/view_res_partner.xml',
         'data/odoo_licence.xml',
     ],
     'demo': [
