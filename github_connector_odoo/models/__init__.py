@@ -3,6 +3,8 @@ from . import odoo_license
 from . import odoo_lib_bin
 from . import odoo_lib_python
 
+from . import res_partner
+
 from . import odoo_module
 from . import odoo_module_version
 

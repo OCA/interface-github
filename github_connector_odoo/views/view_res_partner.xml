@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <!-- Add Author tab -->
+    <record id="view_res_partner_form_inherit" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="github_connector.view_res_partner_form"/>
+        <field name="arch" type="xml">
+            <page name="github" position="after">
+                <page name="author" string="Authors"
+                        attrs="{'invisible': [('is_company','=', False)]}">
+                    <field name="author_ids">
+                        <tree>
+                            <field name="name"/>
+                        </tree>
+                    </field>
+                </page>
+            </page>
+        </field>
+    </record>
+
+</odoo>

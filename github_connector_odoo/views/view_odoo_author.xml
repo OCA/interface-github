@@ -43,6 +43,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                         <h1><field name="name"/></h1>
                     </div>
                     <notebook/>
+                    <group>
+                        <field name="partner_id"/>
+                    </group>
                 </sheet>
             </form>
         </field>

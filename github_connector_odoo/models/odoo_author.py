@@ -27,6 +27,12 @@ class OdooAuthor(models.Model):
         string='Number of Modules',
         compute='_compute_module_qty', store=True)
 
+    partner_id = fields.Many2one(
+        comodel_name='res.partner', string='Company',
+        domain="[('is_company','=', True),('website_published', '=', True),"
+               "('is_integrator','=', True)]",
+        help="Select company which is linked to this Author.")
+
     @api.multi
     @api.depends('module_ids.author_ids')
     def _compute_module_qty(self):
