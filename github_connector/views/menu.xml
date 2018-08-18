@@ -7,7 +7,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 <odoo>
 
     <menuitem id="menu_github"
-        name="Github"/>
+              name="Github"
+              web_icon="github_connector,static/description/icon.png"
+    />
 
     <!-- Community Part -->
     <menuitem id="menu_github_community"
