@@ -4,6 +4,7 @@
 
 import logging
 import os
+import base64
 
 from docutils.core import publish_string
 
