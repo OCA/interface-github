@@ -4,6 +4,7 @@
 
 import logging
 import os
+import base64
 
 from docutils.core import publish_string
 
@@ -342,7 +343,7 @@ class OdooModuleVersion(models.Model):
                 with open(icon_path, 'rb') as f:
                     image = f.read()
                 resized_image = tools.image_resize_image(
-                    image.encode('base64'), size=(96, 96),
+                    base64.b64encode(image), size=(96, 96),
                     encoding='base64', filetype='PNG')
             except Exception:
                 _logger.warning("Unable to read or resize %s" % icon_path)
