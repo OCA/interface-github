@@ -233,7 +233,7 @@ class AbstractGithubModel(models.AbstractModel):
             # and that there a lot of related / computed fields invalidation
             # process, we realize a write only if data changed
             to_write = {}
-            for k, v in vals.iteritems():
+            for k, v in vals.items():
                 if hasattr(item[k], 'id'):
                     to_compare = item[k].id
                 else:
