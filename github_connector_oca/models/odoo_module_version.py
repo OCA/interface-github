@@ -11,10 +11,10 @@ class OdooModuleVersion(models.Model):
     _inherit = 'odoo.module.version'
 
     _ODOO_DEVELOPMENT_STATUS_SELECTION = [
-        ('Alpha', 'Alpha'),
-        ('Beta', 'Beta'),
-        ('Production/Stable', 'Production/Stable'),
-        ('Mature', 'Mature'),
+        ('alpha', 'Alpha'),
+        ('beta', 'Beta'),
+        ('production/stable', 'Production/Stable'),
+        ('mature', 'Mature'),
     ]
 
     development_status = fields.Selection(
@@ -28,5 +28,6 @@ class OdooModuleVersion(models.Model):
         res = super(OdooModuleVersion, self).manifest_2_odoo(
             info, repository_branch, module
         )
-        res['development_status'] = info.get('development_status', False)
+        if 'development_status' in info:
+            res['development_status'] = info['development_status'].lower()
         return res
