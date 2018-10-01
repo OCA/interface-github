@@ -332,19 +332,31 @@ class OdooModuleVersion(models.Model):
                 info, repository_branch, module_version.module_id)
             module_version.write(value)
         icon_path = False
-        for current_icon_path in self._ICON_PATH:
+        resize = False
+        if info.get('images'):
             full_current_icon_path = os.path.join(
-                full_module_path, current_icon_path, 'icon.png')
+                full_module_path, info.get('images')[0])
             if os.path.exists(full_current_icon_path):
                 icon_path = full_current_icon_path
+        else:
+            for current_icon_path in self._ICON_PATH:
+                full_current_icon_path = os.path.join(
+                    full_module_path, current_icon_path, 'icon.png')
+                if os.path.exists(full_current_icon_path):
+                    icon_path = full_current_icon_path
+                    resize = True
+                    break
         if icon_path:
-            resized_image = False
+            image_enc = False
             try:
                 with open(icon_path, 'rb') as f:
                     image = f.read()
-                resized_image = tools.image_resize_image(
-                    base64.b64encode(image), size=(96, 96),
-                    encoding='base64', filetype='PNG')
+                if resize:
+                    image_enc = tools.image_resize_image(
+                        base64.b64encode(image), size=(96, 96),
+                        encoding='base64', filetype='PNG')
+                else:
+                    image_enc = base64.b64encode(image)
             except Exception:
                 _logger.warning("Unable to read or resize %s" % icon_path)
-            module_version.write({'image': resized_image})
+            module_version.write({'image': image_enc})
