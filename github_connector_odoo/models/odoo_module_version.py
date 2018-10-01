@@ -136,7 +136,7 @@ class OdooModuleVersion(models.Model):
         string='Odoo Type', selection=_ODOO_TYPE_SELECTION, store=True,
         compute='_compute_odoo_type')
 
-    image = fields.Binary(string='Icon Image', reaonly=True)
+    image = fields.Binary(string='Icon Image', readonly=True)
 
     github_url = fields.Char(
         string='Github URL', compute='_compute_github_url', store=True,
