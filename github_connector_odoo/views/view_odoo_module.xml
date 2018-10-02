@@ -96,9 +96,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             <h4><field name="name"/></h4>
                             <p class="oe_module_name">
                                 <t t-if="record.technical_name.raw_value"><field name="technical_name"/><br/></t>
-                                <span class="badge" t-if="record.organization_serie_ids_description.raw_value"><t t-esc="record.organization_serie_ids_description.value"/></span><br/>
                                 <i><field name="author_ids_description"/></i>
                             </p>
+                            <span class="badge" t-if="record.organization_serie_ids_description.raw_value">
+                                <t t-esc="record.organization_serie_ids_description.value"/>
+                            </span>
                         </div>
                     </div>
                     </t>
