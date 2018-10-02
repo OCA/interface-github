@@ -109,16 +109,7 @@ class GithubRepositoryBranch(models.Model):
                     # Analyze folders and create module versions
                     _logger.info("Analyzing repository %s ..." % path)
                     for module_name in self.listdir(path):
-                        full_module_path = os.path.join(path, module_name)
-                        module_info = load_information_from_description_file(
-                            module_name, full_module_path)
-
-                        # Create module version, if the module is installable
-                        # in the serie
-                        if module_info.get('installable', False):
-                            module_info['technical_name'] = module_name
-                            module_version_obj.create_or_update_from_manifest(
-                                module_info, branch, full_module_path)
+                        self._analyze_module_name(path, module_name, branch)
         finally:
             # Reset Original level for module logger
             logger1.setLevel(currentLevel1)
@@ -141,3 +132,19 @@ class GithubRepositoryBranch(models.Model):
                     return True
 
         return map(clean, filter(is_really_module, os.listdir(dir)))
+
+    def _analyze_module_name(self, path, module_name, branch):
+        module_version_obj = self.env['odoo.module.version']
+        try:
+            full_module_path = os.path.join(path, module_name)
+            module_info = load_information_from_description_file(
+                module_name, full_module_path)
+            # Create module version, if the module is installable
+            # in the serie
+            if module_info.get('installable', False):
+                module_info['technical_name'] = module_name
+                module_version_obj.create_or_update_from_manifest(
+                    module_info, branch, full_module_path)
+        except Exception as e:
+            _logger.error('Cannot process module with name %s, error '
+                          'is: %s' % (module_name, e))
