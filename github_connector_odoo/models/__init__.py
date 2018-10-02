@@ -1,4 +1,5 @@
 from . import odoo_author
+from . import odoo_category
 from . import odoo_license
 from . import odoo_lib_bin
 from . import odoo_lib_python
