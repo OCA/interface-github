@@ -4,7 +4,7 @@
 {
     'name': 'Github Connector - Odoo',
     'summary': 'Analyze Odoo modules information from Github repositories',
-    'version': '11.0.1.0.1',
+    'version': '11.0.1.1.0',
     'category': 'Connector',
     'license': 'AGPL-3',
     'author': 'Odoo Community Association (OCA), Sylvain LE GAL, GRAP',
@@ -27,6 +27,7 @@
         'views/view_github_repository.xml',
         'views/view_github_repository_branch.xml',
         'data/odoo_licence.xml',
+        'data/odoo_category_data.xml',
     ],
     'demo': [
         'demo/github_organization.xml',
