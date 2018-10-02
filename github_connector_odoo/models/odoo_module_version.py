@@ -142,6 +142,9 @@ class OdooModuleVersion(models.Model):
         string='Github URL', compute='_compute_github_url', store=True,
         readonly=True)
 
+    category_id = fields.Many2one(
+        comodel_name='odoo.category', string='Category', readonly=True)
+
     # Overload Section
     @api.multi
     def unlink(self):
@@ -286,6 +289,23 @@ class OdooModuleVersion(models.Model):
             module_version.organization_serie_id =\
                 res and res[0].id or False
 
+    @api.model
+    def get_module_category(self, info):
+        """Used to search the category of the module by the data given
+        on the manifest.
+
+        :param dict info: The parsed dictionary with the manifest data.
+        :returns: recordset of the given category if exists.
+        """
+        category_obj = self.env['odoo.category']
+        category = info.get('category', False)
+        other_categ = category_obj.search([('name', '=', 'Other')], limit=1)
+        if not category:
+            return other_categ
+        found_category = category_obj.search(
+            [('name', '=', category)], limit=1)
+        return found_category or other_categ
+
     # Custom Section
     @api.model
     def manifest_2_odoo(self, info, repository_branch, module):
@@ -293,7 +313,7 @@ class OdooModuleVersion(models.Model):
             (type(info['author']) == list) and info['author'] or\
             (type(info['author']) == tuple) and [x for x in info['author']] or\
             info['author'].split(',')
-        res = {
+        return {
             'name': info['name'],
             'technical_name': info['technical_name'],
             'summary': info['summary'],
@@ -309,8 +329,8 @@ class OdooModuleVersion(models.Model):
             'depends': ','.join([x for x in sorted(info['depends']) if x]),
             'repository_branch_id': repository_branch.id,
             'module_id': module.id,
+            'category_id': self.get_module_category(info).id or None,
         }
-        return res
 
     @api.model
     def create_or_update_from_manifest(
