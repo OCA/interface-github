@@ -313,8 +313,7 @@ class OdooModuleVersion(models.Model):
             (type(info['author']) == list) and info['author'] or\
             (type(info['author']) == tuple) and [x for x in info['author']] or\
             info['author'].split(',')
-        category = self.get_module_category(info)
-        res = {
+        return {
             'name': info['name'],
             'technical_name': info['technical_name'],
             'summary': info['summary'],
@@ -330,9 +329,8 @@ class OdooModuleVersion(models.Model):
             'depends': ','.join([x for x in sorted(info['depends']) if x]),
             'repository_branch_id': repository_branch.id,
             'module_id': module.id,
-            'category_id': category.id or None,
+            'category_id': self.get_module_category(info).id or None,
         }
-        return res
 
     @api.model
     def create_or_update_from_manifest(

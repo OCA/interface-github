@@ -4,6 +4,7 @@
 
 from odoo import fields, models
 
+
 class OdooCategory(models.Model):
     _name = 'odoo.category'
 
