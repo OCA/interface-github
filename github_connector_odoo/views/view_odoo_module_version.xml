@@ -71,6 +71,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             </group>
                             <group>
                                 <field name="author_ids" widget="many2many_tags"/>
+                                <field name="category_id"/>
                                 <field name="dependency_module_ids" widget="many2many_tags"/>
                                 <field name="lib_python_ids" widget="many2many_tags"/>
                                 <field name="lib_bin_ids" widget="many2many_tags"/>

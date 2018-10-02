@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Oscar Alcala (https://twitter.com/oscarolar)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo noupdate="1">
+    <record id="accounting" model="odoo.category">
+        <field name="name">Accounting</field>
+    </record>
+    <record id="discuss" model="odoo.category">
+        <field name="name">Discuss</field>
+    </record>
+    <record id="document_management" model="odoo.category">
+        <field name="name">Document Management</field>
+    </record>
+    <record id="ecommerce" model="odoo.category">
+        <field name="name">eCommerce</field>
+    </record>
+    <record id="human_resources" model="odoo.category">
+        <field name="name">Human Resources</field>
+    </record>
+    <record id="industries" model="odoo.category">
+        <field name="name">Industries</field>
+    </record>
+    <record id="localization" model="odoo.category">
+        <field name="name">Localization</field>
+    </record>
+    <record id="manufacturing" model="odoo.category">
+        <field name="name">Manufacturing</field>
+    </record>
+    <record id="point_of_sale" model="odoo.category">
+        <field name="name">Point of Sale</field>
+    </record>
+    <record id="productivity" model="odoo.category">
+        <field name="name">Productivity</field>
+    </record>
+    <record id="project" model="odoo.category">
+        <field name="name">Project</field>
+    </record>
+    <record id="purchases" model="odoo.category">
+        <field name="name">Purchases</field>
+    </record>
+    <record id="sales" model="odoo.category">
+        <field name="name">Sales</field>
+    </record>
+    <record id="warehouse" model="odoo.category">
+        <field name="name">Warehouse</field>
+    </record>
+    <record id="website" model="odoo.category">
+        <field name="name">Website</field>
+    </record>
+    <record id="extra_tools" model="odoo.category">
+        <field name="name">Extra Tools</field>
+    </record>
+    <record id="other" model="odoo.category">
+        <field name="name">Other</field>
+    </record>
+</odoo>
