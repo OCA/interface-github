@@ -156,7 +156,7 @@ class GithubRepository(models.Model):
                         ['git', 'pull', 'origin', branch.name],
                         cwd=branch.local_path)
                     if branch.state == 'to_download' or\
-                            'up-to-date' not in res:
+                            'up-to-date' not in res.decode('utf-8'):
                         branch.write({
                             'last_download_date': datetime.today(),
                             'state': 'to_analyze',
