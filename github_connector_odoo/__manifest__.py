@@ -19,6 +19,7 @@
         'views/menu.xml',
         'views/view_odoo_license.xml',
         'views/view_odoo_author.xml',
+        'views/view_odoo_maintainer.xml',
         'views/view_odoo_lib_bin.xml',
         'views/view_odoo_lib_python.xml',
         'views/view_odoo_module.xml',

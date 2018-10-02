@@ -13,6 +13,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="name"/>
                 <field name="technical_name"/>
                 <field name="author_ids"/>
+                <field name="maintainer_ids" />
                 <field name="organization_serie_ids"/>
                 <field name="description_rst"/>
                 <filter name="filter_with_version" string="With Version" domain="[('module_version_qty', '!=', 0)]"/>
@@ -62,6 +63,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     <group cols="4">
                         <field name="organization_serie_ids" widget="many2many_tags" string="Available for"/>
                         <field name="author_ids" widget="many2many_tags"/>
+                        <field name="maintainer_ids" widget="many2many_tags" />
                     </group>
                     <notebook>
                         <page string="Descriptions">

@@ -11,3 +11,5 @@ access_odoo_module_reader,odoo_module reader,model_odoo_module,,1,0,0,0
 access_odoo_module_manager,odoo_module manager,model_odoo_module,github_connector.group_github_connector_manager,1,1,1,1
 access_odoo_module_version_reader,odoo_module_version reader,model_odoo_module_version,,1,0,0,0
 access_odoo_module_version_manager,odoo_module_version manager,model_odoo_module_version,github_connector.group_github_connector_manager,1,1,1,1
+access_odoo_maintainer_reader,odoo_maintainer reader,model_odoo_maintainer,,1,0,0,0
+access_odoo_maintainer_manager,odoo_maintainer manager,model_odoo_maintainer,github_connector.group_github_connector_manager,1,1,1,1
