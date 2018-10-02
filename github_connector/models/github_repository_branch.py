@@ -222,7 +222,12 @@ class GithubRepository(models.Model):
                     "Warning Folder %s not found: Analysis skipped." % path)
             else:
                 _logger.info("Analyzing Source Code in %s ..." % path)
-                vals = branch.analyze_code_one(branch)
+                try:
+                    vals = branch.analyze_code_one(branch)
+                except Exception as e:
+                    _logger.warning(
+                        'Cannot analyze branch %s so skipping it, error '
+                        'is: %s' % (branch.name, e.message))
                 vals.update({
                     'last_analyze_date': datetime.today(),
                     'state': 'analyzed',
