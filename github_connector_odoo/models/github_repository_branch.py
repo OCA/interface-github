@@ -146,6 +146,5 @@ class GithubRepositoryBranch(models.Model):
                 module_version_obj.create_or_update_from_manifest(
                     module_info, branch, full_module_path)
         except Exception as e:
-            _logger.warning('Cannot process module with name %s, error '
-                            'is: %s' % (
-                                module_info['technical_name'], e.message))
+            _logger.error('Cannot process module with name %s, error '
+                          'is: %s' % (module_name, e))
