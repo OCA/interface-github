@@ -40,6 +40,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         parent="menu_odoo"
         sequence="6"
         action="action_odoo_lib_python"/>
+    <menuitem id="menu_odoo_maintainer"
+              parent="menu_odoo"
+              sequence="6"
+              action="action_odoo_maintainer"/>
 
     <!-- Reporting Part -->
     <menuitem id="menu_odoo_module_version_by_serie"

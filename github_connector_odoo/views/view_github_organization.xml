@@ -17,6 +17,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <group name="external_services" position="before">
                 <group name="odoo_settings" string="Odoo Settings">
                     <field name="default_author_text"/>
+                    <field name="default_maintainer_text" />
                 </group>
             </group>
         </field>

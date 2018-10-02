@@ -103,15 +103,27 @@ class OdooModuleVersion(models.Model):
 
     author = fields.Char(string='Author (Manifest)', readonly=True)
 
+    maintainer = fields.Char(string='Maintainer (Manifest)', readonly=True)
+
     author_ids = fields.Many2many(
         string='Authors', comodel_name='odoo.author',
         relation='github_module_version_author_rel',
         column1='module_version_id', column2='author_id', multi='author',
         compute='_compute_author', store=True)
 
+    maintainer_ids = fields.Many2many(
+        string='Maintainers', comodel_name='odoo.maintainer',
+        relation='github_module_version_maintainer_rel',
+        column1='module_version_id', column2='maintainer_id', multi='author',
+        compute='_compute_maintainer', store=True)
+
     author_ids_description = fields.Char(
         string='Authors (Text)', compute='_compute_author', multi='author',
         store=True)
+
+    maintainer_ids_description = fields.Char(
+        string='Maintainers (Text)', compute='_compute_maintainer',
+        multi='author', store=True)
 
     lib_python_ids = fields.Many2many(
         comodel_name='odoo.lib.python', string='Python Lib Dependencies',
@@ -272,6 +284,28 @@ class OdooModuleVersion(models.Model):
                 ', '.join(sorted([x.name for x in authors]))
 
     @api.multi
+    @api.depends('maintainer')
+    def _compute_maintainer(self):
+        odoo_maintainer_obj = self.env['odoo.maintainer']
+        for version in self:
+            if version.maintainer:
+                maintainers = []
+                default_maintainer_text = (
+                    version.repository_id.organization_id
+                    .default_maintainer_text)
+                for item in [x.strip() for x in version.maintainer.split(',')]:
+                    if item and item != default_maintainer_text:
+                        maintainers.append(
+                            odoo_maintainer_obj.create_if_not_exist(item))
+                maintainers = set(maintainers)
+                version.maintainer_ids = [x.id for x in maintainers]
+                version.maintainer_ids_description = ', '.join(
+                    sorted([x.name for x in maintainers]))
+            else:
+                version.maintainer_ids = []
+                version.maintainer_ids_description = False
+
+    @api.multi
     @api.depends(
         'repository_branch_id', 'repository_branch_id.organization_id',
         'repository_branch_id.organization_id.organization_serie_ids',
@@ -293,6 +327,14 @@ class OdooModuleVersion(models.Model):
             (type(info['author']) == list) and info['author'] or\
             (type(info['author']) == tuple) and [x for x in info['author']] or\
             info['author'].split(',')
+        maintainer_list = []
+        if info.get('maintainers'):
+            maintainer_list = (
+                (type(info['maintainers']) == list)
+                and info['maintainers']
+                or (type(info['maintainers']) == tuple)
+                and [x for x in info['mantainers']]
+                or info['maintainers'].split(','))
         res = {
             'name': info['name'],
             'technical_name': info['technical_name'],
@@ -309,6 +351,8 @@ class OdooModuleVersion(models.Model):
             'depends': ','.join([x for x in sorted(info['depends']) if x]),
             'repository_branch_id': repository_branch.id,
             'module_id': module.id,
+            'maintainer': ','.join(
+                [x.strip() for x in sorted(maintainer_list) if x.strip()]),
         }
         return res
 

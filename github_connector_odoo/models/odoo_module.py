@@ -35,6 +35,16 @@ class OdooModule(models.Model):
         string='Authors (Text)', compute='_compute_author', multi='author',
         store=True)
 
+    maintainer_ids = fields.Many2many(
+        string='Maintainers', comodel_name='odoo.maintainer',
+        compute='_compute_maintainer', relation='github_module_maintainer_rel',
+        column1='module_id', column2='maintainer_id', multi='maintainer',
+        store=True)
+
+    maintainer_ids_description = fields.Char(
+        string='Maintainers (Text)', compute='_compute_maintainer',
+        multi='maintainer', store=True)
+
     organization_serie_ids = fields.Many2many(
         string='Series', comodel_name='github.organization.serie',
         compute='_compute_organization_serie',
@@ -140,6 +150,22 @@ class OdooModule(models.Model):
             module.author_ids = [x.id for x in authors]
             module.author_ids_description =\
                 ', '.join(sorted([x.name for x in authors]))
+
+    @api.multi
+    @api.depends('module_version_ids.maintainer_ids')
+    def _compute_maintainer(self):
+        for module in self:
+            maintainers = []
+            for version in module.module_version_ids:
+                maintainers += version.maintainer_ids
+            if maintainers:
+                maintainers = set(maintainers)
+                module.maintainer_ids = [x.id for x in maintainers]
+                module.maintainer_ids_description =\
+                    ', '.join(sorted([x.name for x in maintainers]))
+            else:
+                module.maintainer_ids = False
+                module.maintainer_ids_description = False
 
     @api.multi
     @api.depends('module_version_ids.organization_serie_id')

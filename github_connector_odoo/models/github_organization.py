@@ -14,4 +14,6 @@ class GithubOrganization(models.Model):
 
     default_author_text = fields.Char(string='Default Author Text')
 
+    default_maintainer_text = fields.Char(string='Default Maintainer Text')
+
     runbot_url_pattern = fields.Char(string='Runbot URL Pattern')
