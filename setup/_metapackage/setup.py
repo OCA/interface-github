@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo11-addon-github_connector',
+        'odoo11-addon-github_connector_oca',
         'odoo11-addon-github_connector_odoo',
     ],
     classifiers=[
