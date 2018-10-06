@@ -61,12 +61,20 @@ class GithubRepository(models.Model):
 
     # Compute Section
     @api.multi
-    @api.depends('organization_id.ignored_repository_names')
+    @api.depends(
+        'organization_id.ignored_repository_names',
+        'organization_id.filtered_repository_names')
     def _compute_ignore(self):
         for repository in self:
-            ignored_txt = repository.organization_id.ignored_repository_names
-            repository.is_ignored =\
-                ignored_txt and repository.name in ignored_txt.split("\n")
+            org = repository.organization_id
+            if org.ignored_repository_names:
+                ignored_txt = org.ignored_repository_names
+                repository.is_ignored =\
+                    repository.name in ignored_txt.split("\n")
+            elif org.filtered_repository_names:
+                filtered_txt = org.filtered_repository_names 
+                repository.is_ignored =\
+                    repository.name not in filtered_txt.split("\n")
             repository.color = repository.is_ignored and 1 or 0
 
     @api.multi
@@ -138,7 +146,7 @@ class GithubRepository(models.Model):
         for repository in self:
             branch_ids = []
             correct_series =\
-                repository.organization_id.organization_serie_ids\
+                repository.organization_id.serie_ids\
                 .mapped('name')
 
             for data in github_branch.list([repository.github_login]):

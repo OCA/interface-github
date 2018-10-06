@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2018-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="oca_serie_61" model="github.serie">
+        <field name="name">6.1</field>
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="oca_serie_70" model="github.serie">
+        <field name="name">7.0</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <record id="oca_serie_80" model="github.serie">
+        <field name="name">8.0</field>
+        <field name="sequence">3</field>
+    </record>
+
+    <record id="oca_serie_90" model="github.serie">
+        <field name="name">9.0</field>
+        <field name="sequence">4</field>
+    </record>
+
+    <record id="oca_serie_100" model="github.serie">
+        <field name="name">10.0</field>
+        <field name="sequence">5</field>
+    </record>
+
+    <record id="oca_serie_110" model="github.serie">
+        <field name="name">11.0</field>
+        <field name="sequence">6</field>
+    </record>
+
+    <record id="oca_serie_120" model="github.serie">
+        <field name="name">12.0</field>
+        <field name="sequence">7</field>
+    </record>
+
+</odoo>

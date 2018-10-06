@@ -30,6 +30,7 @@
         'data/odoo_category_data.xml',
     ],
     'demo': [
+        'demo/github_serie.xml',
         'demo/github_organization.xml',
     ],
     'installable': True,

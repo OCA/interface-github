@@ -29,6 +29,7 @@
         'views/view_github_team_repository.xml',
         'views/action.xml',
         'views/view_res_partner.xml',
+        'views/view_github_serie.xml',
         'views/view_github_organization.xml',
         'wizards/view_wizard_download_analyze_branch.xml',
         'views/view_github_repository.xml',
@@ -39,8 +40,9 @@
         'wizards/view_wizard_create_repository.xml',
     ],
     'demo': [
+        'demo/github_serie.xml',
         'demo/github_organization.xml',
-        'demo/github_organization_serie.xml',
+#        'demo/github_organization_serie.xml',
     ],
     'installable': True,
     'external_dependencies': {

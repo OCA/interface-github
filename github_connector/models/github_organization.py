@@ -23,17 +23,26 @@ class GithubOrganization(models.Model):
 
     email = fields.Char(string='Email', readonly=True)
 
-    website_url = fields.Char(string='Website URL', readonly=True)
+    blog = fields.Char(string='Blog', readonly=True)
 
     location = fields.Char(string='Location', readonly=True)
 
     ignored_repository_names = fields.Text(
         string='Ignored Repositories', help="Set here repository names"
         " you want to ignore. One repository per line."
-        " If set, the repositories will be created, but branches"
+        " If set, all repositories will be created, but branches"
         " synchronization and source code download will be disabled."
         " Exemple:\n"
         "purchase-workflow\nOCB\nOpenUpgrade\n")
+
+    filtered_repository_names = fields.Text(
+        string='Filtered Repositories', help="Set here repository names"
+        " you want to fetch. One repository per line."
+        " If set, all repositories will be created, but branches"
+        " synchronization and source code download will be disabled."
+        " Exemple:\n"
+        "odoo\n")
+
 
     member_ids = fields.Many2many(
         string='Members', comodel_name='res.partner',
@@ -60,14 +69,12 @@ class GithubOrganization(models.Model):
         string='Number of Teams', compute='_compute_team_qty',
         store=True)
 
-    organization_serie_ids = fields.One2many(
-        string='Organization Series',
-        comodel_name='github.organization.serie',
-        inverse_name='organization_id')
+    serie_ids = fields.Many2many(
+        string='Series', comodel_name='github.serie')
 
-    organization_serie_qty = fields.Integer(
+    serie_qty = fields.Integer(
         string='Number of Series', store=True,
-        compute='_compute_organization_serie_qty')
+        compute='_compute_serie_qty')
 
     coverage_url_pattern = fields.Char(string='Coverage URL Pattern')
 
@@ -120,11 +127,10 @@ class GithubOrganization(models.Model):
             organization.team_qty = len(organization.team_ids)
 
     @api.multi
-    @api.depends('organization_serie_ids.organization_id')
-    def _compute_organization_serie_qty(self):
+    @api.depends('serie_ids')
+    def _compute_serie_qty(self):
         for organization in self:
-            organization.organization_serie_qty =\
-                len(organization.organization_serie_ids)
+            organization.serie_qty = len(organization.serie_ids)
 
     # Action section
     @api.multi

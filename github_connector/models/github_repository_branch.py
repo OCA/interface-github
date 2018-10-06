@@ -55,14 +55,13 @@ class GithubRepository(models.Model):
         comodel_name='github.organization', string='Organization',
         related='repository_id.organization_id', store=True, readonly=True)
 
-    organization_serie_id = fields.Many2one(
-        comodel_name='github.organization.serie',
-        string='Organization Serie', store=True,
-        compute='_compute_organization_serie_id')
+    serie_id = fields.Many2one(
+        comodel_name='github.serie', string='Serie', store=True,
+        compute='_compute_serie_id')
 
     sequence_serie = fields.Integer(
         string='Sequence Serie', store=True,
-        related='organization_serie_id.sequence')
+        related='serie_id.sequence')
 
     local_path = fields.Char(
         string='Local Path', compute='_compute_local_path')
@@ -255,11 +254,11 @@ class GithubRepository(models.Model):
 
     @api.multi
     @api.depends('organization_id', 'name')
-    def _compute_organization_serie_id(self):
+    def _compute_serie_id(self):
         for branch in self:
-            for serie in branch.organization_id.organization_serie_ids:
+            for serie in branch.organization_id.serie_ids:
                 if serie.name == branch.name:
-                    branch.organization_serie_id = serie
+                    branch.serie_id = serie
 
     @api.multi
     @api.depends('complete_name')

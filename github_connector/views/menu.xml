@@ -22,14 +22,20 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         sequence="1"
         action="action_github_organization"/>
 
-    <menuitem id="menu_github_team"
+
+    <menuitem id="menu_github_serie"
         parent="menu_github_community"
         sequence="2"
+        action="action_github_serie"/>
+
+    <menuitem id="menu_github_team"
+        parent="menu_github_community"
+        sequence="3"
         action="action_github_team"/>
 
     <menuitem id="menu_res_partner"
         parent="menu_github_community"
-        sequence="3"
+        sequence="4"
         action="action_res_partner"/>
 
     <!-- Repository Part -->

@@ -75,7 +75,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     <div class="oe_clear"/>
                     <group col="4">
                         <field name="email" widget="email"/>
-                        <field name="website_url" widget="url"/>
+                        <field name="blog" widget="url"/>
                         <field name="location"/>
                     </group>
                     <notebook>
@@ -83,16 +83,20 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             <group cols="4" string="Ignored Repositories">
                                 <field name="ignored_repository_names" colspan="4" nolabel="1"/>
                             </group>
+                            <group cols="4" string="Filtered Repositories">
+                                <field name="filtered_repository_names" colspan="4" nolabel="1"/>
+                            </group>
                             <group name="external_services" cols="4" string="External Services">
                                 <field name="coverage_url_pattern"/>
                                 <field name="ci_url_pattern"/>
                             </group>
                         </page>
-                        <page string="Organization Series">
-                            <field name="organization_serie_ids" colspan="4" nolabel="1">
-                                <tree string="organization_serie_ids" editable="bottom">
+                        <page string="Series">
+                            <field name="serie_ids" colspan="4" nolabel="1">
+                                <tree editable="bottom">
                                     <field name="sequence"/>
                                     <field name="name"/>
+                                    <field name="type"/>
                                 </tree>
                             </field>
                         </page>
@@ -128,7 +132,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="name"/>
                 <field name="github_login"/>
                 <field name="github_url"/>
-                <field name="website_url" />
+                <field name="blog" />
                 <field name="repository_qty" />
                 <field name="member_qty" />
                 <field name="team_qty" />
@@ -143,9 +147,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             <h3><field name="name"/></h3>
                             <h4><field name="github_login"/></h4>
                             <p class="oe_module_name">
-                                <t t-if="record.website_url.raw_value">
-                                    <a target="_blank" t-att-href="record.website_url.value">
-                                        <field name="website_url"/>
+                                <t t-if="record.blog.raw_value">
+                                    <a target="_blank" t-att-href="record.blog.value">
+                                        <field name="blog"/>
                                     </a>
                                 </t><br/>
                                 <t t-if="record.email.raw_value"><field name="email"/></t><br/>

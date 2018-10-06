@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2018-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <!-- TODO FIXME, update doesn't work -->
+
+    <record id="github_connector.oca_serie_61" model="github.serie">
+        <field name="type">odoo</field>
+    </record>
+
+    <record id="github_connector.oca_serie_70" model="github.serie">
+        <field name="type">odoo</field>
+    </record>
+
+    <record id="github_connector.oca_serie_80" model="github.serie">
+        <field name="type">odoo</field>
+    </record>
+
+    <record id="github_connector.oca_serie_90" model="github.serie">
+        <field name="type">odoo</field>
+    </record>
+
+    <record id="github_connector.oca_serie_100" model="github.serie">
+        <field name="type">odoo</field>
+    </record>
+
+    <record id="github_connector.oca_serie_110" model="github.serie">
+        <field name="type">odoo</field>
+    </record>
+
+    <record id="github_connector.oca_serie_120" model="github.serie">
+        <field name="type">odoo</field>
+    </record>
+
+</odoo>

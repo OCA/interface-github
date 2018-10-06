@@ -15,6 +15,14 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="view_mode">kanban,tree,form</field>
     </record>
 
+    <record id="action_github_serie" model="ir.actions.act_window">
+        <field name="name">Series</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">github.serie</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
     <record id="action_res_partner" model="ir.actions.act_window">
         <field name="name">Users</field>
         <field name="type">ir.actions.act_window</field>
@@ -95,15 +103,14 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         key2="client_action_multi"
         target="new"/>
 
-    <record id="action_wizard_update_branch_list" model="ir.actions.act_window">
-        <field name="name">Update Branch List</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">wizard.update.branch.list</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-        <field name="multi">True</field>
-    </record>
+    <act_window id="action_wizard_update_branch_list"
+        name="Update Branch List"
+        src_model="github.repository"
+        res_model="wizard.update.branch.list"
+        view_type="form"
+        view_mode="form"
+        key2="client_action_multi"
+        target="new"/>
 
     <!-- Settings Part -->
     <record id="action_wizard_load_github_model" model="ir.actions.act_window">
@@ -147,7 +154,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="res_model">github.repository.branch</field>
         <field name="view_type">form</field>
         <field name="view_mode">graph,pivot</field>
-        <field name="context">{'search_default_group_by_organization_serie_id': True}</field>
+        <field name="context">{'search_default_group_by_serie_id': True}</field>
         <field name="view_id" ref="view_github_branch_by_serie_graph" />
     </record>
 
@@ -157,7 +164,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="res_model">github.repository.branch</field>
         <field name="view_type">form</field>
         <field name="view_mode">graph,pivot</field>
-        <field name="context">{'search_default_group_by_organization_serie_id': True}</field>
+        <field name="context">{'search_default_group_by_serie_id': True}</field>
         <field name="view_id" ref="view_github_size_by_serie_graph" />
     </record>
 

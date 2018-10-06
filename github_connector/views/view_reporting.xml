@@ -10,7 +10,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">github.repository.branch</field>
         <field name="arch" type="xml">
             <graph type="bar" stacked="True">
-                <field name="organization_serie_id" type="row"/>
+                <field name="serie_id" type="row"/>
             </graph>
         </field>
     </record>
@@ -19,7 +19,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">github.repository.branch</field>
         <field name="arch" type="xml">
             <graph type="bar" stacked="True">
-                <field name="organization_serie_id" type="row"/>
+                <field name="serie_id" type="row"/>
                 <field name="mb_size" type="measure"/>
             </graph>
         </field>

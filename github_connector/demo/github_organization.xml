@@ -11,7 +11,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="github_login">OCA</field>
         <field name="coverage_url_pattern">https://codecov.io/gh/{organization_name}/{repository_name}/branch/{branch_name}</field>
         <field name="ci_url_pattern">https://travis-ci.org/{organization_name}/{repository_name}</field>
-
         <field name="ignored_repository_names"><![CDATA[contribute-md-template
 maintainer-quality-tools
 maintainer-tools
@@ -22,6 +21,31 @@ OCB
 openupgradelib
 pylint-odoo
 l10n-peru]]></field>
+    <field name="serie_ids" eval="[
+        (4, ref('oca_serie_61')),
+        (4, ref('oca_serie_70')),
+        (4, ref('oca_serie_80')),
+        (4, ref('oca_serie_90')),
+        (4, ref('oca_serie_100')),
+        (4, ref('oca_serie_110')),
+        (4, ref('oca_serie_120')),
+    ]" />
     </record>
+
+    <record id="odoo_sa_organization" model="github.organization">
+        <field name="name">Odoo SA</field>
+        <field name="github_login">odoo</field>
+        <field name="filtered_repository_names"><![CDATA[odoo]]></field>
+    <field name="serie_ids" eval="[
+        (4, ref('oca_serie_61')),
+        (4, ref('oca_serie_70')),
+        (4, ref('oca_serie_80')),
+        (4, ref('oca_serie_90')),
+        (4, ref('oca_serie_100')),
+        (4, ref('oca_serie_110')),
+        (4, ref('oca_serie_120')),
+    ]" />
+    </record>
+
 
 </odoo>
