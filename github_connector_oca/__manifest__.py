@@ -13,9 +13,11 @@
         'github_connector_odoo',
     ],
     'data': [
+        'views/view_github_organization.xml',
         'views/odoo_module_version.xml',
     ],
     'demo': [
+        'demo/github_organization.xml',
     ],
     'installable': True,
 }

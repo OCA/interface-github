@@ -3,6 +3,8 @@
 
 import logging
 from odoo import api, fields, models
+from odoo.addons.github_connector_oca.models.github_organization\
+    import _OWNER_TYPE_SELECTION
 
 _logger = logging.getLogger(__name__)
 
@@ -16,6 +18,11 @@ class OdooModuleVersion(models.Model):
         ('production/stable', 'Production/Stable'),
         ('mature', 'Mature'),
     ]
+
+    owner_type = fields.Selection(
+        string='Owner Type', selection=_OWNER_TYPE_SELECTION,
+        related='repository_id.organization_id.owner_type', store=True,
+        required=True)
 
     development_status = fields.Selection(
         string='Module maturity',

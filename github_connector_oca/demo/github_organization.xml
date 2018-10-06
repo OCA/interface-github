@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2018-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+
+    <record id="github_connector.oca_organization" model="github.organization">
+        <field name="owner_type">oca</field>
+    </record>
+
+    <record id="github_connector.odoo_sa_organization" model="github.organization">
+        <field name="owner_type">editor</field>
+    </record>
+
+</odoo>

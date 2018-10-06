@@ -3,13 +3,39 @@
 <!-- @author: Roel Adriaans -->
 <!-- License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).-->
 <odoo>
-    <record id="view_odoo_module_version_development_status_form" model="ir.ui.view">
+
+    <record id="view_odoo_module_version_search" model="ir.ui.view">
+        <field name="model">odoo.module.version</field>
+        <field name="inherit_id" ref="github_connector_odoo.view_odoo_module_version_search"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <filter string="Owner Type" context="{'group_by' : 'owner_type'}"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_odoo_module_version_tree" model="ir.ui.view">
+        <field name="model">odoo.module.version</field>
+        <field name="inherit_id" ref="github_connector_odoo.view_odoo_module_version_tree"/>
+        <field name="arch" type="xml">
+            <field name="technical_name" position="after">
+                <field name="development_status"/>
+                <field name="owner_type"/>
+            </field>
+        </field>
+    </record>
+
+
+    <record id="view_odoo_module_version_form" model="ir.ui.view">
         <field name="model">odoo.module.version</field>
         <field name="inherit_id" ref="github_connector_odoo.view_odoo_module_version_form"/>
         <field name="arch" type="xml">
             <field name="module_id" position="after">
                 <field name="development_status"/>
+                <field name="owner_type"/>
             </field>
         </field>
     </record>
+
+
 </odoo>
