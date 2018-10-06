@@ -8,9 +8,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <!-- TODO FIXME, update doesn't work -->
 
-    <record id="github_connector.oca_serie_61" model="github.serie">
-        <field name="type">odoo</field>
-    </record>
 
     <record id="github_connector.oca_serie_70" model="github.serie">
         <field name="type">odoo</field>
