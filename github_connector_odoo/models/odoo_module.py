@@ -147,7 +147,7 @@ class OdooModule(models.Model):
             for version in module.module_version_ids:
                 series += version.serie_id
             series = set(series)
-            module.serie_ids =[x.id for x in series]
+            module.serie_ids = [x.id for x in series]
             module.serie_ids_description =\
                 ' - '.join([x.name for x in sorted(
                     series, key=lambda x: x.sequence)])

@@ -280,14 +280,13 @@ class OdooModuleVersion(models.Model):
         'repository_branch_id.organization_id.serie_ids',
         'repository_branch_id.organization_id.serie_ids.name')
     def _compute_serie_id(self):
-        serie_obj = self.env['github.organization.serie']
         for module_version in self:
-            res = serie_obj.search([
-                ('organization_id', '=',
-                    module_version.repository_branch_id.organization_id.id),
-                ('name', '=', module_version.repository_branch_id.name)])
-            module_version.serie_id =\
-                res and res[0].id or False
+            series =\
+                module_version.repository_branch_id.organization_id\
+                .serie_ids.filtered(
+                    lambda x: x.name ==
+                    module_version.repository_branch_id.name)
+            module_version.serie_id = series and series[0].id
 
     @api.model
     def get_module_category(self, info):

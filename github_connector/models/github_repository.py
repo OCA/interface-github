@@ -59,7 +59,6 @@ class GithubRepository(models.Model):
     color = fields.Integer(
         string='Color Index', multi='ignore', compute='_compute_ignore')
 
-
     # Compute Section
     @api.multi
     @api.depends(
@@ -73,7 +72,7 @@ class GithubRepository(models.Model):
                 repository.is_ignored =\
                     repository.name in ignored_txt.split("\n")
             elif org.filtered_repository_names:
-                filtered_txt = org.filtered_repository_names 
+                filtered_txt = org.filtered_repository_names
                 repository.is_ignored =\
                     repository.name not in filtered_txt.split("\n")
             repository.color = repository.is_ignored and 1 or 0

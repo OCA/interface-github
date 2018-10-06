@@ -42,7 +42,6 @@
     'demo': [
         'demo/github_serie.xml',
         'demo/github_organization.xml',
-#        'demo/github_organization_serie.xml',
     ],
     'installable': True,
     'external_dependencies': {

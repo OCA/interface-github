@@ -30,6 +30,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             </xpath>
             <field name="ci_url" position="after">
                 <field name="runbot_url" widget="url" colspan="4"/>
+                <field name="module_paths" colspan="4"/>
             </field>
         </field>
     </record>
