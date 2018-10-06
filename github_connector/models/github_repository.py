@@ -59,6 +59,7 @@ class GithubRepository(models.Model):
     color = fields.Integer(
         string='Color Index', multi='ignore', compute='_compute_ignore')
 
+
     # Compute Section
     @api.multi
     @api.depends(
