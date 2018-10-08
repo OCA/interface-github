@@ -145,6 +145,19 @@ class OdooModuleVersion(models.Model):
     category_id = fields.Many2one(
         comodel_name='odoo.category', string='Category', readonly=True)
 
+    python_lines_qty = fields.Integer(
+        string='Python Lines Quantity', readonly=True)
+
+    xml_yml_lines_qty = fields.Integer(
+        string='XML/YML Lines Quantity', readonly=True)
+
+    js_lines_qty = fields.Integer(
+        string='Javascript Lines Quantity', readonly=True)
+
+    css_lines_qty = fields.Integer(
+        string='CSS Lines Quantity', readonly=True)
+
+
     # Overload Section
     @api.multi
     def unlink(self):
@@ -333,7 +346,7 @@ class OdooModuleVersion(models.Model):
 
     @api.model
     def create_or_update_from_manifest(
-            self, info, repository_branch, full_module_path):
+            self, info, repository_branch, full_module_path, cloc_info):
         module_obj = self.env['odoo.module']
         module_version = self.search([
             ('technical_name', '=', str(info['technical_name'])),
@@ -342,14 +355,16 @@ class OdooModuleVersion(models.Model):
         if not module_version:
             # Create new module version
             module = module_obj.create_if_not_exist(info['technical_name'])
-            module_version = self.create(
-                self.manifest_2_odoo(info, repository_branch, module))
+            vals = self.manifest_2_odoo(info, repository_branch, module)
+            vals.update(cloc_info)
+            module_version = self.create(vals)
 
         else:
             # Update module Version
-            value = self.manifest_2_odoo(
+            vals = self.manifest_2_odoo(
                 info, repository_branch, module_version.module_id)
-            module_version.write(value)
+            vals.update(cloc_info)
+            module_version.write(vals)
         icon_path = False
         resize = False
         if info.get('images'):

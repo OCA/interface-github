@@ -7,11 +7,11 @@ from odoo import api, fields, models
 _logger = logging.getLogger(__name__)
 
 _OWNER_TYPE_SELECTION = [
-    ('undefined', 'Undefined'),
-    ('editor', 'Odoo Editor'),
-    ('oca', 'OCA'),
-    ('extra', 'Extra'),
-    ('custom', 'Custom'),
+    ('1_editor', 'Odoo SA'),
+    ('2_oca', 'OCA'),
+    ('3_extra', 'Extra'),
+    ('4_custom', 'Custom'),
+    ('5_undefined', 'Undefined'),
 ]
 
 class GithubOrganization(models.Model):

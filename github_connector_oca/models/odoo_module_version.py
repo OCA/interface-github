@@ -22,7 +22,7 @@ class OdooModuleVersion(models.Model):
     owner_type = fields.Selection(
         string='Owner Type', selection=_OWNER_TYPE_SELECTION,
         related='repository_id.organization_id.owner_type', store=True,
-        required=True)
+        readonly=True)
 
     development_status = fields.Selection(
         string='Module maturity',

@@ -51,13 +51,15 @@ class GithubRepository(models.Model):
 
     is_ignored = fields.Boolean(
         string='Is Ignored', compute='_compute_ignore', multi='ignore',
+        store=True,
         help="If checked, the branches will not be synchronized, and the"
         " code source will this way not be downloaded and analyzed. To ignore"
         " a repository, go to the organization and add the file"
         " 'Ignored Repositories'.")
 
     color = fields.Integer(
-        string='Color Index', multi='ignore', compute='_compute_ignore')
+        string='Color Index', multi='ignore', compute='_compute_ignore',
+        store=True)
 
     # Compute Section
     @api.multi

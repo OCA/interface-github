@@ -1,9 +1,14 @@
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+# @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import unicodecsv
+import subprocess
 import logging
 import os
+import tempfile
+
 
 from os.path import join as opj
 
@@ -109,7 +114,7 @@ class GithubRepositoryBranch(models.Model):
                     # Analyze folders and create module versions
                     _logger.info("Analyzing repository %s ..." % path)
                     for module_name in self.listdir(path):
-                        self._analyze_module_name(path, module_name, branch)
+                        branch._analyze_module_name(path, module_name)
         finally:
             # Reset Original level for module logger
             logger1.setLevel(currentLevel1)
@@ -133,18 +138,67 @@ class GithubRepositoryBranch(models.Model):
 
         return map(clean, filter(is_really_module, os.listdir(dir)))
 
-    def _analyze_module_name(self, path, module_name, branch):
+    def _analyze_module_name(self, path, module_name):
+        self.ensure_one()
         module_version_obj = self.env['odoo.module.version']
-        try:
+        if True: #try:
             full_module_path = os.path.join(path, module_name)
+
+            # Get data from manifest
             module_info = load_information_from_description_file(
                 module_name, full_module_path)
+
+            # Get lines quantity
+            cloc_info = self._analyse_cloc(path, module_name)
             # Create module version, if the module is installable
             # in the serie
             if module_info.get('installable', False):
                 module_info['technical_name'] = module_name
                 module_version_obj.create_or_update_from_manifest(
-                    module_info, branch, full_module_path)
-        except Exception as e:
-            _logger.error('Cannot process module with name %s, error '
-                          'is: %s' % (module_name, e))
+                    module_info, self, full_module_path, cloc_info)
+#        except Exception as e:
+#            _logger.error('Cannot process module with name %s, error '
+#                          'is: %s' % (module_name, e))
+
+    def _analyse_cloc(self, path, module_name):
+        self.ensure_one()
+        res = {}
+        _logger.debug(
+            'Analysing code of module %s located in %s',
+            module_name, path)
+        csvres = tempfile.NamedTemporaryFile()
+        if True: #try:
+            subprocess.call([
+                'cloc',
+                '--exclude-dir=lib|description',
+                '--skip-uniqueness',
+                '--follow-links',
+                '--exclude-ext=xsd',
+                '--not-match-f="__openerp__.py|__manifest__.py"',
+                '--csv',
+                '--out=%s' % csvres.name,
+                path])
+            _logger.debug("cloc executed via subprocess.call")
+            csvres.seek(0)
+            reader = unicodecsv.reader(csvres, encoding='utf-8')
+            for row in reader:
+                print(row)
+                if row and row[0] == u'files':
+                    continue
+                if row and len(row) == 5:
+                    res[row[1]] = int(row[4])
+
+#        except Exception:
+#            _logger.warning(
+#                'Failed to execute the cloc command on module %s',
+#                module_name)
+#        finally:
+#            csvres.close()
+
+        print(res)
+        return {
+            'python_lines_qty': res.get(u'Python', 0),
+            'xml_yml_lines_qty': res.get(u'XML', 0) + res.get(u'YML', 0),
+            'js_lines_qty': res.get(u'Javascript', 0),
+            'css_lines_qty': res.get(u'CSS', 0),
+        }
