@@ -380,3 +380,14 @@ class OdooModuleVersion(models.Model):
             except Exception:
                 _logger.warning("Unable to read or resize %s" % icon_path)
             module_version.write({'image': image_enc})
+        else:
+            # Set the default icon
+            try:
+                with open(os.path.join(
+                        os.path.dirname(__file__),
+                        '../data/oca.png'), 'rb') as f:
+                    image = base64.b64encode(f.read())
+                    module_version.write({'image': image})
+            except Exception as e:
+                _logger.error(
+                    'Unable to read the OCA icon image, error is %s' % e)
