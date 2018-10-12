@@ -87,8 +87,6 @@ class GithubRepositoryBranch(models.Model):
             # Delete all associated module versions
             module_versions = module_version_obj.search([
                 ('repository_branch_id', '=', branch.id)])
-            module_versions.with_context(
-                dont_change_repository_branch_state=True).unlink()
 
             # Compute path(s) to analyze
             if branch.module_paths:
