@@ -401,14 +401,7 @@ class OdooModuleVersion(models.Model):
     def clean_odoo_module_version(self):
         for module_version in self:
             # Compute path(s) to analyze
-            branch = module_version.repository_branch_id
-            if branch.module_paths:
-                paths = []
-                for path in branch.module_paths.split('\n'):
-                    if path.strip():
-                        paths.append(os.path.join(branch.local_path, path))
-            else:
-                paths = [branch.local_path]
+            paths = module_version.repository_branch_id._get_module_paths()
             found = False
             for path in paths:
                 module_ver_path = os.path.join(
