@@ -72,6 +72,19 @@ class GithubRepositoryBranch(models.Model):
         branches = self.search([('state', '=', 'analyzed')])
         branches.write({'state': 'to_analyze'})
 
+    @api.multi
+    def _get_module_paths(self):
+        # Compute path(s) to analyze
+        self.ensure_one()
+        if self.module_paths:
+            paths = []
+            for path in self.module_paths.split('\n'):
+                if path.strip():
+                    paths.append(os.path.join(self.local_path, path))
+        else:
+            paths = [self.local_path]
+        return paths
+
     @api.model
     def analyze_code_one(self, branch):
         # Change log level to avoid warning, when parsing odoo manifests
@@ -83,21 +96,7 @@ class GithubRepositoryBranch(models.Model):
         logger2.setLevel(logging.ERROR)
 
         try:
-            module_version_obj = self.env['odoo.module.version']
-            # Delete all associated module versions
-            module_versions = module_version_obj.search([
-                ('repository_branch_id', '=', branch.id)])
-            module_versions.with_context(
-                dont_change_repository_branch_state=True).unlink()
-
-            # Compute path(s) to analyze
-            if branch.module_paths:
-                paths = []
-                for path in branch.module_paths.split('\n'):
-                    if path.strip():
-                        paths.append(os.path.join(branch.local_path, path))
-            else:
-                paths = [branch.local_path]
+            paths = branch._get_module_paths()
 
             # Scan each path, if exists
             for path in paths:
