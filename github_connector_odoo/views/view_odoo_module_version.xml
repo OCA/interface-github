@@ -33,13 +33,13 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">odoo.module.version</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="repository_id"/>
-                <field name="serie_id" string="Serie"/>
-                <field name="technical_name"/>
                 <field name="name"/>
-                <field name="author_ids_description"/>
-                <field name="lib_python_ids_description" string="Python Lib"/>
-                <field name="lib_bin_ids_description" string="Bin Lib"/>
+                <field name="technical_name"/>
+                <field name="serie_id" string="Serie"/>
+                <field name="python_lines_qty" string="#Py"/>
+                <field name="xml_yml_lines_qty" string="#X/Y-ML"/>
+                <field name="js_lines_qty" string="#JS"/>
+                <field name="css_lines_qty" string="#CSS"/>
                 <field name="license_id"/>
             </tree>
         </field>

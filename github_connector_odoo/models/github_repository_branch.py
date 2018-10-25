@@ -141,7 +141,7 @@ class GithubRepositoryBranch(models.Model):
     def _analyze_module_name(self, path, module_name):
         self.ensure_one()
         module_version_obj = self.env['odoo.module.version']
-        if True: #try:
+        try:
             full_module_path = os.path.join(path, module_name)
 
             # Get data from manifest
@@ -156,49 +156,43 @@ class GithubRepositoryBranch(models.Model):
                 module_info['technical_name'] = module_name
                 module_version_obj.create_or_update_from_manifest(
                     module_info, self, full_module_path, cloc_info)
-#        except Exception as e:
-#            _logger.error('Cannot process module with name %s, error '
-#                          'is: %s' % (module_name, e))
+        except Exception as e:
+            _logger.error('Cannot process module with name %s, error '
+                          'is: %s' % (module_name, e))
 
     def _analyse_cloc(self, path, module_name):
         self.ensure_one()
         res = {}
-        _logger.debug(
-            'Analysing code of module %s located in %s',
-            module_name, path)
         csvres = tempfile.NamedTemporaryFile()
-        if True: #try:
+        try:
             subprocess.call([
                 'cloc',
-                '--exclude-dir=lib|description',
+                '--exclude-dir="lib,description,tests,odoo_ext,js_css_lib"',
                 '--skip-uniqueness',
                 '--follow-links',
                 '--exclude-ext=xsd',
                 '--not-match-f="__openerp__.py|__manifest__.py"',
                 '--csv',
                 '--out=%s' % csvres.name,
-                path])
-            _logger.debug("cloc executed via subprocess.call")
+                os.path.join(path, module_name)])
             csvres.seek(0)
             reader = unicodecsv.reader(csvres, encoding='utf-8')
             for row in reader:
-                print(row)
                 if row and row[0] == u'files':
                     continue
                 if row and len(row) == 5:
                     res[row[1]] = int(row[4])
 
-#        except Exception:
-#            _logger.warning(
-#                'Failed to execute the cloc command on module %s',
-#                module_name)
-#        finally:
-#            csvres.close()
+        except Exception:
+            _logger.warning(
+                'Failed to execute the cloc command on module %s',
+                module_name)
+        finally:
+            csvres.close()
 
-        print(res)
         return {
             'python_lines_qty': res.get(u'Python', 0),
             'xml_yml_lines_qty': res.get(u'XML', 0) + res.get(u'YML', 0),
-            'js_lines_qty': res.get(u'Javascript', 0),
+            'js_lines_qty': res.get(u'JavaScript', 0),
             'css_lines_qty': res.get(u'CSS', 0),
         }
