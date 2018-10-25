@@ -391,3 +391,30 @@ class OdooModuleVersion(models.Model):
             except Exception as e:
                 _logger.error(
                     'Unable to read the OCA icon image, error is %s' % e)
+
+    @api.model
+    def cron_clean_odoo_module_version(self):
+        module_versions = self.search([])
+        module_versions.clean_odoo_module_version()
+
+    @api.multi
+    def clean_odoo_module_version(self):
+        for module_version in self:
+            # Compute path(s) to analyze
+            paths = module_version.repository_branch_id._get_module_paths()
+            found = False
+            for path in paths:
+                module_ver_path = os.path.join(
+                    path, module_version.technical_name)
+                if os.path.exists(module_ver_path):
+                    found = True
+                    continue
+            if not found:
+                module_version._process_clean_module_version()
+        return True
+
+    @api.multi
+    def _process_clean_module_version(self):
+        for module_version in self:
+            module_version.unlink()
+        return True
