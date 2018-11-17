@@ -170,7 +170,7 @@ class GithubRepository(models.Model):
                     _logger.warning(_(
                         "Error when updating the branch %s in the local folder"
                         " %s.\n Deleting the local folder and trying"
-                        " again.") % (branch.name, branch.local_path))
+                        " again."), branch.name, branch.local_path)
                     command = "rm -r %s" % branch.local_path
                     os.system(command)
                     branch._download_code()
@@ -198,7 +198,7 @@ class GithubRepository(models.Model):
                 size += os.path.getsize(file_path)
             except Exception:
                 _logger.warning(
-                    "Warning : unable to eval the size of '%s'." % file_path)
+                    "Warning : unable to eval the size of '%s'.", file_path)
 
         try:
             Repo(path)
@@ -219,9 +219,9 @@ class GithubRepository(models.Model):
             path = branch.local_path
             if not os.path.exists(path):
                 _logger.warning(
-                    "Warning Folder %s not found: Analysis skipped." % path)
+                    "Warning Folder %s not found: Analysis skipped.", path)
             else:
-                _logger.info("Analyzing Source Code in %s ..." % path)
+                _logger.info("Analyzing Source Code in %s ...", path)
                 try:
                     vals = branch.analyze_code_one(branch)
                     vals.update({
@@ -236,7 +236,7 @@ class GithubRepository(models.Model):
                 except Exception as e:
                     _logger.warning(
                         'Cannot analyze branch %s so skipping it, error '
-                        'is: %s' % (branch.name, e))
+                        'is: %s', branch.name, e)
         return True
 
     # Compute Section

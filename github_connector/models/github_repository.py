@@ -153,6 +153,7 @@ class GithubRepository(models.Model):
                     branch_ids.append(branch.id)
                 else:
                     _logger.warning(
-                        "the branch '%s'/'%s' has been ignored." % (
-                            repository.name, data['name']))
+                        "the branch '%s'/'%s' has been ignored.",
+                        repository.name, data['name'],
+                    )
             repository.branch_ids = branch_ids
