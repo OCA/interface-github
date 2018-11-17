@@ -102,11 +102,11 @@ class GithubRepositoryBranch(models.Model):
             for path in paths:
                 if not os.path.exists(path):
                     _logger.warning(
-                        "Unable to analyse %s. Source code not found." % (
-                            path))
+                        "Unable to analyse %s. Source code not found.", path
+                    )
                 else:
                     # Analyze folders and create module versions
-                    _logger.info("Analyzing repository %s ..." % path)
+                    _logger.info("Analyzing repository %s ...", path)
                     for module_name in self.listdir(path):
                         self._analyze_module_name(path, module_name, branch)
         finally:
@@ -146,4 +146,4 @@ class GithubRepositoryBranch(models.Model):
                     module_info, branch, full_module_path)
         except Exception as e:
             _logger.error('Cannot process module with name %s, error '
-                          'is: %s' % (module_name, e))
+                          'is: %s', module_name, e)
