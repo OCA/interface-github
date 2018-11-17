@@ -378,7 +378,7 @@ class OdooModuleVersion(models.Model):
                 else:
                     image_enc = base64.b64encode(image)
             except Exception:
-                _logger.warning("Unable to read or resize %s" % icon_path)
+                _logger.warning("Unable to read or resize %s", icon_path)
             module_version.write({'image': image_enc})
         else:
             # Set the default icon
@@ -390,7 +390,7 @@ class OdooModuleVersion(models.Model):
                     module_version.write({'image': image})
             except Exception as e:
                 _logger.error(
-                    'Unable to read the OCA icon image, error is %s' % e)
+                    'Unable to read the OCA icon image, error is %s', e)
 
     @api.model
     def cron_clean_odoo_module_version(self):
