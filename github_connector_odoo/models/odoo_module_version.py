@@ -31,6 +31,8 @@ class OdooModuleVersion(models.Model):
         'doctitle_xform': False,
         'output_encoding': 'unicode',
         'xml_declaration': False,
+        'file_insertion_enabled': False,
+        'raw_enabled': False,
     }
 
     _ODOO_TYPE_SELECTION = [
