@@ -7,6 +7,7 @@ from odoo import fields, models
 
 class GithubTeamRepository(models.Model):
     _name = 'github.team.repository'
+    _description = 'Github Team Repository'
     _order = 'team_id, repository_id'
 
     _PERMISSION_SELECTION = [
