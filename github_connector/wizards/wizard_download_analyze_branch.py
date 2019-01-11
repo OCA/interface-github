@@ -7,6 +7,7 @@ from odoo import api, fields, models
 
 class WizardDownloadAnalyzeBranch(models.TransientModel):
     _name = 'wizard.download.analyze.branch'
+    _description = 'Wizard Download Analyze Branch'
 
     download_source_code = fields.Boolean(
         string='Download Source Code', default=True)

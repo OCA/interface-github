@@ -48,4 +48,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="organization_id" ref="oca_organization" />
     </record>
 
+    <record id="oca_organization_serie_12" model="github.organization.serie">
+        <field name="sequence">9</field>
+        <field name="name">12.0</field>
+        <field name="organization_id" ref="oca_organization" />
+    </record>
+
 </odoo>
