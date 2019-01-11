@@ -7,6 +7,7 @@ from odoo import fields, models
 
 class GithubOrganizationSerie(models.Model):
     _name = 'github.organization.serie'
+    _description = 'Github Organization Serie'
     _order = 'sequence, name'
 
     # Columns Section

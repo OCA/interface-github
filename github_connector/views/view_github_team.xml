@@ -17,7 +17,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="partner_ids"/>
                 <field name="repository_ids"/>
                 <group expand="1" string="Group By">
-                    <filter string="Organization" context="{'group_by' : 'organization_id'}"/>
+                    <filter string="Organization" name="organization" context="{'group_by' : 'organization_id'}"/>
                 </group>
             </search>
         </field>
@@ -134,7 +134,3 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     </record>
 
 </odoo>
-
-
-
-
