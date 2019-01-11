@@ -22,6 +22,7 @@ class AbstractGithubModel(models.AbstractModel):
     """
 
     _name = 'abstract.github.model'
+    _description = 'Github abstract model'
     _github_type = None
     _github_login_field = None
     _need_individual_call = False

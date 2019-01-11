@@ -8,6 +8,7 @@ from odoo.tools.safe_eval import safe_eval
 
 class WizardUpdateFromGithub(models.TransientModel):
     _name = 'wizard.update.from.github'
+    _description = 'Wizard Update From Github'
 
     # Columns Section
     child_update = fields.Boolean(string='Update Child Objects', default=False)

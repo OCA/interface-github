@@ -7,6 +7,7 @@ from odoo import api, fields, models
 
 class WizardCreateRepository(models.TransientModel):
     _name = 'wizard.create.repository'
+    _description = 'Wizard Create Repository'
     _inherit = ['github.repository']
 
     # Overload Columns Section
