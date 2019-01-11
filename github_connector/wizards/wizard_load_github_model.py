@@ -9,6 +9,7 @@ from ..models.github import _GITHUB_TYPE
 
 class WizardLoadGithubModel(models.TransientModel):
     _name = 'wizard.load.github.model'
+    _description = 'Wizard Load Github Model'
 
     # Columns Section
     github_type = fields.Selection(

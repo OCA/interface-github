@@ -20,10 +20,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <filter string="To Analyze" name="to_analyze" domain="[('state','=', 'to_analyze')]" />
                 <filter string="Analyzed" name="analyzed" domain="[('state','=', 'analyzed')]" />
                 <group expand="1" string="Group By">
-                    <filter string="Organization" context="{'group_by' : 'organization_id'}"/>
-                    <filter string="Serie" context="{'group_by' : 'organization_serie_id'}"/>
-                    <filter string="Repository" context="{'group_by' : 'repository_id'}"/>
-                    <filter string="State" context="{'group_by' : 'state'}"/>
+                    <filter string="Organization" name="organization" context="{'group_by' : 'organization_id'}"/>
+                    <filter string="Serie" name="serie" context="{'group_by' : 'organization_serie_id'}"/>
+                    <filter string="Repository" name="repository" context="{'group_by' : 'repository_id'}"/>
+                    <filter string="State" name="state" context="{'group_by' : 'state'}"/>
                 </group>
             </search>
         </field>
@@ -140,7 +140,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 <h4 class="oe_partner_heading"><field name="complete_name"/></h4>
                                 <div class="branch_tag_list">
                                     <a target="_blank" t-att-href="record.github_url.value">
-                                        <span class="badge"><i class="fa fa-fw fa-github-alt"/></span>
+                                        <span class="badge"><i class="fa fa-fw fa-github-alt"> </i></span>
                                     </a>
                                     <span class="badge"><field name="mb_size"/> Mb</span>
                                 </div>
