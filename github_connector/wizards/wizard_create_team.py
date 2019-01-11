@@ -7,6 +7,7 @@ from odoo import api, fields, models
 
 class WizardCreateTeam(models.TransientModel):
     _name = 'wizard.create.team'
+    _description = 'Wizard Create Team'
     _inherit = ['github.team']
 
     # Overload Columns Section
@@ -17,11 +18,11 @@ class WizardCreateTeam(models.TransientModel):
 
     # Columns Section
     wizard_partner_ids = fields.Many2many(
-        string='Members', comodel_name='res.partner',
+        string='Team Members', comodel_name='res.partner',
         domain="[('github_login', '!=', False)]")
 
     wizard_repository_ids = fields.Many2many(
-        string='Repositories', comodel_name='github.repository')
+        string='Team Repositories', comodel_name='github.repository')
 
     @api.multi
     def get_github_data_from_odoo(self):
