@@ -1,16 +1,18 @@
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # @author: Sébastien BEAU <sebastien.beau@akretion.com>
+# Copyright 2019 Tecnativa - Cristina Martin R.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     'name': 'Github Connector',
     'summary': 'Synchronize information from Github repositories',
-    'version': '11.0.1.1.1',
+    'version': '12.0.1.0.0',
     'category': 'Connector',
     'license': 'AGPL-3',
     'author':
-        'Odoo Community Association (OCA), GRAP, Akretion'
-        ', Sylvain LE GAL',
+        'Odoo Community Association (OCA), '
+        'GRAP, Akretion, '
+        'Tecnativa',
     'depends': [
         'base',
         'web',

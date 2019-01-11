@@ -7,6 +7,7 @@ from odoo import fields, models
 
 class GithubTeamPartner(models.Model):
     _name = 'github.team.partner'
+    _description = 'Github Team Partner'
     _order = 'team_id, partner_id'
 
     _ROLE_SELECTION = [
