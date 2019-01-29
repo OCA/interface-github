@@ -76,6 +76,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     <group col="4">
                         <field name="email" widget="email"/>
                         <field name="website_url" widget="url"/>
+                        <field name="blog" widget="url"/>
                         <field name="location"/>
                     </group>
                     <notebook>

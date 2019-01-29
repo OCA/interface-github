@@ -25,6 +25,8 @@ class GithubOrganization(models.Model):
 
     website_url = fields.Char(string='Website URL', readonly=True)
 
+    blog = fields.Char(string='Blog URL', readonly=True)
+
     location = fields.Char(string='Location', readonly=True)
 
     ignored_repository_names = fields.Text(
