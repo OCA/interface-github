@@ -25,8 +25,6 @@ class GithubOrganization(models.Model):
 
     website_url = fields.Char(string='Website URL', readonly=True)
 
-    blog = fields.Char(string='Blog URL', readonly=True)
-
     location = fields.Char(string='Location', readonly=True)
 
     ignored_repository_names = fields.Text(
@@ -79,14 +77,14 @@ class GithubOrganization(models.Model):
     @api.model
     def get_odoo_data_from_github(self, data):
         res = super(GithubOrganization, self).get_odoo_data_from_github(data)
-        keys = ['name', 'description', 'location', 'blog', 'email']
-        for key in keys:
-            if key in data:
-                res.update({key: data[key]})
-        if 'avatar_url' in data:
-            res.update({
-                'image': self.get_base64_image_from_github(data['avatar_url']),
-            })
+		res.update({
+            'name': data['name'],
+            'description': data['description'],
+            'location': data['location'],
+            'website_url': data['blog'],
+            'email': data['email'],
+            'image': self.get_base64_image_from_github(data['avatar_url']),
+		})
         return res
 
     @api.multi
