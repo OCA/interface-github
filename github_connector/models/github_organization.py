@@ -77,14 +77,14 @@ class GithubOrganization(models.Model):
     @api.model
     def get_odoo_data_from_github(self, data):
         res = super(GithubOrganization, self).get_odoo_data_from_github(data)
-		res.update({
+        res.update({
             'name': data['name'],
             'description': data['description'],
             'location': data['location'],
             'website_url': data['blog'],
             'email': data['email'],
             'image': self.get_base64_image_from_github(data['avatar_url']),
-		})
+        })
         return res
 
     @api.multi

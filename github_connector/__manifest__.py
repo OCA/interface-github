@@ -5,7 +5,7 @@
 {
     'name': 'Github Connector',
     'summary': 'Synchronize information from Github repositories',
-    'version': '11.0.1.1.1',
+    'version': '11.0.1.1.2',
     'category': 'Connector',
     'license': 'AGPL-3',
     'author':
