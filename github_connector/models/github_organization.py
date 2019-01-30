@@ -75,16 +75,24 @@ class GithubOrganization(models.Model):
 
     # Overloadable Section
     @api.model
+    def get_conversion_dict(self):
+        res = super(GithubOrganization, self).get_conversion_dict()
+        res.update({
+            'name': 'name',
+            'description': 'description',
+            'location': 'location',
+            'email': 'email',
+            'website_url': 'blog',
+        })
+        return res
+
+    @api.model
     def get_odoo_data_from_github(self, data):
         res = super(GithubOrganization, self).get_odoo_data_from_github(data)
-        res.update({
-            'name': data['name'],
-            'description': data['description'],
-            'location': data['location'],
-            'website_url': data['blog'],
-            'email': data['email'],
-            'image': self.get_base64_image_from_github(data['avatar_url']),
-        })
+        if 'avatar_url' in data:
+            res.update({
+                'image': self.get_base64_image_from_github(data['avatar_url']),
+            })
         return res
 
     @api.multi
