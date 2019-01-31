@@ -68,7 +68,6 @@ class AbstractGithubModel(models.AbstractModel):
         Prepare function that map Github fields to Odoo fields
         :return: Dictionary {odoo_field: github_field}
         """
-        """"""
         return {
             'github_id_external': 'id',
             'github_url': 'html_url',
