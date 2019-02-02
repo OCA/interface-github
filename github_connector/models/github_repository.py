@@ -92,15 +92,22 @@ class GithubRepository(models.Model):
 
     # Overloadable Section
     @api.model
+    def get_conversion_dict(self):
+        res = super(GithubRepository, self).get_conversion_dict()
+        res.update({
+            'name': 'name',
+            'github_url': 'url',
+            'description': 'description',
+            'website': 'homepage',
+        })
+        return res
+
+    @api.model
     def get_odoo_data_from_github(self, data):
         organization_obj = self.env['github.organization']
         res = super(GithubRepository, self).get_odoo_data_from_github(data)
         organization = organization_obj.get_from_id_or_create(data['owner'])
         res.update({
-            'name': data['name'],
-            'github_url': data['url'],
-            'description': data['description'],
-            'website': data['homepage'],
             'organization_id': organization.id,
         })
         return res
