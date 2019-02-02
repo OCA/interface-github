@@ -93,6 +93,17 @@ class GithubTeam(models.Model):
             team.repository_qty = len(team.repository_ids)
 
     # Overloadable Section
+    @api.model
+    def get_conversion_dict(self):
+        res = super(GithubTeam, self).get_conversion_dict()
+        res.update({
+            'name': 'name',
+            'description': 'description',
+            'privacy': 'privacy',
+        })
+        return res
+
+    @api.model
     def get_odoo_data_from_github(self, data):
         organization_obj = self.env['github.organization']
         res = super(GithubTeam, self).get_odoo_data_from_github(data)
@@ -102,9 +113,6 @@ class GithubTeam(models.Model):
         else:
             organization_id = False
         res.update({
-            'name': data['name'],
-            'description': data['description'],
-            'privacy': data['privacy'],
             'organization_id': organization_id,
         })
         return res

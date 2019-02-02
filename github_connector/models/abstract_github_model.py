@@ -63,16 +63,29 @@ class AbstractGithubModel(models.AbstractModel):
             return self._github_login_field
 
     @api.model
+    def get_conversion_dict(self):
+        """
+        Prepare function that map Github fields to Odoo fields
+        :return: Dictionary {odoo_field: github_field}
+        """
+        return {
+            'github_id_external': 'id',
+            'github_url': 'html_url',
+            'github_login': self.github_login_field(),
+            'github_create_date': 'created_at',
+            'github_write_date': 'updated_at',
+        }
+
+    @api.model
     def get_odoo_data_from_github(self, data):
         """Prepare function that map Github data to create in Odoo"""
-        return {
-            'github_id_external': data['id'],
-            'github_url': data.get('html_url', False),
-            'github_login': data.get(self.github_login_field(), False),
-            'github_create_date': data.get('created_at', False),
-            'github_write_date': data.get('updated_at', False),
-            'github_last_sync_date': fields.Datetime.now(),
-        }
+        map_dict = self.get_conversion_dict()
+        res = {}
+        for k, v in map_dict.items():
+            if hasattr(self, k) and data.get(v, False):
+                res.update({k: data[v]})
+        res.update({'github_last_sync_date': fields.Datetime.now()})
+        return res
 
     @api.multi
     def get_github_data_from_odoo(self):

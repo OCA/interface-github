@@ -68,14 +68,24 @@ class ResPartner(models.Model):
 
     # Custom Section
     @api.model
+    def get_conversion_dict(self):
+        res = super(ResPartner, self).get_conversion_dict()
+        res.update({
+            'website': 'blog',
+            'email': 'email',
+        })
+        return res
+
+    @api.model
     def get_odoo_data_from_github(self, data):
         res = super(ResPartner, self).get_odoo_data_from_github(data)
         res.update({
             'name':
             data['name'] and data['name'] or
             '%s (Github)' % data['login'],
-            'website': data['blog'],
-            'email': data['email'],
-            'image': self.get_base64_image_from_github(data['avatar_url']),
         })
+        if 'avatar_url' in data:
+            res.update({
+                'image': self.get_base64_image_from_github(data['avatar_url']),
+            })
         return res
