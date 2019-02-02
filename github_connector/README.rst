@@ -242,6 +242,7 @@ Contributors
 * Sébastien BEAU (sebastien.beau@akretion.com)
 * Benoît GUILLOT (benoit.guillot@akretion.com)
 * Vicent Cubells (vicent.cubells@tecnativa.com)
+* Enrique Martín (enriquemartin@digital5.es)
 
 Maintainer
 ----------
