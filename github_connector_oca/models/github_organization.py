@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
-from odoo import api, fields, models
+from odoo import fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -14,11 +14,12 @@ _OWNER_TYPE_SELECTION = [
     ('5_undefined', 'Undefined'),
 ]
 
+
 class GithubOrganization(models.Model):
     _inherit = 'github.organization'
 
     owner_type = fields.Selection(
         string='Owner Type', selection=_OWNER_TYPE_SELECTION,
-        required=True, default='custom')
+        required=True, default='4_custom')
 
     # TODO make a constraint to forbid undefined value
