@@ -46,6 +46,6 @@
     ],
     'installable': True,
     'external_dependencies': {
-        'python': ['gitpython'],
+        'python': ['GitPython'],
     },
 }
