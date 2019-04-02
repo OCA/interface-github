@@ -143,8 +143,9 @@ class AbstractGithubModel(models.AbstractModel):
 
         # We try to see if object exist by name (instead of id)
         if self._github_login_field and self._github_login_field in data:
-            existing_object = self.search([
-                ('github_login', '=', data[self._github_login_field])])
+            existing_object = self.with_context(active_test=False).search(
+                [('github_login', '=', data[self._github_login_field])]
+            )
             if len(existing_object) == 1:
                 # Update the existing object with the id
                 existing_object.github_id_external = data['id']
