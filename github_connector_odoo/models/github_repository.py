@@ -27,8 +27,8 @@ class GithubRepository(models.Model):
         for organization_id, repositories in url_done.items():
             if organization_id.runbot_parse_url:
                 runbot_list = urlopen(
-                    Request(
-                        organization_id.runbot_parse_url)).read().split('\n')
+                    Request(organization_id.runbot_parse_url)
+                ).read().decode().split('\n')
                 for item in runbot_list:
                     for repository in repositories:
                         if item.endswith(repository.complete_name):
