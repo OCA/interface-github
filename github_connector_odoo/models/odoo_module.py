@@ -8,6 +8,7 @@ from odoo.tools import html_sanitize
 
 class OdooModule(models.Model):
     _name = 'odoo.module'
+    _description = 'Odoo Module'
     _order = 'technical_name, name'
 
     # Column Section

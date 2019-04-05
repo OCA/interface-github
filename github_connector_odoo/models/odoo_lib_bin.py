@@ -7,6 +7,7 @@ from odoo import api, fields, models
 
 class OdooLibBin(models.Model):
     _name = 'odoo.lib.bin'
+    _description = 'Odoo Lib Bin'
     _order = 'module_version_qty desc'
 
     # Column Section
