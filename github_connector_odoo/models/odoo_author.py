@@ -7,6 +7,7 @@ from odoo import api, fields, models
 
 class OdooAuthor(models.Model):
     _name = 'odoo.author'
+    _description = 'Odoo Author'
     _order = 'module_qty desc, name'
 
     # Column Section

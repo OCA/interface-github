@@ -21,10 +21,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="license_id"/>
                 <field name="author_ids"/>
                 <field name="organization_serie_id"/>
-                <filter string="Odoo Type" context="{'group_by' : 'odoo_type'}"/>
-                <filter string="License" context="{'group_by' : 'license_id'}"/>
-                <filter string="Module" context="{'group_by' : 'module_id'}"/>
-                <filter string="Repository Branch" context="{'group_by' : 'repository_branch_id'}"/>
+                <group expand="0" string="Group By">
+                    <filter string="Odoo Type" name="odoo_type" context="{'group_by' : 'odoo_type'}"/>
+                    <filter string="License" name="license" context="{'group_by' : 'license_id'}"/>
+                    <filter string="Module" name="module" context="{'group_by' : 'module_id'}"/>
+                    <filter string="Repository Branch" name="repository_branch" context="{'group_by' : 'repository_branch_id'}"/>
+                </group>
             </search>
         </field>
     </record>
@@ -111,10 +113,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     <t t-name="kanban-box">
                     <div class="oe_module_vignette oe_kanban_global_click">
                         <t t-if="record.image.raw_value">
-                            <img t-att-src="'data:image/png;base64,'+record.image.raw_value" class="oe_module_icon"/>
+                            <img t-att-src="'data:image/png;base64,'+record.image.raw_value" class="oe_module_icon" alt=""/>
                         </t>
                         <t t-if="!record.image.raw_value">
-                            <img t-att-src='_s + "/github_connector_odoo/static/src/img/default_image_module_version.png"' class="oe_module_icon"/>
+                            <img t-att-src='_s + "/github_connector_odoo/static/src/img/default_image_module_version.png"' class="oe_module_icon" alt=""/>
                         </t>
                         <div class="oe_module_desc">
                             <h4><field name="name"/></h4>
