@@ -10,7 +10,7 @@ from docutils.core import publish_string
 
 from odoo import _, api, fields, models, tools
 from odoo.tools import html_sanitize
-from odoo.addons.base.module.module import MyWriter
+from odoo.addons.base.models.ir_module import MyWriter
 from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
@@ -18,6 +18,7 @@ _logger = logging.getLogger(__name__)
 
 class OdooModuleVersion(models.Model):
     _name = 'odoo.module.version'
+    _description = 'Odoo Module Version'
     _order = 'name, technical_name'
 
     _ICON_PATH = [
