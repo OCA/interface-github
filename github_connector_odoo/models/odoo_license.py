@@ -7,6 +7,7 @@ from odoo import api, fields, models
 
 class OdooLicense(models.Model):
     _name = 'odoo.license'
+    _description = 'Odoo License'
     _order = 'name'
 
     # Column Section
