@@ -76,7 +76,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     <t t-name="kanban-box">
                     <div class="oe_module_vignette oe_kanban_global_click">
                         <t t-if="record.image.raw_value">
-                            <img t-att-src="'data:image/png;base64,'+record.image.raw_value" class="oe_module_icon" alt=""/>
+                            <img t-att-src="'data:image/png;base64,'+record.image.raw_value" class="oe_module_icon" t-att-alt="record.name.raw_value"/>
                         </t>
                         <div class="oe_module_desc">
                             <h3><field name="name"/></h3>
