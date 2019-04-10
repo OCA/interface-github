@@ -47,7 +47,7 @@ Configuration
    modules
 2. The URL of the file that contains IDs of your repositories for the runbot
 
-.. image:: https://raw.githubusercontent.com/github_connector_odoo/static/description/github_organization_form.png
+.. image:: https://raw.githubusercontent.com/OCA/interface-github/12.0/github_connector_odoo/static/description/github_organization_form.png
 
 If you had analyzed previously your repositories with the
 'github Connector' module, you should launch again the Analysis Process
@@ -120,12 +120,6 @@ Possible improvements :
 
 1. Possibility to search by field or by model name. (Ex: field:invoice_id)
 2. Possibility to display the number of XML, Python, Yaml, HTML, CSS lines
-
-* Implement Social feature, like possibility to comment a module, add a
-  notation, like the website https://www.odoo.com/apps
-
-* Create a new module github_connector_odoo_website, that could display
-  the modules informations for non logged users.
 
 Bug Tracker
 ===========
