@@ -8,6 +8,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
     <menuitem id="menu_github"
               name="Github"
+              groups="github_connector.group_github_connector_user"
               web_icon="github_connector,static/description/icon.png"
     />
 
@@ -30,6 +31,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <menuitem id="menu_res_partner"
         parent="menu_github_community"
         sequence="3"
+        groups="github_connector.group_github_connector_user"
         action="action_res_partner"/>
 
     <!-- Repository Part -->
