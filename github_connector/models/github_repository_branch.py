@@ -86,6 +86,13 @@ class GithubRepository(models.Model):
     # Init Section
     def __init__(self, pool, cr):
         source_path = tools.config.get('source_code_local_path', False)
+        if not os.path.exists(source_path):
+            try:
+                os.makedirs(source_path)
+            except Exception as e:
+                _logger.error(_(
+                    "Error when trying to create the main folder %s\n"
+                    " Please check Odoo Access Rights.\n %s"), source_path, e)
         if source_path and source_path not in modules.module.ad_paths:
             modules.module.ad_paths.append(source_path)
         super(GithubRepository, self).__init__(pool, cr)
