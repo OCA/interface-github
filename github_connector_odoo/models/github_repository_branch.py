@@ -117,7 +117,7 @@ class GithubRepositoryBranch(models.Model):
     # Copy Paste from Odoo Core
     # This function is for the time being in another function.
     # (Ref: openerp/modules/module.py)
-    def listdir(self, dir):
+    def list_dir(self, folder):
         def clean(name):
             name = os.path.basename(name)
             if name[-4:] == '.zip':
@@ -126,7 +126,7 @@ class GithubRepositoryBranch(models.Model):
 
         def is_really_module(name):
             for mname in MANIFEST_NAMES:
-                if os.path.isfile(opj(dir, name, mname)):
+                if os.path.isfile(opj(folder, name, mname)):
                     return True
 
         return map(clean, filter(is_really_module, os.listdir(dir)))

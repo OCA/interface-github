@@ -124,12 +124,20 @@ class Github(object):
             try:
                 if self.token:
                     headers = {'Authorization': 'token {}'.format(self.token)}
-                    get = lambda u: requests.get(u, headers=headers)
-                    post = lambda u, d: requests.get(u ,headers=headers, data=d)
+
+                    def get(u):
+                        return requests.get(u, headers=headers)
+
+                    def post(u, d):
+                        return requests.get(u, headers=headers, data=d)
                 else:
                     auth = HTTPBasicAuth(self.login, self.password)
-                    get = lambda u: requests.get(u, auth=auth)
-                    post = lambda u, d: requests.get(u, auth=auth, data=d)
+
+                    def get(u):
+                        return requests.get(u, auth=auth)
+
+                    def post(u, d):
+                        return requests.get(u, auth=auth, data=d)
 
                 if call_type == 'get':
                     response = get(url)

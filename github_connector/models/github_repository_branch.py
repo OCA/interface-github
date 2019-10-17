@@ -8,7 +8,6 @@ import os
 from subprocess import check_output
 from datetime import datetime
 
-from .github import _GITHUB_URL
 from odoo import _, api, exceptions, fields, models, modules, tools
 from odoo.tools.safe_eval import safe_eval
 

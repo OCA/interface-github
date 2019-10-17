@@ -22,9 +22,11 @@ Once installed, you have to:
    credentials, and the local path where the source code will be downloaded:
 
    * ``source_code_local_path = /workspace/source_code/``
+
 Note: make sure that Odoo process has read / write access on that folder
 
    * ``github_token = your_github_access_token``
+
 or
    * ``github_login = your_github_login``
    * ``github_password = your_github_password``
