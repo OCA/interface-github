@@ -74,12 +74,13 @@ _CODE_201 = 201
 
 class Github(object):
 
-    def __init__(self, github_type, login, password, max_try):
+    def __init__(self, github_type, login, password, max_try, token=""):
         super(Github, self).__init__()
         self.github_type = github_type
         self.login = login
         self.password = password
         self.max_try = max_try
+        self.token = token
 
     def _build_url(self, arguments, url_type, page):
         arguments = arguments and arguments or {}
@@ -93,6 +94,16 @@ class Github(object):
             complete_url += ('?' in complete_url and '&' or '?') +\
                 'per_page=%d&page=%d' % (_MAX_NUMBER_REQUEST, page)
         return complete_url
+
+    def get_http_url(self):
+        """ Returns the http url to github with the identifications
+
+        :rtype: string
+        """
+        identification = (
+            self.token if self.token else ":".join([self.login, self.password])
+        )
+        return "https://{}@github.com/".format(identification)
 
     def list(self, arguments):
         page = 1
@@ -110,16 +121,9 @@ class Github(object):
         _logger.info("Calling %s" % url)
         for i in range(self.max_try):
             try:
-                if call_type == 'get':
-                    response = requests.get(
-                        url, auth=HTTPBasicAuth(self.login, self.password))
-                    break
-                elif call_type == 'post':
-                    json_data = json.dumps(data)
-                    response = requests.post(
-                        url, auth=HTTPBasicAuth(self.login, self.password),
-                        data=json_data)
-                    break
+                request_func = self.get_request_function(call_type)
+                response = request_func(url, data)
+                break
             except Exception as err:
                 _logger.warning(
                     "URL Call Error. %d/%d. URL: %s",
@@ -128,15 +132,20 @@ class Github(object):
         else:
             raise exceptions.Warning(_('Maximum attempts reached.'))
 
+        # display an anonymize token or the login
+        login = (
+            self.token and "* * * * * * * * {}".format(self.token[-4:])
+            or self.login
+        )
         if response.status_code == _CODE_401:
             raise exceptions.Warning(_(
                 "401 - Unable to authenticate to Github with the login '%s'.\n"
                 "You should check your credentials in the Odoo"
-                " configuration file.") % self.login)
+                " configuration file.") % login)
         if response.status_code == _CODE_403:
             raise exceptions.Warning(_(
                 "Unable to realize the current operation. The login '%s'"
-                " does not have the correct access rights.") % self.login)
+                " does not have the correct access rights.") % login)
         if response.status_code == _CODE_422:
             raise exceptions.Warning(_(
                 "Unable to realize the current operation. Possible reasons:\n"
@@ -150,12 +159,55 @@ class Github(object):
                     response.url, response.status_code, response.reason))
         return response.json()
 
+    def get_request_function(self, call_type):
+        """ Return the request function to use depending on the call_type and the
+        identification type.
+
+
+        :param str call_type: CRUD method. Can be get or post.
+        :rtype: callable
+        """
+        supported_crud_methods = ('get', 'post')
+        msg = "`{}` is not a supported CRUD method. Use one of the following {}".format(
+            call_type, supported_crud_methods
+        )
+        assert call_type in supported_crud_methods, msg
+        # We want the same signature for all the functions returned to ease the usage.
+        # The caller should not have to # consider cases. Cases are handled here.
+
+        if self.token:
+            # When an access token is used, the token has to be passed using a headers.
+            # there is no Auth class included in requests.
+            headers = {'Authorization': 'token {}'.format(self.token)}
+
+            def get(u, _):
+                return requests.get(u, headers=headers)
+
+            def post(u, d):
+                json_data = json.dumps(d)
+                return requests.get(u, headers=headers, data=json_data)
+        else:
+            auth = HTTPBasicAuth(self.login, self.password)
+
+            def get(u, _):
+                return requests.get(u, auth=auth)
+
+            def post(u, d):
+                json_data = json.dumps(d)
+                return requests.get(u, auth=auth, data=json_data)
+
+        if call_type == 'get':
+            return get
+
+        return post
+
     def get(self, arguments, by_id=False, page=None):
         url = self._build_url(
             arguments, by_id and 'url_get_by_id' or 'url_get_by_name', page)
         return self.get_by_url(url, 'get')
 
     def create(self, arguments, data):
+        # pylint: disable=method-required-super
         url = self._build_url(arguments, 'url_create', None)
         res = self.get_by_url(url, 'post', data)
         return res
