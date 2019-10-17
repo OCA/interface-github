@@ -21,11 +21,18 @@ Once installed, you have to:
 #. Open your odoo.conf file and add extra settings to mention Github
    credentials, and the local path where the source code will be downloaded:
 
-   * ``github_login = your_github_login``
-   * ``github_password = your_github_password``
    * ``source_code_local_path = /workspace/source_code/``
 
-   Note: make sure that Odoo process has read / write access on that folder
+Note: make sure that Odoo process has read / write access on that folder
+
+   * ``github_token = your_github_access_token``
+
+or
+   * ``github_login = your_github_login``
+   * ``github_password = your_github_password``
+
+Note: if token and login/password are provided, the token will be used.
+
 
 #. Go to 'Settings' / 'Technical' / 'Parameters' / 'System Parameters'
    and define the following values:
