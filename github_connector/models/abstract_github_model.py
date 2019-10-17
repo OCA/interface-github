@@ -275,9 +275,9 @@ class AbstractGithubModel(models.AbstractModel):
         return Github(
             github_type,
             int(self.sudo().env['ir.config_parameter'].get_param('github.max_try')),
-            login=tools.config.get('github_login'),
-            password=tools.config.get('github_password'),
-            token=tools.config.get('github_token'),
+            login=tools.config.get('github_login', ""),
+            password=tools.config.get('github_password', ""),
+            token=tools.config.get('github_token', ""),
         )
 
     @api.multi
