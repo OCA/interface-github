@@ -74,9 +74,10 @@ _CODE_201 = 201
 
 class Github(object):
 
-    def __init__(self, github_type, login, password, max_try):
+    def __init__(self, github_type, max_try, login="", password="", token=""):
         super(Github, self).__init__()
         self.github_type = github_type
+        self.token = token
         self.login = login
         self.password = password
         self.max_try = max_try
@@ -94,6 +95,17 @@ class Github(object):
                 'per_page=%d&page=%d' % (_MAX_NUMBER_REQUEST, page)
         return complete_url
 
+    def get_http_url(self):
+        """ Returns the http url to github with the identifications
+
+        :rtype: string
+        """
+        identification = ":".join([self.login, self.password])
+        if self.token:
+            identification = self.token
+
+        return "https://{}@github.com/".format(identification)
+
     def list(self, arguments):
         page = 1
         datas = []
@@ -110,33 +122,40 @@ class Github(object):
         _logger.info("Calling %s" % url)
         for i in range(self.max_try):
             try:
+                if self.token:
+                    headers = {'Authorization': 'token {}'.format(self.token)}
+                    get = lambda u: requests.get(u, headers=headers)
+                    post = lambda u, d: requests.get(u ,headers=headers, data=d)
+                else:
+                    auth = HTTPBasicAuth(self.login, self.password)
+                    get = lambda u: requests.get(u, auth=auth)
+                    post = lambda u, d: requests.get(u, auth=auth, data=d)
+
                 if call_type == 'get':
-                    response = requests.get(
-                        url, auth=HTTPBasicAuth(self.login, self.password))
+                    response = get(url)
                     break
                 elif call_type == 'post':
                     json_data = json.dumps(data)
-                    response = requests.post(
-                        url, auth=HTTPBasicAuth(self.login, self.password),
-                        data=json_data)
+                    response = post(url, json_data)
                     break
             except Exception as err:
-                _logger.warning(
+                _logger.exception(
                     "URL Call Error. %d/%d. URL: %s",
                     i, self.max_try, err.__str__(),
                 )
         else:
             raise exceptions.Warning(_('Maximum attempts reached.'))
 
+        login = self.token or self.login
         if response.status_code == _CODE_401:
             raise exceptions.Warning(_(
                 "401 - Unable to authenticate to Github with the login '%s'.\n"
                 "You should check your credentials in the Odoo"
-                " configuration file.") % self.login)
+                " configuration file.") % login)
         if response.status_code == _CODE_403:
             raise exceptions.Warning(_(
                 "Unable to realize the current operation. The login '%s'"
-                " does not have the correct access rights.") % self.login)
+                " does not have the correct access rights.") % login)
         if response.status_code == _CODE_422:
             raise exceptions.Warning(_(
                 "Unable to realize the current operation. Possible reasons:\n"

@@ -129,6 +129,7 @@ class GithubRepository(models.Model):
 
     @api.multi
     def _download_code(self):
+        client = self.get_github_connector("")
         for branch in self:
             if not os.path.exists(branch.local_path):
                 _logger.info(
@@ -144,7 +145,7 @@ class GithubRepository(models.Model):
 
                 command = (
                     "git clone %s%s/%s.git -b %s %s") % (
-                        _GITHUB_URL,
+                        client.get_http_url(),
                         branch.repository_id.organization_id.github_login,
                         branch.repository_id.name,
                         branch.name,
