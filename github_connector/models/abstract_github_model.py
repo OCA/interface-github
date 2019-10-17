@@ -159,7 +159,7 @@ class AbstractGithubModel(models.AbstractModel):
             elif len(existing_object) > 1:
                 raise UserError(
                     _("Duplicate object with Github login %s") %
-                    (data[self._github_login_field], ))
+                    (data[self._github_login_field],))
 
         if self._need_individual_call:
             github_connector = self.get_github_connector(self.github_type())
@@ -263,8 +263,8 @@ class AbstractGithubModel(models.AbstractModel):
     @api.multi
     def get_github_connector(self, github_type):
         no_login = (
-                not tools.config.get('github_login')
-                or not tools.config.get('github_password')
+            not tools.config.get('github_login') or
+            not tools.config.get('github_password')
         )
         no_token = not tools.config.get('github_token')
         if no_login and no_token:
