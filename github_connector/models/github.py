@@ -74,13 +74,13 @@ _CODE_201 = 201
 
 class Github(object):
 
-    def __init__(self, github_type, max_try, login="", password="", token=""):
+    def __init__(self, github_type, login, password, max_try, token=""):
         super(Github, self).__init__()
         self.github_type = github_type
-        self.token = token
         self.login = login
         self.password = password
         self.max_try = max_try
+        self.token = token
 
     def _build_url(self, arguments, url_type, page):
         arguments = arguments and arguments or {}
@@ -147,14 +147,15 @@ class Github(object):
                     response = post(url, json_data)
                     break
             except Exception as err:
-                _logger.exception(
+                _logger.warning(
                     "URL Call Error. %d/%d. URL: %s",
                     i, self.max_try, err.__str__(),
                 )
         else:
             raise exceptions.Warning(_('Maximum attempts reached.'))
 
-        login = self.token or self.login
+        # display an anonymize token or the login
+        login = self.token and "* * * * * * * * {}".format(self.token[-4:]) or self.login
         if response.status_code == _CODE_401:
             raise exceptions.Warning(_(
                 "401 - Unable to authenticate to Github with the login '%s'.\n"

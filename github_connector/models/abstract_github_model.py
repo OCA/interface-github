@@ -274,10 +274,10 @@ class AbstractGithubModel(models.AbstractModel):
                 " in Odoo configuration file."))
         return Github(
             github_type,
-            int(self.sudo().env['ir.config_parameter'].get_param('github.max_try')),
             login=tools.config.get('github_login', ""),
             password=tools.config.get('github_password', ""),
-            token=tools.config.get('github_token', ""),
+            max_try=int(self.sudo().env['ir.config_parameter'].get_param('github.max_try')),
+            token=tools.config.get('github_token', "")
         )
 
     @api.multi
