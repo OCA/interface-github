@@ -134,8 +134,8 @@ class Github(object):
 
         # display an anonymize token or the login
         login = (
-                self.token and "* * * * * * * * {}".format(self.token[-4:])
-                or self.login
+            self.token and "* * * * * * * * {}".format(self.token[-4:])
+            or self.login
         )
         if response.status_code == _CODE_401:
             raise exceptions.Warning(_(
@@ -168,10 +168,10 @@ class Github(object):
         :rtype: callable
         """
         supported_crud_methods = ('get', 'post')
-        assert call_type in supported_crud_methods, \
-            "`{}` is not a supported CRUD method. Use one of the following {}".format(
-                call_type, supported_crud_methods
+        msg = "`{}` is not a supported CRUD method. Use one of the following {}".format(
+            call_type, supported_crud_methods
         )
+        assert call_type in supported_crud_methods, msg
         # We want the same signature for all the functions returned to ease the usage.
         # The caller should not have to # consider cases. Cases are handled here.
 
