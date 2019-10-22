@@ -277,7 +277,9 @@ class AbstractGithubModel(models.AbstractModel):
             login=tools.config.get('github_login', ""),
             password=tools.config.get('github_password', ""),
             # or 1 to avoid the raise of an error on None
-            max_try=int(self.sudo().env['ir.config_parameter'].get_param('github.max_try') or 1),
+            max_try=int(
+                self.sudo().env['ir.config_parameter'].get_param('github.max_try') or 1
+            ),
             token=tools.config.get('github_token', "")
         )
 

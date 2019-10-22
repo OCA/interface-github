@@ -100,7 +100,9 @@ class Github(object):
 
         :rtype: string
         """
-        identification = self.token if self.token else ":".join([self.login, self.password])
+        identification = (
+            self.token if self.token else ":".join([self.login, self.password])
+        )
         return "https://{}@github.com/".format(identification)
 
     def list(self, arguments):
@@ -131,7 +133,10 @@ class Github(object):
             raise exceptions.Warning(_('Maximum attempts reached.'))
 
         # display an anonymize token or the login
-        login = self.token and "* * * * * * * * {}".format(self.token[-4:]) or self.login
+        login = (
+                self.token and "* * * * * * * * {}".format(self.token[-4:])
+                or self.login
+        )
         if response.status_code == _CODE_401:
             raise exceptions.Warning(_(
                 "401 - Unable to authenticate to Github with the login '%s'.\n"
@@ -155,7 +160,9 @@ class Github(object):
         return response.json()
 
     def get_request_function(self, call_type):
-        """ Return the request function to use depending on the call_type and the identification type.
+        """ Return the request function to use depending on the call_type and the
+        identification type.
+
 
         :param str call_type: CRUD method. Can be get or post.
         :rtype: callable
@@ -165,8 +172,8 @@ class Github(object):
             "`{}` is not a supported CRUD method. Use one of the following {}".format(
                 call_type, supported_crud_methods
         )
-        # We want the same signature for all the functions returned to ease the usage. The caller should not have to
-        # consider cases. Cases are handled here.
+        # We want the same signature for all the functions returned to ease the usage.
+        # The caller should not have to # consider cases. Cases are handled here.
 
         if self.token:
             # When an access token is used, the token has to be passed using a headers.
