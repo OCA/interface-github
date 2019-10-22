@@ -100,10 +100,7 @@ class Github(object):
 
         :rtype: string
         """
-        identification = ":".join([self.login, self.password])
-        if self.token:
-            identification = self.token
-
+        identification = self.token if self.token else ":".join([self.login, self.password])
         return "https://{}@github.com/".format(identification)
 
     def list(self, arguments):
@@ -122,30 +119,9 @@ class Github(object):
         _logger.info("Calling %s" % url)
         for i in range(self.max_try):
             try:
-                if self.token:
-                    headers = {'Authorization': 'token {}'.format(self.token)}
-
-                    def get(u):
-                        return requests.get(u, headers=headers)
-
-                    def post(u, d):
-                        return requests.get(u, headers=headers, data=d)
-                else:
-                    auth = HTTPBasicAuth(self.login, self.password)
-
-                    def get(u):
-                        return requests.get(u, auth=auth)
-
-                    def post(u, d):
-                        return requests.get(u, auth=auth, data=d)
-
-                if call_type == 'get':
-                    response = get(url)
-                    break
-                elif call_type == 'post':
-                    json_data = json.dumps(data)
-                    response = post(url, json_data)
-                    break
+                request_func = self.get_request_function(call_type)
+                response = request_func(url, data)
+                break
             except Exception as err:
                 _logger.warning(
                     "URL Call Error. %d/%d. URL: %s",
@@ -177,6 +153,46 @@ class Github(object):
                     "- Reason: %s") % (
                     response.url, response.status_code, response.reason))
         return response.json()
+
+    def get_request_function(self, call_type):
+        """ Return the request function to use depending on the call_type and the identification type.
+
+        :param str call_type: CRUD method. Can be get or post.
+        :rtype: callable
+        """
+        supported_crud_methods = ('get', 'post')
+        assert call_type in supported_crud_methods, \
+            "`{}` is not a supported CRUD method. Use one of the following {}".format(
+                call_type, supported_crud_methods
+        )
+        # We want the same signature for all the functions returned to ease the usage. The caller should not have to
+        # consider cases. Cases are handled here.
+
+        if self.token:
+            # When an access token is used, the token has to be passed using a headers.
+            # there is no Auth class included in requests.
+            headers = {'Authorization': 'token {}'.format(self.token)}
+
+            def get(u, _):
+                return requests.get(u, headers=headers)
+
+            def post(u, d):
+                json_data = json.dumps(d)
+                return requests.get(u, headers=headers, data=json_data)
+        else:
+            auth = HTTPBasicAuth(self.login, self.password)
+
+            def get(u, _):
+                return requests.get(u, auth=auth)
+
+            def post(u, d):
+                json_data = json.dumps(d)
+                return requests.get(u, auth=auth, data=json_data)
+
+        if call_type == 'get':
+            return get
+
+        return post
 
     def get(self, arguments, by_id=False, page=None):
         url = self._build_url(
