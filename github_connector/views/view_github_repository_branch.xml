@@ -112,10 +112,14 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             </group>
                         </page>
                         <page name="technical" string="Technical Settings">
-                            <group col="4">
-                                <field name="local_path" colspan="4"/>
-                                <field name="last_download_date"/>
-                                <field name="last_analyze_date"/>
+                            <group>
+                                <group name="group_technical_paths">
+                                    <field name="local_path"/>
+                                </group>
+                                <group name="group_technical_dates">
+                                    <field name="last_download_date"/>
+                                    <field name="last_analyze_date"/>
+                                </group>
                             </group>
                         </page>
                     </notebook>
