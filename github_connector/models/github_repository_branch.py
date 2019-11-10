@@ -192,12 +192,11 @@ class GithubRepository(models.Model):
                         res.append(os.path.join(root, fic))
         return res
 
-    @api.model
-    def analyze_code_one(self, branch):
+    def analyze_code_one(self):
         """Overload Me in custom Module that manage Source Code analysis.
         """
         self.ensure_one()
-        path = branch.local_path
+        path = self.local_path
         # Compute Files Sizes
         size = 0
         for file_path in self._get_analyzable_files(path):
@@ -230,7 +229,7 @@ class GithubRepository(models.Model):
             else:
                 _logger.info("Analyzing Source Code in %s ...", path)
                 try:
-                    vals = branch.analyze_code_one(branch)
+                    vals = branch.analyze_code_one()
                     vals.update({
                         'last_analyze_date': datetime.today(),
                         'state': 'analyzed',
