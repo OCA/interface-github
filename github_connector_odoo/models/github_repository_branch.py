@@ -85,8 +85,7 @@ class GithubRepositoryBranch(models.Model):
             paths = [self.local_path]
         return paths
 
-    @api.model
-    def analyze_code_one(self, branch):
+    def analyze_code_one(self):
         # Change log level to avoid warning, when parsing odoo manifests
         logger1 = logging.getLogger('openerp.modules.module')
         logger2 = logging.getLogger('openerp.addons.base.module.module')
@@ -96,7 +95,7 @@ class GithubRepositoryBranch(models.Model):
         logger2.setLevel(logging.ERROR)
 
         try:
-            paths = branch._get_module_paths()
+            paths = self._get_module_paths()
 
             # Scan each path, if exists
             for path in paths:
@@ -108,12 +107,12 @@ class GithubRepositoryBranch(models.Model):
                     # Analyze folders and create module versions
                     _logger.info("Analyzing repository %s ...", path)
                     for module_name in self.listdir(path):
-                        self._analyze_module_name(path, module_name, branch)
+                        self._analyze_module_name(path, module_name)
         finally:
             # Reset Original level for module logger
             logger1.setLevel(currentLevel1)
             logger2.setLevel(currentLevel2)
-        return super(GithubRepositoryBranch, self).analyze_code_one(branch)
+        return super().analyze_code_one()
 
     # Copy Paste from Odoo Core
     # This function is for the time being in another function.
@@ -132,7 +131,8 @@ class GithubRepositoryBranch(models.Model):
 
         return map(clean, filter(is_really_module, os.listdir(dir)))
 
-    def _analyze_module_name(self, path, module_name, branch):
+    def _analyze_module_name(self, path, module_name):
+        self.ensure_one()
         module_version_obj = self.env['odoo.module.version']
         try:
             full_module_path = os.path.join(path, module_name)
@@ -143,7 +143,7 @@ class GithubRepositoryBranch(models.Model):
             if module_info.get('installable', False):
                 module_info['technical_name'] = module_name
                 module_version_obj.create_or_update_from_manifest(
-                    module_info, branch, full_module_path)
+                    module_info, self, full_module_path)
         except Exception as e:
             _logger.error('Cannot process module with name %s, error '
                           'is: %s', module_name, e)
