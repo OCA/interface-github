@@ -148,6 +148,10 @@ class OdooModuleVersion(models.Model):
     category_id = fields.Many2one(
         comodel_name='odoo.category', string='Category', readonly=True)
 
+    full_module_path = fields.Char(
+        string="Full Local Path to the module",
+    )
+
     # Overload Section
     @api.multi
     def unlink(self):
@@ -162,17 +166,23 @@ class OdooModuleVersion(models.Model):
     # Compute Section
     @api.multi
     @api.depends(
-        'technical_name', 'repository_id.organization_id.github_login',
-        'repository_id.name', 'repository_branch_id.name')
+        'repository_id.organization_id.github_login',
+        'repository_id.name',
+        'repository_branch_id.name',
+        'repository_branch_id.local_path',
+        'full_module_path',
+    )
     def _compute_github_url(self):
         for version in self:
             version.github_url = "https://github.com/{organization_name}/"\
-                "{repository_name}/tree/{branch_name}/{module_name}".format(
+                "{repository_name}/tree/{branch_name}/{rest_path}".format(
                     organization_name=version.
                     repository_id.organization_id.github_login,
                     repository_name=version.repository_id.name,
                     branch_name=version.repository_branch_id.name,
-                    module_name=version.technical_name)
+                    rest_path=version.full_module_path[
+                        len(version.repository_branch_id.local_path) + 1:],
+                )
 
     @api.depends('repository_branch_id.repository_id.name')
     def _compute_odoo_type(self):
@@ -346,14 +356,16 @@ class OdooModuleVersion(models.Model):
         if not module_version:
             # Create new module version
             module = module_obj.create_if_not_exist(info['technical_name'])
-            module_version = self.create(
-                self.manifest_2_odoo(info, repository_branch, module))
+            vals = self.manifest_2_odoo(info, repository_branch, module)
+            vals['full_module_path'] = full_module_path
+            module_version = self.create(vals)
 
         else:
             # Update module Version
-            value = self.manifest_2_odoo(
+            vals = self.manifest_2_odoo(
                 info, repository_branch, module_version.module_id)
-            module_version.write(value)
+            vals['full_module_path'] = full_module_path
+            module_version.write(vals)
         icon_path = False
         resize = False
         if info.get('images'):

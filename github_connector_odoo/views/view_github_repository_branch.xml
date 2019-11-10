@@ -31,6 +31,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <field name="ci_url" position="after">
                 <field name="runbot_url" widget="url" colspan="4"/>
             </field>
+            <group name="group_technical_paths" position="inside">
+                <field name="module_paths"/>
+            </group>
         </field>
     </record>
 
