@@ -47,11 +47,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <sheet>
                     <div class="oe_button_box" name="buttons">
 
-                        <button type="action" name="%(action_github_repository)d"
-                                class="oe_stat_button" icon="fa-folder-o"
-                                attrs="{'invisible': [('repository_qty', '=', False)]}"
-                                context="{'search_default_organization_id': active_id}">
-                            <field name="repository_qty" string="Repositories" widget="statinfo" />
+                        <button type="action" name="%(action_res_partner)d"
+                                class="oe_stat_button" icon="fa-user"
+                                attrs="{'invisible': [('member_qty', '=', False)]}"
+                                context="{'search_default_organization_ids': active_id}">
+                            <field name="member_qty" string="Members" widget="statinfo" />
                         </button>
                         <button type="action" name="%(action_github_team)d"
                                 class="oe_stat_button" icon="fa-users"
@@ -59,11 +59,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 context="{'search_default_organization_id': active_id}">
                             <field name="team_qty" string="Teams" widget="statinfo" />
                         </button>
-                        <button type="action" name="%(action_res_partner)d"
-                                class="oe_stat_button" icon="fa-user"
-                                attrs="{'invisible': [('member_qty', '=', False)]}"
-                                context="{'search_default_organization_ids': active_id}">
-                            <field name="member_qty" string="Members" widget="statinfo" />
+                        <button type="action" name="%(action_github_repository)d"
+                                class="oe_stat_button" icon="fa-folder-o"
+                                attrs="{'invisible': [('repository_qty', '=', False)]}"
+                                context="{'search_default_organization_id': active_id}">
+                            <field name="repository_qty" string="Repositories" widget="statinfo" />
                         </button>
                     </div>
 
