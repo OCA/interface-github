@@ -45,13 +45,13 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                         <button type="action" class="oe_stat_button" icon="fa-code-fork"
                                 name="%(action_github_repository_branch)d"
                                 attrs="{'invisible': [('repository_branch_qty', '=', False)]}"
-                                context="{'search_default_repository_id': active_id}">
+                                context="{'search_default_repository_id': id}">
                             <field name="repository_branch_qty" string="Branches" widget="statinfo" />
                         </button>
                         <button type="action" class="oe_stat_button" icon="fa-users"
                                 name="%(action_github_team_repository_from_repository)d"
                                 attrs="{'invisible': [('team_qty', '=', False)]}"
-                                context="{'search_default_repository_id': active_id}">
+                                context="{'search_default_repository_id': id}">
                             <field name="team_qty" string="Teams" widget="statinfo" />
                         </button>
                     </div>

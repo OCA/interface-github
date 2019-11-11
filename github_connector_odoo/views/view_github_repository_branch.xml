@@ -24,7 +24,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <button type="action" class="oe_stat_button" icon="fa-cube"
                         name="%(action_odoo_module_version)d"
                         attrs="{'invisible': [('module_version_qty', '=', False)]}"
-                        context="{'search_default_repository_branch_id': active_id}">
+                        context="{'search_default_repository_branch_id': id}">
                     <field name="module_version_qty" string="Modules" widget="statinfo" />
                 </button>
             </xpath>
