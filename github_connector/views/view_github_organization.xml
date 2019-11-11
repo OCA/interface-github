@@ -45,14 +45,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             groups="github_connector.group_github_connector_manager"/>
                 </header>
                 <sheet>
-                    <field name="image" widget="image" class="oe_avatar oe_left"/>
-                    <div class="oe_title">
-                        <h1><field name="name"/></h1>
-                        <h3 class="oe_fade">
-                            <field name="description" class="oe_inline"/>
-                        </h3>
-                    </div>
-                    <div class="oe_right oe_button_box" name="buttons">
+                    <div class="oe_button_box" name="buttons">
+
                         <button type="action" name="%(action_github_repository)d"
                                 class="oe_stat_button" icon="fa-folder-o"
                                 attrs="{'invisible': [('repository_qty', '=', False)]}"
@@ -71,6 +65,14 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 context="{'search_default_organization_ids': active_id}">
                             <field name="member_qty" string="Members" widget="statinfo" />
                         </button>
+                    </div>
+
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                        <h3 class="oe_fade">
+                            <field name="description" class="oe_inline"/>
+                        </h3>
                     </div>
                     <div class="oe_clear"/>
                     <group col="4">
