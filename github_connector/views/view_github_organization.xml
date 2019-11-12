@@ -37,10 +37,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     <button name="button_sync_member" type="object" string="Members Sync."
                             class="btn btn-default" icon="fa-chevron-right"
                             groups="github_connector.group_github_connector_manager"/>
-                    <button name="button_sync_repository" type="object" string="Repositories Sync."
+                    <button name="button_sync_team" type="object" string="Teams Sync."
                             class="btn btn-default" icon="fa-chevron-right"
                             groups="github_connector.group_github_connector_manager"/>
-                    <button name="button_sync_team" type="object" string="Teams Sync."
+                    <button name="button_sync_repository" type="object" string="Repositories Sync."
                             class="btn btn-default" icon="fa-chevron-right"
                             groups="github_connector.group_github_connector_manager"/>
                 </header>
