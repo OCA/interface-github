@@ -106,7 +106,7 @@ class GithubRepositoryBranch(models.Model):
                 else:
                     # Analyze folders and create module versions
                     _logger.info("Analyzing repository %s ...", path)
-                    for module_name in self.listdir(path):
+                    for module_name in self.list_dir(path):
                         self._analyze_module_name(path, module_name)
         finally:
             # Reset Original level for module logger
