@@ -179,16 +179,14 @@ class GithubRepository(models.Model):
                         "Error when updating the branch %s in the local folder"
                         " %s.\n Deleting the local folder and trying"
                         " again."), branch.name, branch.local_path)
-                    deleted = False
                     try:
                         shutil.rmtree(branch.local_path)
-                        deleted = True
                     except Exception:
                         _logger.error(
                             "Error deleting the branch %s in the local folder "
                             "%s. You need to check manually what is happening "
                             "there.")
-                    if deleted:
+                    else:
                         branch._download_code()
         return True
 
