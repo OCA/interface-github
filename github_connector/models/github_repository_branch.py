@@ -4,6 +4,7 @@
 
 import logging
 import os
+import shutil
 
 from subprocess import check_output
 from datetime import datetime
@@ -178,9 +179,15 @@ class GithubRepository(models.Model):
                         "Error when updating the branch %s in the local folder"
                         " %s.\n Deleting the local folder and trying"
                         " again."), branch.name, branch.local_path)
-                    command = "rm -r %s" % branch.local_path
-                    os.system(command)
-                    branch._download_code()
+                    try:
+                        shutil.rmtree(branch.local_path)
+                    except Exception:
+                        _logger.error(
+                            "Error deleting the branch %s in the local folder "
+                            "%s. You need to check manually what is happening "
+                            "there.")
+                    else:
+                        branch._download_code()
         return True
 
     def _get_analyzable_files(self, existing_folder):
