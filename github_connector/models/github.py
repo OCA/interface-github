@@ -95,7 +95,7 @@ class Github(object):
                 'per_page=%d&page=%d' % (_MAX_NUMBER_REQUEST, page)
         return complete_url
 
-    def get_http_url(self):
+    def get_http_url(self, unsecure=False):
         """ Returns the http url to github with the identifications
 
         :rtype: string
@@ -103,7 +103,10 @@ class Github(object):
         identification = (
             self.token if self.token else ":".join([self.login, self.password])
         )
-        return "https://{}@github.com/".format(identification)
+        if unsecure:
+            return "https://{}@github.com/".format(identification)
+        else:
+            return _GITHUB_URL
 
     def list(self, arguments):
         page = 1
