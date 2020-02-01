@@ -16,4 +16,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="value">True</field>
     </record>
 
+    <record id="github_unsecure" model="ir.config_parameter">
+        <field name="key">github.unsecure</field>
+        <field name="value">False</field>
+    </record>
+
 </odoo>

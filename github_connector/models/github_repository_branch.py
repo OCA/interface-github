@@ -130,8 +130,8 @@ class GithubRepository(models.Model):
     @api.multi
     def _download_code(self):
         client = self.get_github_connector("")
-        unsecure = self.sudo().env['ir.config_parameter'].get_param(
-            'github.unsecure', False)
+        unsecure = bool(self.sudo().env['ir.config_parameter'].get_param(
+            'github.unsecure', False))
         for branch in self:
             if not os.path.exists(branch.local_path):
                 _logger.info(
