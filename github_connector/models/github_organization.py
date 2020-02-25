@@ -115,8 +115,6 @@ class GithubOrganization(models.Model):
             except exceptions.Warning:
                 logger.exception("Error when processing %s()", func.__name__)
 
-
-
     @api.model
     def cron_update_organization_team(self):
         organizations = self.search([])
