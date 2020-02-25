@@ -1,8 +1,11 @@
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+# @author: Numigi (https://numigi.com)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+import logging
+from odoo import api, fields, models, exceptions
 
-from odoo import api, fields, models
+logger = logging.getLogger(__name__)
 
 
 class GithubOrganization(models.Model):
@@ -97,9 +100,22 @@ class GithubOrganization(models.Model):
 
     @api.multi
     def full_update(self):
-        self.button_sync_member()
-        self.button_sync_repository()
-        self.button_sync_team()
+        # The right to access all of the queried github object are different
+        # The user might have access to the repositories but not to the member or team
+        # As a matter of fact, you can have access to the list of teams only if you are
+        # part of the organization.
+        funcs = (
+            self.button_sync_member,
+            self.button_sync_repository,
+            self.button_sync_team,
+        )
+        for func in funcs:
+            try:
+                func()
+            except exceptions.Warning:
+                logger.exception("Error when processing %s()", func.__name__)
+
+
 
     @api.model
     def cron_update_organization_team(self):
