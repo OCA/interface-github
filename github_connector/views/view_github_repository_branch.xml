@@ -1,124 +1,186 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
 Copyright (C) 2016-Today: Odoo Community Association (OCA)
 @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
-
     <record id="view_github_repository_branch_search" model="ir.ui.view">
         <field name="model">github.repository.branch</field>
         <field name="arch" type="xml">
             <search>
-                <field name="complete_name" string="Name"
-                    filter_domain="[('complete_name', 'ilike', self)]"/>
-                <field name="organization_id"/>
-                <field name="organization_serie_id"/>
-                <field name="repository_id"/>
-                <field name="state"/>
-                <filter string="To Download" name="to_download" domain="[('state','=', 'to_download')]" />
-                <filter string="To Analyze" name="to_analyze" domain="[('state','=', 'to_analyze')]" />
-                <filter string="Analyzed" name="analyzed" domain="[('state','=', 'analyzed')]" />
+                <field
+                    name="complete_name"
+                    string="Name"
+                    filter_domain="[('complete_name', 'ilike', self)]"
+                />
+                <field name="organization_id" />
+                <field name="organization_serie_id" />
+                <field name="repository_id" />
+                <field name="state" />
+                <filter
+                    string="To Download"
+                    name="to_download"
+                    domain="[('state','=', 'to_download')]"
+                />
+                <filter
+                    string="To Analyze"
+                    name="to_analyze"
+                    domain="[('state','=', 'to_analyze')]"
+                />
+                <filter
+                    string="Analyzed"
+                    name="analyzed"
+                    domain="[('state','=', 'analyzed')]"
+                />
                 <group expand="1" string="Group By">
-                    <filter string="Organization" name="organization" context="{'group_by' : 'organization_id'}"/>
-                    <filter string="Serie" name="serie" context="{'group_by' : 'organization_serie_id'}"/>
-                    <filter string="Repository" name="repository" context="{'group_by' : 'repository_id'}"/>
-                    <filter string="State" name="state" context="{'group_by' : 'state'}"/>
+                    <filter
+                        string="Organization"
+                        name="organization"
+                        context="{'group_by' : 'organization_id'}"
+                    />
+                    <filter
+                        string="Serie"
+                        name="serie"
+                        context="{'group_by' : 'organization_serie_id'}"
+                    />
+                    <filter
+                        string="Repository"
+                        name="repository"
+                        context="{'group_by' : 'repository_id'}"
+                    />
+                    <filter
+                        string="State"
+                        name="state"
+                        context="{'group_by' : 'state'}"
+                    />
                 </group>
             </search>
         </field>
     </record>
-
     <record id="view_github_repository_branch_tree" model="ir.ui.view">
         <field name="model">github.repository.branch</field>
         <field name="arch" type="xml">
             <tree colors="blue: state == 'to_download'; brown: state == 'to_analyze';">
-                <field name="complete_name"/>
-                <field name="mb_size" attrs="{'invisible': [('size', '=', 0)]}" sum="Total"/>
-                <field name="size" invisible="1"/>
-                <field name="repository_id" invisible="1"/>
-                <field name="last_download_date"/>
-                <field name="last_analyze_date"/>
-                <button name="button_download_code"
-                        type="object" states="to_download"
-                        string="Download Source Code"
-                        icon="fa-download"
-                        groups="github_connector.group_github_connector_manager"/>
-                <button name="button_download_code"
-                        type="object" states="to_analyze,analyzed"
-                        string="Update Source Code"
-                        icon="fa-download"
-                        groups="github_connector.group_github_connector_manager"/>
-                <button name="button_analyze_code"
-                        type="object" states="to_analyze"
-                        string="Analyze Source Code"
-                        icon="fa-refresh"
-                        groups="github_connector.group_github_connector_manager"/>
-                <button name="button_analyze_code"
-                        type="object" states="analyzed"
-                        string="Update Source Code Analyzis"
-                        icon="fa-refresh"
-                        groups="github_connector.group_github_connector_manager"/>
-                <field name="state"/>
+                <field name="complete_name" />
+                <field
+                    name="mb_size"
+                    attrs="{'invisible': [('size', '=', 0)]}"
+                    sum="Total"
+                />
+                <field name="size" invisible="1" />
+                <field name="repository_id" invisible="1" />
+                <field name="last_download_date" />
+                <field name="last_analyze_date" />
+                <button
+                    name="button_download_code"
+                    type="object"
+                    states="to_download"
+                    string="Download Source Code"
+                    icon="fa-download"
+                    groups="github_connector.group_github_connector_manager"
+                />
+                <button
+                    name="button_download_code"
+                    type="object"
+                    states="to_analyze,analyzed"
+                    string="Update Source Code"
+                    icon="fa-download"
+                    groups="github_connector.group_github_connector_manager"
+                />
+                <button
+                    name="button_analyze_code"
+                    type="object"
+                    states="to_analyze"
+                    string="Analyze Source Code"
+                    icon="fa-refresh"
+                    groups="github_connector.group_github_connector_manager"
+                />
+                <button
+                    name="button_analyze_code"
+                    type="object"
+                    states="analyzed"
+                    string="Update Source Code Analyzis"
+                    icon="fa-refresh"
+                    groups="github_connector.group_github_connector_manager"
+                />
+                <field name="state" />
             </tree>
         </field>
     </record>
-
     <record id="view_github_repository_branch_form" model="ir.ui.view">
         <field name="model">github.repository.branch</field>
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="button_download_code"
-                            type="object" states="to_download"
-                            string="Download Source Code"
-                            class="btn btn-primary" icon="fa-download"
-                            groups="github_connector.group_github_connector_manager"/>
-                    <button name="button_download_code"
-                            type="object" states="to_analyze,analyzed"
-                            string="Update Source Code"
-                            class="btn btn-default" icon="fa-download"
-                            groups="github_connector.group_github_connector_manager"/>
-                    <button name="button_analyze_code"
-                            type="object" states="to_analyze"
-                            string="Analyze Source Code"
-                            class="btn btn-primary" icon="fa-refresh"
-                            groups="github_connector.group_github_connector_manager"/>
-                    <button name="button_analyze_code"
-                            type="object" states="analyzed"
-                            string="Update Source Code Analyzis"
-                            class="btn btn-default" icon="fa-refresh"
-                            groups="github_connector.group_github_connector_manager"/>
-                    <field name="state" widget="statusbar"/>
+                    <button
+                        name="button_download_code"
+                        type="object"
+                        states="to_download"
+                        string="Download Source Code"
+                        class="btn btn-primary"
+                        icon="fa-download"
+                        groups="github_connector.group_github_connector_manager"
+                    />
+                    <button
+                        name="button_download_code"
+                        type="object"
+                        states="to_analyze,analyzed"
+                        string="Update Source Code"
+                        class="btn btn-default"
+                        icon="fa-download"
+                        groups="github_connector.group_github_connector_manager"
+                    />
+                    <button
+                        name="button_analyze_code"
+                        type="object"
+                        states="to_analyze"
+                        string="Analyze Source Code"
+                        class="btn btn-primary"
+                        icon="fa-refresh"
+                        groups="github_connector.group_github_connector_manager"
+                    />
+                    <button
+                        name="button_analyze_code"
+                        type="object"
+                        states="analyzed"
+                        string="Update Source Code Analyzis"
+                        class="btn btn-default"
+                        icon="fa-refresh"
+                        groups="github_connector.group_github_connector_manager"
+                    />
+                    <field name="state" widget="statusbar" />
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box" />
                     <div class="oe_title">
-                        <h1><field name="complete_name"/></h1>
+                        <h1>
+                            <field name="complete_name" />
+                        </h1>
                     </div>
                     <group col="4">
                         <field name="size" />
                         <field name="mb_size" />
-                        <field name="repository_id"/>
-                        <field name="organization_id"/>
-                        <field name="organization_serie_id"/>
+                        <field name="repository_id" />
+                        <field name="organization_id" />
+                        <field name="organization_serie_id" />
                     </group>
                     <notebook>
                         <page string="External Services">
                             <group col="4">
-                                <field name="github_url" widget="url" colspan="4"/>
-                                <field name="coverage_url" widget="url" colspan="4"/>
-                                <field name="ci_url" widget="url" colspan="4"/>
+                                <field name="github_url" widget="url" colspan="4" />
+                                <field name="coverage_url" widget="url" colspan="4" />
+                                <field name="ci_url" widget="url" colspan="4" />
                             </group>
                         </page>
                         <page name="technical" string="Technical Settings">
                             <group>
                                 <group name="group_technical_paths">
-                                    <field name="local_path"/>
+                                    <field name="local_path" />
                                 </group>
                                 <group name="group_technical_dates">
-                                    <field name="last_download_date"/>
-                                    <field name="last_analyze_date"/>
+                                    <field name="last_download_date" />
+                                    <field name="last_analyze_date" />
                                 </group>
                             </group>
                         </page>
@@ -127,26 +189,34 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             </form>
         </field>
     </record>
-
     <record id="view_github_repository_branch_kanban" model="ir.ui.view">
         <field name="model">github.repository.branch</field>
         <field name="arch" type="xml">
             <kanban>
-                <field name="complete_name"/>
-                <field name="mb_size"/>
-                <field name="coverage_url"/>
-                <field name="ci_url"/>
-                <field name="github_url"/>
+                <field name="complete_name" />
+                <field name="mb_size" />
+                <field name="coverage_url" />
+                <field name="ci_url" />
+                <field name="github_url" />
                 <templates>
                     <t t-name="kanban-box">
                         <div class="o_res_partner_kanban oe_kanban_global_click">
                             <div class="oe_kanban_details">
-                                <h4 class="oe_partner_heading"><field name="complete_name"/></h4>
+                                <h4 class="oe_partner_heading">
+                                    <field name="complete_name" />
+                                </h4>
                                 <div class="branch_tag_list">
-                                    <a target="_blank" t-att-href="record.github_url.value">
-                                        <span class="badge"><i class="fa fa-fw fa-github-alt"> </i></span>
+                                    <a
+                                        target="_blank"
+                                        t-att-href="record.github_url.value"
+                                    >
+                                        <span class="badge">
+                                            <i class="fa fa-fw fa-github-alt"> </i>
+                                        </span>
                                     </a>
-                                    <span class="badge"><field name="mb_size"/> Mb</span>
+                                    <span class="badge"><field
+                                            name="mb_size"
+                                        /> Mb</span>
                                 </div>
                             </div>
                         </div>
@@ -155,5 +225,4 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             </kanban>
         </field>
     </record>
-
 </odoo>
