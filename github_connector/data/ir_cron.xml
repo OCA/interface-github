@@ -1,61 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
 Copyright (C) 2016-Today: Odoo Community Association (OCA)
 @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo noupdate="1">
-
-        <record model="ir.cron" id="cron_update_organization">
-            <field name="name">Synchronize All Organizations and Teams</field>
-            <field name="interval_number">1</field>
-            <field name="active" eval="False"/>
-            <field name="user_id" ref="base.user_root"/>
-            <field name="interval_type">days</field>
-            <field name="numbercall">-1</field>
-            <field name="doall" eval="False"/>
-            <field name="state">code</field>
-            <field name="model_id" ref="model_github_organization"/>
-            <field name="code">model.cron_update_organization_team()</field>
-        </record>
-
-        <record model="ir.cron" id="cron_update_branch_list">
-            <field name="name">Synchronize Branches List for All Repositories</field>
-            <field name="interval_number">1</field>
-            <field name="active" eval="False"/>
-            <field name="user_id" ref="base.user_root"/>
-            <field name="interval_type">days</field>
-            <field name="numbercall">-1</field>
-            <field name="doall" eval="False"/>
-            <field name="state">code</field>
-            <field name="model_id" ref="model_github_repository"/>
-            <field name="code">model.cron_update_branch_list()</field>
-        </record>
-
-        <record model="ir.cron" id="cron_download_code">
-            <field name="name">Download Source Code for All Github Branches</field>
-            <field name="interval_number">1</field>
-            <field name="active" eval="False"/>
-            <field name="user_id" ref="base.user_root"/>
-            <field name="interval_type">days</field>
-            <field name="numbercall">-1</field>
-            <field name="doall" eval="False"/>
-            <field name="state">code</field>
-            <field name="model_id" ref="model_github_repository_branch"/>
-            <field name="code">model.cron_download_all()</field>
-        </record>
-
-        <record model="ir.cron" id="cron_analyze_code">
-            <field name="name">Analyze Source Code for All Github Branches</field>
-            <field name="interval_number">1</field>
-            <field name="active" eval="False"/>
-            <field name="user_id" ref="base.user_root"/>
-            <field name="interval_type">days</field>
-            <field name="numbercall">-1</field>
-            <field name="doall" eval="False"/>
-            <field name="state">code</field>
-            <field name="model_id" ref="model_github_repository_branch"/>
-            <field name="code">model.cron_analyze_all()</field>
-        </record>
-
+    <record model="ir.cron" id="cron_update_organization">
+        <field name="name">Synchronize All Organizations and Teams</field>
+        <field name="interval_number">1</field>
+        <field name="active" eval="False" />
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False" />
+        <field name="state">code</field>
+        <field name="model_id" ref="model_github_organization" />
+        <field name="code">model.cron_update_organization_team()</field>
+    </record>
+    <record model="ir.cron" id="cron_update_branch_list">
+        <field name="name">Synchronize Branches List for All Repositories</field>
+        <field name="interval_number">1</field>
+        <field name="active" eval="False" />
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False" />
+        <field name="state">code</field>
+        <field name="model_id" ref="model_github_repository" />
+        <field name="code">model.cron_update_branch_list()</field>
+    </record>
+    <record model="ir.cron" id="cron_download_code">
+        <field name="name">Download Source Code for All Github Branches</field>
+        <field name="interval_number">1</field>
+        <field name="active" eval="False" />
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False" />
+        <field name="state">code</field>
+        <field name="model_id" ref="model_github_repository_branch" />
+        <field name="code">model.cron_download_all()</field>
+    </record>
+    <record model="ir.cron" id="cron_analyze_code">
+        <field name="name">Analyze Source Code for All Github Branches</field>
+        <field name="interval_number">1</field>
+        <field name="active" eval="False" />
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False" />
+        <field name="state">code</field>
+        <field name="model_id" ref="model_github_repository_branch" />
+        <field name="code">model.cron_analyze_all()</field>
+    </record>
 </odoo>

@@ -1,4 +1,3 @@
-
 from . import github
 from . import abstract_github_model
 
