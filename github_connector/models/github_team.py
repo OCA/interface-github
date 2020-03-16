@@ -9,14 +9,12 @@ class GithubTeam(models.Model):
     _name = "github.team"
     _inherit = ["abstract.github.model"]
     _order = "name"
+    _description = "Github Team"
 
     _github_type = "team"
     _github_login_field = "slug"
 
-    _PRIVACY_SELECTION = [
-        ("secret", "Secret"),
-        ("closed", "Closed"),
-    ]
+    _PRIVACY_SELECTION = [("secret", "Secret"), ("closed", "Closed")]
 
     # Column Section
     organization_id = fields.Many2one(
@@ -81,7 +79,6 @@ class GithubTeam(models.Model):
     )
 
     # Compute Section
-    @api.multi
     @api.depends("github_login", "organization_id.github_login")
     def _compute_github_url(self):
         for team in self:
@@ -93,23 +90,18 @@ class GithubTeam(models.Model):
                 )
             )
 
-    @api.multi
     @api.depends("name", "organization_id.github_login")
     def _compute_complete_name(self):
         for team in self:
-            team.complete_name = (
-                team.organization_id.github_login
-                + "/"
-                + (team.github_login and team.github_login or "")
+            team.complete_name = "{}/{}".format(
+                team.organization_id.github_login, team.github_login
             )
 
-    @api.multi
     @api.depends("partner_ids")
     def _compute_partner_qty(self):
         for team in self:
             team.partner_qty = len(team.partner_ids)
 
-    @api.multi
     @api.depends("repository_ids")
     def _compute_repository_qty(self):
         for team in self:
@@ -118,28 +110,23 @@ class GithubTeam(models.Model):
     # Overloadable Section
     @api.model
     def get_conversion_dict(self):
-        res = super(GithubTeam, self).get_conversion_dict()
-        res.update(
-            {"name": "name", "description": "description", "privacy": "privacy",}
-        )
+        res = super().get_conversion_dict()
+        res.update({"name": "name", "description": "description", "privacy": "privacy"})
         return res
 
     @api.model
     def get_odoo_data_from_github(self, data):
         organization_obj = self.env["github.organization"]
-        res = super(GithubTeam, self).get_odoo_data_from_github(data)
+        res = super().get_odoo_data_from_github(data)
         if data.get("organization", False):
             organization_id = organization_obj.get_from_id_or_create(
                 data["organization"]
             ).id
         else:
             organization_id = False
-        res.update(
-            {"organization_id": organization_id,}
-        )
+        res.update({"organization_id": organization_id})
         return res
 
-    @api.multi
     def get_github_data_from_odoo(self):
         self.ensure_one()
         return {
@@ -148,20 +135,15 @@ class GithubTeam(models.Model):
             "privacy": self.privacy,
         }
 
-    @api.multi
     def get_github_args_for_creation(self):
         self.ensure_one()
-        return [
-            self.organization_id.github_login,
-        ]
+        return [self.organization_id.github_login]
 
-    @api.multi
     def full_update(self):
         self.button_sync_member()
         self.button_sync_repository()
 
     # Action Section
-    @api.multi
     def button_sync_member(self):
         partner_obj = self.env["res.partner"]
         connector_member = self.get_github_connector("team_members_member")
@@ -177,7 +159,6 @@ class GithubTeam(models.Model):
             team.partner_ids = [(2, x.id, False) for x in team.partner_ids]
             team.partner_ids = [(0, False, x) for x in partner_data]
 
-    @api.multi
     def button_sync_repository(self):
         repository_obj = self.env["github.repository"]
         connector = self.get_github_connector("team_repositories")
@@ -197,3 +178,23 @@ class GithubTeam(models.Model):
 
             team.repository_ids = [(2, x.id, False) for x in team.repository_ids]
             team.repository_ids = [(0, False, x) for x in repository_data]
+
+    def action_github_team_partner_from_team(self):
+        self.ensure_one()
+        action = self.env.ref(
+            "github_connector.action_github_team_partner_from_team"
+        ).read()[0]
+        action["context"] = dict(self.env.context)
+        action["context"].pop("group_by", None)
+        action["context"]["search_default_team_id"] = self.id
+        return action
+
+    def action_github_team_repository_from_team(self):
+        self.ensure_one()
+        action = self.env.ref(
+            "github_connector.action_github_team_repository_from_team"
+        ).read()[0]
+        action["context"] = dict(self.env.context)
+        action["context"].pop("group_by", None)
+        action["context"]["search_default_team_id"] = self.id
+        return action

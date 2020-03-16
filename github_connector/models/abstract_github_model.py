@@ -4,6 +4,7 @@
 
 import base64
 import logging
+from datetime import datetime
 from urllib.request import urlopen
 
 from odoo import _, api, exceptions, fields, models, tools
@@ -28,9 +29,7 @@ class AbstractGithubModel(models.AbstractModel):
     _need_individual_call = False
     _field_list_prevent_overwrite = []
 
-    github_id_external = fields.Char(
-        string="Github Id", readonly=True, index=True, oldname="github_id"
-    )
+    github_id_external = fields.Char(string="Github Id", readonly=True, index=True)
 
     github_login = fields.Char(
         string="Github Technical Name", readonly=True, index=True
@@ -85,6 +84,11 @@ class AbstractGithubModel(models.AbstractModel):
             "github_write_date": "updated_at",
         }
 
+    def process_timezone_fields(self, res):
+        for k, v in res.items():
+            if self._fields[k].type == "datetime" and isinstance(v, str):
+                res[k] = datetime.strptime(v, "%Y-%m-%dT%H:%M:%SZ")
+
     @api.model
     def get_odoo_data_from_github(self, data):
         """Prepare function that map Github data to create in Odoo"""
@@ -94,9 +98,9 @@ class AbstractGithubModel(models.AbstractModel):
             if hasattr(self, k) and data.get(v, False):
                 res.update({k: data[v]})
         res.update({"github_last_sync_date": fields.Datetime.now()})
+        self.process_timezone_fields(res)
         return res
 
-    @api.multi
     def get_github_data_from_odoo(self):
         """Prepare function that map Odoo data to create in Github.
         Usefull only if your model implement creation in github"""
@@ -108,7 +112,6 @@ class AbstractGithubModel(models.AbstractModel):
             )
         )
 
-    @api.multi
     def get_github_args_for_creation(self):
         """Should Return list of arguments required to create the given item
         in Github.
@@ -121,14 +124,12 @@ class AbstractGithubModel(models.AbstractModel):
             )
         )
 
-    @api.multi
     def full_update(self):
         """Override this function in models that inherit this abstract
         to mention which items should be synchronized from github when the
         user click on 'Full Update' Button"""
         pass
 
-    @api.multi
     def _hook_after_github_creation(self):
         """Hook that will be called, after a creation in github.
         Override this function to add custom logic for after creation."""
@@ -207,15 +208,12 @@ class AbstractGithubModel(models.AbstractModel):
         else:
             return current_object
 
-    @api.multi
     def button_update_from_github_light(self):
         return self.update_from_github(False)
 
-    @api.multi
     def button_update_from_github_full(self):
         return self.update_from_github(True)
 
-    @api.multi
     def update_from_github(self, child_update):
         """Call Github API, using a URL using github id. Load data and
             update Odoo object accordingly, if the odoo object is obsolete.
@@ -239,7 +237,7 @@ class AbstractGithubModel(models.AbstractModel):
         max_try = int(
             self.sudo().env["ir.config_parameter"].get_param("github.max_try")
         )
-        for i in range(max_try):
+        for _i in range(max_try):
             try:
                 stream = urlopen(url).read()
                 break
@@ -257,7 +255,6 @@ class AbstractGithubModel(models.AbstractModel):
         vals.update(extra_data)
         return self.create(vals)
 
-    @api.multi
     def _update_from_github_data(self, data):
         for item in self:
             vals = self.get_odoo_data_from_github(data)
@@ -278,32 +275,25 @@ class AbstractGithubModel(models.AbstractModel):
             if to_write:
                 item.write(to_write)
 
-    @api.multi
     def get_github_connector(self, github_type):
-        no_login = not tools.config.get("github_login") or not tools.config.get(
+        if not tools.config.get("github_login") or not tools.config.get(
             "github_password"
-        )
-        no_token = not tools.config.get("github_token")
-        if no_login and no_token:
+        ):
             raise exceptions.Warning(
                 _(
-                    "Please add the couple 'github_login' and 'github_password'"
-                    " or 'github_token'"
-                    " in Odoo configuration file."
+                    "Please add 'github_login' and 'github_password' "
+                    "in Odoo configuration file."
                 )
             )
         return Github(
             github_type,
-            login=tools.config.get("github_login", ""),
-            password=tools.config.get("github_password", ""),
-            # or 1 to avoid the raise of an error on None
+            login=tools.config["github_login"],
+            password=tools.config["github_password"],
             max_try=int(
-                self.sudo().env["ir.config_parameter"].get_param("github.max_try") or 1
+                self.sudo().env["ir.config_parameter"].get_param("github.max_try", 1)
             ),
-            token=tools.config.get("github_token", ""),
         )
 
-    @api.multi
     def create_in_github(self, model_obj):
         self.ensure_one()
         github_connector = self.get_github_connector(self.github_type())
@@ -317,7 +307,6 @@ class AbstractGithubModel(models.AbstractModel):
         new_item._hook_after_github_creation()
         return new_item
 
-    @api.multi
     def get_action(self):
         self.ensure_one()
         return {

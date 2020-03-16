@@ -10,10 +10,7 @@ class GithubTeamPartner(models.Model):
     _description = "Github Team Partner"
     _order = "team_id, partner_id"
 
-    _ROLE_SELECTION = [
-        ("member", "Member"),
-        ("maintainer", "Maintainer"),
-    ]
+    _ROLE_SELECTION = [("member", "Member"), ("maintainer", "Maintainer")]
 
     # Column Section
     team_id = fields.Many2one(
@@ -36,8 +33,4 @@ class GithubTeamPartner(models.Model):
 
     role = fields.Selection(
         selection=_ROLE_SELECTION, string="Role", required=True, readonly=True
-    )
-
-    image_small = fields.Binary(
-        related="partner_id.image_small", readonly=True, store=True
     )
