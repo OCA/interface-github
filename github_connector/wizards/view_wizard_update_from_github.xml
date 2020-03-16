@@ -1,27 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
 Copyright (C) 2016-Today: Odoo Community Association (OCA)
 @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
-
     <record id="view_wizard_update_from_github_form" model="ir.ui.view">
         <field name="model">wizard.update.from.github</field>
         <field name="arch" type="xml">
             <form>
                 <group col="4">
-                    <field name="child_update"/>
+                    <field name="child_update" />
                 </group>
                 <footer>
-                    <button name="button_update_from_github"
-                            string="Update From Github"
-                            type="object" class="oe_highlight"/>
+                    <button
+                        name="button_update_from_github"
+                        string="Update From Github"
+                        type="object"
+                        class="oe_highlight"
+                    />
                     or
-                    <button string="Cancel" class="oe_link" special="cancel"/>
+                    <button string="Cancel" class="oe_link" special="cancel" />
                 </footer>
             </form>
         </field>
     </record>
-
 </odoo>
