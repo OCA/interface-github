@@ -6,20 +6,18 @@ from odoo import api, fields, models
 
 
 class WizardDownloadAnalyzeBranch(models.TransientModel):
-    _name = 'wizard.download.analyze.branch'
-    _description = 'Wizard Download Analyze Branch'
+    _name = "wizard.download.analyze.branch"
+    _description = "Wizard Download Analyze Branch"
 
-    download_source_code = fields.Boolean(
-        string='Download Source Code', default=True)
+    download_source_code = fields.Boolean(string="Download Source Code", default=True)
 
-    analyze_source_code = fields.Boolean(
-        string='Analyze Source Code', default=True)
+    analyze_source_code = fields.Boolean(string="Analyze Source Code", default=True)
 
     @api.multi
     def apply(self):
-        repository_obj = self.env['github.repository.branch']
+        repository_obj = self.env["github.repository.branch"]
         for wizard in self:
-            branches = repository_obj.browse(self._context['active_ids'])
+            branches = repository_obj.browse(self._context["active_ids"])
             if wizard.download_source_code:
                 branches.button_download_code()
             if wizard.analyze_source_code:
