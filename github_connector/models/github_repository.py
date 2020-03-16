@@ -13,6 +13,7 @@ class GithubRepository(models.Model):
     _name = "github.repository"
     _inherit = ["abstract.github.model"]
     _order = "organization_id, name"
+    _description = "Github Repository"
 
     _github_type = "repository"
     _github_login_field = "full_name"
@@ -79,7 +80,6 @@ class GithubRepository(models.Model):
     )
 
     # Compute Section
-    @api.multi
     @api.depends("organization_id.ignored_repository_names")
     def _compute_ignore(self):
         for repository in self:
@@ -89,23 +89,21 @@ class GithubRepository(models.Model):
             )
             repository.color = repository.is_ignored and 1 or 0
 
-    @api.multi
     @api.depends("team_ids")
     def _compute_team_qty(self):
         for repository in self:
             repository.team_qty = len(repository.team_ids)
 
-    @api.multi
     @api.depends("name", "organization_id.github_login")
     def _compute_complete_name(self):
         for repository in self:
-            repository.complete_name = (
-                repository.organization_id.github_login + "/" + repository.name
-                and repository.name
-                or ""
+            repository.complete_name = "%(login)s/%(rep_name)s" % (
+                {
+                    "login": repository.organization_id.github_login,
+                    "rep_name": repository.name or "",
+                }
             )
 
-    @api.multi
     @api.depends("repository_branch_ids.repository_id")
     def _compute_repository_branch_qty(self):
         for repository in self:
@@ -114,7 +112,7 @@ class GithubRepository(models.Model):
     # Overloadable Section
     @api.model
     def get_conversion_dict(self):
-        res = super(GithubRepository, self).get_conversion_dict()
+        res = super().get_conversion_dict()
         res.update(
             {
                 "name": "name",
@@ -128,14 +126,11 @@ class GithubRepository(models.Model):
     @api.model
     def get_odoo_data_from_github(self, data):
         organization_obj = self.env["github.organization"]
-        res = super(GithubRepository, self).get_odoo_data_from_github(data)
+        res = super().get_odoo_data_from_github(data)
         organization = organization_obj.get_from_id_or_create(data["owner"])
-        res.update(
-            {"organization_id": organization.id,}
-        )
+        res.update({"organization_id": organization.id})
         return res
 
-    @api.multi
     def get_github_data_from_odoo(self):
         self.ensure_one()
         return {
@@ -144,14 +139,10 @@ class GithubRepository(models.Model):
             "homepage": self.website,
         }
 
-    @api.multi
     def get_github_args_for_creation(self):
         self.ensure_one()
-        return [
-            self.organization_id.github_login,
-        ]
+        return [self.organization_id.github_login]
 
-    @api.multi
     def full_update(self):
         self.button_sync_branch()
 
@@ -161,7 +152,6 @@ class GithubRepository(models.Model):
         branches.button_sync_branch()
         return True
 
-    @api.multi
     def button_sync_branch(self):
         github_branch = self.get_github_connector("repository_branches")
         branch_obj = self.env["github.repository.branch"]
@@ -189,3 +179,23 @@ class GithubRepository(models.Model):
                         data["name"],
                     )
             repository.branch_ids = branch_ids
+
+    def action_github_team_repository_from_repository(self):
+        self.ensure_one()
+        action = self.env.ref(
+            "github_connector.action_github_team_repository_from_repository"
+        ).read()[0]
+        action["context"] = dict(self.env.context)
+        action["context"].pop("group_by", None)
+        action["context"]["search_default_repository_id"] = self.id
+        return action
+
+    def action_github_repository_branch(self):
+        self.ensure_one()
+        action = self.env.ref(
+            "github_connector.action_github_repository_branch"
+        ).read()[0]
+        action["context"] = dict(self.env.context)
+        action["context"].pop("group_by", None)
+        action["context"]["search_default_repository_id"] = self.id
+        return action

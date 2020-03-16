@@ -61,7 +61,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="view_github_repository_branch_tree" model="ir.ui.view">
         <field name="model">github.repository.branch</field>
         <field name="arch" type="xml">
-            <tree colors="blue: state == 'to_download'; brown: state == 'to_analyze';">
+            <tree
+                decoration-info="state == 'to_download'"
+                decoration-warning="state == 'to_analyze'"
+            >
                 <field name="complete_name" />
                 <field
                     name="mb_size"
