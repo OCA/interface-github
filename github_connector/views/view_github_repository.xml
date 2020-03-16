@@ -28,7 +28,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="view_github_repository_tree" model="ir.ui.view">
         <field name="model">github.repository</field>
         <field name="arch" type="xml">
-            <tree colors="gray: repository_branch_qty == 0;">
+            <tree decoration-muted="repository_branch_qty == 0">
                 <field name="complete_name" />
                 <field name="description" />
                 <field name="repository_branch_qty" string="# Branches" />
@@ -52,28 +52,45 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button
-                            type="action"
+                            type="object"
                             class="oe_stat_button"
                             icon="fa-code-fork"
-                            name="%(action_github_repository_branch)d"
+                            name="action_github_repository_branch"
                             attrs="{'invisible': [('repository_branch_qty', '=', False)]}"
-                            context="{'search_default_repository_id': active_id}"
                         >
-                            <field
-                                name="repository_branch_qty"
-                                string="Branches"
-                                widget="statinfo"
-                            />
+                            <div class="o_stat_info">
+                                <field
+                                    name="repository_branch_qty"
+                                    class="o_stat_value"
+                                />
+                                <span
+                                    class="o_stat_text"
+                                    attrs="{'invisible': [('repository_branch_qty', '&lt;', 2)]}"
+                                > Branches</span>
+                                <span
+                                    class="o_stat_text"
+                                    attrs="{'invisible': [('repository_branch_qty', '&gt;', 1)]}"
+                                > Branch</span>
+                            </div>
                         </button>
                         <button
-                            type="action"
+                            type="object"
                             class="oe_stat_button"
                             icon="fa-users"
-                            name="%(action_github_team_repository_from_repository)d"
+                            name="action_github_team_repository_from_repository"
                             attrs="{'invisible': [('team_qty', '=', False)]}"
-                            context="{'search_default_repository_id': active_id}"
                         >
-                            <field name="team_qty" string="Teams" widget="statinfo" />
+                            <div class="o_stat_info">
+                                <field name="team_qty" class="o_stat_value" />
+                                <span
+                                    class="o_stat_text"
+                                    attrs="{'invisible': [('repository_branch_qty', '&lt;', 2)]}"
+                                > Teams</span>
+                                <span
+                                    class="o_stat_text"
+                                    attrs="{'invisible': [('repository_branch_qty', '&gt;', 1)]}"
+                                > Team</span>
+                            </div>
                         </button>
                     </div>
                     <div class="oe_title">
@@ -102,7 +119,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                     name="button_update_from_github_light"
                                     type="object"
                                     string="Light Sync"
-                                    class="btn btn-default"
+                                    class="btn btn-light"
                                     icon="fa-angle-right"
                                     groups="github_connector.group_github_connector_manager"
                                 />
@@ -110,7 +127,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                     name="button_update_from_github_full"
                                     type="object"
                                     string="Full Sync"
-                                    class="btn btn-default"
+                                    class="btn btn-light"
                                     icon="fa-angle-double-right"
                                     groups="github_connector.group_github_connector_manager"
                                 />

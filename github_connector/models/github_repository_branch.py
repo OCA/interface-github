@@ -23,6 +23,7 @@ class GithubRepository(models.Model):
     _name = "github.repository.branch"
     _inherit = ["abstract.github.model"]
     _order = "repository_id, sequence_serie"
+    _description = "Github Repository Branch"
 
     _github_type = "repository_branches"
     _github_login_field = False
@@ -111,14 +112,12 @@ class GithubRepository(models.Model):
                 )
         if source_path and source_path not in modules.module.ad_paths:
             modules.module.ad_paths.append(source_path)
-        super(GithubRepository, self).__init__(pool, cr)
+        super().__init__(pool, cr)
 
     # Action Section
-    @api.multi
     def button_download_code(self):
         return self._download_code()
 
-    @api.multi
     def button_analyze_code(self):
         return self._analyze_code()
 
@@ -143,7 +142,6 @@ class GithubRepository(models.Model):
             branch = self.create({"name": name, "repository_id": repository_id})
         return branch
 
-    @api.multi
     def _download_code(self):
         client = self.get_github_connector("")
         for branch in self:
@@ -170,7 +168,7 @@ class GithubRepository(models.Model):
                 )
                 os.system(command)
                 branch.write(
-                    {"last_download_date": datetime.today(), "state": "to_analyze",}
+                    {"last_download_date": datetime.today(), "state": "to_analyze"}
                 )
             else:
                 # Update repository
@@ -187,9 +185,7 @@ class GithubRepository(models.Model):
                             }
                         )
                     else:
-                        branch.write(
-                            {"last_download_date": datetime.today(),}
-                        )
+                        branch.write({"last_download_date": datetime.today()})
                 except Exception:
                     # Trying to clean the local folder
                     _logger.warning(
@@ -215,7 +211,7 @@ class GithubRepository(models.Model):
 
     def _get_analyzable_files(self, existing_folder):
         res = []
-        for root, dirs, files in os.walk(existing_folder):
+        for root, _dirs, files in os.walk(existing_folder):
             if "/.git" not in root:
                 for fic in files:
                     if fic != ".gitignore":
@@ -245,7 +241,6 @@ class GithubRepository(models.Model):
 
         return {"size": size}
 
-    @api.multi
     def _analyze_code(self):
         partial_commit = safe_eval(
             self.sudo()
@@ -261,7 +256,7 @@ class GithubRepository(models.Model):
                 try:
                     vals = branch.analyze_code_one()
                     vals.update(
-                        {"last_analyze_date": datetime.today(), "state": "analyzed",}
+                        {"last_analyze_date": datetime.today(), "state": "analyzed"}
                     )
                     # Mark the branch as analyzed
                     branch.write(vals)
@@ -277,7 +272,6 @@ class GithubRepository(models.Model):
         return True
 
     # Compute Section
-    @api.multi
     @api.depends("name", "repository_id.name")
     def _compute_complete_name(self):
         for branch in self:
@@ -285,13 +279,11 @@ class GithubRepository(models.Model):
                 branch.repository_id.complete_name + "/" + branch.name
             )
 
-    @api.multi
     @api.depends("size")
     def _compute_mb_size(self):
         for branch in self:
             branch.mb_size = float(branch.size) / (1024 ** 2)
 
-    @api.multi
     @api.depends("organization_id", "name")
     def _compute_organization_serie_id(self):
         for branch in self:
@@ -299,7 +291,6 @@ class GithubRepository(models.Model):
                 if serie.name == branch.name:
                     branch.organization_serie_id = serie
 
-    @api.multi
     @api.depends("complete_name")
     def _compute_local_path(self):
         source_path = tools.config.get("source_code_local_path", False)
@@ -315,7 +306,6 @@ class GithubRepository(models.Model):
                 source_path, branch.organization_id.github_login, branch.complete_name
             )
 
-    @api.multi
     @api.depends(
         "name",
         "repository_id.name",
@@ -325,14 +315,17 @@ class GithubRepository(models.Model):
     def _compute_coverage(self):
         for branch in self:
             if not branch.organization_id.coverage_url_pattern:
-                continue
-            branch.coverage_url = branch.organization_id.coverage_url_pattern.format(
-                organization_name=branch.organization_id.github_login,
-                repository_name=branch.repository_id.name,
-                branch_name=branch.name,
-            )
+                branch.coverage_url = ""
+            else:
+                # This is done because if not, black format the line in a wrong
+                # way
+                org_id = branch.organization_id
+                branch.coverage_url = org_id.coverage_url_pattern.format(
+                    organization_name=org_id.github_login,
+                    repository_name=branch.repository_id.name,
+                    branch_name=branch.name,
+                )
 
-    @api.multi
     @api.depends(
         "name",
         "repository_id.name",
@@ -342,6 +335,7 @@ class GithubRepository(models.Model):
     def _compute_ci(self):
         for branch in self:
             if not branch.organization_id.ci_url_pattern:
+                branch.ci_url = ""
                 continue
             branch.ci_url = branch.organization_id.ci_url_pattern.format(
                 organization_name=branch.organization_id.github_login,
@@ -349,15 +343,11 @@ class GithubRepository(models.Model):
                 branch_name=branch.name,
             )
 
-    @api.multi
     @api.depends("name", "repository_id.complete_name")
     def _compute_github_url(self):
         for branch in self:
-            branch.github_url = (
-                "https://github.com/"
-                + branch.organization_id.github_login
-                + "/"
-                + branch.repository_id.complete_name
-                + "/tree/"
-                + branch.name
+            branch.github_url = "https://github.com/{}/{}/tree/{}".format(
+                branch.organization_id.github_login,
+                branch.repository_id.complete_name,
+                branch.name,
             )

@@ -10,14 +10,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="name">Organizations</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.organization</field>
-        <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,form</field>
     </record>
     <record id="action_res_partner" model="ir.actions.act_window">
         <field name="name">Users</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.partner</field>
-        <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="context">{'search_default_has_github_account':1}</field>
     </record>
@@ -25,14 +23,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="name">Teams</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.team</field>
-        <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,form</field>
     </record>
     <record id="action_github_team_partner_from_partner" model="ir.actions.act_window">
         <field name="name">Teams</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.team.partner</field>
-        <field name="view_type">form</field>
         <field name="view_id" ref="view_github_team_partner_from_partner_kanban" />
         <field name="view_mode">kanban,tree,form</field>
     </record>
@@ -40,7 +36,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="name">Members</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.team.partner</field>
-        <field name="view_type">form</field>
         <field name="view_id" ref="view_github_team_partner_from_team_kanban" />
         <field name="view_mode">kanban,tree,form</field>
     </record>
@@ -51,7 +46,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="name">Team</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.team.repository</field>
-        <field name="view_type">form</field>
         <field
             name="view_id"
             ref="view_github_team_repository_from_repository_kanban"
@@ -62,7 +56,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="name">Repositories</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.team.repository</field>
-        <field name="view_type">form</field>
         <field name="view_id" ref="view_github_team_repository_from_team_kanban" />
         <field name="view_mode">kanban,tree,form</field>
     </record>
@@ -71,41 +64,19 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="name">Repositories</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.repository</field>
-        <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,form</field>
     </record>
     <record id="action_github_repository_branch" model="ir.actions.act_window">
         <field name="name">Repository Branches</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.repository.branch</field>
-        <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,form</field>
-    </record>
-    <!-- Extra Button Parts -->
-    <record id="action_wizard_download_analyze_branch" model="ir.actions.act_window">
-        <field name="name">Download and Analyze Source Code</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">wizard.download.analyze.branch</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-        <field name="multi">True</field>
-    </record>
-    <record id="action_wizard_update_branch_list" model="ir.actions.act_window">
-        <field name="name">Update Branch List</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">wizard.update.branch.list</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-        <field name="multi">True</field>
     </record>
     <!-- Settings Part -->
     <record id="action_wizard_load_github_model" model="ir.actions.act_window">
         <field name="name">Load from Github Wizard</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">wizard.load.github.model</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
@@ -113,7 +84,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="name">Create Team in Github Wizard</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">wizard.create.team</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
@@ -121,13 +91,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="name">Create Repo in Github Wizard</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">wizard.create.repository</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-    </record>
-    <record id="action_wizard_update_from_github" model="ir.actions.act_window">
-        <field name="name">Update from Github</field>
-        <field name="res_model">wizard.update.from.github</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>
@@ -136,7 +99,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="name">Branches by Serie</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.repository.branch</field>
-        <field name="view_type">form</field>
         <field name="view_mode">graph,pivot</field>
         <field
             name="context"
@@ -147,7 +109,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="name">Sizes by Serie</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">github.repository.branch</field>
-        <field name="view_type">form</field>
         <field name="view_mode">graph,pivot</field>
         <field
             name="context"
