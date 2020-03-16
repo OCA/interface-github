@@ -18,7 +18,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="view_github_team_repository_tree" model="ir.ui.view">
         <field name="model">github.team.repository</field>
         <field name="arch" type="xml">
-            <tree colors="brown: permission == 'admin'; blue: permission == 'read'">
+            <tree
+                decoration-warning="permission == 'admin'"
+                decoration-info="permission == 'read'"
+            >
                 <field
                     name="team_id"
                     invisible="context.get('search_default_team_id')"

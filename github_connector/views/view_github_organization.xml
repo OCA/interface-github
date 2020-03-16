@@ -60,7 +60,66 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     />
                 </header>
                 <sheet>
-                    <field name="image" widget="image" class="oe_avatar oe_left" />
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="object"
+                            name="action_github_repository"
+                            class="oe_stat_button"
+                            icon="fa-folder-o"
+                            attrs="{'invisible': [('repository_qty', '=', False)]}"
+                        >
+                            <div class="o_stat_info">
+                                <field name="repository_qty" class="o_stat_value" />
+                                <span
+                                    class="o_stat_text"
+                                    attrs="{'invisible': [('repository_qty', '&lt;', 2)]}"
+                                > Repositories</span>
+                                <span
+                                    class="o_stat_text"
+                                    attrs="{'invisible': [('repository_qty', '&gt;', 1)]}"
+                                > Repository</span>
+                            </div>
+                        </button>
+                        <button
+                            type="object"
+                            name="action_github_team"
+                            class="oe_stat_button"
+                            icon="fa-users"
+                            attrs="{'invisible': [('team_qty', '=', False)]}"
+                        >
+                            <div class="o_stat_info">
+                                <field name="team_qty" class="o_stat_value" />
+                                <span
+                                    class="o_stat_text"
+                                    attrs="{'invisible': [('team_qty', '&lt;', 2)]}"
+                                > Teams</span>
+                                <span
+                                    class="o_stat_text"
+                                    attrs="{'invisible': [('team_qty', '&gt;', 1)]}"
+                                > Team</span>
+                            </div>
+                        </button>
+                        <button
+                            type="object"
+                            name="action_res_partner"
+                            class="oe_stat_button"
+                            icon="fa-user"
+                            attrs="{'invisible': [('member_qty', '=', False)]}"
+                        >
+                            <div class="o_stat_info">
+                                <field name="member_qty" class="o_stat_value" />
+                                <span
+                                    class="o_stat_text"
+                                    attrs="{'invisible': [('member_qty', '&lt;', 2)]}"
+                                > Members</span>
+                                <span
+                                    class="o_stat_text"
+                                    attrs="{'invisible': [('member_qty', '&gt;', 1)]}"
+                                > Member</span>
+                            </div>
+                        </button>
+                    </div>
+                    <field name="image" widget="image" class="oe_avatar" />
                     <div class="oe_title">
                         <h1>
                             <field name="name" />
@@ -68,46 +127,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                         <h3 class="oe_fade">
                             <field name="description" class="oe_inline" />
                         </h3>
-                    </div>
-                    <div class="oe_right oe_button_box" name="buttons">
-                        <button
-                            type="action"
-                            name="%(action_github_repository)d"
-                            class="oe_stat_button"
-                            icon="fa-folder-o"
-                            attrs="{'invisible': [('repository_qty', '=', False)]}"
-                            context="{'search_default_organization_id': active_id}"
-                        >
-                            <field
-                                name="repository_qty"
-                                string="Repositories"
-                                widget="statinfo"
-                            />
-                        </button>
-                        <button
-                            type="action"
-                            name="%(action_github_team)d"
-                            class="oe_stat_button"
-                            icon="fa-users"
-                            attrs="{'invisible': [('team_qty', '=', False)]}"
-                            context="{'search_default_organization_id': active_id}"
-                        >
-                            <field name="team_qty" string="Teams" widget="statinfo" />
-                        </button>
-                        <button
-                            type="action"
-                            name="%(action_res_partner)d"
-                            class="oe_stat_button"
-                            icon="fa-user"
-                            attrs="{'invisible': [('member_qty', '=', False)]}"
-                            context="{'search_default_organization_ids': active_id}"
-                        >
-                            <field
-                                name="member_qty"
-                                string="Members"
-                                widget="statinfo"
-                            />
-                        </button>
                     </div>
                     <div class="oe_clear" />
                     <group col="4">
@@ -180,7 +199,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">github.organization</field>
         <field name="arch" type="xml">
             <kanban>
-                <field name="image" />
+                <field name="id" />
                 <field name="name" />
                 <field name="github_login" />
                 <field name="github_url" />
@@ -193,12 +212,13 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_module_vignette oe_kanban_global_click">
-                            <img
-                                t-att-src="'data:image/png;base64,'+record.image.raw_value"
-                                t-att-alt="record.name.value"
-                                class="oe_module_icon"
-                            />
-                            <div class="oe_module_desc">
+                            <div class="o_kanban_image">
+                                <img
+                                    t-att-alt="record.name.value"
+                                    t-att-src="kanban_image('github.organization', 'image', record.id.raw_value)"
+                                />
+                            </div>
+                            <div class="oe_kanban_details">
                                 <h3>
                                     <field name="name" />
                                 </h3>
