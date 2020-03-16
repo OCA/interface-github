@@ -18,7 +18,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="view_github_team_partner_tree" model="ir.ui.view">
         <field name="model">github.team.partner</field>
         <field name="arch" type="xml">
-            <tree colors="brown: role == 'member';">
+            <tree decoration-warning="role == 'member'">
                 <field
                     name="team_id"
                     invisible="context.get('search_default_team_id')"
@@ -51,30 +51,22 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         </field>
     </record>
     <record id="view_github_team_partner_from_team_kanban" model="ir.ui.view">
+        <field name="name">github.team.partner.kanban</field>
         <field name="model">github.team.partner</field>
         <field name="arch" type="xml">
             <kanban>
-                <field name="image_small" />
                 <field name="partner_id" />
                 <field name="role" />
                 <templates>
                     <t t-name="kanban-box">
-                        <div class="o_res_partner_kanban oe_kanban_global_click">
+                        <div class="oe_kanban_global_click">
                             <div class="o_kanban_image">
-                                <t t-if="record.image_small.raw_value">
-                                    <img
-                                        t-att-src="kanban_image('github.team.partner', 'image_small', record.id.value)"
-                                        t-att-alt="record.name.value"
-                                    />
-                                </t>
-                                <t t-if="!record.image_small.raw_value">
-                                    <img
-                                        t-att-src="_s + '/base/static/src/img/avatar.png'"
-                                        t-att-alt="record.name.value"
-                                    />
-                                </t>
+                                <img
+                                    alt="Avatar"
+                                    t-att-src="kanban_image('res.partner', 'image_128', record.partner_id.raw_value)"
+                                />
                             </div>
-                            <div class="oe_module_desc">
+                            <div class="oe_kanban_details">
                                 <h3>
                                     <field name="partner_id" />
                                 </h3>
