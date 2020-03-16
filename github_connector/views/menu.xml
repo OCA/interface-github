@@ -1,94 +1,102 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
 Copyright (C) 2016-Today: Odoo Community Association (OCA)
 @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
-
-    <menuitem id="menu_github"
-              name="Github"
-              groups="github_connector.group_github_connector_user"
-              web_icon="github_connector,static/description/icon.png"
+    <menuitem
+        id="menu_github"
+        name="Github"
+        groups="github_connector.group_github_connector_user"
+        web_icon="github_connector,static/description/icon.png"
     />
-
     <!-- Community Part -->
-    <menuitem id="menu_github_community"
+    <menuitem
+        id="menu_github_community"
         parent="menu_github"
         sequence="20"
-        name="Github Community"/>
-
-    <menuitem id="menu_github_organization"
+        name="Github Community"
+    />
+    <menuitem
+        id="menu_github_organization"
         parent="menu_github_community"
         sequence="1"
-        action="action_github_organization"/>
-
-    <menuitem id="menu_github_team"
+        action="action_github_organization"
+    />
+    <menuitem
+        id="menu_github_team"
         parent="menu_github_community"
         sequence="2"
-        action="action_github_team"/>
-
-    <menuitem id="menu_res_partner"
+        action="action_github_team"
+    />
+    <menuitem
+        id="menu_res_partner"
         parent="menu_github_community"
         sequence="3"
         groups="github_connector.group_github_connector_user"
-        action="action_res_partner"/>
-
+        action="action_res_partner"
+    />
     <!-- Repository Part -->
-    <menuitem id="menu_github_repository_root"
+    <menuitem
+        id="menu_github_repository_root"
         parent="menu_github"
         sequence="30"
-        name="Github Repository"/>
-
-    <menuitem id="menu_github_repository"
+        name="Github Repository"
+    />
+    <menuitem
+        id="menu_github_repository"
         parent="menu_github_repository_root"
         sequence="1"
-        action="action_github_repository"/>
-
-    <menuitem id="menu_github_repository_branch"
+        action="action_github_repository"
+    />
+    <menuitem
+        id="menu_github_repository_branch"
         parent="menu_github_repository_root"
         sequence="2"
-        action="action_github_repository_branch"/>
-
+        action="action_github_repository_branch"
+    />
     <!-- Settings Part -->
-    <menuitem id="menu_github_settings"
+    <menuitem
+        id="menu_github_settings"
         parent="menu_github"
         groups="github_connector.group_github_connector_manager"
         sequence="50"
-        name="Settings"/>
-
-    <menuitem id="menu_wizard_load_github_model"
+        name="Settings"
+    />
+    <menuitem
+        id="menu_wizard_load_github_model"
         parent="menu_github_settings"
         sequence="1"
         name="Sync Object"
-        action="action_wizard_load_github_model"/>
-
-    <menuitem id="menu_wizard_create_team"
+        action="action_wizard_load_github_model"
+    />
+    <menuitem
+        id="menu_wizard_create_team"
         parent="menu_github_settings"
         sequence="2"
         name="Create Team in Github"
-        action="action_wizard_create_team"/>
-
-    <menuitem id="menu_wizard_create_repository"
+        action="action_wizard_create_team"
+    />
+    <menuitem
+        id="menu_wizard_create_repository"
         parent="menu_github_settings"
         sequence="2"
         name="Create Repo in Github"
-        action="action_wizard_create_repository"/>
-
+        action="action_wizard_create_repository"
+    />
     <!-- Reporting Part -->
-    <menuitem id="menu_reporting"
-        parent="menu_github"
-        sequence="40"
-        name="Reports"/>
-
-    <menuitem id="menu_branch_by_serie"
+    <menuitem id="menu_reporting" parent="menu_github" sequence="40" name="Reports" />
+    <menuitem
+        id="menu_branch_by_serie"
         parent="menu_reporting"
         sequence="1"
-        action="action_github_branch_by_serie"/>
-
-    <menuitem id="menu_size_by_serie"
+        action="action_github_branch_by_serie"
+    />
+    <menuitem
+        id="menu_size_by_serie"
         parent="menu_reporting"
         sequence="2"
-        action="action_github_size_by_serie"/>
-
+        action="action_github_size_by_serie"
+    />
 </odoo>

@@ -6,9 +6,9 @@ from odoo import api, fields, models
 
 
 class WizardCreateRepository(models.TransientModel):
-    _name = 'wizard.create.repository'
-    _description = 'Wizard Create Repository'
-    _inherit = ['github.repository']
+    _name = "wizard.create.repository"
+    _description = "Wizard Create Repository"
+    _inherit = ["github.repository"]
 
     # Overload Columns Section
     name = fields.Char(readonly=False)
@@ -25,5 +25,5 @@ class WizardCreateRepository(models.TransientModel):
     @api.multi
     def button_create_in_github(self):
         self.ensure_one()
-        new_item = self.create_in_github(self.env['github.repository'])
+        new_item = self.create_in_github(self.env["github.repository"])
         return new_item.get_action()

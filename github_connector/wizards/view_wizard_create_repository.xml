@@ -1,30 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
 Copyright (C) 2016-Today: Odoo Community Association (OCA)
 @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
-
     <record id="view_wizard_create_repository_form" model="ir.ui.view">
         <field name="model">wizard.create.repository</field>
         <field name="arch" type="xml">
             <form>
                 <group col="4">
-                    <field name="organization_id" colspan="4"/>
-                    <field name="name" colspan="4"/>
-                    <field name="description" colspan="4"/>
-                    <field name="website" colspan="4"/>
+                    <field name="organization_id" colspan="4" />
+                    <field name="name" colspan="4" />
+                    <field name="description" colspan="4" />
+                    <field name="website" colspan="4" />
                 </group>
                 <footer>
-                    <button name="button_create_in_github"
-                            string="Create in Github"
-                            type="object" class="oe_highlight"/>
+                    <button
+                        name="button_create_in_github"
+                        string="Create in Github"
+                        type="object"
+                        class="oe_highlight"
+                    />
                     or
                     <button string="Cancel" class="oe_link" special="cancel" />
                 </footer>
             </form>
         </field>
     </record>
-
 </odoo>
