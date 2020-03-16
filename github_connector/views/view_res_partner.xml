@@ -59,12 +59,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="arch" type="xml">
             <div name="button_box" position="inside">
                 <button
-                    type="action"
-                    name="%(action_github_organization)d"
+                    type="object"
+                    name="action_github_organization"
                     class="oe_stat_button"
                     icon="fa-institution"
                     attrs="{'invisible': ['|', ('github_login', '=', False), ('is_company', '=', True)]}"
-                    context="{'search_default_team_ids': active_id}"
                 >
                     <field
                         name="organization_qty"
@@ -73,12 +72,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     />
                 </button>
                 <button
-                    type="action"
-                    name="%(action_github_team_partner_from_partner)d"
+                    type="object"
+                    name="action_github_team_partner_from_partner"
                     class="oe_stat_button"
                     icon="fa-users"
                     attrs="{'invisible': ['|', ('github_login', '=', False), ('is_company', '=', True)]}"
-                    context="{'search_default_partner_id': active_id}"
                 >
                     <field name="github_team_qty" string="Teams" widget="statinfo" />
                 </button>

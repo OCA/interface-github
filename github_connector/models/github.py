@@ -27,21 +27,21 @@ _GITHUB_TYPE = [
 ]
 
 _GITHUB_TYPE_URL = {
-    "organization": {"url_get_by_name": "orgs/%s",},
-    "user": {"url_get_by_id": "user/%s", "url_get_by_name": "users/%s",},
+    "organization": {"url_get_by_name": "orgs/%s"},
+    "user": {"url_get_by_id": "user/%s", "url_get_by_name": "users/%s"},
     "repository": {
         "url_get_by_id": "repositories/%s",
         "url_get_by_name": "repos/%s",
         "url_create": "orgs/%s/repos",
     },
-    "team": {"url_get_by_id": "teams/%s", "url_create": "orgs/%s/teams",},
-    "organization_members": {"url_get_by_name": "orgs/%s/members",},
-    "organization_repositories": {"url_get_by_name": "orgs/%s/repos",},
-    "organization_teams": {"url_get_by_name": "orgs/%s/teams",},
-    "team_members_member": {"url_get_by_name": "teams/%s/members?role=member",},
-    "team_members_maintainer": {"url_get_by_name": "teams/%s/members?role=maintainer",},
-    "team_repositories": {"url_get_by_name": "teams/%s/repos",},
-    "repository_branches": {"url_get_by_name": "repos/%s/branches",},
+    "team": {"url_get_by_id": "teams/%s", "url_create": "orgs/%s/teams"},
+    "organization_members": {"url_get_by_name": "orgs/%s/members"},
+    "organization_repositories": {"url_get_by_name": "orgs/%s/repos"},
+    "organization_teams": {"url_get_by_name": "orgs/%s/teams"},
+    "team_members_member": {"url_get_by_name": "teams/%s/members?role=member"},
+    "team_members_maintainer": {"url_get_by_name": "teams/%s/members?role=maintainer"},
+    "team_repositories": {"url_get_by_name": "teams/%s/repos"},
+    "repository_branches": {"url_get_by_name": "repos/%s/branches"},
 }
 
 _CODE_401 = 401
@@ -52,13 +52,12 @@ _CODE_201 = 201
 
 
 class Github(object):
-    def __init__(self, github_type, login, password, max_try, token=""):
-        super(Github, self).__init__()
+    def __init__(self, github_type, login, password, max_try):
+        super().__init__()
         self.github_type = github_type
         self.login = login
         self.password = password
         self.max_try = max_try
-        self.token = token
 
     def _build_url(self, arguments, url_type, page):
         arguments = arguments and arguments or {}
@@ -75,12 +74,9 @@ class Github(object):
 
     def get_http_url(self):
         """ Returns the http url to github with the identifications
-
         :rtype: string
         """
-        identification = (
-            self.token if self.token else ":".join([self.login, self.password])
-        )
+        identification = ":".join([self.login, self.password])
         return "https://{}@github.com/".format(identification)
 
     def list(self, arguments):
@@ -103,15 +99,11 @@ class Github(object):
                 break
             except Exception as err:
                 _logger.warning(
-                    "URL Call Error. %d/%d. URL: %s", i, self.max_try, err.__str__(),
+                    "URL Call Error. %d/%d. URL: %s", i, self.max_try, err.__str__()
                 )
         else:
             raise exceptions.Warning(_("Maximum attempts reached."))
 
-        # display an anonymize token or the login
-        login = (
-            self.token and "* * * * * * * * {}".format(self.token[-4:]) or self.login
-        )
         if response.status_code == _CODE_401:
             raise exceptions.Warning(
                 _(
@@ -119,17 +111,17 @@ class Github(object):
                     "You should check your credentials in the Odoo"
                     " configuration file."
                 )
-                % login
+                % self.login
             )
-        if response.status_code == _CODE_403:
+        elif response.status_code == _CODE_403:
             raise exceptions.Warning(
                 _(
                     "Unable to realize the current operation. The login '%s'"
                     " does not have the correct access rights."
                 )
-                % login
+                % self.login
             )
-        if response.status_code == _CODE_422:
+        elif response.status_code == _CODE_422:
             raise exceptions.Warning(
                 _(
                     "Unable to realize the current operation. Possible reasons:\n"
@@ -160,27 +152,14 @@ class Github(object):
         # We want the same signature for all the functions returned to ease the usage.
         # The caller should not have to # consider cases. Cases are handled here.
 
-        if self.token:
-            # When an access token is used, the token has to be passed using a headers.
-            # there is no Auth class included in requests.
-            headers = {"Authorization": "token {}".format(self.token)}
+        auth = HTTPBasicAuth(self.login, self.password)
 
-            def get(u, _):
-                return requests.get(u, headers=headers)
+        def get(u, _):
+            return requests.get(u, auth=auth)
 
-            def post(u, d):
-                json_data = json.dumps(d)
-                return requests.get(u, headers=headers, data=json_data)
-
-        else:
-            auth = HTTPBasicAuth(self.login, self.password)
-
-            def get(u, _):
-                return requests.get(u, auth=auth)
-
-            def post(u, d):
-                json_data = json.dumps(d)
-                return requests.get(u, auth=auth, data=json_data)
+        def post(u, d):
+            json_data = json.dumps(d)
+            return requests.post(u, auth=auth, data=json_data)
 
         if call_type == "get":
             return get

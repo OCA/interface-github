@@ -2,7 +2,7 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class WizardCreateTeam(models.TransientModel):
@@ -27,10 +27,9 @@ class WizardCreateTeam(models.TransientModel):
         string="Team Repositories", comodel_name="github.repository"
     )
 
-    @api.multi
     def get_github_data_from_odoo(self):
         self.ensure_one()
-        res = super(WizardCreateTeam, self).get_github_data_from_odoo()
+        res = super().get_github_data_from_odoo()
         res.update(
             {
                 "maintainers": [
@@ -43,7 +42,6 @@ class WizardCreateTeam(models.TransientModel):
         )
         return res
 
-    @api.multi
     def button_create_in_github(self):
         self.ensure_one()
         new_item = self.create_in_github(self.env["github.team"])
