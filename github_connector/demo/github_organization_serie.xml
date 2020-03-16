@@ -1,57 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
 Copyright (C) 2016-Today: Odoo Community Association (OCA)
 @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
-
     <record id="oca_organization_serie_60" model="github.organization.serie">
         <field name="sequence">2</field>
         <field name="name">6.0</field>
         <field name="organization_id" ref="oca_organization" />
     </record>
-
     <record id="oca_organization_serie_61" model="github.organization.serie">
         <field name="sequence">3</field>
         <field name="name">6.1</field>
         <field name="organization_id" ref="oca_organization" />
     </record>
-
     <record id="oca_organization_serie_70" model="github.organization.serie">
         <field name="sequence">4</field>
         <field name="name">7.0</field>
         <field name="organization_id" ref="oca_organization" />
     </record>
-
     <record id="oca_organization_serie_80" model="github.organization.serie">
         <field name="sequence">5</field>
         <field name="name">8.0</field>
         <field name="organization_id" ref="oca_organization" />
     </record>
-
     <record id="oca_organization_serie_90" model="github.organization.serie">
         <field name="sequence">6</field>
         <field name="name">9.0</field>
         <field name="organization_id" ref="oca_organization" />
     </record>
-
     <record id="oca_organization_serie_10" model="github.organization.serie">
         <field name="sequence">7</field>
         <field name="name">10.0</field>
         <field name="organization_id" ref="oca_organization" />
     </record>
-
     <record id="oca_organization_serie_11" model="github.organization.serie">
         <field name="sequence">8</field>
         <field name="name">11.0</field>
         <field name="organization_id" ref="oca_organization" />
     </record>
-
     <record id="oca_organization_serie_12" model="github.organization.serie">
         <field name="sequence">9</field>
         <field name="name">12.0</field>
         <field name="organization_id" ref="oca_organization" />
     </record>
-
 </odoo>
