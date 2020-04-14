@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
 Copyright (C) 2016-Today: Odoo Community Association (OCA)
 @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
-
     <!-- Source Code Part -->
     <record id="action_odoo_module" model="ir.actions.act_window">
         <field name="name">Odoo Modules</field>
@@ -15,7 +14,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="view_mode">kanban,tree,form</field>
         <field name="context">{'search_default_filter_with_version': True}</field>
     </record>
-
     <record id="action_odoo_module_version" model="ir.actions.act_window">
         <field name="name">Odoo Module Versions</field>
         <field name="type">ir.actions.act_window</field>
@@ -23,7 +21,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,graph,form</field>
     </record>
-
     <record id="action_odoo_license" model="ir.actions.act_window">
         <field name="name">Odoo Module Licenses</field>
         <field name="type">ir.actions.act_window</field>
@@ -31,7 +28,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,form</field>
     </record>
-
     <record id="action_odoo_author" model="ir.actions.act_window">
         <field name="name">Odoo Module Authors</field>
         <field name="type">ir.actions.act_window</field>
@@ -39,7 +35,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
-
     <record id="action_odoo_lib_bin" model="ir.actions.act_window">
         <field name="name">Odoo Bin Libs</field>
         <field name="type">ir.actions.act_window</field>
@@ -47,7 +42,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
-
     <record id="action_odoo_lib_python" model="ir.actions.act_window">
         <field name="name">Odoo Python Libs</field>
         <field name="type">ir.actions.act_window</field>
@@ -55,7 +49,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
-
     <!-- Reporting Part -->
     <record id="action_odoo_module_version_by_serie" model="ir.actions.act_window">
         <field name="name">Modules by Serie</field>
@@ -65,5 +58,4 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="view_mode">graph</field>
         <field name="view_id" ref="view_odoo_module_version_by_serie_graph" />
     </record>
-
 </odoo>
