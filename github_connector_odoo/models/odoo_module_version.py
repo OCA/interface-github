@@ -210,7 +210,6 @@ class OdooModuleVersion(models.Model):
     full_module_path = fields.Char(string="Full Local Path to the module",)
 
     # Overload Section
-    @api.multi
     def unlink(self):
         # Analyzed repository branches should be reanalyzed
         if not self._context.get("dont_change_repository_branch_state", False):
@@ -224,7 +223,6 @@ class OdooModuleVersion(models.Model):
         return super(OdooModuleVersion, self).unlink()
 
     # Compute Section
-    @api.multi
     @api.depends(
         "repository_id.organization_id.github_login",
         "repository_id.name",
@@ -260,7 +258,6 @@ class OdooModuleVersion(models.Model):
             else:
                 version.odoo_type = "other"
 
-    @api.multi
     @api.depends("technical_name", "repository_branch_id.complete_name")
     def _compute_complete_name(self):
         for version in self:
@@ -270,7 +267,6 @@ class OdooModuleVersion(models.Model):
                 + version.technical_name
             )
 
-    @api.multi
     @api.depends("description_rst")
     def _compute_description_rst_html(self):
         for version in self:
@@ -293,7 +289,6 @@ class OdooModuleVersion(models.Model):
                 )
             version.description_rst_html = html_sanitize(output)
 
-    @api.multi
     @api.depends("depends")
     def _compute_dependency_module_ids(self):
         module_obj = self.env["odoo.module"]
@@ -305,7 +300,6 @@ class OdooModuleVersion(models.Model):
                     modules.append(module_obj.create_if_not_exist(module_name))
             version.dependency_module_ids = [x.id for x in modules]
 
-    @api.multi
     @api.depends("external_dependencies")
     def _compute_lib(self):
         lib_python_obj = self.env["odoo.lib.python"]
@@ -328,7 +322,6 @@ class OdooModuleVersion(models.Model):
                 sorted([x.name for x in bin_libs])
             )
 
-    @api.multi
     @api.depends("license")
     def _compute_license_id(self):
         license_obj = self.env["odoo.license"]
@@ -336,7 +329,6 @@ class OdooModuleVersion(models.Model):
             if version.license:
                 version.license_id = license_obj.create_if_not_exist(version.license).id
 
-    @api.multi
     @api.depends("author")
     def _compute_author(self):
         odoo_author_obj = self.env["odoo.author"]
@@ -355,7 +347,6 @@ class OdooModuleVersion(models.Model):
                 sorted([x.name for x in authors])
             )
 
-    @api.multi
     @api.depends(
         "repository_branch_id",
         "repository_branch_id.organization_id",
@@ -467,15 +458,11 @@ class OdooModuleVersion(models.Model):
             try:
                 with open(icon_path, "rb") as f:
                     image = f.read()
+                image_enc = base64.b64encode(image)
                 if resize:
-                    image_enc = tools.image_resize_image(
-                        base64.b64encode(image),
-                        size=(96, 96),
-                        encoding="base64",
-                        filetype="PNG",
-                    )
-                else:
-                    image_enc = base64.b64encode(image)
+                    image = tools.image.ImageProcess(image_enc, False)
+                    image.resize(96, 96)
+                    image_enc = image.image_base64(output_format="PNG")
             except Exception:
                 _logger.warning("Unable to read or resize %s", icon_path)
             module_version.write({"image": image_enc})
@@ -495,7 +482,6 @@ class OdooModuleVersion(models.Model):
         module_versions = self.search([])
         module_versions.clean_odoo_module_version()
 
-    @api.multi
     def clean_odoo_module_version(self):
         for module_version in self:
             # Compute path(s) to analyze
@@ -510,7 +496,6 @@ class OdooModuleVersion(models.Model):
                 module_version._process_clean_module_version()
         return True
 
-    @api.multi
     def _process_clean_module_version(self):
         for module_version in self:
             module_version.unlink()

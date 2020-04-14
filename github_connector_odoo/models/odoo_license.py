@@ -27,7 +27,7 @@ class OdooLicense(models.Model):
 
     website = fields.Char(string="Website")
 
-    image = fields.Binary(string="Icon Image")
+    image = fields.Image(string="Icon Image")
 
     description = fields.Text(string="Description")
 
@@ -39,7 +39,6 @@ class OdooLicense(models.Model):
     ]
 
     # Compute Section
-    @api.multi
     @api.depends("module_version_ids.license_id")
     def _compute_module_version_qty(self):
         for module in self:
