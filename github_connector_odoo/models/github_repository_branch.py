@@ -4,64 +4,64 @@
 
 import logging
 import os
-
 from os.path import join as opj
 
 from odoo import api, fields, models
-
 from odoo.modules import load_information_from_description_file
 
 # Hard define this value to make this module working with or without
 # the patch (that backports V10 manifests analysis code.
-MANIFEST_NAMES = ('__manifest__.py', '__openerp__.py')
+MANIFEST_NAMES = ("__manifest__.py", "__openerp__.py")
 
 _logger = logging.getLogger(__name__)
 
 
 class GithubRepositoryBranch(models.Model):
-    _inherit = ['github.repository.branch']
+    _inherit = ["github.repository.branch"]
 
     module_paths = fields.Text(
-        string='Module Paths', help="Set here extra relative paths"
+        string="Module Paths",
+        help="Set here extra relative paths"
         " you want to scan to find modules. If not set, root path will be"
         " scanned. One repository per line. Example:\n"
         "./addons/\n"
-        "./openerp/addons/")
+        "./openerp/addons/",
+    )
 
     module_version_ids = fields.One2many(
-        comodel_name='odoo.module.version',
-        inverse_name='repository_branch_id', string='Module Versions')
+        comodel_name="odoo.module.version",
+        inverse_name="repository_branch_id",
+        string="Module Versions",
+    )
 
     module_version_qty = fields.Integer(
-        string='Number of Module Versions',
-        compute='_compute_module_version_qty')
+        string="Number of Module Versions", compute="_compute_module_version_qty"
+    )
 
-    runbot_url = fields.Char(
-        string='Runbot URL', compute='_compute_runbot_url')
+    runbot_url = fields.Char(string="Runbot URL", compute="_compute_runbot_url")
 
     # Compute Section
     @api.multi
     @api.depends(
-        'name', 'repository_id.runbot_id_external',
-        'organization_id.runbot_url_pattern')
+        "name", "repository_id.runbot_id_external", "organization_id.runbot_url_pattern"
+    )
     def _compute_runbot_url(self):
         for branch in self:
             if not branch.repository_id.runbot_id_external:
                 branch.runbot_url = False
             else:
-                branch.runbot_url =\
-                    branch.organization_id.runbot_url_pattern.format(
-                        runbot_id_external=str(
-                            branch.repository_id.runbot_id_external),
-                        branch_name=branch.name)
+                branch.runbot_url = branch.organization_id.runbot_url_pattern.format(
+                    runbot_id_external=str(branch.repository_id.runbot_id_external),
+                    branch_name=branch.name,
+                )
 
     @api.multi
-    @api.depends(
-        'module_version_ids', 'module_version_ids.repository_branch_id')
+    @api.depends("module_version_ids", "module_version_ids.repository_branch_id")
     def _compute_module_version_qty(self):
         for repository_branch in self:
-            repository_branch.module_version_qty =\
-                len(repository_branch.module_version_ids)
+            repository_branch.module_version_qty = len(
+                repository_branch.module_version_ids
+            )
 
     # Custom Section
     @api.model
@@ -69,8 +69,8 @@ class GithubRepositoryBranch(models.Model):
         """ function called when the module is installed to set all branches
         to analyze again.
         """
-        branches = self.search([('state', '=', 'analyzed')])
-        branches.write({'state': 'to_analyze'})
+        branches = self.search([("state", "=", "analyzed")])
+        branches.write({"state": "to_analyze"})
 
     @api.multi
     def _get_module_paths(self):
@@ -78,7 +78,7 @@ class GithubRepositoryBranch(models.Model):
         self.ensure_one()
         if self.module_paths:
             paths = []
-            for path in self.module_paths.split('\n'):
+            for path in self.module_paths.split("\n"):
                 if path.strip():
                     paths.append(os.path.join(self.local_path, path))
         else:
@@ -87,8 +87,8 @@ class GithubRepositoryBranch(models.Model):
 
     def analyze_code_one(self):
         # Change log level to avoid warning, when parsing odoo manifests
-        logger1 = logging.getLogger('openerp.modules.module')
-        logger2 = logging.getLogger('openerp.addons.base.module.module')
+        logger1 = logging.getLogger("openerp.modules.module")
+        logger2 = logging.getLogger("openerp.addons.base.module.module")
         currentLevel1 = logger1.level
         currentLevel2 = logger2.level
         logger1.setLevel(logging.ERROR)
@@ -120,7 +120,7 @@ class GithubRepositoryBranch(models.Model):
     def listdir(self, dir):
         def clean(name):
             name = os.path.basename(name)
-            if name[-4:] == '.zip':
+            if name[-4:] == ".zip":
                 name = name[:-4]
             return name
 
@@ -133,17 +133,20 @@ class GithubRepositoryBranch(models.Model):
 
     def _analyze_module_name(self, path, module_name):
         self.ensure_one()
-        module_version_obj = self.env['odoo.module.version']
+        module_version_obj = self.env["odoo.module.version"]
         try:
             full_module_path = os.path.join(path, module_name)
             module_info = load_information_from_description_file(
-                module_name, full_module_path)
+                module_name, full_module_path
+            )
             # Create module version, if the module is installable
             # in the serie
-            if module_info.get('installable', False):
-                module_info['technical_name'] = module_name
+            if module_info.get("installable", False):
+                module_info["technical_name"] = module_name
                 module_version_obj.create_or_update_from_manifest(
-                    module_info, self, full_module_path)
+                    module_info, self, full_module_path
+                )
         except Exception as e:
-            _logger.error('Cannot process module with name %s, error '
-                          'is: %s', module_name, e)
+            _logger.error(
+                "Cannot process module with name %s, error " "is: %s", module_name, e
+            )

@@ -1,61 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
 Copyright (C) 2016-Today: Odoo Community Association (OCA)
 @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
-
     <record id="view_odoo_license_search" model="ir.ui.view">
         <field name="model">odoo.license</field>
         <field name="arch" type="xml">
             <search>
-                <field name="name"/>
+                <field name="name" />
             </search>
         </field>
     </record>
-
     <record id="view_odoo_license_tree" model="ir.ui.view">
         <field name="model">odoo.license</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name"/>
-                <field name="module_version_qty" sum="Total"/>
+                <field name="name" />
+                <field name="module_version_qty" sum="Total" />
             </tree>
         </field>
     </record>
-
     <record id="view_odoo_license_form" model="ir.ui.view">
         <field name="model">odoo.license</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <field name="image" widget="image" class="oe_avatar"/>
+                    <field name="image" widget="image" class="oe_avatar" />
                     <div class="oe_button_box" name="button_box">
-                        <button name="toggle_active"
-                                type="object"
-                                class="oe_stat_button"
-                                icon="fa-archive">
-                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        <button
+                            name="toggle_active"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-archive"
+                        >
+                            <field
+                                name="active"
+                                widget="boolean_button"
+                                options='{"terminology": "archive"}'
+                            />
                         </button>
-                        <button type="action"
-                                name="%(action_odoo_module_version)d"
-                                class="oe_stat_button" icon="fa-cube"
-                                attrs="{'invisible': [('module_version_qty', '=', False)]}"
-                                context="{'search_default_license_id': active_id}">
-                            <field name="module_version_qty" string="Modules" widget="statinfo" />
+                        <button
+                            type="action"
+                            name="%(action_odoo_module_version)d"
+                            class="oe_stat_button"
+                            icon="fa-cube"
+                            attrs="{'invisible': [('module_version_qty', '=', False)]}"
+                            context="{'search_default_license_id': active_id}"
+                        >
+                            <field
+                                name="module_version_qty"
+                                string="Modules"
+                                widget="statinfo"
+                            />
                         </button>
                     </div>
                     <div class="oe_title">
-                        <h1><field name="name"/></h1>
+                        <h1>
+                            <field name="name" />
+                        </h1>
                     </div>
                     <notebook>
                         <page string="Information">
                             <group>
-                                <field name="website" widget="url"/>
+                                <field name="website" widget="url" />
                             </group>
                             <group string="Description">
-                                <field name="description" nolabel="1"/>
+                                <field name="description" nolabel="1" />
                             </group>
                         </page>
                     </notebook>
@@ -63,34 +75,44 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             </form>
         </field>
     </record>
-
     <record id="view_odoo_license_kanban" model="ir.ui.view">
         <field name="model">odoo.license</field>
         <field name="arch" type="xml">
             <kanban>
-                <field name="image"/>
-                <field name="name"/>
-                <field name="website"/>
+                <field name="image" />
+                <field name="name" />
+                <field name="website" />
                 <field name="module_version_qty" />
                 <templates>
                     <t t-name="kanban-box">
-                    <div class="oe_module_vignette oe_kanban_global_click">
-                        <t t-if="record.image.raw_value">
-                            <img t-att-src="'data:image/png;base64,'+record.image.raw_value" class="oe_module_icon" t-att-alt="record.name.raw_value"/>
-                        </t>
-                        <div class="oe_module_desc">
-                            <h3><field name="name"/></h3>
-                            <p class="oe_module_name">
-                                <t t-if="record.website.raw_value"><field name="website"/></t>
-                                <t t-if="!record.website.raw_value"><br/></t>
-                            </p>
-                            <span class="badge"><t t-esc="record.module_version_qty.value"/></span>
+                        <div class="oe_module_vignette oe_kanban_global_click">
+                            <t t-if="record.image.raw_value">
+                                <img
+                                    t-att-src="'data:image/png;base64,'+record.image.raw_value"
+                                    class="oe_module_icon"
+                                    t-att-alt="record.name.raw_value"
+                                />
+                            </t>
+                            <div class="oe_module_desc">
+                                <h3>
+                                    <field name="name" />
+                                </h3>
+                                <p class="oe_module_name">
+                                    <t t-if="record.website.raw_value">
+                                        <field name="website" />
+                                    </t>
+                                    <t t-if="!record.website.raw_value">
+                                        <br />
+                                    </t>
+                                </p>
+                                <span class="badge">
+                                    <t t-esc="record.module_version_qty.value" />
+                                </span>
+                            </div>
                         </div>
-                    </div>
                     </t>
-              </templates>
+                </templates>
             </kanban>
         </field>
     </record>
-
 </odoo>
