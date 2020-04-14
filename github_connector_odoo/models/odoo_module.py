@@ -7,131 +7,160 @@ from odoo.tools import html_sanitize
 
 
 class OdooModule(models.Model):
-    _name = 'odoo.module'
-    _description = 'Odoo Module'
-    _order = 'technical_name, name'
+    _name = "odoo.module"
+    _description = "Odoo Module"
+    _order = "technical_name, name"
 
     # Column Section
     name = fields.Char(
-        string='Name', store=True, readonly=True, compute='_compute_name')
+        string="Name", store=True, readonly=True, compute="_compute_name"
+    )
 
     technical_name = fields.Char(
-        string='Technical Name', index=True, required=True, readonly=True)
+        string="Technical Name", index=True, required=True, readonly=True
+    )
 
     module_version_ids = fields.One2many(
-        comodel_name='odoo.module.version', inverse_name='module_id',
-        string='Versions', readonly=True)
+        comodel_name="odoo.module.version",
+        inverse_name="module_id",
+        string="Versions",
+        readonly=True,
+    )
 
     module_version_qty = fields.Integer(
-        string='Number of Module Versions',
-        compute='_compute_module_version_qty', store=True)
+        string="Number of Module Versions",
+        compute="_compute_module_version_qty",
+        store=True,
+    )
 
     author_ids = fields.Many2many(
-        string='Authors', comodel_name='odoo.author',
-        compute='_compute_author', relation='github_module_author_rel',
-        column1='module_id', column2='author_id', multi='author',
-        store=True)
+        string="Authors",
+        comodel_name="odoo.author",
+        compute="_compute_author",
+        relation="github_module_author_rel",
+        column1="module_id",
+        column2="author_id",
+        multi="author",
+        store=True,
+    )
 
     author_ids_description = fields.Char(
-        string='Authors (Text)', compute='_compute_author', multi='author',
-        store=True)
+        string="Authors (Text)", compute="_compute_author", multi="author", store=True
+    )
 
     organization_serie_ids = fields.Many2many(
-        string='Series', comodel_name='github.organization.serie',
-        compute='_compute_organization_serie',
-        multi='organization_serie', store=True,
-        relation='github_module_organization_serie_rel',
-        column1='module_id', column2='organization_serie_id')
+        string="Series",
+        comodel_name="github.organization.serie",
+        compute="_compute_organization_serie",
+        multi="organization_serie",
+        store=True,
+        relation="github_module_organization_serie_rel",
+        column1="module_id",
+        column2="organization_serie_id",
+    )
 
     organization_serie_ids_description = fields.Char(
-        string='Series (Text)', store=True,
-        compute='_compute_organization_serie',
-        multi='organization_serie')
+        string="Series (Text)",
+        store=True,
+        compute="_compute_organization_serie",
+        multi="organization_serie",
+    )
 
     description_rst = fields.Char(
-        string='RST Description of the last Version', store=True,
-        readonly=True, compute='_compute_description', multi='description_rst')
+        string="RST Description of the last Version",
+        store=True,
+        readonly=True,
+        compute="_compute_description",
+        multi="description_rst",
+    )
 
     description_rst_html = fields.Html(
-        string='HTML of the RST Description of the last Version', store=True,
-        readonly=True, compute='_compute_description', multi='description_rst')
+        string="HTML of the RST Description of the last Version",
+        store=True,
+        readonly=True,
+        compute="_compute_description",
+        multi="description_rst",
+    )
 
     dependence_module_version_ids = fields.Many2many(
-        comodel_name='odoo.module.version',
-        string='Module Versions that depend on this module',
-        relation='module_version_dependency_rel',
-        column1='dependency_module_id', column2='module_version_id')
+        comodel_name="odoo.module.version",
+        string="Module Versions that depend on this module",
+        relation="module_version_dependency_rel",
+        column1="dependency_module_id",
+        column2="module_version_id",
+    )
 
     dependence_module_version_qty = fields.Integer(
-        string='Number of Module Versions that depend on this module',
-        compute='_compute_dependence_module_version_qty', store=True)
+        string="Number of Module Versions that depend on this module",
+        compute="_compute_dependence_module_version_qty",
+        store=True,
+    )
 
     image = fields.Binary(
-        string='Icon Image', compute='_compute_image', store=True,
-        reaonly=True)
+        string="Icon Image", compute="_compute_image", store=True, reaonly=True
+    )
 
     # Compute Section
     @api.multi
-    @api.depends('module_version_ids.image')
+    @api.depends("module_version_ids.image")
     def _compute_image(self):
-        module_version_obj = self.env['odoo.module.version']
+        module_version_obj = self.env["odoo.module.version"]
         for module in self:
             version_ids = module.module_version_ids.ids
             last_version = module_version_obj.search(
-                [('id', 'in', version_ids)],
-                order='organization_serie_id desc', limit=1)
+                [("id", "in", version_ids)], order="organization_serie_id desc", limit=1
+            )
             if last_version:
                 module.image = last_version.image
 
     @api.multi
-    @api.depends('technical_name', 'module_version_ids.name')
+    @api.depends("technical_name", "module_version_ids.name")
     def _compute_name(self):
-        module_version_obj = self.env['odoo.module.version']
+        module_version_obj = self.env["odoo.module.version"]
         for module in self:
             version_ids = module.module_version_ids.ids
             last_version = module_version_obj.search(
-                [('id', 'in', version_ids)],
-                order='organization_serie_id desc', limit=1)
+                [("id", "in", version_ids)], order="organization_serie_id desc", limit=1
+            )
             if last_version:
                 module.name = last_version.name
             else:
                 module.name = module.technical_name
 
     @api.multi
-    @api.depends(
-        'module_version_ids', 'module_version_ids.description_rst_html')
+    @api.depends("module_version_ids", "module_version_ids.description_rst_html")
     def _compute_description(self):
-        module_version_obj = self.env['odoo.module.version']
+        module_version_obj = self.env["odoo.module.version"]
         for module in self:
             version_ids = module.module_version_ids.ids
             last_version = module_version_obj.search(
-                [('id', 'in', version_ids)],
-                order='organization_serie_id desc', limit=1)
+                [("id", "in", version_ids)], order="organization_serie_id desc", limit=1
+            )
             if last_version:
                 module.description_rst = last_version.description_rst
                 module.description_rst_html = last_version.description_rst_html
             else:
-                module.description_rst = ''
+                module.description_rst = ""
                 module.description_rst_html = html_sanitize(
-                    "<h1 style='color:gray;'>" +
-                    _("No Version Found") +
-                    "</h1>")
+                    "<h1 style='color:gray;'>" + _("No Version Found") + "</h1>"
+                )
 
     @api.multi
-    @api.depends('dependence_module_version_ids.dependency_module_ids')
+    @api.depends("dependence_module_version_ids.dependency_module_ids")
     def _compute_dependence_module_version_qty(self):
         for module in self:
-            module.dependence_module_version_qty =\
-                len(module.dependence_module_version_ids)
+            module.dependence_module_version_qty = len(
+                module.dependence_module_version_ids
+            )
 
     @api.multi
-    @api.depends('module_version_ids')
+    @api.depends("module_version_ids")
     def _compute_module_version_qty(self):
         for module in self:
             module.module_version_qty = len(module.module_version_ids)
 
     @api.multi
-    @api.depends('module_version_ids.author_ids')
+    @api.depends("module_version_ids.author_ids")
     def _compute_author(self):
         for module in self:
             authors = []
@@ -139,29 +168,27 @@ class OdooModule(models.Model):
                 authors += version.author_ids
             authors = set(authors)
             module.author_ids = [x.id for x in authors]
-            module.author_ids_description =\
-                ', '.join(sorted([x.name for x in authors]))
+            module.author_ids_description = ", ".join(sorted([x.name for x in authors]))
 
     @api.multi
-    @api.depends('module_version_ids.organization_serie_id')
+    @api.depends("module_version_ids.organization_serie_id")
     def _compute_organization_serie(self):
         for module in self:
             organization_series = []
             for version in module.module_version_ids:
                 organization_series += version.organization_serie_id
             organization_series = set(organization_series)
-            module.organization_serie_ids =\
-                [x.id for x in organization_series]
-            module.organization_serie_ids_description =\
-                ' - '.join([x.name for x in sorted(
-                    organization_series, key=lambda x: x.sequence)])
+            module.organization_serie_ids = [x.id for x in organization_series]
+            module.organization_serie_ids_description = " - ".join(
+                [x.name for x in sorted(organization_series, key=lambda x: x.sequence)]
+            )
 
     # Custom Section
     @api.model
     def create_if_not_exist(self, technical_name):
-        module = self.search([('technical_name', '=', technical_name)])
+        module = self.search([("technical_name", "=", technical_name)])
         if not module:
-            module = self.create({'technical_name': technical_name})
+            module = self.create({"technical_name": technical_name})
         return module
 
     @api.multi

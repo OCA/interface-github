@@ -1,94 +1,119 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!--
 Copyright (C) 2016-Today: Odoo Community Association (OCA)
 @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
-
     <record id="view_odoo_module_version_search" model="ir.ui.view">
         <field name="model">odoo.module.version</field>
         <field name="arch" type="xml">
             <search>
-                <field name="name"/>
-                <field name="complete_name"/>
-                <field name="summary"/>
-                <field name="description_rst"/>
+                <field name="name" />
+                <field name="complete_name" />
+                <field name="summary" />
+                <field name="description_rst" />
                 <field name="dependency_module_ids" />
-                <field name="module_id"/>
-                <field name="repository_branch_id"/>
-                <field name="repository_id"/>
-                <field name="license_id"/>
-                <field name="author_ids"/>
-                <field name="organization_serie_id"/>
+                <field name="module_id" />
+                <field name="repository_branch_id" />
+                <field name="repository_id" />
+                <field name="license_id" />
+                <field name="author_ids" />
+                <field name="organization_serie_id" />
                 <group expand="0" string="Group By">
-                    <filter string="Odoo Type" name="odoo_type" context="{'group_by' : 'odoo_type'}"/>
-                    <filter string="License" name="license" context="{'group_by' : 'license_id'}"/>
-                    <filter string="Module" name="module" context="{'group_by' : 'module_id'}"/>
-                    <filter string="Repository Branch" name="repository_branch" context="{'group_by' : 'repository_branch_id'}"/>
+                    <filter
+                        string="Odoo Type"
+                        name="odoo_type"
+                        context="{'group_by' : 'odoo_type'}"
+                    />
+                    <filter
+                        string="License"
+                        name="license"
+                        context="{'group_by' : 'license_id'}"
+                    />
+                    <filter
+                        string="Module"
+                        name="module"
+                        context="{'group_by' : 'module_id'}"
+                    />
+                    <filter
+                        string="Repository Branch"
+                        name="repository_branch"
+                        context="{'group_by' : 'repository_branch_id'}"
+                    />
                 </group>
             </search>
         </field>
     </record>
-
     <record id="view_odoo_module_version_tree" model="ir.ui.view">
         <field name="model">odoo.module.version</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="repository_id"/>
-                <field name="organization_serie_id" string="Serie"/>
-                <field name="technical_name"/>
-                <field name="name"/>
-                <field name="author_ids_description"/>
-                <field name="lib_python_ids_description" string="Python Lib"/>
-                <field name="lib_bin_ids_description" string="Bin Lib"/>
-                <field name="license_id"/>
+                <field name="repository_id" />
+                <field name="organization_serie_id" string="Serie" />
+                <field name="technical_name" />
+                <field name="name" />
+                <field name="author_ids_description" />
+                <field name="lib_python_ids_description" string="Python Lib" />
+                <field name="lib_bin_ids_description" string="Bin Lib" />
+                <field name="license_id" />
             </tree>
         </field>
     </record>
-
     <record id="view_odoo_module_version_form" model="ir.ui.view">
         <field name="model">odoo.module.version</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <field name="image" widget="image" class="oe_avatar"/>
+                    <field name="image" widget="image" class="oe_avatar" />
                     <div class="oe_title">
-                        <h1><field name="name"/></h1>
-                        <h2><field name="technical_name"/></h2>
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                        <h2>
+                            <field name="technical_name" />
+                        </h2>
                     </div>
-                    <div class="oe_clear"/>
+                    <div class="oe_clear" />
                     <h3 class="oe_fade">
-                        <field name="summary" class="oe_inline"/>
+                        <field name="summary" class="oe_inline" />
                     </h3>
-                    <div class="oe_clear"/>
+                    <div class="oe_clear" />
                     <notebook>
                         <page string="Information">
                             <group col="4">
-                                <field name="github_url" colspan="4" widget="url"/>
-                                <field name="repository_id"/>
-                                <field name="repository_branch_id"/>
-                                <field name="module_id"/>
-                                <field name="license_id"/>
+                                <field name="github_url" colspan="4" widget="url" />
+                                <field name="repository_id" />
+                                <field name="repository_branch_id" />
+                                <field name="module_id" />
+                                <field name="license_id" />
                             </group>
                             <group>
-                                <field name="author_ids" widget="many2many_tags"/>
-                                <field name="category_id"/>
-                                <field name="dependency_module_ids" widget="many2many_tags"/>
-                                <field name="lib_python_ids" widget="many2many_tags"/>
-                                <field name="lib_bin_ids" widget="many2many_tags"/>
+                                <field name="author_ids" widget="many2many_tags" />
+                                <field name="category_id" />
+                                <field
+                                    name="dependency_module_ids"
+                                    widget="many2many_tags"
+                                />
+                                <field name="lib_python_ids" widget="many2many_tags" />
+                                <field name="lib_bin_ids" widget="many2many_tags" />
                             </group>
                             <group>
-                                <hr/>
-                                <field name="description_rst_html" nolabel="1" class="oe_styling_v8" colspan="2"/>
+                                <hr />
+                                <field
+                                    name="description_rst_html"
+                                    nolabel="1"
+                                    class="oe_styling_v8"
+                                    colspan="2"
+                                />
                             </group>
                         </page>
                         <page string="Technical information (Manifest)">
                             <group col="4">
-                                <field name="author"/>
-                                <field name="license"/>
-                                <field name="website"/>
-                                <field name="depends"/>
+                                <field name="author" />
+                                <field name="license" />
+                                <field name="website" />
+                                <field name="depends" />
                                 <field name="external_dependencies" />
                                 <newline />
                                 <field name="description_rst" nolabel="1" colspan="4" />
@@ -99,42 +124,58 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             </form>
         </field>
     </record>
-
     <record id="view_odoo_module_version_kanban" model="ir.ui.view">
         <field name="model">odoo.module.version</field>
         <field name="arch" type="xml">
             <kanban>
-                <field name="image"/>
-                <field name="name"/>
-                <field name="technical_name"/>
-                <field name="github_url"/>
+                <field name="image" />
+                <field name="name" />
+                <field name="technical_name" />
+                <field name="github_url" />
                 <field name="repository_branch_id" />
                 <templates>
                     <t t-name="kanban-box">
-                    <div class="oe_module_vignette oe_kanban_global_click">
-                        <t t-if="record.image.raw_value">
-                            <img t-att-src="'data:image/png;base64,'+record.image.raw_value" class="oe_module_icon" t-att-alt="record.name.raw_value"/>
-                        </t>
-                        <t t-if="!record.image.raw_value">
-                            <img t-att-src='_s + "/github_connector_odoo/static/src/img/default_image_module_version.png"' class="oe_module_icon" t-att-alt="record.name.raw_value"/>
-                        </t>
-                        <div class="oe_module_desc">
-                            <h4><field name="name"/></h4>
-                            <p class="oe_module_name">
-                                <t t-if="record.technical_name.raw_value"><field name="technical_name"/><br/></t>
-                                <i><field name="repository_id"/></i>
-                            </p>
-                            <a target="_blank" t-att-href="record.github_url.value">
-                                <span class="badge"><i class="fa fa-fw fa-github-alt"/></span>
-                            </a>
-
-                            <span class="badge"><t t-esc="record.repository_branch_id.value"/></span>
+                        <div class="oe_module_vignette oe_kanban_global_click">
+                            <t t-if="record.image.raw_value">
+                                <img
+                                    t-att-src="'data:image/png;base64,'+record.image.raw_value"
+                                    class="oe_module_icon"
+                                    t-att-alt="record.name.raw_value"
+                                />
+                            </t>
+                            <t t-if="!record.image.raw_value">
+                                <img
+                                    t-att-src='_s + "/github_connector_odoo/static/src/img/default_image_module_version.png"'
+                                    class="oe_module_icon"
+                                    t-att-alt="record.name.raw_value"
+                                />
+                            </t>
+                            <div class="oe_module_desc">
+                                <h4>
+                                    <field name="name" />
+                                </h4>
+                                <p class="oe_module_name">
+                                    <t t-if="record.technical_name.raw_value">
+                                        <field name="technical_name" />
+                                        <br />
+                                    </t>
+                                    <i>
+                                        <field name="repository_id" />
+                                    </i>
+                                </p>
+                                <a target="_blank" t-att-href="record.github_url.value">
+                                    <span class="badge">
+                                        <i class="fa fa-fw fa-github-alt" />
+                                    </span>
+                                </a>
+                                <span class="badge">
+                                    <t t-esc="record.repository_branch_id.value" />
+                                </span>
+                            </div>
                         </div>
-                    </div>
                     </t>
-              </templates>
+                </templates>
             </kanban>
         </field>
     </record>
-
 </odoo>
