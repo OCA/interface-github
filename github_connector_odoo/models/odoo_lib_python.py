@@ -29,7 +29,6 @@ class OdooLibPython(models.Model):
     )
 
     # Compute Section
-    @api.multi
     @api.depends("module_version_ids", "module_version_ids.lib_python_ids")
     def _compute_module_version_qty(self):
         for lib_python in self:
