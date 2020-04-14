@@ -35,7 +35,6 @@ class OdooAuthor(models.Model):
         string="Number of Modules", compute="_compute_module_qty", store=True
     )
 
-    @api.multi
     @api.depends("module_ids.author_ids")
     def _compute_module_qty(self):
         for author in self:

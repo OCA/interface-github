@@ -16,11 +16,9 @@ class GithubRepository(models.Model):
         readonly=True,
         store=True,
         compute="_compute_runbot_id_external",
-        oldname="ci_id_external",
     )
 
     # Compute Section
-    @api.multi
     @api.depends("organization_id.runbot_parse_url")
     def _compute_runbot_id_external(self):
         url_done = defaultdict(list)

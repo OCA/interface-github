@@ -8,53 +8,39 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <!-- Source Code Part -->
     <record id="action_odoo_module" model="ir.actions.act_window">
         <field name="name">Odoo Modules</field>
-        <field name="type">ir.actions.act_window</field>
         <field name="res_model">odoo.module</field>
-        <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="context">{'search_default_filter_with_version': True}</field>
     </record>
     <record id="action_odoo_module_version" model="ir.actions.act_window">
         <field name="name">Odoo Module Versions</field>
-        <field name="type">ir.actions.act_window</field>
         <field name="res_model">odoo.module.version</field>
-        <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,graph,form</field>
     </record>
     <record id="action_odoo_license" model="ir.actions.act_window">
         <field name="name">Odoo Module Licenses</field>
-        <field name="type">ir.actions.act_window</field>
         <field name="res_model">odoo.license</field>
-        <field name="view_type">form</field>
         <field name="view_mode">kanban,tree,form</field>
     </record>
     <record id="action_odoo_author" model="ir.actions.act_window">
         <field name="name">Odoo Module Authors</field>
-        <field name="type">ir.actions.act_window</field>
         <field name="res_model">odoo.author</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
     <record id="action_odoo_lib_bin" model="ir.actions.act_window">
         <field name="name">Odoo Bin Libs</field>
-        <field name="type">ir.actions.act_window</field>
         <field name="res_model">odoo.lib.bin</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
     <record id="action_odoo_lib_python" model="ir.actions.act_window">
         <field name="name">Odoo Python Libs</field>
-        <field name="type">ir.actions.act_window</field>
         <field name="res_model">odoo.lib.python</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
     <!-- Reporting Part -->
     <record id="action_odoo_module_version_by_serie" model="ir.actions.act_window">
         <field name="name">Modules by Serie</field>
-        <field name="type">ir.actions.act_window</field>
         <field name="res_model">odoo.module.version</field>
-        <field name="view_type">form</field>
         <field name="view_mode">graph</field>
         <field name="view_id" ref="view_odoo_module_version_by_serie_graph" />
     </record>
