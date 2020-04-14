@@ -6,26 +6,31 @@ from odoo import api, fields, models
 
 
 class OdooLibPython(models.Model):
-    _name = 'odoo.lib.python'
-    _description = 'Odoo Lib Python'
-    _order = 'module_version_qty desc'
+    _name = "odoo.lib.python"
+    _description = "Odoo Lib Python"
+    _order = "module_version_qty desc"
 
     # Column Section
-    name = fields.Char(
-        string='Name', index=True, required=True, readonly=True)
+    name = fields.Char(string="Name", index=True, required=True, readonly=True)
 
     module_version_ids = fields.Many2many(
-        comodel_name='odoo.module.version', string='Module Versions',
-        relation='module_version_lib_python_rel', column1='lib_python_id',
-        column2='module_version_id', readonly=True)
+        comodel_name="odoo.module.version",
+        string="Module Versions",
+        relation="module_version_lib_python_rel",
+        column1="lib_python_id",
+        column2="module_version_id",
+        readonly=True,
+    )
 
     module_version_qty = fields.Integer(
-        string='Number of Module Versions',
-        compute='_compute_module_version_qty', store=True)
+        string="Number of Module Versions",
+        compute="_compute_module_version_qty",
+        store=True,
+    )
 
     # Compute Section
     @api.multi
-    @api.depends('module_version_ids', 'module_version_ids.lib_python_ids')
+    @api.depends("module_version_ids", "module_version_ids.lib_python_ids")
     def _compute_module_version_qty(self):
         for lib_python in self:
             lib_python.module_version_qty = len(lib_python.module_version_ids)
@@ -33,7 +38,7 @@ class OdooLibPython(models.Model):
     # Custom Section
     @api.model
     def create_if_not_exist(self, name):
-        lib_python = self.search([('name', '=', name)])
+        lib_python = self.search([("name", "=", name)])
         if not lib_python:
-            lib_python = self.create({'name': name})
+            lib_python = self.create({"name": name})
         return lib_python
