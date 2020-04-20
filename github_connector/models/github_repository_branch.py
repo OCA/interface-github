@@ -8,7 +8,7 @@ import shutil
 from datetime import datetime
 from subprocess import check_output
 
-from odoo import _, api, exceptions, fields, models, modules, tools
+from odoo import _, addons, api, exceptions, fields, models, tools
 from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
@@ -110,8 +110,8 @@ class GithubRepository(models.Model):
                     source_path,
                     e,
                 )
-        if source_path and source_path not in modules.module.ad_paths:
-            modules.module.ad_paths.append(source_path)
+        if source_path and source_path not in addons.__path__:
+            addons.__path__.append(source_path)
         super().__init__(pool, cr)
 
     # Action Section
