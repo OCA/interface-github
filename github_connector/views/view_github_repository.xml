@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="view_github_repository_search" model="ir.ui.view">
+        <field name="model">github.repository</field>
+        <field name="arch" type="xml">
+            <search>
+                <field
+                    name="name"
+                    string="Name or Description"
+                    filter_domain="['|', ('name', 'ilike', self), ('description', 'ilike', self)]"
+                />
+                <field name="organization_id" />
+                <group expand="1" string="Group By">
+                    <filter
+                        string="Organization"
+                        name="organization"
+                        context="{'group_by' : 'organization_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="view_github_repository_tree" model="ir.ui.view">
+        <field name="model">github.repository</field>
+        <field name="arch" type="xml">
+            <tree decoration-muted="repository_branch_qty == 0">
+                <field name="complete_name" />
+                <field name="description" />
+                <field name="repository_branch_qty" string="# Branches" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_github_repository_form" model="ir.ui.view">
+        <field name="model">github.repository</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="button_sync_branch"
+                        type="object"
+                        string="Branches Sync."
+                        class="btn btn-default"
+                        icon="fa-chevron-right"
+                        groups="github_connector.group_github_connector_manager"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-code-fork"
+                            name="action_github_repository_branch"
+                            attrs="{'invisible': [('repository_branch_qty', '=', False)]}"
+                        >
+                            <div class="o_stat_info">
+                                <field
+                                    name="repository_branch_qty"
+                                    class="o_stat_value"
+                                />
+                                <span
+                                    class="o_stat_text"
+                                    attrs="{'invisible': [('repository_branch_qty', '&lt;', 2)]}"
+                                > Branches</span>
+                                <span
+                                    class="o_stat_text"
+                                    attrs="{'invisible': [('repository_branch_qty', '&gt;', 1)]}"
+                                > Branch</span>
+                            </div>
+                        </button>
+                        <button
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-users"
+                            name="action_github_team_repository_from_repository"
+                            attrs="{'invisible': [('team_qty', '=', False)]}"
+                        >
+                            <div class="o_stat_info">
+                                <field name="team_qty" class="o_stat_value" />
+                                <span
+                                    class="o_stat_text"
+                                    attrs="{'invisible': [('repository_branch_qty', '&lt;', 2)]}"
+                                > Teams</span>
+                                <span
+                                    class="o_stat_text"
+                                    attrs="{'invisible': [('repository_branch_qty', '&gt;', 1)]}"
+                                > Team</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                        <h3 class="oe_fade">
+                            <field name="description" class="oe_inline" />
+                        </h3>
+                    </div>
+                    <group col="4">
+                        <field name="organization_id" />
+                        <field name="is_ignored" />
+                        <field name="website" widget="url" />
+                    </group>
+                    <notebook>
+                        <page name="github" string="Github">
+                            <group col="4">
+                                <field name="github_url" widget="url" colspan="4" />
+                                <field name="github_id_external" />
+                                <field name="github_login" />
+                                <field name="github_create_date" />
+                                <field name="github_write_date" />
+                                <field name="github_last_sync_date" />
+                                <button
+                                    name="button_update_from_github_light"
+                                    type="object"
+                                    string="Light Sync"
+                                    class="btn btn-light"
+                                    icon="fa-angle-right"
+                                    groups="github_connector.group_github_connector_manager"
+                                />
+                                <button
+                                    name="button_update_from_github_full"
+                                    type="object"
+                                    string="Full Sync"
+                                    class="btn btn-light"
+                                    icon="fa-angle-double-right"
+                                    groups="github_connector.group_github_connector_manager"
+                                />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_github_repository_kanban" model="ir.ui.view">
+        <field name="model">github.repository</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name" />
+                <field name="color" />
+                <field name="description" />
+                <field name="organization_id" />
+                <field name="is_ignored" />
+                <field name="website" />
+                <field name="repository_branch_qty" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div
+                            t-attf-class="#{kanban_color(record.color.raw_value)} oe_kanban_global_click"
+                        >
+                            <div class="oe_module_desc">
+                                <h3>
+                                    <field name="name" />
+                                </h3>
+                                <t t-if="record.description.raw_value">
+                                    <h4>
+                                        <field name="description" />
+                                    </h4>
+                                </t>
+                                <p class="oe_module_name">
+                                    <field name="organization_id" />
+                                    <br />
+                                    <t t-if="record.website.raw_value">
+                                        <field name="website" />
+                                    </t>
+                                    <br />
+                                </p>
+                                <span class="badge">
+                                    <i class="fa fa-fw fa-code-fork" />
+                                    <t t-esc="record.repository_branch_qty.value" />
+                                </span>
+                                <t t-if="record.is_ignored.raw_value">
+                                    <span class="badge">
+                                        <i class="fa fa-fw fa-ban" />
+                                    </span>
+                                </t>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>
