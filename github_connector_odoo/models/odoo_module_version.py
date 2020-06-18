@@ -197,7 +197,7 @@ class OdooModuleVersion(models.Model):
         compute="_compute_odoo_type",
     )
 
-    image = fields.Binary(string="Icon Image", readonly=True)
+    image = fields.Binary(string="Icon Image", readonly=True, attachment=True)
 
     github_url = fields.Char(
         string="Github URL", compute="_compute_github_url", store=True, readonly=True
