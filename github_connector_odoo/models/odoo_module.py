@@ -89,8 +89,8 @@ class OdooModule(models.Model):
         store=True,
     )
 
-    image = fields.Image(
-        string="Icon Image", compute="_compute_image", store=True, readonly=True
+    image = fields.Binary(
+        string="Icon Image", compute="_compute_image", store=True, attachment=True
     )
 
     # Compute Section
