@@ -27,7 +27,7 @@ class OdooLicense(models.Model):
 
     website = fields.Char(string="Website")
 
-    image = fields.Image(string="Icon Image")
+    image = fields.Binary(string="Icon Image", attachment=True)
 
     description = fields.Text(string="Description")
 
