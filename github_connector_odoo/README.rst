@@ -148,6 +148,7 @@ Contributors
 
   * Vicent Cubells
   * Alexandre Díaz
+  * Pedro M. Baeza
 
 Maintainers
 ~~~~~~~~~~~
