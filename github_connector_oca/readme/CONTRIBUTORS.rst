@@ -2,3 +2,4 @@
 * `Tecnativa <https://www.tecnativa.com>`__:
 
   * Vicent Cubells
+  * Carlos Roca

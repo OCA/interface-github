@@ -1,0 +1,44 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* github_connector_oca
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: github_connector_oca
+#: model:ir.model.fields.selection,name:github_connector_oca.selection__odoo_module_version__development_status__alpha
+msgid "Alpha"
+msgstr ""
+
+#. module: github_connector_oca
+#: model:ir.model.fields.selection,name:github_connector_oca.selection__odoo_module_version__development_status__beta
+msgid "Beta"
+msgstr ""
+
+#. module: github_connector_oca
+#: model:ir.model.fields.selection,name:github_connector_oca.selection__odoo_module_version__development_status__mature
+msgid "Mature"
+msgstr ""
+
+#. module: github_connector_oca
+#: model:ir.model.fields,field_description:github_connector_oca.field_odoo_module_version__development_status
+msgid "Module maturity"
+msgstr ""
+
+#. module: github_connector_oca
+#: model:ir.model,name:github_connector_oca.model_odoo_module_version
+msgid "Odoo Module Version"
+msgstr ""
+
+#. module: github_connector_oca
+#: model:ir.model.fields.selection,name:github_connector_oca.selection__odoo_module_version__development_status__production/stable
+msgid "Production/Stable"
+msgstr ""
