@@ -3,7 +3,7 @@
 {
     "name": "Github Connector - OCA extension",
     "summary": "Add OCA specific information to Odoo modules",
-    "version": "12.0.1.0.0",
+    "version": "13.0.1.0.0",
     "category": "Connector",
     "license": "AGPL-3",
     "author": "Odoo Community Association (OCA), " "Road-Support",
