@@ -348,6 +348,6 @@ class GithubRepository(models.Model):
         for branch in self:
             branch.github_url = "https://github.com/{}/{}/tree/{}".format(
                 branch.organization_id.github_login,
-                branch.repository_id.complete_name,
+                branch.repository_id.name,
                 branch.name,
             )
