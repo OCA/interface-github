@@ -275,9 +275,7 @@ class GithubRepository(models.Model):
     @api.depends("name", "repository_id.name")
     def _compute_complete_name(self):
         for branch in self:
-            branch.complete_name = (
-                branch.repository_id.name + "/" + branch.name
-            )
+            branch.complete_name = branch.repository_id.name + "/" + branch.name
 
     @api.depends("size")
     def _compute_mb_size(self):
