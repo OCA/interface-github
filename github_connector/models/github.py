@@ -6,7 +6,7 @@
 
 from odoo import _, exceptions
 
-from requests.auth import HTTPBasicAuth
+from requests.auth import HTTPBasicAuth, AuthBase
 import requests
 import json
 import logging
@@ -74,12 +74,14 @@ _CODE_201 = 201
 
 class Github(object):
 
-    def __init__(self, github_type, login, password, max_try):
+    def __init__(self, github_type, login, password, max_try, token=None):
         super(Github, self).__init__()
         self.github_type = github_type
-        self.login = login
-        self.password = password
         self.max_try = max_try
+        if token:
+            self.auth = HTTPTokenAuth(token)
+        else:
+            self.auth = HTTPBasicAuth(login, password)
 
     def _build_url(self, arguments, url_type, page):
         arguments = arguments and arguments or {}
@@ -110,15 +112,12 @@ class Github(object):
         _logger.info("Calling %s" % url)
         for i in range(self.max_try):
             try:
-                if call_type == 'get':
-                    response = requests.get(
-                        url, auth=HTTPBasicAuth(self.login, self.password))
+                if call_type == "get":
+                    response = requests.get(url, auth=self.auth)
                     break
-                elif call_type == 'post':
+                elif call_type == "post":
                     json_data = json.dumps(data)
-                    response = requests.post(
-                        url, auth=HTTPBasicAuth(self.login, self.password),
-                        data=json_data)
+                    response = requests.post(url, auth=self.auth, data=json_data)
                     break
             except Exception as err:
                 _logger.warning(
@@ -156,6 +155,21 @@ class Github(object):
         return self.get_by_url(url, 'get')
 
     def create(self, arguments, data):
+        # pylint: disable=method-required-super
         url = self._build_url(arguments, 'url_create', None)
         res = self.get_by_url(url, 'post', data)
         return res
+
+
+class HTTPTokenAuth(AuthBase):
+
+    header_format_str = "token {}"
+
+    def __init__(self, token):
+        self.token = token
+
+    def __call__(self, request):
+        request.headers["Authorization"] = self.header_format_str.format(
+            self.token
+        )
+        return request
