@@ -262,17 +262,24 @@ class AbstractGithubModel(models.AbstractModel):
 
     @api.multi
     def get_github_connector(self, github_type):
-        if (not tools.config.get('github_login') or
-                not tools.config.get('github_password')):
+        no_login = (
+            not tools.config.get('github_login') or
+            not tools.config.get('github_password')
+        )
+        no_token = not tools.config.get('github_token')
+        if no_login and no_token:
             raise exceptions.Warning(_(
-                "Please add 'github_login' and 'github_password' "
-                "in Odoo configuration file."))
+                "Please add the couple 'github_login' and 'github_password'"
+                " or 'github_token'"
+                " in Odoo configuration file."))
         return Github(
             github_type,
-            tools.config['github_login'],
-            tools.config['github_password'],
+            tools.config.get('github_login', ''),
+            tools.config.get('github_password', ''),
             int(self.sudo().env['ir.config_parameter'].get_param(
-                'github.max_try')))
+                'github.max_try')),
+            tools.config.get('github_token', ''),
+        )
 
     @api.multi
     def create_in_github(self, model_obj):
