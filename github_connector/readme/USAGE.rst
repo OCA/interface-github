@@ -133,13 +133,3 @@ This module provides several reports
 **Sizes by Serie**
 
 .. image:: ../static/description/reporting_sizes_by_serie.png
-
-Technical Information
-~~~~~~~~~~~~~~~~~~~~~
-
-This module provides 4 crons that you can enable:
-
-* Synchronize All Organizations and Teams (``cron_update_organization``)
-* Synchronize Branches List for All repositories (``cron_update_branch_list``)
-* Download Source Code for All Github Branches (``cron_download_code``)
-* Analyze Source Code for All Github Branches (``cron_analyze_code``)
