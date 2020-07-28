@@ -8,7 +8,7 @@ import json
 import logging
 
 import requests
-from requests.auth import HTTPBasicAuth
+from requests.auth import AuthBase, HTTPBasicAuth
 
 from odoo import _, exceptions
 
@@ -52,12 +52,14 @@ _CODE_201 = 201
 
 
 class Github(object):
-    def __init__(self, github_type, login, password, max_try):
+    def __init__(self, github_type, login, password, max_try, token=None):
         super().__init__()
         self.github_type = github_type
-        self.login = login
-        self.password = password
         self.max_try = max_try
+        if token:
+            self.auth = HTTPTokenAuth(token)
+        else:
+            self.auth = HTTPBasicAuth(login, password)
 
     def _build_url(self, arguments, url_type, page):
         arguments = arguments and arguments or {}
@@ -71,13 +73,6 @@ class Github(object):
                 "?" in complete_url and "&" or "?"
             ) + "per_page=%d&page=%d" % (_MAX_NUMBER_REQUEST, page)
         return complete_url
-
-    def get_http_url(self):
-        """ Returns the http url to github with the identifications
-        :rtype: string
-        """
-        identification = ":".join([self.login, self.password])
-        return "https://{}@github.com/".format(identification)
 
     def list(self, arguments):
         page = 1
@@ -94,12 +89,16 @@ class Github(object):
         _logger.info("Calling %s" % url)
         for i in range(self.max_try):
             try:
-                request_func = self.get_request_function(call_type)
-                response = request_func(url, data)
-                break
+                if call_type == "get":
+                    response = requests.get(url, auth=self.auth)
+                    break
+                elif call_type == "post":
+                    json_data = json.dumps(data)
+                    response = requests.post(url, auth=self.auth, data=json_data)
+                    break
             except Exception as err:
                 _logger.warning(
-                    "URL Call Error. %d/%d. URL: %s", i, self.max_try, err.__str__()
+                    "URL Call Error. %d/%d. URL: %s", i, self.max_try, err.__str__(),
                 )
         else:
             raise exceptions.Warning(_("Maximum attempts reached."))
@@ -136,36 +135,6 @@ class Github(object):
             )
         return response.json()
 
-    def get_request_function(self, call_type):
-        """ Return the request function to use depending on the call_type and the
-        identification type.
-
-
-        :param str call_type: CRUD method. Can be get or post.
-        :rtype: callable
-        """
-        supported_crud_methods = ("get", "post")
-        msg = "`{}` is not a supported CRUD method. Use one of the following {}".format(
-            call_type, supported_crud_methods
-        )
-        assert call_type in supported_crud_methods, msg
-        # We want the same signature for all the functions returned to ease the usage.
-        # The caller should not have to # consider cases. Cases are handled here.
-
-        auth = HTTPBasicAuth(self.login, self.password)
-
-        def get(u, _):
-            return requests.get(u, auth=auth)
-
-        def post(u, d):
-            json_data = json.dumps(d)
-            return requests.post(u, auth=auth, data=json_data)
-
-        if call_type == "get":
-            return get
-
-        return post
-
     def get(self, arguments, by_id=False, page=None):
         url = self._build_url(
             arguments, by_id and "url_get_by_id" or "url_get_by_name", page
@@ -177,3 +146,15 @@ class Github(object):
         url = self._build_url(arguments, "url_create", None)
         res = self.get_by_url(url, "post", data)
         return res
+
+
+class HTTPTokenAuth(AuthBase):
+
+    header_format_str = "token {}"
+
+    def __init__(self, token):
+        self.token = token
+
+    def __call__(self, request):
+        request.headers["Authorization"] = self.header_format_str.format(self.token)
+        return request

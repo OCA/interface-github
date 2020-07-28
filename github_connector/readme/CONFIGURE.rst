@@ -7,8 +7,15 @@ Once installed, you have to:
 
 Note: make sure that Odoo process has read / write access on that folder
 
+   * ``github_token = your_github_access_token``
+
+or
+
    * ``github_login = your_github_login``
    * ``github_password = your_github_password``
+
+Note: if token and login/password are provided, the token will be used.
+The login/password auth will be deprecated by GitHub in the future.
 
 #. Go to 'Settings' / 'Technical' / 'Parameters' / 'System Parameters'
    and define the following values:
@@ -27,3 +34,13 @@ Note: make sure that Odoo process has read / write access on that folder
 #. Go to your(s) user(s) form to add them in the new 'Connector Github Manager'
    groups. The members of this group will have the possibility to run Github
    synchronization.
+
+Technical Information
+~~~~~~~~~~~~~~~~~~~~~
+
+This module provides 4 crons that you can enable:
+
+* Synchronize All Organizations and Teams (``cron_update_organization``)
+* Synchronize Branches List for All repositories (``cron_update_branch_list``)
+* Download Source Code for All Github Branches (``cron_download_code``)
+* Analyze Source Code for All Github Branches (``cron_analyze_code``)
