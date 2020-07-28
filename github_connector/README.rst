@@ -49,8 +49,15 @@ Once installed, you have to:
 
 Note: make sure that Odoo process has read / write access on that folder
 
+   * ``github_token = your_github_access_token``
+
+or
+
    * ``github_login = your_github_login``
    * ``github_password = your_github_password``
+
+Note: if token and login/password are provided, the token will be used.
+The login/password auth will be deprecated by GitHub in the future.
 
 #. Go to 'Settings' / 'Technical' / 'Parameters' / 'System Parameters'
    and define the following values:
@@ -69,6 +76,16 @@ Note: make sure that Odoo process has read / write access on that folder
 #. Go to your(s) user(s) form to add them in the new 'Connector Github Manager'
    groups. The members of this group will have the possibility to run Github
    synchronization.
+
+Technical Information
+~~~~~~~~~~~~~~~~~~~~~
+
+This module provides 4 crons that you can enable:
+
+* Synchronize All Organizations and Teams (``cron_update_organization``)
+* Synchronize Branches List for All repositories (``cron_update_branch_list``)
+* Download Source Code for All Github Branches (``cron_download_code``)
+* Analyze Source Code for All Github Branches (``cron_analyze_code``)
 
 Usage
 =====
@@ -209,16 +226,6 @@ This module provides several reports
 
 .. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/reporting_sizes_by_serie.png
 
-Technical Information
-~~~~~~~~~~~~~~~~~~~~~
-
-This module provides 4 crons that you can enable:
-
-* Synchronize All Organizations and Teams (``cron_update_organization``)
-* Synchronize Branches List for All repositories (``cron_update_branch_list``)
-* Download Source Code for All Github Branches (``cron_download_code``)
-* Analyze Source Code for All Github Branches (``cron_analyze_code``)
-
 Known issues / Roadmap
 ======================
 
@@ -230,14 +237,14 @@ Known issues / Roadmap
 
 * Possible improvements:
 
-1. Create a new module github_connector_website, that could display
-   teams / repositories / branches informations for non logged users.
+  1. Create a new module github_connector_website, that could display
+     teams / repositories / branches informations for non logged users.
 
-2. Analyze commits (author, quantity by series, etc...):
-   this feature has been partially implemented in a V8.0 PR.
+  2. Analyze commits (author, quantity by series, etc...):
+     this feature has been partially implemented in a V8.0 PR.
 
-3. Synchronize Pull Request, Issues, Comments:
-   this feature has been partially implemented in a V8.0 PR.
+  3. Synchronize Pull Request, Issues, Comments:
+     this feature has been partially implemented in a V8.0 PR.
 
 * Refactor the github connector:
 
@@ -280,9 +287,11 @@ Contributors
 * Enrique Martín (enriquemartin@digital5.es)
 * `Tecnativa <https://www.tecnativa.com>`_:",
 
+  * Pedro M. Baeza
   * Vicent Cubells
   * Alexandre Díaz
   * Ernesto Tejeda
+  * Carlos Roca
 
 Maintainers
 ~~~~~~~~~~~

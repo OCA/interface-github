@@ -808,7 +808,8 @@ msgstr ""
 #: code:addons/github_connector/models/abstract_github_model.py:0
 #, python-format
 msgid ""
-"Please add 'github_login' and 'github_password' in Odoo configuration file."
+"Please add the couple 'github_login' and 'github_password' or 'github_token'"
+" in Odoo configuration file."
 msgstr ""
 
 #. module: github_connector
