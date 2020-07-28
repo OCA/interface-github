@@ -11,6 +11,8 @@ from subprocess import check_output
 from odoo import _, addons, api, exceptions, fields, models, tools
 from odoo.tools.safe_eval import safe_eval
 
+from .github import _GITHUB_URL
+
 _logger = logging.getLogger(__name__)
 
 try:
@@ -143,7 +145,6 @@ class GithubRepository(models.Model):
         return branch
 
     def _download_code(self):
-        client = self.get_github_connector("")
         for branch in self:
             if not os.path.exists(branch.local_path):
                 _logger.info("Cloning new repository into %s ..." % branch.local_path)
@@ -160,7 +161,7 @@ class GithubRepository(models.Model):
                     )
 
                 command = ("git clone %s%s/%s.git -b %s %s") % (
-                    client.get_http_url(),
+                    _GITHUB_URL,
                     branch.repository_id.organization_id.github_login,
                     branch.repository_id.name,
                     branch.name,

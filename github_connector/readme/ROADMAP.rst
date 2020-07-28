@@ -6,14 +6,14 @@
 
 * Possible improvements:
 
-1. Create a new module github_connector_website, that could display
-   teams / repositories / branches informations for non logged users.
+  1. Create a new module github_connector_website, that could display
+     teams / repositories / branches informations for non logged users.
 
-2. Analyze commits (author, quantity by series, etc...):
-   this feature has been partially implemented in a V8.0 PR.
+  2. Analyze commits (author, quantity by series, etc...):
+     this feature has been partially implemented in a V8.0 PR.
 
-3. Synchronize Pull Request, Issues, Comments:
-   this feature has been partially implemented in a V8.0 PR.
+  3. Synchronize Pull Request, Issues, Comments:
+     this feature has been partially implemented in a V8.0 PR.
 
 * Refactor the github connector:
 
