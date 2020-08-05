@@ -292,7 +292,7 @@ class GithubRepository(models.Model):
 
     @api.depends("complete_name")
     def _compute_local_path(self):
-        source_path = tools.config.get("source_code_local_path", False)
+        source_path = tools.config.get("source_code_local_path", "")
         if not source_path and not tools.config["test_enable"]:
             raise exceptions.Warning(
                 _(
