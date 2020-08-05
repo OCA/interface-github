@@ -100,7 +100,7 @@ class GithubRepository(models.Model):
     # Init Section
     def __init__(self, pool, cr):
         source_path = tools.config.get("source_code_local_path", False)
-        if not os.path.exists(source_path):
+        if source_path and not os.path.exists(source_path):
             try:
                 os.makedirs(source_path)
             except Exception as e:
@@ -293,7 +293,7 @@ class GithubRepository(models.Model):
     @api.depends("complete_name")
     def _compute_local_path(self):
         source_path = tools.config.get("source_code_local_path", False)
-        if not source_path:
+        if not source_path and not tools.config["test_enable"]:
             raise exceptions.Warning(
                 _(
                     "source_code_local_path should be defined in your "
