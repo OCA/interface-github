@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright 2020 Tecnativa - Carlos Roca
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<!-- pylint: disable=duplicate-xml-record-id -->
+<odoo>
+    <!-- Odoo module version -->
+    <record id="odoo_module_version_1_demo" model="odoo.module.version">
+        <field name="author">Joseph Lee</field>
+    </record>
+    <record id="odoo_module_version_2_demo" model="odoo.module.version">
+        <field name="author">Joseph Lee</field>
+    </record>
+    <record id="odoo_module_version_3_demo" model="odoo.module.version">
+        <field name="author">Joseph Lee</field>
+    </record>
+    <record id="odoo_module_version_4_demo" model="odoo.module.version">
+        <field name="author">Joseph Lee</field>
+    </record>
+    <record id="odoo_module_version_5_demo" model="odoo.module.version">
+        <field name="author">Joseph Lee</field>
+    </record>
+    <record id="odoo_module_version_6_demo" model="odoo.module.version">
+        <field name="author">Rodney Black</field>
+    </record>
+</odoo>
