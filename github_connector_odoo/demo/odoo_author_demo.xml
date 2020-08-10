@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2020 Tecnativa - Carlos Roca
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="odoo_author_1_demo" model="odoo.author">
+        <field name="name">Rodney Black</field>
+    </record>
+    <record id="odoo_author_2_demo" model="odoo.author">
+        <field name="name">Joseph Lee</field>
+    </record>
+</odoo>
