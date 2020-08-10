@@ -31,7 +31,11 @@
         "wizards/view_wizard_create_team.xml",
         "wizards/view_wizard_create_repository.xml",
     ],
-    "demo": ["demo/github_organization.xml", "demo/github_organization_serie.xml"],
+    "demo": [
+        "demo/github_organization.xml",
+        "demo/github_organization_serie.xml",
+        "demo/github_repository_branch_demo.xml",
+    ],
     "installable": True,
     "external_dependencies": {"python": ["GitPython"]},
 }
