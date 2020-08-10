@@ -47,6 +47,9 @@ Once installed, you have to:
 
    * ``source_code_local_path = /workspace/source_code/``
 
+Note: you can define the route as environment variable using the key
+SOURCE_CODE_LOCAL_PATH
+
 Note: make sure that Odoo process has read / write access on that folder
 
    * ``github_token = your_github_access_token``
