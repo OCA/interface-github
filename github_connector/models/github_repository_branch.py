@@ -99,7 +99,7 @@ class GithubRepository(models.Model):
 
     # Init Section
     def __init__(self, pool, cr):
-        source_path = tools.config.get("source_code_local_path", False)
+        source_path = self._get_source_path()
         if source_path and not os.path.exists(source_path):
             try:
                 os.makedirs(source_path)
@@ -115,6 +115,11 @@ class GithubRepository(models.Model):
         if source_path and source_path not in addons.__path__:
             addons.__path__.append(source_path)
         super().__init__(pool, cr)
+
+    def _get_source_path(self):
+        return tools.config.get("source_code_local_path", "") or os.environ.get(
+            "SOURCE_CODE_LOCAL_PATH", ""
+        )
 
     # Action Section
     def button_download_code(self):
@@ -292,7 +297,7 @@ class GithubRepository(models.Model):
 
     @api.depends("complete_name")
     def _compute_local_path(self):
-        source_path = tools.config.get("source_code_local_path", "")
+        source_path = self._get_source_path()
         if not source_path and not tools.config["test_enable"]:
             raise exceptions.Warning(
                 _(

@@ -6,7 +6,7 @@
 {
     "name": "Github Connector",
     "summary": "Synchronize information from Github repositories",
-    "version": "13.0.2.0.1",
+    "version": "13.0.2.1.0",
     "category": "Connector",
     "license": "AGPL-3",
     "author": "Odoo Community Association (OCA), " "GRAP, Akretion, " "Tecnativa",
@@ -31,7 +31,11 @@
         "wizards/view_wizard_create_team.xml",
         "wizards/view_wizard_create_repository.xml",
     ],
-    "demo": ["demo/github_organization.xml", "demo/github_organization_serie.xml"],
+    "demo": [
+        "demo/github_organization.xml",
+        "demo/github_organization_serie.xml",
+        "demo/github_repository_branch_demo.xml",
+    ],
     "installable": True,
     "external_dependencies": {"python": ["GitPython"]},
 }
