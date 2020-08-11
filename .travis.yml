@@ -34,7 +34,7 @@ jobs:
 
 env:
   global:
-    - VERSION="13.0" TESTS="0" LINT_CHECK="0" MAKEPOT="0"
+    - VERSION="13.0" TESTS="0" LINT_CHECK="0" MAKEPOT="0" SOURCE_CODE_LOCAL_PATH="/tmp/"
 
 install:
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git

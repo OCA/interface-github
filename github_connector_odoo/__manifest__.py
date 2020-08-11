@@ -28,6 +28,11 @@
         "data/odoo_category_data.xml",
         "data/ir_cron.xml",
     ],
-    "demo": ["demo/github_organization.xml"],
+    "demo": [
+        "demo/github_organization.xml",
+        "demo/odoo_author_demo.xml",
+        "demo/odoo_module_demo.xml",
+        "demo/odoo_module_post_demo.xml",
+    ],
     "installable": True,
 }
