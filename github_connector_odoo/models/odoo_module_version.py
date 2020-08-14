@@ -180,8 +180,8 @@ class OdooModuleVersion(models.Model):
                     repository_id.organization_id.github_login,
                     repository_name=version.repository_id.name,
                     branch_name=version.repository_branch_id.name,
-                    rest_path=version.full_module_path[
-                        len(version.repository_branch_id.local_path) + 1:],
+                    rest_path=(version.full_module_path or "")[
+                        len(version.repository_branch_id.local_path or "") + 1:],
                 )
 
     @api.depends('repository_branch_id.repository_id.name')
@@ -277,7 +277,7 @@ class OdooModuleVersion(models.Model):
         odoo_author_obj = self.env['odoo.author']
         for version in self:
             authors = []
-            for item in [x.strip() for x in version.author.split(',')]:
+            for item in [x.strip() for x in (version.author or "").split(',')]:
                 if item and item != version.repository_id.organization_id.\
                         default_author_text:
                     authors.append(
