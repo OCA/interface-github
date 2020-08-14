@@ -32,6 +32,9 @@
     ],
     'demo': [
         'demo/github_organization.xml',
+        "demo/odoo_author_demo.xml",
+        "demo/odoo_module_demo.xml",
+        "demo/odoo_module_post_demo.xml",
     ],
     'installable': True,
 }
