@@ -179,6 +179,30 @@ Finally, you can download locally the source code of all your branches:
 
    .. image:: https://raw.githubusercontent.com/OCA/interface-github/12.0/github_connector/static/description/github_repository_branch_list.png
 
+Download a private repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you want to fetch the source code from a private repository, you need a token (instead of login/password) with the right scopes:
+
+#. Go to 'Github Account' / 'Settings' / 'Developer settings' / 'Personal access tokens' / 'Generate new token'.
+
+   .. image:: https://raw.githubusercontent.com/OCA/interface-github/12.0/github_connector/static/description/generate_new_token.png
+
+#. In the 'New personal access token' you have to select 'repo scope'.
+
+   .. image:: https://raw.githubusercontent.com/OCA/interface-github/12.0/github_connector/static/description/personal_access_token.png
+
+Add one of these scopes to your token:
+
+* **(no scope)** : Grants read-only access to public information (includes public user profile info, public repository info, and gists).
+* * **repo** : Grants full access to private and public repositories. `See here why is this needed <https://youtu.be/07F2pHfvHvA>`__.
+
+Secure storage:
+
+* For security, the git code (source_code_local_path) and the config file (odoo.conf) should be found in a secure storage where only the Odoo process has read and write capabilities.
+
+Otherwise, the code and token (or login/password if you use those -- don't do it!) may be exposed.
+
 Data creation in Github
 ~~~~~~~~~~~~~~~~~~~~~~~
 
