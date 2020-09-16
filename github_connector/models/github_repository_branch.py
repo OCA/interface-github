@@ -1,4 +1,5 @@
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
+# Copyright 2020 Tecnativa - Víctor Martínez
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -95,6 +96,14 @@ class GithubRepository(models.Model):
 
     github_url = fields.Char(
         string="Github URL", store=True, compute="_compute_github_url"
+    )
+    analysis_rule_ids = fields.Many2many(
+        string="Analysis Rules", comodel_name="github.analysis.rule"
+    )
+    analysis_rule_info_ids = fields.One2many(
+        string="Analysis Rules (info)",
+        comodel_name="github.repository.branch.rule.info",
+        inverse_name="repository_branch_id",
     )
 
     # Init Section
@@ -229,6 +238,16 @@ class GithubRepository(models.Model):
         """
         self.ensure_one()
         path = self.local_path
+        # github_analysis_rule
+        rule_ids = (
+            self.repository_id.organization_id.analysis_rule_ids
+            + self.repository_id.analysis_rule_ids
+            + self.analysis_rule_ids
+        )
+        for rule_id in rule_ids:
+            self._delete_analysis_rule_model_info(rule_id)
+            for vals in self._prepare_analysis_rule_info_vals(rule_id):
+                self.env[self._prepare_analysis_rule_model_info(rule_id)].create(vals)
         # Compute Files Sizes
         size = 0
         for file_path in self._get_analyzable_files(path):
@@ -276,6 +295,55 @@ class GithubRepository(models.Model):
                         e,
                     )
         return True
+
+    def _prepare_analysis_rule_model_info(self, analysis_rule_id):
+        """Define model data info that override with other addons"""
+        return "github.repository.branch.rule.info"
+
+    def _delete_analysis_rule_model_info(self, analysis_rule_id):
+        """Remove existing info data to create new records"""
+        self.env[self._prepare_analysis_rule_model_info(analysis_rule_id)].search(
+            [
+                ("analysis_rule_id", "=", analysis_rule_id.id),
+                ("repository_branch_id", "=", self.id),
+            ]
+        ).sudo().unlink()
+
+    def _prepare_analysis_rule_info_vals(self, analysis_rule_id):
+        """Prepare info vals"""
+        res = self._operation_analysis_rule_id(analysis_rule_id)
+        return [
+            {
+                "analysis_rule_id": analysis_rule_id.id,
+                "repository_branch_id": self.id,
+                "code_count": res["code"],
+                "documentation_count": res["documentation"],
+                "empty_count": res["empty"],
+                "string_count": res["string"],
+                "scanned_files": len(res["paths"]),
+            }
+        ]
+
+    def _operation_analysis_rule_id(self, analysis_rule_id):
+        """This function allow to override with other addons that need
+        to change this analysis
+        """
+        res = {
+            "paths": [],
+            "code": 0,
+            "documentation": 0,
+            "empty": 0,
+            "string": 0,
+        }
+        for match in analysis_rule_id._get_matches(self.local_path):
+            # _logger.info("analyse file %s "% match)
+            res_file = analysis_rule_id._analysis_file(self.local_path + "/" + match)
+            res["paths"].append(res_file["path"])
+            # define values
+            for key in ("code", "documentation", "empty", "string"):
+                res[key] += res_file[key]
+
+        return res
 
     # Compute Section
     @api.depends("name", "repository_id.name")
@@ -355,3 +423,15 @@ class GithubRepository(models.Model):
                 branch.repository_id.name,
                 branch.name,
             )
+
+
+class GithubRepositoryBranchRuleInfo(models.TransientModel):
+    _inherit = "github.analysis.rule.info.mixin"
+    _name = "github.repository.branch.rule.info"
+    _description = " Github Repository Branch Rule Info"
+
+    repository_branch_id = fields.Many2one(
+        string="Repository Branch",
+        comodel_name="github.repository.branch",
+        ondelete="cascade",
+    )

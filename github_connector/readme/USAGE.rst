@@ -85,6 +85,31 @@ Finally, you can download locally the source code of all your branches:
 
    .. image:: ../static/description/github_repository_branch_list.png
 
+Analysis source code
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+It's possible to create custom analysis rules that relate to a GitHub organization, GitHub repository and/or GitHub repository branch to analyze code.
+
+#. Go to 'Settings' / 'Analysis rule groups' and create records that allow to organize the rules
+
+#. Go to 'Settings' / 'Analysis rules' and create rules, for example:
+
+  1. Name: All code, Group: General, Paths: ``*``
+  2. Name: Python code, Group: General, Paths: ``*.py``
+  3. Name: Xml code, Group: General, Paths: ``*.xml``
+  4. Name: Repository 1, Group: Custom, Paths: /path/
+
+Note: Paths field in 'Analysis rule' allow to put multiple paths for line, path format is according to https://git-scm.com/docs/gitignore#_pattern_format
+
+#. Go to *GitHub > GitHub Community > Organizations* and define Analysis rules (optional)
+#. Go to *GitHub > GitHub Repository > Repositories* and define Analysis rules (optional)
+#. Go to *GitHub > GitHub Repository > Repository Branches* and define Analysis rules (optional)
+
+Analysis source code is executed when 'Update Source Code Analysis' button in some 'Repository Branch', get all the Analysis rules (Repository + Organization) and analyze code and generate info about it
+Other option to Analysis source code is in cron called 'Analyze Source Code for All Github Branches'
+
+You can see in 'Repository Branch' / 'Code Analysis' the info obtained from analysis rules.
+
 Data creation in Github
 ~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -133,3 +158,7 @@ This module provides several reports
 **Sizes by Serie**
 
 .. image:: ../static/description/reporting_sizes_by_serie.png
+
+**Repository branch analysis rule**
+
+.. image:: ../static/description/github_repository_branch_rule_info_report.png

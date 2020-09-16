@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2020 Tecnativa - Víctor Martínez
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="view_github_analysis_rule_tree" model="ir.ui.view">
+        <field name="model">github.analysis.rule</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="group_id" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_github_analysis_rule_form" model="ir.ui.view">
+        <field name="model">github.analysis.rule</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group col="4">
+                        <field name="group_id" colspan="4" />
+                    </group>
+                    <notebook>
+                        <page name="technical" string="Technical Settings">
+                            <group col="4">
+                                <field name="paths" colspan="4" />
+                                <div
+                                    class="alert alert-warning"
+                                    colspan="4"
+                                    role="alert"
+                                >
+                                    You can see reference documentation and some examples in:
+                                    <a
+                                        href="https://git-scm.com/docs/gitignore#_pattern_format"
+                                        target="_blank"
+                                    >https://git-scm.com/docs/gitignore#_pattern_format</a>
+                                </div>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
