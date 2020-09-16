@@ -14,8 +14,52 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: github_connector
+#: model:ir.model,name:github_connector.model_github_repository_branch_rule_info
+msgid " Github Repository Branch Rule Info"
+msgstr ""
+
+#. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_tree
 msgid "# Branches"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__code_count
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__code_count
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__code_count
+msgid "# Code"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__documentation_count
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__documentation_count
+msgid "# Doc."
+msgstr ""
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__documentation_count
+msgid "# Documentation"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__empty_count
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__empty_count
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__empty_count
+msgid "# Empty"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__string_count
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__string_count
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__string_count
+msgid "# String"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__total_count
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__total_count
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__total_count
+msgid "# Total"
 msgstr ""
 
 #. module: github_connector
@@ -76,6 +120,46 @@ msgstr ""
 #. module: github_connector
 #: model:ir.model.fields.selection,name:github_connector.selection__github_team_repository__permission__admin
 msgid "Admin"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__analysis_rule_id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__analysis_rule_id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__analysis_rule_id
+msgid "Analysis Rule"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__analysis_rule_ids
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__analysis_rule_ids
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__analysis_rule_ids
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__analysis_rule_ids
+msgid "Analysis Rules"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__analysis_rule_info_ids
+msgid "Analysis Rules (info)"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.actions.act_window,name:github_connector.action_github_analysis_rule
+msgid "Analysis rule"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.actions.act_window,name:github_connector.action_github_analysis_rule_group
+msgid "Analysis rule group"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.ui.menu,name:github_connector.menu_github_analysis_rule_group
+msgid "Analysis rule groups"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.ui.menu,name:github_connector.menu_github_analysis_rule
+msgid "Analysis rules"
 msgstr ""
 
 #. module: github_connector
@@ -146,6 +230,13 @@ msgstr ""
 #: model:ir.model.fields.selection,name:github_connector.selection__github_team__privacy__closed
 #: model:ir.model.fields.selection,name:github_connector.selection__wizard_create_team__privacy__closed
 msgid "Closed"
+msgstr ""
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_form
+msgid "Code Analysis"
 msgstr ""
 
 #. module: github_connector
@@ -228,10 +319,13 @@ msgid "Create in Github"
 msgstr ""
 
 #. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__create_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_group__create_uid
 #: model:ir.model.fields,field_description:github_connector.field_github_organization__create_uid
 #: model:ir.model.fields,field_description:github_connector.field_github_organization_serie__create_uid
 #: model:ir.model.fields,field_description:github_connector.field_github_repository__create_uid
 #: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__create_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__create_uid
 #: model:ir.model.fields,field_description:github_connector.field_github_team__create_uid
 #: model:ir.model.fields,field_description:github_connector.field_github_team_partner__create_uid
 #: model:ir.model.fields,field_description:github_connector.field_github_team_repository__create_uid
@@ -242,10 +336,13 @@ msgid "Created by"
 msgstr ""
 
 #. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__create_date
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_group__create_date
 #: model:ir.model.fields,field_description:github_connector.field_github_organization__create_date
 #: model:ir.model.fields,field_description:github_connector.field_github_organization_serie__create_date
 #: model:ir.model.fields,field_description:github_connector.field_github_repository__create_date
 #: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__create_date
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__create_date
 #: model:ir.model.fields,field_description:github_connector.field_github_team__create_date
 #: model:ir.model.fields,field_description:github_connector.field_github_team_partner__create_date
 #: model:ir.model.fields,field_description:github_connector.field_github_team_repository__create_date
@@ -253,6 +350,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__create_date
 #: model:ir.model.fields,field_description:github_connector.field_wizard_load_github_model__create_date
 msgid "Created on"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.model.fields,help:github_connector.field_github_analysis_rule__paths
+#: model:ir.model.fields,help:github_connector.field_github_repository_branch_rule_info_report__paths
+msgid "Define with pathspec especification"
 msgstr ""
 
 #. module: github_connector
@@ -266,10 +369,15 @@ msgstr ""
 
 #. module: github_connector
 #: model:ir.model.fields,field_description:github_connector.field_abstract_github_model__display_name
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__display_name
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_group__display_name
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__display_name
 #: model:ir.model.fields,field_description:github_connector.field_github_organization__display_name
 #: model:ir.model.fields,field_description:github_connector.field_github_organization_serie__display_name
 #: model:ir.model.fields,field_description:github_connector.field_github_repository__display_name
 #: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__display_name
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__display_name
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__display_name
 #: model:ir.model.fields,field_description:github_connector.field_github_team__display_name
 #: model:ir.model.fields,field_description:github_connector.field_github_team_partner__display_name
 #: model:ir.model.fields,field_description:github_connector.field_github_team_repository__display_name
@@ -384,6 +492,21 @@ msgid "Github"
 msgstr ""
 
 #. module: github_connector
+#: model:ir.model,name:github_connector.model_github_analysis_rule
+msgid "Github Analysis Rule"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_github_analysis_rule_group
+msgid "Github Analysis Rule Group"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_github_analysis_rule_info_mixin
+msgid "Github Analysis Rule Mixin"
+msgstr ""
+
+#. module: github_connector
 #: model:ir.ui.menu,name:github_connector.menu_github_community
 msgid "Github Community"
 msgstr ""
@@ -430,6 +553,11 @@ msgstr ""
 #. module: github_connector
 #: model:ir.model,name:github_connector.model_github_repository_branch
 msgid "Github Repository Branch"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_github_repository_branch_rule_info_report
+msgid "Github Repository Branch Rule Info Report"
 msgstr ""
 
 #. module: github_connector
@@ -489,6 +617,14 @@ msgid "Github organization"
 msgstr ""
 
 #. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__group_id
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__group_id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__group_id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__group_id
+msgid "Group"
+msgstr ""
+
+#. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_search
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_search
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_search
@@ -502,10 +638,15 @@ msgstr ""
 
 #. module: github_connector
 #: model:ir.model.fields,field_description:github_connector.field_abstract_github_model__id
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__id
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_group__id
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__id
 #: model:ir.model.fields,field_description:github_connector.field_github_organization__id
 #: model:ir.model.fields,field_description:github_connector.field_github_organization_serie__id
 #: model:ir.model.fields,field_description:github_connector.field_github_repository__id
 #: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__id
 #: model:ir.model.fields,field_description:github_connector.field_github_team__id
 #: model:ir.model.fields,field_description:github_connector.field_github_team_partner__id
 #: model:ir.model.fields,field_description:github_connector.field_github_team_repository__id
@@ -559,10 +700,15 @@ msgstr ""
 
 #. module: github_connector
 #: model:ir.model.fields,field_description:github_connector.field_abstract_github_model____last_update
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule____last_update
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_group____last_update
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin____last_update
 #: model:ir.model.fields,field_description:github_connector.field_github_organization____last_update
 #: model:ir.model.fields,field_description:github_connector.field_github_organization_serie____last_update
 #: model:ir.model.fields,field_description:github_connector.field_github_repository____last_update
 #: model:ir.model.fields,field_description:github_connector.field_github_repository_branch____last_update
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info____last_update
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report____last_update
 #: model:ir.model.fields,field_description:github_connector.field_github_team____last_update
 #: model:ir.model.fields,field_description:github_connector.field_github_team_partner____last_update
 #: model:ir.model.fields,field_description:github_connector.field_github_team_repository____last_update
@@ -586,10 +732,13 @@ msgid "Last Sync Date with Github"
 msgstr ""
 
 #. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__write_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_group__write_uid
 #: model:ir.model.fields,field_description:github_connector.field_github_organization__write_uid
 #: model:ir.model.fields,field_description:github_connector.field_github_organization_serie__write_uid
 #: model:ir.model.fields,field_description:github_connector.field_github_repository__write_uid
 #: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__write_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__write_uid
 #: model:ir.model.fields,field_description:github_connector.field_github_team__write_uid
 #: model:ir.model.fields,field_description:github_connector.field_github_team_partner__write_uid
 #: model:ir.model.fields,field_description:github_connector.field_github_team_repository__write_uid
@@ -600,10 +749,13 @@ msgid "Last Updated by"
 msgstr ""
 
 #. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__write_date
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_group__write_date
 #: model:ir.model.fields,field_description:github_connector.field_github_organization__write_date
 #: model:ir.model.fields,field_description:github_connector.field_github_organization_serie__write_date
 #: model:ir.model.fields,field_description:github_connector.field_github_repository__write_date
 #: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__write_date
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__write_date
 #: model:ir.model.fields,field_description:github_connector.field_github_team__write_date
 #: model:ir.model.fields,field_description:github_connector.field_github_team_partner__write_date
 #: model:ir.model.fields,field_description:github_connector.field_github_team_repository__write_date
@@ -693,9 +845,12 @@ msgid "Members Sync."
 msgstr ""
 
 #. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__name
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_group__name
 #: model:ir.model.fields,field_description:github_connector.field_github_organization_serie__name
 #: model:ir.model.fields,field_description:github_connector.field_github_repository__name
 #: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__name
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__name
 #: model:ir.model.fields,field_description:github_connector.field_github_team__name
 #: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__name
 #: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__name
@@ -785,6 +940,11 @@ msgid "Organization Series"
 msgstr ""
 
 #. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__organization_serie_id
+msgid "Organization serie"
+msgstr ""
+
+#. module: github_connector
 #: model:ir.actions.act_window,name:github_connector.action_github_organization
 #: model:ir.model.fields,field_description:github_connector.field_res_partner__organization_ids
 #: model:ir.model.fields,field_description:github_connector.field_res_users__organization_ids
@@ -797,6 +957,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:github_connector.field_github_team__parent_id
 #: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__parent_id
 msgid "Parent Team"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__paths
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__paths
+msgid "Paths"
 msgstr ""
 
 #. module: github_connector
@@ -846,10 +1012,17 @@ msgstr ""
 
 #. module: github_connector
 #: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__repository_id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__repository_id
 #: model:ir.model.fields,field_description:github_connector.field_github_team_repository__repository_id
 #: model:ir.model.fields.selection,name:github_connector.selection__wizard_load_github_model__github_type__repository
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_search
 msgid "Repository"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__repository_branch_id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__repository_branch_id
+msgid "Repository Branch"
 msgstr ""
 
 #. module: github_connector
@@ -864,8 +1037,28 @@ msgid "Repository Sync."
 msgstr ""
 
 #. module: github_connector
+#: model:ir.actions.act_window,name:github_connector.action_github_repository_branch_rule_info_report
+#: model:ir.ui.menu,name:github_connector.menu_action_github_repository_branch_rule_info_report
+#: model_terms:ir.ui.view,arch_db:github_connector.action_github_repository_branch_rule_info_report_graph
+#: model_terms:ir.ui.view,arch_db:github_connector.action_github_repository_branch_rule_info_report_pivot
+msgid "Repository branch analysis rule"
+msgstr ""
+
+#. module: github_connector
 #: model:ir.model.fields,field_description:github_connector.field_github_team_partner__role
 msgid "Role"
+msgstr ""
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+msgid "Rule info (Repository)"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__scanned_files
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__scanned_files
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__scanned_files
+msgid "Scanned files"
 msgstr ""
 
 #. module: github_connector
@@ -986,6 +1179,7 @@ msgid "Teams Sync."
 msgstr ""
 
 #. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_analysis_rule_form
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
 msgid "Technical Settings"
 msgstr ""
@@ -1023,6 +1217,36 @@ msgstr ""
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_tree
 msgid "Total"
+msgstr ""
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+msgid "Total code"
+msgstr ""
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+msgid "Total documentation"
+msgstr ""
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+msgid "Total empty"
+msgstr ""
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+msgid "Total scanned"
+msgstr ""
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+msgid "Total string"
+msgstr ""
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+msgid "Total total"
 msgstr ""
 
 #. module: github_connector
@@ -1109,6 +1333,16 @@ msgstr ""
 #. module: github_connector
 #: model:ir.model.fields.selection,name:github_connector.selection__github_team_repository__permission__write
 msgid "Write"
+msgstr ""
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_analysis_rule_form
+msgid "You can see reference documentation and some examples in:"
+msgstr ""
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_analysis_rule_form
+msgid "https://git-scm.com/docs/gitignore#_pattern_format"
 msgstr ""
 
 #. module: github_connector
