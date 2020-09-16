@@ -29,12 +29,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button
-                            type="action"
-                            name="%(action_odoo_module_version)d"
+                            type="object"
+                            name="action_open"
                             class="oe_stat_button"
                             icon="fa-cube"
                             attrs="{'invisible': [('module_version_qty', '=', False)]}"
-                            context="{'search_default_license_id': active_id}"
+                            context="{'xml_id': 'action_odoo_module_version', 'field_name': 'lib_bin_ids'}"
                         >
                             <field
                                 name="module_version_qty"

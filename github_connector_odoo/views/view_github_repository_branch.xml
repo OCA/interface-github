@@ -26,12 +26,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="arch" type="xml">
             <xpath expr="//div[@name='button_box']" position="inside">
                 <button
-                    type="action"
+                    type="object"
                     class="oe_stat_button"
                     icon="fa-cube"
-                    name="%(action_odoo_module_version)d"
+                    name="action_open"
                     attrs="{'invisible': [('module_version_qty', '=', False)]}"
-                    context="{'search_default_repository_branch_id': active_id}"
+                    context="{'xml_id': 'action_odoo_module_version', 'field_name': 'repository_branch_id'}"
                 >
                     <field
                         name="module_version_qty"
