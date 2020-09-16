@@ -78,6 +78,9 @@ class GithubRepository(models.Model):
     color = fields.Integer(
         string="Color Index", multi="ignore", compute="_compute_ignore"
     )
+    analysis_rule_ids = fields.Many2many(
+        string="Analysis Rules", comodel_name="github.analysis.rule"
+    )
 
     # Compute Section
     @api.depends("organization_id.ignored_repository_names")
