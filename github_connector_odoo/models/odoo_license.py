@@ -6,6 +6,7 @@ from odoo import api, fields, models
 
 
 class OdooLicense(models.Model):
+    _inherit = "abstract.action.mixin"
     _name = "odoo.license"
     _description = "Odoo License"
     _order = "name"
