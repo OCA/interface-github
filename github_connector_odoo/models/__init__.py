@@ -1,3 +1,4 @@
+from . import abstract_action_mixin
 from . import odoo_author
 from . import odoo_category
 from . import odoo_license
