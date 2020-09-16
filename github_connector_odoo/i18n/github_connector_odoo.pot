@@ -14,6 +14,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: github_connector_odoo
+#: model:ir.model,name:github_connector_odoo.model_abstract_action_mixin
+msgid "Abstract Action Mixin"
+msgstr ""
+
+#. module: github_connector_odoo
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_license__active
 msgid "Active"
 msgstr ""
@@ -137,6 +142,7 @@ msgid "Descriptions"
 msgstr ""
 
 #. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_abstract_action_mixin__display_name
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_author__display_name
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_category__display_name
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_bin__display_name
@@ -193,6 +199,7 @@ msgid "HTML the RST Description"
 msgstr ""
 
 #. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_abstract_action_mixin__id
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_author__id
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_category__id
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_bin__id
@@ -234,6 +241,7 @@ msgid "Information"
 msgstr ""
 
 #. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_abstract_action_mixin____last_update
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_author____last_update
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_category____last_update
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_bin____last_update
