@@ -6,6 +6,7 @@ from odoo import api, fields, models
 
 
 class OdooAuthor(models.Model):
+    _inherit = "abstract.action.mixin"
     _name = "odoo.author"
     _description = "Odoo Author"
     _order = "module_qty desc, name"
