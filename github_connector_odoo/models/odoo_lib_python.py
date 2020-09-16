@@ -6,6 +6,7 @@ from odoo import api, fields, models
 
 
 class OdooLibPython(models.Model):
+    _inherit = "abstract.action.mixin"
     _name = "odoo.lib.python"
     _description = "Odoo Lib Python"
     _order = "module_version_qty desc"

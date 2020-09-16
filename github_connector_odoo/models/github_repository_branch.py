@@ -17,7 +17,8 @@ _logger = logging.getLogger(__name__)
 
 
 class GithubRepositoryBranch(models.Model):
-    _inherit = ["github.repository.branch"]
+    _inherit = ["github.repository.branch", "abstract.action.mixin"]
+    _name = "github.repository.branch"
 
     module_paths = fields.Text(
         string="Module Paths",
