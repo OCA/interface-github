@@ -187,6 +187,35 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 </group>
                             </group>
                         </page>
+                        <page name="code_analysis" string="Code Analysis">
+                            <label for="analysis_rule_ids" />
+                            <field name="analysis_rule_ids" colspan="4" />
+                            <label for="analysis_rule_info_ids" />
+                            <field
+                                name="analysis_rule_info_ids"
+                                widget="one2many_list"
+                                colspan="4"
+                            >
+                                <tree
+                                    string="Rule info (Repository)"
+                                    create="false"
+                                    delete="false"
+                                    editable="false"
+                                >
+                                    <field name="group_id" />
+                                    <field name="analysis_rule_id" />
+                                    <field name="code_count" sum="Total code" />
+                                    <field
+                                        name="documentation_count"
+                                        sum="Total documentation"
+                                    />
+                                    <field name="empty_count" sum="Total empty" />
+                                    <field name="string_count" sum="Total string" />
+                                    <field name="total_count" sum="Total total" />
+                                    <field name="scanned_files" sum="Total scanned" />
+                                </tree>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
             </form>
