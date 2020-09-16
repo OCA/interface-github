@@ -133,6 +133,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 />
                             </group>
                         </page>
+                        <page name="code_analysis" string="Code Analysis">
+                            <label for="analysis_rule_ids" />
+                            <field name="analysis_rule_ids" colspan="4" />
+                        </page>
                     </notebook>
                 </sheet>
             </form>

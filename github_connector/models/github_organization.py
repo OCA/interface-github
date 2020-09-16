@@ -1,4 +1,5 @@
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
+# Copyright 2020 Tecnativa - Víctor Martínez
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -86,6 +87,10 @@ class GithubOrganization(models.Model):
     coverage_url_pattern = fields.Char(string="Coverage URL Pattern")
 
     ci_url_pattern = fields.Char(string="CI URL Pattern")
+
+    analysis_rule_ids = fields.Many2many(
+        string="Analysis Rules", comodel_name="github.analysis.rule"
+    )
 
     # Overloadable Section
     @api.model
