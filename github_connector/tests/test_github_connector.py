@@ -1,4 +1,4 @@
-# Copyright 2021 Tecnativa - Víctor Martínez
+# Copyright 2021-2022 Tecnativa - Víctor Martínez
 # Copyright 2021 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -7,15 +7,14 @@ import json
 import responses
 
 from odoo.modules.module import get_resource_path
-from odoo.tests import common
+
+from .common import TestGithubConnectorCommon
 
 
-class TestGithubConnector(common.SavepointCase):
+class TestGithubConnector(TestGithubConnectorCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.model = cls.env["res.partner"]
-        cls.env["ir.config_parameter"].set_param("github.access_token", "test")
         # Create appropriate responses for the API calls
         with open(
             get_resource_path(
@@ -49,12 +48,13 @@ class TestGithubConnector(common.SavepointCase):
 
     @responses.activate
     def test_partner_get_from_id_or_create(self):
-        partner = self.model.create_from_name("OCA-git-bot")
+        partner_model = self.env["res.partner"]
+        partner = partner_model.create_from_name("OCA-git-bot")
         self.assertEqual(partner.github_name, "OCA-git-bot")
         # Check create process not really create new record
-        res = self.model.get_from_id_or_create(data={"login": "OCA-git-bot"})
+        res = partner_model.get_from_id_or_create(data={"login": "OCA-git-bot"})
         self.assertEqual(partner.id, res.id)
         # Try to archive record and try to create again
         partner.active = False
-        res = self.model.get_from_id_or_create(data={"login": "OCA-git-bot"})
+        res = partner_model.get_from_id_or_create(data={"login": "OCA-git-bot"})
         self.assertEqual(partner.id, res.id)
