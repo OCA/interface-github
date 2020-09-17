@@ -4,22 +4,22 @@ Copyright 2020 Tecnativa - Víctor Martínez
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <odoo>
-    <record id="github_analysis_rule_1_demo" model="github.analysis.rule">
+    <record id="github_analysis_rule_python" model="github.analysis.rule">
         <field name="name">Python files</field>
         <field name="group_id" ref="github_analysis_rule_group_1_demo" />
         <field name="paths">*.py</field>
     </record>
-    <record id="github_analysis_rule_2_demo" model="github.analysis.rule">
+    <record id="github_analysis_rule_xml" model="github.analysis.rule">
         <field name="name">XML files</field>
         <field name="group_id" ref="github_analysis_rule_group_1_demo" />
         <field name="paths">*.xml</field>
     </record>
-    <record id="github_analysis_rule_3_demo" model="github.analysis.rule">
+    <record id="github_analysis_rule_js" model="github.analysis.rule">
         <field name="name">JS files</field>
         <field name="group_id" ref="github_analysis_rule_group_1_demo" />
         <field name="paths">*.js</field>
     </record>
-    <record id="github_analysis_rule_4_demo" model="github.analysis.rule">
+    <record id="github_analysis_rule_test" model="github.analysis.rule">
         <field name="name">Test files</field>
         <field name="group_id" ref="github_analysis_rule_group_1_demo" />
         <field name="paths">/tests/*.py</field>
