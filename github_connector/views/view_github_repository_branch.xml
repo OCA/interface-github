@@ -190,11 +190,15 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                         <page name="code_analysis" string="Code Analysis">
                             <label for="analysis_rule_ids" />
                             <field name="analysis_rule_ids" colspan="4" />
-                            <label for="analysis_rule_info_ids" />
+                            <label
+                                for="analysis_rule_info_ids"
+                                attrs="{'invisible': [('analysis_rule_info_ids', '=', [])]}"
+                            />
                             <field
                                 name="analysis_rule_info_ids"
                                 widget="one2many_list"
                                 colspan="4"
+                                attrs="{'invisible': [('analysis_rule_info_ids', '=', [])]}"
                             >
                                 <tree
                                     string="Rule info (Repository)"
