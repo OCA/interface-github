@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo noupdate="1">
+    <record id="odoo_manifest_key_data" model="odoo.manifest.key">
+        <field name="name">data</field>
+    </record>
+    <record id="odoo_manifest_key_demo" model="odoo.manifest.key">
+        <field name="name">demo</field>
+    </record>
+</odoo>

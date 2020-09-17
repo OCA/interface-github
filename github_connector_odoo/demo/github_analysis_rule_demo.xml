@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright 2021 Tecnativa - Víctor Martínez
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record
+        id="github_analysis_rule_python_has_odoo_addons"
+        model="github.analysis.rule"
+    >
+        <field name="name">Python files (misc)</field>
+        <field name="group_id" ref="github_analysis_rule_group_2_demo" />
+        <field name="has_odoo_addons" eval="True" />
+        <field name="paths">
+*.py
+!/tests/*.py
+        </field>
+    </record>
+    <record
+        id="github_analysis_rule_test_python_has_odoo_addons"
+        model="github.analysis.rule"
+    >
+        <field name="name">Test python files (misc)</field>
+        <field name="group_id" ref="github_analysis_rule_group_2_demo" />
+        <field name="has_odoo_addons" eval="True" />
+        <field name="paths">/tests/*.py</field>
+    </record>
+    <record id="github_analysis_rule_xml_has_odoo_addons" model="github.analysis.rule">
+        <field name="name">XML files (misc)</field>
+        <field name="group_id" ref="github_analysis_rule_group_2_demo" />
+        <field name="has_odoo_addons" eval="True" />
+        <field name="paths">*.xml</field>
+    </record>
+    <record id="github_analysis_rule_js_has_odoo_addons" model="github.analysis.rule">
+        <field name="name">JS files (misc)</field>
+        <field name="group_id" ref="github_analysis_rule_group_2_demo" />
+        <field name="has_odoo_addons" eval="True" />
+        <field name="paths">
+*.js
+!/lib/
+        </field>
+    </record>
+    <record
+        id="github_analysis_rule_test_js_has_odoo_addons"
+        model="github.analysis.rule"
+    >
+        <field name="name">Test js files (misc)</field>
+        <field name="group_id" ref="github_analysis_rule_group_2_demo" />
+        <field name="has_odoo_addons" eval="True" />
+        <field name="paths">/tests/*.js</field>
+    </record>
+    <record id="github_analysis_rule_css_has_odoo_addons" model="github.analysis.rule">
+        <field name="name">Css files (misc)</field>
+        <field name="group_id" ref="github_analysis_rule_group_2_demo" />
+        <field name="has_odoo_addons" eval="True" />
+        <field name="paths">
+*.css
+*.scss
+*.less
+*.sass
+        </field>
+    </record>
+    <record
+        id="github_analysis_rule_demo_data_has_odoo_addons"
+        model="github.analysis.rule"
+    >
+        <field name="name">Demo data (misc)</field>
+        <field name="group_id" ref="github_analysis_rule_group_2_demo" />
+        <field name="has_odoo_addons" eval="True" />
+        <field name="paths">*.xml</field>
+        <field
+            name="manifest_key_ids"
+            eval="[(6, 0, [ref('github_connector_odoo.odoo_manifest_key_demo')])]"
+        />
+    </record>
+</odoo>
