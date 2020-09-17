@@ -90,6 +90,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             </group>
                             <group>
                                 <field name="author_ids" widget="many2many_tags" />
+                                <field
+                                    name="manifest_key_ids"
+                                    widget="many2many_tags"
+                                />
                                 <field name="category_id" />
                                 <field
                                     name="dependency_module_ids"
@@ -113,11 +117,19 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 <field name="author" />
                                 <field name="license" />
                                 <field name="website" />
+                                <field name="manifest_keys" />
                                 <field name="depends" />
                                 <field name="external_dependencies" />
                                 <newline />
                                 <field name="description_rst" nolabel="1" colspan="4" />
                             </group>
+                        </page>
+                        <page name="code_analysis" string="Code Analysis">
+                            <field
+                                name="analysis_rule_info_ids"
+                                colspan="4"
+                                context="{'tree_view_ref': 'github_connector_odoo.odoo_module_version_rule_info_tree'}"
+                            />
                         </page>
                     </notebook>
                 </sheet>
@@ -180,6 +192,22 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     </t>
                 </templates>
             </kanban>
+        </field>
+    </record>
+    <record id="odoo_module_version_rule_info_tree" model="ir.ui.view">
+        <field name="model">odoo.module.version.rule.info</field>
+        <field name="arch" type="xml">
+            <tree delete="false" create="false" edit="false">
+                <field name="group_id" />
+                <field name="analysis_rule_id" />
+                <field name="repository_branch_id" />
+                <field name="code_count" sum="Total code" />
+                <field name="documentation_count" sum="Total documentation" />
+                <field name="empty_count" sum="Total empty" />
+                <field name="string_count" sum="Total string" />
+                <field name="total_count" sum="Total total" />
+                <field name="scanned_files" sum="Total scanned" />
+            </tree>
         </field>
     </record>
 </odoo>

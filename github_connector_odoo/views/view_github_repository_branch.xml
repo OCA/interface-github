@@ -46,6 +46,31 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <group name="group_technical_paths" position="inside">
                 <field name="module_paths" />
             </group>
+            <page name="code_analysis" position="inside">
+                <field
+                    name="module_version_analysis_rule_info_ids"
+                    widget="one2many_list"
+                    colspan="4"
+                    attrs="{'invisible': [('module_version_analysis_rule_info_ids', '=', [])]}"
+                >
+                    <tree
+                        string="Rule info (Modules)"
+                        create="false"
+                        delete="false"
+                        editable="false"
+                    >
+                        <field name="group_id" />
+                        <field name="analysis_rule_id" />
+                        <field name="module_version_id" />
+                        <field name="code_count" sum="Total code" />
+                        <field name="documentation_count" sum="Total documentation" />
+                        <field name="empty_count" sum="Total empty" />
+                        <field name="string_count" sum="Total string" />
+                        <field name="total_count" sum="Total total" />
+                        <field name="scanned_files" sum="Total scanned" />
+                    </tree>
+                </field>
+            </page>
         </field>
     </record>
     <record id="view_github_repository_branch_kanban" model="ir.ui.view">

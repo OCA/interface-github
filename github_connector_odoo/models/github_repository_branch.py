@@ -40,6 +40,28 @@ class GithubRepositoryBranch(models.Model):
 
     runbot_url = fields.Char(string="Runbot URL", compute="_compute_runbot_url")
 
+    module_version_analysis_rule_info_ids = fields.Many2many(
+        string="Analysis Rule Info ids (module version)",
+        comodel_name="odoo.module.version.rule.info",
+        compute="_compute_module_version_analysis_rule_info_ids",
+        relation="rule_info_module_version_rel",
+        column1="repository_branch_id",
+        column2="module_version_id",
+        readonly=True,
+    )
+
+    @api.depends("module_version_ids")
+    def _compute_module_version_analysis_rule_info_ids(self):
+        self.ensure_one()
+        self.module_version_analysis_rule_info_ids = self.env[
+            "odoo.module.version.rule.info"
+        ].search(
+            [
+                ("module_version_id", "in", self.module_version_ids.ids),
+                ("repository_branch_id", "=", self.id),
+            ]
+        )
+
     # Compute Section
     @api.depends(
         "name", "repository_id.runbot_id_external", "organization_id.runbot_url_pattern"
@@ -93,7 +115,6 @@ class GithubRepositoryBranch(models.Model):
 
         try:
             paths = self._get_module_paths()
-
             # Scan each path, if exists
             for path in paths:
                 if not os.path.exists(path):
@@ -127,6 +148,90 @@ class GithubRepositoryBranch(models.Model):
                     return True
 
         return map(clean, filter(is_really_module, os.listdir(directory)))
+
+    def _prepare_analysis_rule_model_info(self, analysis_rule_id):
+        if analysis_rule_id.has_odoo_addons:
+            return "odoo.module.version.rule.info"
+        else:
+            return super()._prepare_analysis_rule_model_info(analysis_rule_id)
+
+    def _delete_analysis_rule_model_info(self, analysis_rule_id):
+        if not analysis_rule_id.has_odoo_addons:
+            return super()._delete_analysis_rule_model_info(analysis_rule_id)
+        return False
+
+    def _prepare_analysis_rule_info_vals(self, analysis_rule_id):
+        if analysis_rule_id.has_odoo_addons:
+            if self.module_version_ids:
+                vals = []
+                for module_version_id in self.module_version_ids:
+                    res = self._operation_analysis_rule_id_by_module_version_id(
+                        analysis_rule_id, module_version_id
+                    )
+                    # remove
+                    self.env[
+                        self._prepare_analysis_rule_model_info(analysis_rule_id)
+                    ].search(
+                        [
+                            ("analysis_rule_id", "=", analysis_rule_id.id),
+                            ("repository_branch_id", "=", self.id),
+                            ("module_version_id", "=", module_version_id.id),
+                        ]
+                    ).sudo().unlink()
+                    # vals
+                    vals.append(
+                        {
+                            "analysis_rule_id": analysis_rule_id.id,
+                            "repository_branch_id": self.id,
+                            "module_version_id": module_version_id.id,
+                            "code_count": res["code"],
+                            "documentation_count": res["documentation"],
+                            "empty_count": res["empty"],
+                            "string_count": res["string"],
+                            "scanned_files": len(res["paths"]),
+                        }
+                    )
+                return vals
+
+        return super()._prepare_analysis_rule_info_vals(analysis_rule_id)
+
+    def _operation_analysis_rule_id_by_module_version_id(
+        self, analysis_rule_id, module_version_id
+    ):
+        res = {
+            "paths": [],
+            "code": 0,
+            "documentation": 0,
+            "empty": 0,
+            "string": 0,
+        }
+        matchs = []
+        full_path = module_version_id.full_module_path
+        if analysis_rule_id.has_odoo_addons and analysis_rule_id.manifest_key_ids:
+            manifest_keys_find = module_version_id.manifest_key_ids.filtered(
+                lambda x: x.id in analysis_rule_id.manifest_key_ids.ids
+            )
+            module_info = load_information_from_description_file(
+                module_version_id.technical_name, full_path
+            )
+            spec = analysis_rule_id._set_spec(analysis_rule_id.paths.splitlines())
+            for manifest_key_find in manifest_keys_find:
+                if manifest_key_find.name in module_info:
+                    key_paths = module_info[manifest_key_find.name]
+                    path_items = []
+                    for key_path in key_paths:
+                        path_items.append("{}/{}".format(full_path, key_path))
+                    matchs += spec.match_files(path_items)
+        else:
+            matchs = analysis_rule_id._get_matches(full_path)
+        # operations related to matchs
+        for match in matchs:
+            res_file = analysis_rule_id._analysis_file(match)
+            res["paths"].append(res_file["path"])
+            # define values
+            for key in ("code", "documentation", "empty", "string"):
+                res[key] += res_file[key]
+        return res
 
     def _analyze_module_name(self, path, module_name):
         self.ensure_one()
