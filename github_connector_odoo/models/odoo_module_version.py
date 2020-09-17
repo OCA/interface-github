@@ -26,6 +26,7 @@ class OdooModuleVersion(models.Model):
         "static/src/img/",
         "static/description/",
     ]
+    _MANIFEST_KEYS_ALLOWED = ["data", "demo"]
 
     # Constant Section
     _SETTING_OVERRIDES = {
@@ -206,6 +207,20 @@ class OdooModuleVersion(models.Model):
         string="Full Local Path to the module",
     )
 
+    manifest_keys = fields.Char(string="Manifest keys (Manifest)", readonly=True)
+    manifest_key_ids = fields.Many2many(
+        comodel_name="odoo.manifest.key",
+        string="Manifest keys",
+        store=True,
+        compute="_compute_manifest_key_ids",
+    )
+    analysis_rule_info_ids = fields.One2many(
+        string="Analysis Rule Info ids",
+        comodel_name="odoo.module.version.rule.info",
+        inverse_name="module_version_id",
+        readonly=True,
+    )
+
     # Overload Section
     def unlink(self):
         # Analyzed repository branches should be reanalyzed
@@ -295,6 +310,19 @@ class OdooModuleVersion(models.Model):
                 for module_name in version.depends.split(","):
                     modules.append(module_obj.create_if_not_exist(module_name))
             version.dependency_module_ids = [x.id for x in modules]
+
+    @api.depends("manifest_keys")
+    def _compute_manifest_key_ids(self):
+        manifest_key_obj = self.env["odoo.manifest.key"]
+        for version in self:
+            manifest_keys = []
+            if version.manifest_keys:
+                for manifest_key in version.manifest_keys.split(","):
+                    if manifest_key:
+                        manifest_keys.append(
+                            manifest_key_obj.create_if_not_exist(manifest_key)
+                        )
+            version.manifest_key_ids = [x.id for x in manifest_keys]
 
     @api.depends("external_dependencies")
     def _compute_lib(self):
@@ -392,6 +420,10 @@ class OdooModuleVersion(models.Model):
             and [x for x in info["author"]]
             or info["author"].split(",")
         )
+        manifest_keys = []
+        for manifest_key in self._MANIFEST_KEYS_ALLOWED:
+            if manifest_key in info:
+                manifest_keys.append(manifest_key)
         return {
             "name": info["name"],
             "technical_name": info["technical_name"],
@@ -405,6 +437,7 @@ class OdooModuleVersion(models.Model):
             "external_dependencies": info.get("external_dependencies", {}),
             "author": ",".join([x.strip() for x in sorted(author_list) if x.strip()]),
             "depends": ",".join([x for x in sorted(info["depends"]) if x]),
+            "manifest_keys": ",".join([x for x in sorted(manifest_keys) if x]),
             "repository_branch_id": repository_branch.id,
             "module_id": module.id,
             "category_id": self.get_module_category(info).id or None,
@@ -498,3 +531,18 @@ class OdooModuleVersion(models.Model):
         for module_version in self:
             module_version.unlink()
         return True
+
+
+class OdooModuleVersionRuleInfo(models.TransientModel):
+    _inherit = "github.analysis.rule.info.mixin"
+    _name = "odoo.module.version.rule.info"
+    _description = "Odoo Module Vesion Rule Info"
+
+    module_version_id = fields.Many2one(
+        string="Module Version",
+        comodel_name="odoo.module.version",
+    )
+    repository_branch_id = fields.Many2one(
+        string="Repository Branch",
+        comodel_name="github.repository.branch",
+    )
