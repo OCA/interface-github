@@ -29,4 +29,4 @@ class GithubTeamPartner(models.Model):
         readonly=True)
 
     image_small = fields.Binary(
-        related='partner_id.image_small', readonly=True, store=True)
+        related='partner_id.image_small', readonly=True, store=True, attachment=True)
