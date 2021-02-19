@@ -6,7 +6,7 @@
 {
     'name': 'Github Connector',
     'summary': 'Synchronize information from Github repositories',
-    'version': '12.0.2.2.0',
+    'version': '12.0.2.2.1',
     'category': 'Connector',
     'license': 'AGPL-3',
     'author':
