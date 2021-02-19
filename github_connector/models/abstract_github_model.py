@@ -152,13 +152,15 @@ class AbstractGithubModel(models.AbstractModel):
         extra_data = extra_data and extra_data or {}
 
         # We try to search object by id
-        existing_object = self.search([("github_id_external", "=", data["id"])])
+        existing_object = self.with_context(active_test=False).search(
+            [("github_id_external", "=", data["id"])]
+        )
         if existing_object:
             return existing_object
 
         # We try to see if object exist by name (instead of id)
         if self._github_login_field and self._github_login_field in data:
-            existing_object = self.search(
+            existing_object = self.with_context(active_test=False).search(
                 [("github_login", "=", data[self._github_login_field])]
             )
             if len(existing_object) == 1:
@@ -201,7 +203,9 @@ class AbstractGithubModel(models.AbstractModel):
         github_connector = self.get_github_connector(self.github_type())
         res = github_connector.get([name])
         # search if ID doesn't exist in database
-        current_object = self.search([("github_id_external", "=", res["id"])])
+        current_object = self.with_context(active_test=False).search(
+            [("github_id_external", "=", res["id"])]
+        )
         if not current_object:
             # Create the object
             return self._create_from_github_data(res)
