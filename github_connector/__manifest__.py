@@ -6,7 +6,7 @@
 {
     "name": "Github Connector",
     "summary": "Synchronize information from Github repositories",
-    "version": "13.0.2.1.0",
+    "version": "13.0.2.1.1",
     "category": "Connector",
     "license": "AGPL-3",
     "author": "Odoo Community Association (OCA), " "GRAP, Akretion, " "Tecnativa",
