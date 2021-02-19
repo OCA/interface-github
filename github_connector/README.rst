@@ -295,6 +295,7 @@ Contributors
   * Alexandre Díaz
   * Ernesto Tejeda
   * Carlos Roca
+  * Víctor Martínez
 
 Maintainers
 ~~~~~~~~~~~
