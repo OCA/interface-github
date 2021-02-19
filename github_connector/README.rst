@@ -320,6 +320,7 @@ Contributors
     * Pedro M. Baeza
     * Vicent Cubells
     * Carlos Roca
+    * Víctor Martínez
 
 Maintainers
 ~~~~~~~~~~~
