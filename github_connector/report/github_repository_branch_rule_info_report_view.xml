@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright 2020 Tecnativa - Víctor Martínez
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record
+        model="ir.ui.view"
+        id="action_github_repository_branch_rule_info_report_pivot"
+    >
+        <field name="model">github.repository.branch.rule.info.report</field>
+        <field name="arch" type="xml">
+            <pivot string="Repository branch analysis rule" disable_linking="True">
+                <field name="repository_id" type="row" />
+                <field name="total_count" type="measure" />
+            </pivot>
+        </field>
+    </record>
+    <record
+        model="ir.ui.view"
+        id="action_github_repository_branch_rule_info_report_graph"
+    >
+        <field name="model">github.repository.branch.rule.info.report</field>
+        <field name="arch" type="xml">
+            <graph string="Repository branch analysis rule">
+                <field name="repository_id" type="row" />
+                <field name="total_count" type="measure" />
+            </graph>
+        </field>
+    </record>
+    <record
+        model="ir.actions.act_window"
+        id="action_github_repository_branch_rule_info_report"
+    >
+        <field name="name">Repository branch analysis rule</field>
+        <field name="res_model">github.repository.branch.rule.info.report</field>
+        <field name="view_mode">pivot,graph</field>
+    </record>
+    <menuitem
+        name="Repository branch analysis rule"
+        action="action_github_repository_branch_rule_info_report"
+        id="menu_action_github_repository_branch_rule_info_report"
+        parent="menu_reporting"
+        sequence="20"
+    />
+</odoo>

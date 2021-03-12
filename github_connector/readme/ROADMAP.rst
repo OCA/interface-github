@@ -22,7 +22,3 @@
   good access to child object, generating for the time being, unnecessary
   API calls. For example, updating a repository should call before a call to
   the parent organization (The current module is so faster).
-
-.. code-block:: bash
-
-   ``sudo pip install PyGitHub``

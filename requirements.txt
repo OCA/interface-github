@@ -1,1 +1,3 @@
 GitPython
+pygount
+pathspec
