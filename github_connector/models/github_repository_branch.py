@@ -233,12 +233,7 @@ class GithubRepository(models.Model):
                         res.append(os.path.join(root, fic))
         return res
 
-    def analyze_code_one(self):
-        """Overload Me in custom Module that manage Source Code analysis.
-        """
-        self.ensure_one()
-        path = self.local_path
-        # github_analysis_rule
+    def set_analysis_rule_info(self):
         rule_ids = (
             self.repository_id.organization_id.analysis_rule_ids
             + self.repository_id.analysis_rule_ids
@@ -248,6 +243,13 @@ class GithubRepository(models.Model):
             self._delete_analysis_rule_model_info(rule_id)
             for vals in self._prepare_analysis_rule_info_vals(rule_id):
                 self.env[self._prepare_analysis_rule_model_info(rule_id)].create(vals)
+
+    def analyze_code_one(self):
+        """Overload Me in custom Module that manage Source Code analysis.
+        """
+        self.ensure_one()
+        path = self.local_path
+        self.set_analysis_rule_info()
         # Compute Files Sizes
         size = 0
         for file_path in self._get_analyzable_files(path):
@@ -263,7 +265,6 @@ class GithubRepository(models.Model):
             # to be downloaded again
             self.state = "to_download"
             return {"size": 0}
-
         return {"size": size}
 
     def _analyze_code(self):
@@ -302,12 +303,17 @@ class GithubRepository(models.Model):
 
     def _delete_analysis_rule_model_info(self, analysis_rule_id):
         """Remove existing info data to create new records"""
-        self.env[self._prepare_analysis_rule_model_info(analysis_rule_id)].search(
-            [
-                ("analysis_rule_id", "=", analysis_rule_id.id),
-                ("repository_branch_id", "=", self.id),
-            ]
-        ).sudo().unlink()
+        return (
+            self.env[self._prepare_analysis_rule_model_info(analysis_rule_id)]
+            .search(
+                [
+                    ("analysis_rule_id", "=", analysis_rule_id.id),
+                    ("repository_branch_id", "=", self.id),
+                ]
+            )
+            .sudo()
+            .unlink()
+        )
 
     def _prepare_analysis_rule_info_vals(self, analysis_rule_id):
         """Prepare info vals"""
@@ -336,13 +342,11 @@ class GithubRepository(models.Model):
             "string": 0,
         }
         for match in analysis_rule_id._get_matches(self.local_path):
-            # _logger.info("analyse file %s "% match)
             res_file = analysis_rule_id._analysis_file(self.local_path + "/" + match)
             res["paths"].append(res_file["path"])
             # define values
             for key in ("code", "documentation", "empty", "string"):
                 res[key] += res_file[key]
-
         return res
 
     # Compute Section

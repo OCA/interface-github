@@ -5,7 +5,8 @@
 import base64
 import logging
 from datetime import datetime
-from urllib.request import urlopen
+
+import requests
 
 from odoo import _, api, exceptions, fields, models, tools
 from odoo.exceptions import UserError
@@ -243,7 +244,8 @@ class AbstractGithubModel(models.AbstractModel):
         )
         for _i in range(max_try):
             try:
-                stream = urlopen(url).read()
+                req = requests.get(url, timeout=10)
+                stream = req.content
                 break
             except Exception as err:
                 _logger.warning("URL Call Error. %s" % (err.__str__()))

@@ -44,6 +44,20 @@ manifest file.
 
 
 
+**Analysis source code**
+
+Implements Analysis source code in odoo module versions, now add new field called "has_odoo_addons" (boolean) in Analysis rule that allow (if defined) analyze odoo_module_versions and save info about it
+
+
+
+**Soource code analysis**
+
+Implements Source code analysis odoo module versions, now addiing new field called "has_odoo_addons" (boolean) in Analysis rule that (if defined) allows to analyze odoo_module_versions and save info about it
+
+In 'Repository Branch' / 'Code Analysis', shows the info related to odoo_module_versions rules analysis too.
+
+
+
 **Reporting**
 
 This module provide a new reporting.

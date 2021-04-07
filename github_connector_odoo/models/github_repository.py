@@ -3,7 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from collections import defaultdict
-from urllib.request import Request, urlopen
+
+import requests
 
 from odoo import api, fields, models
 
@@ -27,12 +28,8 @@ class GithubRepository(models.Model):
 
         for organization_id, repositories in url_done.items():
             if organization_id.runbot_parse_url:
-                runbot_list = (
-                    urlopen(Request(organization_id.runbot_parse_url))
-                    .read()
-                    .decode()
-                    .split("\n")
-                )
+                req = requests.get(organization_id.runbot_parse_url, timeout=10)
+                runbot_list = req.content.decode().split("\n")
                 for item in runbot_list:
                     for repository in repositories:
                         if item.endswith(repository.complete_name):

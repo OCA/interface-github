@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="view_github_analysis_rule_form" model="ir.ui.view">
+        <field name="model">github.analysis.rule</field>
+        <field
+            name="inherit_id"
+            ref="github_connector.view_github_analysis_rule_form"
+        />
+        <field name="arch" type="xml">
+            <field name="group_id" position="after">
+                <field name="has_odoo_addons" />
+            </field>
+            <field name="paths" position="after">
+                <field
+                    name="manifest_key_ids"
+                    attrs="{'invisible': [('has_odoo_addons', '=', False)]}"
+                    colspan="4"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
