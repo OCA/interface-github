@@ -98,7 +98,10 @@ class Github(object):
                     break
             except Exception as err:
                 _logger.warning(
-                    "URL Call Error. %d/%d. URL: %s", i, self.max_try, err.__str__(),
+                    "URL Call Error. %d/%d. URL: %s",
+                    i,
+                    self.max_try,
+                    err.__str__(),
                 )
         else:
             raise exceptions.Warning(_("Maximum attempts reached."))

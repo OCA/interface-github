@@ -128,26 +128,24 @@ class AbstractGithubModel(models.AbstractModel):
         """Override this function in models that inherit this abstract
         to mention which items should be synchronized from github when the
         user click on 'Full Update' Button"""
-        pass
 
     def _hook_after_github_creation(self):
         """Hook that will be called, after a creation in github.
         Override this function to add custom logic for after creation."""
-        pass
 
     # Custom Public Function
     @api.model
     def get_from_id_or_create(self, data, extra_data=None):
         """Search if the odoo object exists in database. If yes, returns the
-            object. Otherwise, creates the new object.
+        object. Otherwise, creates the new object.
 
-            :param data: dict with github 'id' and 'url' keys
-            :return: The searched or created object
+        :param data: dict with github 'id' and 'url' keys
+        :return: The searched or created object
 
-            :Example:
+        :Example:
 
-            >>> self.env['github_organization'].get_from_id_or_create(
-                {'id': 7600578, 'url': 'https://api.github.com/orgs/OCA'})
+        >>> self.env['github_organization'].get_from_id_or_create(
+            {'id': 7600578, 'url': 'https://api.github.com/orgs/OCA'})
         """
         extra_data = extra_data and extra_data or {}
 
@@ -190,15 +188,15 @@ class AbstractGithubModel(models.AbstractModel):
     @api.model
     def create_from_name(self, name):
         """Call Github API, using a URL using github name. Load data and
-            Create Odoo object accordingly, if the odoo object doesn't exist.
+        Create Odoo object accordingly, if the odoo object doesn't exist.
 
-            :param name: the github name to load
-            :return: The created object
+        :param name: the github name to load
+        :return: The created object
 
-            :Example:
+        :Example:
 
-            >>> self.env['github_organization'].create_from_name('OCA')
-            >>> self.env['github_repository'].create_from_name('OCA/web')
+        >>> self.env['github_organization'].create_from_name('OCA')
+        >>> self.env['github_repository'].create_from_name('OCA/web')
         """
         github_connector = self.get_github_connector(self.github_type())
         res = github_connector.get([name])
@@ -220,11 +218,11 @@ class AbstractGithubModel(models.AbstractModel):
 
     def update_from_github(self, child_update):
         """Call Github API, using a URL using github id. Load data and
-            update Odoo object accordingly, if the odoo object is obsolete.
-            (Based on last write dates)
+        update Odoo object accordingly, if the odoo object is obsolete.
+        (Based on last write dates)
 
-            :param child_update: set to True if you want to reload childs
-                Objects linked to this object. (like members for teams)
+        :param child_update: set to True if you want to reload childs
+            Objects linked to this object. (like members for teams)
         """
         github_connector = self.get_github_connector(self.github_type())
         for item in self:
