@@ -234,8 +234,7 @@ class GithubRepository(models.Model):
         return res
 
     def analyze_code_one(self):
-        """Overload Me in custom Module that manage Source Code analysis.
-        """
+        """Overload Me in custom Module that manage Source Code analysis."""
         self.ensure_one()
         path = self.local_path
         # github_analysis_rule

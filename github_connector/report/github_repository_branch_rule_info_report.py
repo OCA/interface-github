@@ -11,19 +11,23 @@ class GithubRepositoryBranchRuleInfoReport(models.Model):
     _auto = False
 
     analysis_rule_id = fields.Many2one(
-        string="Analysis Rule", comodel_name="github.analysis.rule",
+        string="Analysis Rule",
+        comodel_name="github.analysis.rule",
     )
     group_id = fields.Many2one(
         string="Group", related="analysis_rule_id.group_id", readonly=True
     )
     repository_branch_id = fields.Many2one(
-        string="Repository Branch", comodel_name="github.repository.branch",
+        string="Repository Branch",
+        comodel_name="github.repository.branch",
     )
     repository_id = fields.Many2one(
-        string="Repository", comodel_name="github.repository",
+        string="Repository",
+        comodel_name="github.repository",
     )
     organization_serie_id = fields.Many2one(
-        string="Organization serie", comodel_name="github.organization.serie",
+        string="Organization serie",
+        comodel_name="github.organization.serie",
     )
     code_count = fields.Integer(string="# Code")
     documentation_count = fields.Integer(string="# Documentation")
@@ -78,7 +82,10 @@ class GithubRepositoryBranchRuleInfoReport(models.Model):
         )
 
         return "{} (SELECT {} FROM {} WHERE grbri.id > 0 GROUP BY {})".format(
-            with_, select_, from_, groupby_,
+            with_,
+            select_,
+            from_,
+            groupby_,
         )
 
     def init(self):
