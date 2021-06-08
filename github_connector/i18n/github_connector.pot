@@ -72,7 +72,7 @@ msgstr ""
 #: code:addons/github_connector/models/github.py:0
 #, python-format
 msgid ""
-"401 - Unable to authenticate to Github with the login '%s'.\n"
+"401 - Unable to authenticate to Github with the %s.\n"
 "You should check your credentials in the Odoo configuration file."
 msgstr ""
 
@@ -1267,8 +1267,8 @@ msgstr ""
 #: code:addons/github_connector/models/github.py:0
 #, python-format
 msgid ""
-"Unable to realize the current operation. The login '%s' does not have the "
-"correct access rights."
+"Unable to realize the current operation. The %s does not have the correct "
+"access rights."
 msgstr ""
 
 #. module: github_connector
@@ -1346,6 +1346,12 @@ msgid "https://git-scm.com/docs/gitignore#_pattern_format"
 msgstr ""
 
 #. module: github_connector
+#: code:addons/github_connector/models/github.py:0
+#, python-format
+msgid "login '%s'"
+msgstr ""
+
+#. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_wizard_create_repository_form
 #: model_terms:ir.ui.view,arch_db:github_connector.view_wizard_create_team_form
 #: model_terms:ir.ui.view,arch_db:github_connector.view_wizard_load_github_model_form
@@ -1355,6 +1361,12 @@ msgstr ""
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
 msgid "organization_serie_ids"
+msgstr ""
+
+#. module: github_connector
+#: code:addons/github_connector/models/github.py:0
+#, python-format
+msgid "provided token"
 msgstr ""
 
 #. module: github_connector
