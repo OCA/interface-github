@@ -103,22 +103,26 @@ class Github(object):
         else:
             raise exceptions.Warning(_("Maximum attempts reached."))
 
+        if isinstance(self.auth, HTTPBasicAuth):
+            auth_err_msg = _("login '%s'") % self.auth.login
+        elif isinstance(self.auth, HTTPTokenAuth):
+            auth_err_msg = _("provided token")
         if response.status_code == _CODE_401:
             raise exceptions.Warning(
                 _(
-                    "401 - Unable to authenticate to Github with the login '%s'.\n"
+                    "401 - Unable to authenticate to Github with the %s.\n"
                     "You should check your credentials in the Odoo"
                     " configuration file."
                 )
-                % self.login
+                % auth_err_msg
             )
         elif response.status_code == _CODE_403:
             raise exceptions.Warning(
                 _(
-                    "Unable to realize the current operation. The login '%s'"
+                    "Unable to realize the current operation. The %s"
                     " does not have the correct access rights."
                 )
-                % self.login
+                % auth_err_msg
             )
         elif response.status_code == _CODE_422:
             raise exceptions.Warning(
