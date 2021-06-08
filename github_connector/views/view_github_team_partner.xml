@@ -21,13 +21,15 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <tree decoration-warning="role == 'member'">
                 <field
                     name="team_id"
-                    invisible="context.get('search_default_team_id')"
+                    attrs="{'invisible': [('context_search_default_team_id', '!=', 0)]}"
                 />
                 <field
                     name="partner_id"
-                    invisible="context.get('search_default_partner_id')"
+                    attrs="{'invisible': [('context_search_default_partner_id', '!=', 0)]}"
                 />
                 <field name="role" />
+                <field name="context_search_default_team_id" invisible="1" />
+                <field name="context_search_default_partner_id" invisible="1" />
             </tree>
         </field>
     </record>

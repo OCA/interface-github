@@ -6,10 +6,11 @@
 {
     "name": "Github Connector",
     "summary": "Synchronize information from Github repositories",
-    "version": "13.0.3.0.0",
+    "version": "14.0.1.0.0",
     "category": "Connector",
     "license": "AGPL-3",
-    "author": "Odoo Community Association (OCA), " "GRAP, Akretion, " "Tecnativa",
+    "author": "Odoo Community Association (OCA), GRAP, Akretion, Tecnativa",
+    "website": "https://github.com/OCA/interface-github",
     "depends": ["base", "web"],
     "data": [
         "security/ir_model_category.xml",

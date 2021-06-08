@@ -68,16 +68,13 @@ class GithubRepository(models.Model):
     is_ignored = fields.Boolean(
         string="Is Ignored",
         compute="_compute_ignore",
-        multi="ignore",
         help="If checked, the branches will not be synchronized, and the"
         " code source will this way not be downloaded and analyzed. To ignore"
         " a repository, go to the organization and add the file"
         " 'Ignored Repositories'.",
     )
 
-    color = fields.Integer(
-        string="Color Index", multi="ignore", compute="_compute_ignore"
-    )
+    color = fields.Integer(string="Color Index", compute="_compute_ignore")
     analysis_rule_ids = fields.Many2many(
         string="Analysis Rules", comodel_name="github.analysis.rule"
     )
