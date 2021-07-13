@@ -111,7 +111,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             <group col="4">
                                 <field name="github_url" widget="url" colspan="4" />
                                 <field name="github_id_external" />
-                                <field name="github_login" />
+                                <field name="github_name" />
                                 <field name="github_create_date" />
                                 <field name="github_write_date" />
                                 <field name="github_last_sync_date" />
@@ -181,7 +181,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 </span>
                                 <t t-if="record.is_ignored.raw_value">
                                     <span class="badge">
-                                        <i class="fa fa-fw fa-ban" />
+                                        <i class="fa fa-fw fa-ban" title="Ignored" />
                                     </span>
                                 </t>
                             </div>
