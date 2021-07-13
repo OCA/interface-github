@@ -1,6 +1,12 @@
 # Copyright 2020 Tecnativa - Víctor Martínez
+# Copyright 2021 Tecnativa - João Marques
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
+import json
+
+import responses
+
+from odoo.modules.module import get_resource_path
 from odoo.tests.common import SavepointCase
 
 
@@ -63,7 +69,8 @@ class TestGithubAnalysisRule(SavepointCase):
                 "description": "The GitHub repos for all Open Source work around Odoo",
                 "website_url": "https://odoo-community.org/",
                 "github_url": "https://github.com/OCA",
-                "github_login": "OCA",
+                "github_name": "OCA",
+                "github_id_external": 7600578,
                 "analysis_rule_ids": [
                     (4, cls.analysis_rule_python.id),
                     (4, cls.analysis_rule_xml.id),
@@ -81,7 +88,8 @@ class TestGithubAnalysisRule(SavepointCase):
             {
                 "name": "OCB",
                 "organization_id": cls.organization_oca.id,
-                "github_login": "%s/OCB" % cls.organization_oca.github_login,
+                "github_name": "%s/OCB" % cls.organization_oca.github_name,
+                "github_id_external": 20558462,
                 "analysis_rule_ids": [(4, cls.analysis_rule_ocb.id)],
             }
         )
@@ -89,8 +97,8 @@ class TestGithubAnalysisRule(SavepointCase):
             {
                 "name": "account-analytic",
                 "organization_id": cls.organization_oca.id,
-                "github_login": "%s/account-analytic"
-                % cls.organization_oca.github_login,
+                "github_id_external": 20881668,
+                "github_name": "%s/account-analytic" % cls.organization_oca.github_name,
             }
         )
         # repository branch
@@ -113,7 +121,22 @@ class TestGithubAnalysisRule(SavepointCase):
                 "analysis_rule_ids": [(4, cls.analysis_rule_custom.id)],
             }
         )
+        cls.env["ir.config_parameter"].set_param("github.access_token", "test")
+        # Create appropriate responses for the API calls
+        with open(
+            get_resource_path(
+                "github_connector", "tests", "res", "github_repo_20881668_response.json"
+            )
+        ) as jsonfile:
+            cls.repo_data = json.loads(jsonfile.read())
+        responses.add(
+            responses.GET,
+            "https://api.github.com:443/repositories/20881668",
+            json=cls.repo_data,
+            status=200,
+        )
 
+    @responses.activate
     def test_github_analysis_rule(self):
         self.assertEqual(len(self.organization_oca.analysis_rule_ids), 3)
         self.assertEqual(len(self.repository_ocb.analysis_rule_ids), 1)

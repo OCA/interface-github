@@ -12,7 +12,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field
                     name="name"
                     string="Name or Github Name"
-                    filter_domain="['|', ('name', 'ilike', self), ('github_login', 'ilike', self)]"
+                    filter_domain="['|', ('name', 'ilike', self), ('github_name', 'ilike', self)]"
                 />
             </search>
         </field>
@@ -21,7 +21,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">github.organization</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="github_login" />
+                <field name="github_name" />
                 <field name="name" />
                 <field name="member_qty" />
                 <field name="repository_qty" />
@@ -168,7 +168,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             <group col="4">
                                 <field name="github_url" widget="url" colspan="4" />
                                 <field name="github_id_external" />
-                                <field name="github_login" />
+                                <field name="github_name" />
                                 <field name="github_create_date" />
                                 <field name="github_write_date" />
                                 <field name="github_last_sync_date" />
@@ -205,7 +205,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <kanban>
                 <field name="id" />
                 <field name="name" />
-                <field name="github_login" />
+                <field name="github_name" />
                 <field name="github_url" />
                 <field name="website_url" />
                 <field name="repository_qty" />
@@ -227,7 +227,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                     <field name="name" />
                                 </h3>
                                 <h4>
-                                    <field name="github_login" />
+                                    <field name="github_name" />
                                 </h4>
                                 <p class="oe_module_name">
                                     <t t-if="record.website_url.raw_value">
@@ -250,7 +250,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 </p>
                                 <a target="_blank" t-att-href="record.github_url.value">
                                     <span class="badge">
-                                        <i class="fa fa-fw fa-github-alt" />
+                                        <i
+                                            class="fa fa-fw fa-github-alt"
+                                            title="Github"
+                                        />
                                     </span>
                                 </a>
                                 <span class="badge">
