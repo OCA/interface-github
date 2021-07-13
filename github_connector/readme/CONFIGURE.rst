@@ -12,13 +12,8 @@ Note: make sure that Odoo process has read / write access on that folder
 
    * ``github_token = your_github_access_token``
 
-or
-
-   * ``github_login = your_github_login``
-   * ``github_password = your_github_password``
-
-Note: if token and login/password are provided, the token will be used.
-The login/password auth will be deprecated by GitHub in the future.
+Note: The login/password auth has been deprecated by GitHub.
+https://docs.github.com/en/rest/overview/other-authentication-methods#via-username-and-password
 
 #. Go to 'Settings' / 'Technical' / 'Parameters' / 'System Parameters'
    and define the following values:

@@ -1,4 +1,5 @@
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
+# Copyright 2021 Tecnativa - João Marques
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -15,7 +16,6 @@ class GithubRepository(models.Model):
     _order = "organization_id, name"
     _description = "Github Repository"
 
-    _github_type = "repository"
     _github_login_field = "full_name"
 
     # Column Section
@@ -94,12 +94,12 @@ class GithubRepository(models.Model):
         for repository in self:
             repository.team_qty = len(repository.team_ids)
 
-    @api.depends("name", "organization_id.github_login")
+    @api.depends("name", "organization_id.github_name")
     def _compute_complete_name(self):
         for repository in self:
             repository.complete_name = "%(login)s/%(rep_name)s" % (
                 {
-                    "login": repository.organization_id.github_login,
+                    "login": repository.organization_id.github_name,
                     "rep_name": repository.name or "",
                 }
             )
@@ -116,7 +116,6 @@ class GithubRepository(models.Model):
         res.update(
             {
                 "name": "name",
-                "github_url": "url",
                 "description": "description",
                 "website": "homepage",
             }
@@ -124,24 +123,41 @@ class GithubRepository(models.Model):
         return res
 
     @api.model
-    def get_odoo_data_from_github(self, data):
-        organization_obj = self.env["github.organization"]
-        res = super().get_odoo_data_from_github(data)
-        organization = organization_obj.get_from_id_or_create(data["owner"])
-        res.update({"organization_id": organization.id})
+    def get_odoo_data_from_github(self, gh_data):
+        res = super().get_odoo_data_from_github(gh_data)
+        org_id = self.env.context.get("github_organization_id", None)
+        if not org_id:
+            # Fetch current organization object
+            organization_obj = self.env["github.organization"]
+            organization = organization_obj.get_from_id_or_create(gh_data=gh_data.owner)
+            org_id = organization.id
+        res.update({"organization_id": org_id})
         return res
 
-    def get_github_data_from_odoo(self):
-        self.ensure_one()
-        return {
-            "name": self.name,
-            "description": self.description or "",
-            "homepage": self.website,
-        }
+    def find_related_github_object(self, obj_id=None):
+        """Query Github API to find the related object"""
+        gh_api = self.get_github_connector()
+        return gh_api.get_repo(int(obj_id or self.github_id_external))
 
-    def get_github_args_for_creation(self):
+    def get_github_base_obj_for_creation(self):
         self.ensure_one()
-        return [self.organization_id.github_login]
+        gh_api = self.get_github_connector()
+        return gh_api.get_organization(self.organization_id.github_name)
+
+    def create_in_github(self):
+        """Create an object in Github through the API"""
+        self.ensure_one()
+        # Create in Github
+        gh_base_obj = self.get_github_base_obj_for_creation()
+        gh_repo = gh_base_obj.create_repo(
+            name=self.name, description=self.description or "", homepage=self.website
+        )
+        # Create in Odoo with the returned data and update object
+        data = self.get_odoo_data_from_github(gh_repo)
+        new_item = self._create_from_github_data(data)
+        new_item.full_update()
+        new_item._hook_after_github_creation()
+        return new_item
 
     def full_update(self):
         self.button_sync_branch()
@@ -153,32 +169,29 @@ class GithubRepository(models.Model):
         return True
 
     def button_sync_branch(self):
-        github_branch = self.get_github_connector("repository_branches")
+        gh_repo = self.find_related_github_object()
         branch_obj = self.env["github.repository.branch"]
-        for repository in self:
+        for repository in self.filtered(lambda r: not r.is_ignored):
             branch_ids = []
             correct_series = repository.organization_id.organization_serie_ids.mapped(
                 "name"
             )
-
-            for data in github_branch.list([repository.github_login]):
-                if repository.is_ignored:
-                    pass
-                elif data["name"] in correct_series:
+            for gh_branch in gh_repo.get_branches():
+                if gh_branch.name in correct_series:
                     # We don't use get_from_id_or_create because repository
                     # branches does not have any ids. (very basic object in the
                     # Github API)
                     branch = branch_obj.create_or_update_from_name(
-                        repository.id, data["name"]
+                        repository.id, gh_branch.name
                     )
                     branch_ids.append(branch.id)
                 else:
                     _logger.warning(
                         "the branch '%s'/'%s' has been ignored.",
                         repository.name,
-                        data["name"],
+                        gh_branch.name,
                     )
-            repository.branch_ids = branch_ids
+            repository.repository_branch_ids = [(6, 0, branch_ids)]
 
     def action_github_team_repository_from_repository(self):
         self.ensure_one()

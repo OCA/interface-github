@@ -23,7 +23,7 @@ Github Connector
     :target: https://runbot.odoo-community.org/runbot/229/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module allows you to:
 
@@ -70,7 +70,7 @@ Note: make sure that Odoo process has read / write access on that folder
 
 or
 
-   * ``github_login = your_github_login``
+   * ``github_name = your_github_login``
    * ``github_password = your_github_password``
 
 Note: if token and login/password are provided, the token will be used.
