@@ -20,7 +20,7 @@ class WizardCreateTeam(models.TransientModel):
     wizard_partner_ids = fields.Many2many(
         string="Team Members",
         comodel_name="res.partner",
-        domain="[('github_login', '!=', False)]",
+        domain="[('github_name', '!=', False)]",
     )
 
     wizard_repository_ids = fields.Many2many(
@@ -33,10 +33,10 @@ class WizardCreateTeam(models.TransientModel):
         res.update(
             {
                 "maintainers": [
-                    x.github_login for x in self.wizard_partner_ids if x.github_login
+                    x.github_name for x in self.wizard_partner_ids if x.github_name
                 ],
                 "repo_names": [
-                    x.github_login for x in self.wizard_repository_ids if x.github_login
+                    x.github_name for x in self.wizard_repository_ids if x.github_name
                 ],
             }
         )
@@ -44,5 +44,5 @@ class WizardCreateTeam(models.TransientModel):
 
     def button_create_in_github(self):
         self.ensure_one()
-        new_item = self.create_in_github(self.env["github.team"])
+        new_item = self.env["github.team"].create_in_github()
         return new_item.get_action()

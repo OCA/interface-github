@@ -14,13 +14,13 @@ Github Connector
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Finterface--github-lightgray.png?logo=github
-    :target: https://github.com/OCA/interface-github/tree/13.0/github_connector
+    :target: https://github.com/OCA/interface-github/tree/14.0/github_connector
     :alt: OCA/interface-github
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/interface-github-13-0/interface-github-13-0-github_connector
+    :target: https://translation.odoo-community.org/projects/interface-github-14-0/interface-github-14-0-github_connector
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/229/13.0
+    :target: https://runbot.odoo-community.org/runbot/229/14.0
     :alt: Try me on Runbot
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
@@ -68,13 +68,8 @@ Note: make sure that Odoo process has read / write access on that folder
 
    * ``github_token = your_github_access_token``
 
-or
-
-   * ``github_login = your_github_login``
-   * ``github_password = your_github_password``
-
-Note: if token and login/password are provided, the token will be used.
-The login/password auth will be deprecated by GitHub in the future.
+Note: The login/password auth has been deprecated by GitHub.
+https://docs.github.com/en/rest/overview/other-authentication-methods#via-username-and-password
 
 #. Go to 'Settings' / 'Technical' / 'Parameters' / 'System Parameters'
    and define the following values:
@@ -88,7 +83,7 @@ The login/password auth will be deprecated by GitHub in the future.
       download (potentially with a lot of repositories) in order to reduce the
       size of the transaction
 
-   .. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/github_settings.png
+   .. image:: https://raw.githubusercontent.com/OCA/interface-github/14.0/github_connector/static/description/github_settings.png
 
 #. Go to your(s) user(s) form to add them in the new 'Connector Github Manager'
    groups. The members of this group will have the possibility to run Github
@@ -115,18 +110,18 @@ To fetch information from Github, you have to:
 #. go to 'Github' / 'Settings' / 'Sync Object'
 #. Select the object type you want to synchronize and its Gthub name
 
-   .. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/sync_organization.png
+   .. image:: https://raw.githubusercontent.com/OCA/interface-github/14.0/github_connector/static/description/sync_organization.png
 
 #. Once done for your organization(s), go to 'Github' / 'Github Commnunity' /
    'Organizations'
 
-   .. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/github_organization_kanban.png
+   .. image:: https://raw.githubusercontent.com/OCA/interface-github/14.0/github_connector/static/description/github_organization_kanban.png
 
 #. Optionally, once organization is created, you can create series for your
    projects. Go to 'Github' / 'Organizations' / click on your organization /
    'Organization Series' Tabs
 
-   .. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/github_organization_series.png
+   .. image:: https://raw.githubusercontent.com/OCA/interface-github/14.0/github_connector/static/description/github_organization_series.png
 
 Select branches to download
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -141,12 +136,12 @@ main branches (releases):
 #. In the 'Settings' tab, set the URL of the 'External Services' you use
    for Continuous Integration and Coverage.
 
-   .. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/github_organization_external_services.png
+   .. image:: https://raw.githubusercontent.com/OCA/interface-github/14.0/github_connector/static/description/github_organization_external_services.png
 
 #. Once done, click on buttons 'Syncs', to synchronize repositories, teams and
    members. (This process can take a while depending of your size)
 
-   .. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/github_organization_sync_buttons.png
+   .. image:: https://raw.githubusercontent.com/OCA/interface-github/14.0/github_connector/static/description/github_organization_sync_buttons.png
 
 Team / members synchronization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -155,16 +150,16 @@ You can synchronize members teams:
 
 #. Go to 'Teams' / tree view / 'Actions' / 'Update from Github'.
 
-   .. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/github_team_kanban.png
+   .. image:: https://raw.githubusercontent.com/OCA/interface-github/14.0/github_connector/static/description/github_team_kanban.png
 
 #. In each team, you can see the members list and the role of the members
 
-   .. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/github_team_partner_kanban.png
+   .. image:: https://raw.githubusercontent.com/OCA/interface-github/14.0/github_connector/static/description/github_team_partner_kanban.png
 
 #. In each team, you can see the repositories list but not the permissions of the
    team. (See 'Known Issues' Section)
 
-   .. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/github_team_repository_kanban.png
+   .. image:: https://raw.githubusercontent.com/OCA/interface-github/14.0/github_connector/static/description/github_team_repository_kanban.png
 
 Repositories synchronization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -174,12 +169,12 @@ You can synchronize the branches of your repositories:
 #. Go to 'Repositories' /
    tree view / 'Actions' / 'Update from Github'
 
-   .. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/github_repository_kanban.png
+   .. image:: https://raw.githubusercontent.com/OCA/interface-github/14.0/github_connector/static/description/github_repository_kanban.png
 
 #. In each repository, you can see the main branches list and the size of code
    source.
 
-   .. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/github_repository_branch_kanban.png
+   .. image:: https://raw.githubusercontent.com/OCA/interface-github/14.0/github_connector/static/description/github_repository_branch_kanban.png
 
 Fetching the source code
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -188,11 +183,11 @@ Finally, you can download locally the source code of all your branches:
 
 #. Go to 'Repository Branches' / tree view / 'Actions' / 'Download and Analyse Source Code'.
 
-   .. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/wizard_download_analyze.png
+   .. image:: https://raw.githubusercontent.com/OCA/interface-github/14.0/github_connector/static/description/wizard_download_analyze.png
 
 #. In the tree view you can update manually source code or refresh analysis.
 
-   .. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/github_repository_branch_list.png
+   .. image:: https://raw.githubusercontent.com/OCA/interface-github/14.0/github_connector/static/description/github_repository_branch_list.png
 
 Analysis source code
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -233,14 +228,14 @@ You have the possibility to creates two items in Github directly from Odoo
    #. Later on, a synchronization will be performed, to create the according
       team in the Odoo instance.
 
-   .. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/wizard_create_team.png
+   .. image:: https://raw.githubusercontent.com/OCA/interface-github/14.0/github_connector/static/description/wizard_create_team.png
 
 #. Repositories:
 
    #. Go to 'Settings' / 'Create Team in Github'.
    #. Set the information and click on Create in Github.
 
-   .. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/wizard_create_repository.png
+   .. image:: https://raw.githubusercontent.com/OCA/interface-github/14.0/github_connector/static/description/wizard_create_repository.png
 
 Note
 ~~~~
@@ -262,15 +257,15 @@ This module provides several reports
 
 **Branches by Serie**
 
-.. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/reporting_branches_by_serie.png
+.. image:: https://raw.githubusercontent.com/OCA/interface-github/14.0/github_connector/static/description/reporting_branches_by_serie.png
 
 **Sizes by Serie**
 
-.. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/reporting_sizes_by_serie.png
+.. image:: https://raw.githubusercontent.com/OCA/interface-github/14.0/github_connector/static/description/reporting_sizes_by_serie.png
 
 **Repository branch analysis rule**
 
-.. image:: https://raw.githubusercontent.com/OCA/interface-github/13.0/github_connector/static/description/github_repository_branch_rule_info_report.png
+.. image:: https://raw.githubusercontent.com/OCA/interface-github/14.0/github_connector/static/description/github_repository_branch_rule_info_report.png
 
 Known issues / Roadmap
 ======================
@@ -306,7 +301,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/interface-github/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/interface-github/issues/new?body=module:%20github_connector%0Aversion:%2013.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/interface-github/issues/new?body=module:%20github_connector%0Aversion:%2014.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -335,6 +330,7 @@ Contributors
   * Ernesto Tejeda
   * Carlos Roca
   * Víctor Martínez
+  * João Marques
 
 Maintainers
 ~~~~~~~~~~~
@@ -349,6 +345,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/interface-github <https://github.com/OCA/interface-github/tree/13.0/github_connector>`_ project on GitHub.
+This module is part of the `OCA/interface-github <https://github.com/OCA/interface-github/tree/14.0/github_connector>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
