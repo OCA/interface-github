@@ -23,5 +23,5 @@ class WizardCreateRepository(models.TransientModel):
 
     def button_create_in_github(self):
         self.ensure_one()
-        new_item = self.create_in_github(self.env["github.repository"])
+        new_item = self.create_in_github()
         return new_item.get_action()

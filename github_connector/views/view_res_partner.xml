@@ -13,17 +13,17 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <filter
                     string="Has Github Account"
                     name="has_github_account"
-                    domain="[('github_login', '!=', False)]"
+                    domain="[('github_name', '!=', False)]"
                 />
             </filter>
             <field name="name" position="after">
                 <field
-                    name="github_login"
+                    name="github_name"
                     string="Github Login"
-                    filter_domain="[('github_login','ilike', self)]"
+                    filter_domain="[('github_name','ilike', self)]"
                 />
                 <field name="organization_ids" />
-                <field name="github_team_ids" />
+                <field name="github_team_partner_ids" />
             </field>
         </field>
     </record>
@@ -33,12 +33,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="arch" type="xml">
             <!-- load data -->
             <field name="mobile" position="after">
-                <field name="github_login" />
+                <field name="github_name" />
             </field>
             <!-- Display Data -->
             <xpath expr="//li[@t-if='record.email.raw_value']" position="after">
-                <li t-if="record.github_login.raw_value">
-                    <field name="github_login" />
+                <li t-if="record.github_name.raw_value">
+                    <field name="github_name" />
                 </li>
             </xpath>
         </field>
@@ -48,7 +48,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="inherit_id" ref="base.view_partner_tree" />
         <field name="arch" type="xml">
             <field name="display_name" position="after">
-                <field name="github_login" />
+                <field name="github_name" />
                 <field name="github_team_qty" />
             </field>
         </field>
@@ -63,7 +63,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     name="action_github_organization"
                     class="oe_stat_button"
                     icon="fa-institution"
-                    attrs="{'invisible': ['|', ('github_login', '=', False), ('is_company', '=', True)]}"
+                    attrs="{'invisible': ['|', ('github_name', '=', False), ('is_company', '=', True)]}"
                 >
                     <field
                         name="organization_qty"
@@ -76,7 +76,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     name="action_github_team_partner_from_partner"
                     class="oe_stat_button"
                     icon="fa-users"
-                    attrs="{'invisible': ['|', ('github_login', '=', False), ('is_company', '=', True)]}"
+                    attrs="{'invisible': ['|', ('github_name', '=', False), ('is_company', '=', True)]}"
                 >
                     <field name="github_team_qty" string="Teams" widget="statinfo" />
                 </button>
@@ -85,14 +85,14 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <page
                     name="github"
                     string="Github"
-                    attrs="{'invisible': [('github_login', '=', False)]}"
+                    attrs="{'invisible': [('github_name', '=', False)]}"
                 >
                     <group col="4">
                         <field name="is_bot_account" />
                         <newline />
                         <field name="github_url" widget="url" colspan="4" />
                         <field name="github_id_external" />
-                        <field name="github_login" />
+                        <field name="github_name" />
                         <field name="github_create_date" />
                         <field name="github_write_date" />
                         <field name="github_last_sync_date" />
