@@ -4,8 +4,6 @@
 
 from odoo import fields, models
 
-from ..models.github import _GITHUB_TYPE
-
 
 class WizardLoadGithubModel(models.TransientModel):
     _name = "wizard.load.github.model"
@@ -13,7 +11,11 @@ class WizardLoadGithubModel(models.TransientModel):
 
     # Columns Section
     github_type = fields.Selection(
-        selection=_GITHUB_TYPE,
+        selection=[
+            ("organization", "Organization"),
+            ("repository", "Repository"),
+            ("user", "User"),
+        ],
         string="Github Type Name",
         default="organization",
         required=True,
