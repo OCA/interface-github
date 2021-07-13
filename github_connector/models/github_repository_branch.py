@@ -1,5 +1,6 @@
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # Copyright 2020 Tecnativa - Víctor Martínez
+# Copyright 2021 Tecnativa - João Marques
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -11,8 +12,6 @@ from subprocess import check_output
 
 from odoo import _, addons, api, exceptions, fields, models, tools
 from odoo.tools.safe_eval import safe_eval
-
-from .github import _GITHUB_URL
 
 _logger = logging.getLogger(__name__)
 
@@ -28,7 +27,6 @@ class GithubRepository(models.Model):
     _order = "repository_id, sequence_serie"
     _description = "Github Repository Branch"
 
-    _github_type = "repository_branches"
     _github_login_field = False
 
     _SELECTION_STATE = [
@@ -89,10 +87,10 @@ class GithubRepository(models.Model):
     last_analyze_date = fields.Datetime(string="Last Analyze Date")
 
     coverage_url = fields.Char(
-        string="Coverage URL", store=True, compute="_compute_coverage"
+        string="Coverage URL", store=True, compute="_compute_coverage_url"
     )
 
-    ci_url = fields.Char(string="CI URL", store=True, compute="_compute_ci")
+    ci_url = fields.Char(string="CI URL", store=True, compute="_compute_ci_url")
 
     github_url = fields.Char(
         string="Github URL", store=True, compute="_compute_github_url"
@@ -160,6 +158,8 @@ class GithubRepository(models.Model):
 
     def _download_code(self):
         for branch in self:
+            repository = branch.repository_id
+            gh_repo = repository.find_related_github_object()
             if not os.path.exists(branch.local_path):
                 _logger.info("Cloning new repository into %s ..." % branch.local_path)
                 # Cloning the repository
@@ -173,11 +173,8 @@ class GithubRepository(models.Model):
                         )
                         % (branch.local_path)
                     )
-
-                command = ("git clone %s%s/%s.git -b %s %s") % (
-                    _GITHUB_URL,
-                    branch.repository_id.organization_id.github_login,
-                    branch.repository_id.name,
+                command = ("git clone %s -b %s %s") % (
+                    gh_repo.clone_url,
                     branch.name,
                     branch.local_path,
                 )
@@ -254,7 +251,6 @@ class GithubRepository(models.Model):
                 size += os.path.getsize(file_path)
             except Exception:
                 _logger.warning("Warning : unable to eval the size of '%s'.", file_path)
-
         try:
             Repo(path)
         except Exception:
@@ -262,7 +258,6 @@ class GithubRepository(models.Model):
             # to be downloaded again
             self.state = "to_download"
             return {"size": 0}
-
         return {"size": size}
 
     def _analyze_code(self):
@@ -286,7 +281,6 @@ class GithubRepository(models.Model):
                     branch.write(vals)
                     if partial_commit:
                         self._cr.commit()  # pylint: disable=invalid-commit
-
                 except Exception as e:
                     _logger.warning(
                         "Cannot analyze branch %s so skipping it, error " "is: %s",
@@ -374,16 +368,16 @@ class GithubRepository(models.Model):
             )
         for branch in self:
             branch.local_path = os.path.join(
-                source_path, branch.organization_id.github_login, branch.complete_name
+                source_path, branch.organization_id.github_name, branch.complete_name
             )
 
     @api.depends(
         "name",
         "repository_id.name",
-        "organization_id.github_login",
+        "organization_id.github_name",
         "organization_id.coverage_url_pattern",
     )
-    def _compute_coverage(self):
+    def _compute_coverage_url(self):
         for branch in self:
             if not branch.organization_id.coverage_url_pattern:
                 branch.coverage_url = ""
@@ -392,7 +386,7 @@ class GithubRepository(models.Model):
                 # way
                 org_id = branch.organization_id
                 branch.coverage_url = org_id.coverage_url_pattern.format(
-                    organization_name=org_id.github_login,
+                    organization_name=org_id.github_name,
                     repository_name=branch.repository_id.name,
                     branch_name=branch.name,
                 )
@@ -400,16 +394,16 @@ class GithubRepository(models.Model):
     @api.depends(
         "name",
         "repository_id.name",
-        "organization_id.github_login",
+        "organization_id.github_name",
         "organization_id.ci_url_pattern",
     )
-    def _compute_ci(self):
+    def _compute_ci_url(self):
         for branch in self:
             if not branch.organization_id.ci_url_pattern:
                 branch.ci_url = ""
                 continue
             branch.ci_url = branch.organization_id.ci_url_pattern.format(
-                organization_name=branch.organization_id.github_login,
+                organization_name=branch.organization_id.github_name,
                 repository_name=branch.repository_id.name,
                 branch_name=branch.name,
             )
@@ -417,9 +411,8 @@ class GithubRepository(models.Model):
     @api.depends("name", "repository_id.complete_name")
     def _compute_github_url(self):
         for branch in self:
-            branch.github_url = "https://github.com/{}/{}/tree/{}".format(
-                branch.organization_id.github_login,
-                branch.repository_id.name,
+            branch.github_url = "{}/tree/{}".format(
+                branch.repository_id.github_url,
                 branch.name,
             )
 

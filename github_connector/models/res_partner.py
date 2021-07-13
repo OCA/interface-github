@@ -1,6 +1,9 @@
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
+# Copyright 2021 Tecnativa - João Marques
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+from github.GithubException import UnknownObjectException
 
 from odoo import _, api, fields, models
 
@@ -9,7 +12,6 @@ class ResPartner(models.Model):
     _name = "res.partner"
     _inherit = ["res.partner", "abstract.github.model"]
 
-    _github_type = "user"
     _github_login_field = "login"
     _need_individual_call = True
     _field_list_prevent_overwrite = ["name", "website", "email", "image_1920"]
@@ -20,7 +22,7 @@ class ResPartner(models.Model):
         help="Check this box if this " "account is a bot or similar.",
     )
 
-    github_team_ids = fields.Many2many(
+    github_team_partner_ids = fields.One2many(
         string="Teams",
         comodel_name="github.team.partner",
         inverse_name="partner_id",
@@ -50,15 +52,15 @@ class ResPartner(models.Model):
     _sql_constraints = [
         (
             "github_login_uniq",
-            "unique(github_login)",
+            "unique(github_name)",
             "Two different partners cannot have the same Github Login",
         )
     ]
 
-    @api.constrains("github_login", "is_company")
+    @api.constrains("github_name", "is_company")
     def _check_login_company(self):
         for partner in self:
-            if partner.is_company and partner.github_login:
+            if partner.is_company and partner.github_name:
                 raise Warning(
                     _("A company ('%s') can not have a Github login" " associated.")
                     % partner.name
@@ -70,10 +72,10 @@ class ResPartner(models.Model):
         for partner in self:
             partner.organization_qty = len(partner.organization_ids)
 
-    @api.depends("github_team_ids")
+    @api.depends("github_team_partner_ids")
     def _compute_github_team_qty(self):
         for partner in self:
-            partner.github_team_qty = len(partner.github_team_ids)
+            partner.github_team_qty = len(partner.github_team_partner_ids)
 
     # Custom Section
     @api.model
@@ -83,14 +85,22 @@ class ResPartner(models.Model):
         return res
 
     @api.model
-    def get_odoo_data_from_github(self, data):
-        res = super().get_odoo_data_from_github(data)
-        res.update({"name": data["name"] or "%s (Github)" % data["login"]})
-        if "avatar_url" in data:
+    def get_odoo_data_from_github(self, gh_data):
+        res = super().get_odoo_data_from_github(gh_data)
+        res.update({"name": gh_data.name or "%s (Github)" % gh_data.login})
+        if hasattr(gh_data, "avatar_url"):
             res.update(
-                {"image_1920": self.get_base64_image_from_github(data["avatar_url"])}
+                {"image_1920": self.get_base64_image_from_github(gh_data.avatar_url)}
             )
         return res
+
+    def find_related_github_object(self, obj_id=None):
+        """Query Github API to find the related object"""
+        gh_api = self.get_github_connector()
+        try:
+            return gh_api.get_user_by_id(int(obj_id or self.github_id_external))
+        except UnknownObjectException:
+            return gh_api.get_user(self.github_name)
 
     def action_github_organization(self):
         self.ensure_one()

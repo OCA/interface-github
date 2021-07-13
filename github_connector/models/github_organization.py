@@ -1,9 +1,12 @@
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # Copyright 2020 Tecnativa - Víctor Martínez
+# Copyright 2021 Tecnativa - João Marques
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from github.GithubException import GithubException
+
+from odoo import _, api, exceptions, fields, models
 
 
 class GithubOrganization(models.Model):
@@ -12,7 +15,6 @@ class GithubOrganization(models.Model):
     _order = "name"
     _description = "Github organization"
 
-    _github_type = "organization"
     _github_login_field = "login"
 
     # Columns Section
@@ -54,7 +56,6 @@ class GithubOrganization(models.Model):
     repository_ids = fields.One2many(
         string="Repositories",
         comodel_name="github.repository",
-        ondelete="cascade",
         inverse_name="organization_id",
         readonly=True,
     )
@@ -108,10 +109,10 @@ class GithubOrganization(models.Model):
         return res
 
     @api.model
-    def get_odoo_data_from_github(self, data):
-        res = super().get_odoo_data_from_github(data)
-        if "avatar_url" in data:
-            res.update({"image": self.get_base64_image_from_github(data["avatar_url"])})
+    def get_odoo_data_from_github(self, gh_data):
+        res = super().get_odoo_data_from_github(gh_data)
+        if hasattr(gh_data, "avatar_url"):
+            res.update({"image": self.get_base64_image_from_github(gh_data.avatar_url)})
         return res
 
     def full_update(self):
@@ -149,38 +150,54 @@ class GithubOrganization(models.Model):
                 organization.organization_serie_ids
             )
 
+    def find_related_github_object(self, obj_id=None):
+        """Query Github API to find the related object"""
+        gh_api = self.get_github_connector()
+        return gh_api.get_organization(obj_id or self.github_name)
+
     # Action section
     def button_sync_member(self):
-        github_member = self.get_github_connector("organization_members")
+        gh_org = self.find_related_github_object()
         partner_obj = self.env["res.partner"]
         for organization in self:
             member_ids = []
-            for data in github_member.list([organization.github_login]):
-                partner = partner_obj.get_from_id_or_create(data)
+            for gh_member in gh_org.get_members():
+                partner = partner_obj.get_from_id_or_create(gh_data=gh_member)
                 member_ids.append(partner.id)
             organization.member_ids = member_ids
 
     def button_sync_repository(self):
+        gh_org = self.find_related_github_object()
         repository_obj = self.env["github.repository"]
-        github_repo = self.get_github_connector("organization_repositories")
         for organization in self:
             repository_ids = []
-            for data in github_repo.list([organization.github_login]):
-                repository = repository_obj.get_from_id_or_create(data)
+            for gh_repo in gh_org.get_repos():
+                repository = repository_obj.with_context(
+                    github_organization_id=organization.id
+                ).get_from_id_or_create(gh_data=gh_repo)
                 repository_ids.append(repository.id)
             organization.repository_ids = repository_ids
 
     def button_sync_team(self):
+        gh_org = self.find_related_github_object()
         team_obj = self.env["github.team"]
-        github_team = self.get_github_connector("organization_teams")
         for organization in self:
-            team_ids = []
-            for data in github_team.list([organization.github_login]):
-                team = team_obj.get_from_id_or_create(
-                    data, {"organization_id": organization.id}
-                )
-                team_ids.append(team.id)
-            organization.team_ids = team_ids
+            try:
+                team_ids = []
+                for gh_team in gh_org.get_teams():
+                    team = team_obj.get_from_id_or_create(
+                        gh_data=gh_team, extra_data={"organization_id": organization.id}
+                    )
+                    team_ids.append(team.id)
+                organization.team_ids = team_ids
+            except GithubException as e:
+                if e.status == 403:
+                    raise exceptions.AccessError(
+                        _(
+                            "The provided Github Token must have admin read:org"
+                            " permissions to the organization '%s'" % self.name
+                        )
+                    )
 
     def action_github_repository(self):
         self.ensure_one()
