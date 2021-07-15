@@ -226,7 +226,7 @@ class OdooModuleVersion(models.Model):
 
     # Compute Section
     @api.depends(
-        "repository_id.organization_id.github_login",
+        "repository_id.organization_id.github_name",
         "repository_id.name",
         "repository_branch_id.name",
         "repository_branch_id.local_path",
@@ -238,7 +238,7 @@ class OdooModuleVersion(models.Model):
             version.github_url = (
                 "https://github.com/{organization_name}/"
                 "{repository_name}/tree/{branch_name}/{rest_path}".format(
-                    organization_name=repo_id.organization_id.github_login,
+                    organization_name=repo_id.organization_id.github_name,
                     repository_name=repo_id.name,
                     branch_name=version.repository_branch_id.name,
                     rest_path=(version.full_module_path or "")[
