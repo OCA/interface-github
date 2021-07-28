@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="view_github_branch_by_serie_graph" model="ir.ui.view">
+        <field name="model">github.repository.branch</field>
+        <field name="arch" type="xml">
+            <graph type="bar" stacked="True">
+                <field name="organization_serie_id" type="row" />
+            </graph>
+        </field>
+    </record>
+    <record id="view_github_size_by_serie_graph" model="ir.ui.view">
+        <field name="model">github.repository.branch</field>
+        <field name="arch" type="xml">
+            <graph type="bar" stacked="True">
+                <field name="organization_serie_id" type="row" />
+                <field name="mb_size" type="measure" />
+            </graph>
+        </field>
+    </record>
+</odoo>

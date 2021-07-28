@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="view_github_team_search" model="ir.ui.view">
+        <field name="model">github.team</field>
+        <field name="arch" type="xml">
+            <search>
+                <field
+                    name="name"
+                    string="Name or Github Name"
+                    filter_domain="['|', ('name', 'ilike', self), ('github_name', 'ilike', self)]"
+                />
+                <field name="github_name" />
+                <field name="organization_id" />
+                <field name="partner_ids" />
+                <field name="repository_ids" />
+                <group expand="1" string="Group By">
+                    <filter
+                        string="Organization"
+                        name="organization"
+                        context="{'group_by' : 'organization_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="view_github_team_tree" model="ir.ui.view">
+        <field name="model">github.team</field>
+        <field name="arch" type="xml">
+            <tree decoration-muted="partner_qty == 0">
+                <field name="complete_name" />
+                <field name="name" />
+                <field name="partner_qty" />
+                <field name="repository_qty" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_github_team_form" model="ir.ui.view">
+        <field name="model">github.team</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="button_sync_member"
+                        type="object"
+                        string="Members Sync."
+                        class="btn btn-default"
+                        icon="fa-chevron-right"
+                        groups="github_connector.group_github_connector_manager"
+                    />
+                    <button
+                        name="button_sync_repository"
+                        type="object"
+                        string="Repository Sync."
+                        class="btn btn-default"
+                        icon="fa-chevron-right"
+                        groups="github_connector.group_github_connector_manager"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="object"
+                            name="action_github_team_partner_from_team"
+                            class="oe_stat_button"
+                            icon="fa-user"
+                            attrs="{'invisible': [('partner_qty', '=', False)]}"
+                        >
+                            <field
+                                name="partner_qty"
+                                string="Members"
+                                widget="statinfo"
+                            />
+                        </button>
+                        <button
+                            type="object"
+                            name="action_github_team_repository_from_team"
+                            class="oe_stat_button"
+                            icon="fa-folder-o"
+                            attrs="{'invisible': [('repository_qty', '=', False)]}"
+                        >
+                            <field
+                                name="repository_qty"
+                                string="Repositories"
+                                widget="statinfo"
+                            />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                        <h3 class="oe_fade">
+                            <field name="description" class="oe_inline" />
+                        </h3>
+                    </div>
+                    <group>
+                        <field name="organization_id" />
+                        <field name="parent_id" />
+                    </group>
+                    <notebook>
+                        <page name="github" string="Github">
+                            <group col="4">
+                                <field name="github_url" widget="url" colspan="4" />
+                                <field name="github_id_external" />
+                                <field name="github_name" />
+                                <field name="github_last_sync_date" />
+                                <button
+                                    name="button_update_from_github_light"
+                                    type="object"
+                                    string="Light Sync"
+                                    class="btn btn-default"
+                                    icon="fa-angle-right"
+                                    groups="github_connector.group_github_connector_manager"
+                                />
+                                <button
+                                    name="button_update_from_github_full"
+                                    type="object"
+                                    string="Full Sync"
+                                    class="btn btn-default"
+                                    icon="fa-angle-double-right"
+                                    groups="github_connector.group_github_connector_manager"
+                                />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_github_team_kanban" model="ir.ui.view">
+        <field name="model">github.team</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name" />
+                <field name="organization_id" />
+                <field name="github_name" />
+                <field name="github_url" />
+                <field name="partner_qty" />
+                <field name="repository_qty" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_module_vignette oe_kanban_global_click">
+                            <div class="oe_module_desc">
+                                <h3>
+                                    <field name="name" />
+                                </h3>
+                                <h4>
+                                    <field name="github_name" />
+                                </h4>
+                                <p class="oe_module_name">
+                                    <t t-if="record.organization_id.raw_value">
+                                        <field name="organization_id" />
+                                    </t>
+                                    <br />
+                                </p>
+                                <a target="_blank" t-att-href="record.github_url.value">
+                                    <span class="badge">
+                                        <i
+                                            class="fa fa-fw fa-github-alt"
+                                            title="Github"
+                                        />
+                                    </span>
+                                </a>
+                                <span class="badge">
+                                    <i class="fa fa-fw fa-user" />
+                                    <t t-esc="record.partner_qty.value" />
+                                </span>
+                                <span class="badge">
+                                    <i class="fa fa-fw fa-folder-o" />
+                                    <t t-esc="record.repository_qty.value" />
+                                </span>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

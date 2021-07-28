@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright 2020 Tecnativa - Víctor Martínez
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="github_analysis_rule_group_1_demo" model="github.analysis.rule.group">
+        <field name="name">Odoo modules</field>
+    </record>
+</odoo>
