@@ -15,7 +15,11 @@ TODO: add repo description.
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+[github_connector](github_connector/) | 14.0.1.0.0 | Synchronize information from Github repositories
 
 [//]: # (end addons)
 
