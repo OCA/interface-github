@@ -145,13 +145,12 @@ class OdooModuleVersion(models.Model):
         relation="github_module_version_author_rel",
         column1="module_version_id",
         column2="author_id",
-        multi="author",
         compute="_compute_author",
         store=True,
     )
 
     author_ids_description = fields.Char(
-        string="Authors (Text)", compute="_compute_author", multi="author", store=True
+        string="Authors (Text)", compute="_compute_author", store=True
     )
 
     lib_python_ids = fields.Many2many(
@@ -160,7 +159,6 @@ class OdooModuleVersion(models.Model):
         relation="module_version_lib_python_rel",
         column1="module_version_id",
         column2="lib_python_id",
-        multi="lib",
         compute="_compute_lib",
         store=True,
     )
@@ -168,7 +166,6 @@ class OdooModuleVersion(models.Model):
     lib_python_ids_description = fields.Char(
         string="Python Lib Dependencies (Text)",
         compute="_compute_lib",
-        multi="lib",
         store=True,
     )
 
@@ -178,7 +175,6 @@ class OdooModuleVersion(models.Model):
         relation="module_version_lib_bin_rel",
         column1="module_version_id",
         column2="lib_bin_id",
-        multi="lib",
         compute="_compute_lib",
         store=True,
     )
@@ -186,7 +182,6 @@ class OdooModuleVersion(models.Model):
     lib_bin_ids_description = fields.Char(
         string="Bin Lib Dependencies (Text)",
         compute="_compute_lib",
-        multi="lib",
         store=True,
     )
 
@@ -222,11 +217,11 @@ class OdooModuleVersion(models.Model):
                     ("state", "=", "analyzed"),
                 ]
             ).write({"state": "to_analyze"})
-        return super(OdooModuleVersion, self).unlink()
+        return super().unlink()
 
     # Compute Section
     @api.depends(
-        "repository_id.organization_id.github_login",
+        "repository_id.organization_id.github_name",
         "repository_id.name",
         "repository_branch_id.name",
         "repository_branch_id.local_path",
@@ -238,7 +233,7 @@ class OdooModuleVersion(models.Model):
             version.github_url = (
                 "https://github.com/{organization_name}/"
                 "{repository_name}/tree/{branch_name}/{rest_path}".format(
-                    organization_name=repo_id.organization_id.github_login,
+                    organization_name=repo_id.organization_id.github_name,
                     repository_name=repo_id.name,
                     branch_name=version.repository_branch_id.name,
                     rest_path=(version.full_module_path or "")[
@@ -296,9 +291,8 @@ class OdooModuleVersion(models.Model):
         module_obj = self.env["odoo.module"]
         for version in self:
             modules = []
-            for module_name in version.depends.split(","):
-                if module_name:
-                    # Weird case, some times 'depends' field is empty
+            if version.depends:
+                for module_name in version.depends.split(","):
                     modules.append(module_obj.create_if_not_exist(module_name))
             version.dependency_module_ids = [x.id for x in modules]
 
@@ -309,7 +303,9 @@ class OdooModuleVersion(models.Model):
         for version in self:
             python_libs = []
             bin_libs = []
-            my_eval = safe_eval(version.external_dependencies)
+            my_eval = {}
+            if version.external_dependencies:
+                my_eval = safe_eval(version.external_dependencies)
             for python_name in my_eval.get("python", []):
                 python_libs.append(lib_python_obj.create_if_not_exist(python_name))
             for bin_name in my_eval.get("bin", []):
