@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -143,6 +143,9 @@ msgstr ""
 
 #. module: github_connector_odoo
 #: model:ir.model.fields,field_description:github_connector_odoo.field_abstract_action_mixin__display_name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_organization__display_name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_repository__display_name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_repository_branch__display_name
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_author__display_name
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_category__display_name
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_bin__display_name
@@ -200,6 +203,9 @@ msgstr ""
 
 #. module: github_connector_odoo
 #: model:ir.model.fields,field_description:github_connector_odoo.field_abstract_action_mixin__id
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_organization__id
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_repository__id
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_repository_branch__id
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_author__id
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_category__id
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_bin__id
@@ -242,6 +248,9 @@ msgstr ""
 
 #. module: github_connector_odoo
 #: model:ir.model.fields,field_description:github_connector_odoo.field_abstract_action_mixin____last_update
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_organization____last_update
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_repository____last_update
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_repository_branch____last_update
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_author____last_update
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_category____last_update
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_bin____last_update
@@ -379,6 +388,11 @@ msgid "Number of Modules"
 msgstr ""
 
 #. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_github_repository_branch_kanban
+msgid "Number of modules"
+msgstr ""
+
+#. module: github_connector_odoo
 #: model:ir.model,name:github_connector_odoo.model_odoo_author
 msgid "Odoo Author"
 msgstr ""
@@ -463,6 +477,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__odoo_type
 #: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_version_search
 msgid "Odoo Type"
+msgstr ""
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_version_kanban
+msgid "Open on github"
 msgstr ""
 
 #. module: github_connector_odoo
