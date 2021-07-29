@@ -4,7 +4,6 @@
 
 import logging
 import os
-from os.path import join as opj
 
 from odoo import api, fields, models
 from odoo.modules import load_information_from_description_file
@@ -124,7 +123,7 @@ class GithubRepositoryBranch(models.Model):
 
         def is_really_module(name):
             for mname in MANIFEST_NAMES:
-                if os.path.isfile(opj(directory, name, mname)):
+                if os.path.isfile(os.path.join(directory, name, mname)):
                     return True
 
         return map(clean, filter(is_really_module, os.listdir(directory)))
