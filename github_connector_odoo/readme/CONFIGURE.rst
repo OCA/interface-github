@@ -1,7 +1,7 @@
 * Once installed, go to your organization, and set extra settings:
 
 1. The name of your organization in the author keys of the manifest odoo
-   modules
+   modules (in the **Default Author Text** field)
 2. The URL of the file that contains IDs of your repositories for the runbot
 
 .. image:: ./static/description/github_organization_form.png

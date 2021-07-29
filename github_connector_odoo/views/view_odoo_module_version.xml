@@ -163,7 +163,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                         <field name="repository_id" />
                                     </i>
                                 </p>
-                                <a target="_blank" t-att-href="record.github_url.value">
+                                <a
+                                    target="_blank"
+                                    t-att-href="record.github_url.value"
+                                    title="Open on github"
+                                >
                                     <span class="badge">
                                         <i class="fa fa-fw fa-github-alt" />
                                     </span>
