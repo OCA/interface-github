@@ -65,7 +65,7 @@ class GithubRepositoryBranch(models.Model):
     # Custom Section
     @api.model
     def _set_state_to_analyze(self):
-        """ function called when the module is installed to set all branches
+        """function called when the module is installed to set all branches
         to analyze again.
         """
         branches = self.search([("state", "=", "analyzed")])

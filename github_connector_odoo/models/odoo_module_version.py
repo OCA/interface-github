@@ -207,7 +207,9 @@ class OdooModuleVersion(models.Model):
         comodel_name="odoo.category", string="Category", readonly=True
     )
 
-    full_module_path = fields.Char(string="Full Local Path to the module",)
+    full_module_path = fields.Char(
+        string="Full Local Path to the module",
+    )
 
     # Overload Section
     def unlink(self):

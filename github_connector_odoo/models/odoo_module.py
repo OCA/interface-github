@@ -59,7 +59,9 @@ class OdooModule(models.Model):
     )
 
     organization_serie_ids_description = fields.Char(
-        string="Series (Text)", store=True, compute="_compute_organization_serie",
+        string="Series (Text)",
+        store=True,
+        compute="_compute_organization_serie",
     )
 
     description_rst = fields.Char(
