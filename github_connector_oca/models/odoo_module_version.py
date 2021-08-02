@@ -22,9 +22,7 @@ class OdooModuleVersion(models.Model):
 
     @api.model
     def manifest_2_odoo(self, info, repository_branch, module):
-        res = super(OdooModuleVersion, self).manifest_2_odoo(
-            info, repository_branch, module
-        )
+        res = super().manifest_2_odoo(info, repository_branch, module)
         if "development_status" in info:
             res["development_status"] = info["development_status"].lower()
         return res
