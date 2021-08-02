@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="view_odoo_lib_bin_search" model="ir.ui.view">
+        <field name="model">odoo.lib.bin</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+    <record id="view_odoo_lib_bin_tree" model="ir.ui.view">
+        <field name="model">odoo.lib.bin</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="module_version_qty" sum="Total" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_odoo_lib_bin_form" model="ir.ui.view">
+        <field name="model">odoo.lib.bin</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="object"
+                            name="action_open"
+                            class="oe_stat_button"
+                            icon="fa-cube"
+                            attrs="{'invisible': [('module_version_qty', '=', False)]}"
+                            context="{'xml_id': 'action_odoo_module_version', 'field_name': 'lib_bin_ids'}"
+                        >
+                            <field
+                                name="module_version_qty"
+                                string="Mod. Versions"
+                                widget="statinfo"
+                            />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <notebook />
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

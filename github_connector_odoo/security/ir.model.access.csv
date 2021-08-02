@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_odoo_author_reader,odoo_author reader,model_odoo_author,,1,0,0,0
+access_odoo_author_manager,odoo_author manager,model_odoo_author,github_connector.group_github_connector_manager,1,1,1,1
+access_odoo_lib_bin_reader,odoo_lib_bin reader,model_odoo_lib_bin,,1,0,0,0
+access_odoo_lib_bin_manager,odoo_lib_bin manager,model_odoo_lib_bin,github_connector.group_github_connector_manager,1,1,1,1
+access_odoo_lib_python_reader,odoo_lib_python reader,model_odoo_lib_python,,1,0,0,0
+access_odoo_lib_python_manager,odoo_lib_python manager,model_odoo_lib_python,github_connector.group_github_connector_manager,1,1,1,1
+access_odoo_license_reader,odoo_license reader,model_odoo_license,,1,0,0,0
+access_odoo_license_manager,odoo_license manager,model_odoo_license,github_connector.group_github_connector_manager,1,1,1,1
+access_odoo_module_reader,odoo_module reader,model_odoo_module,,1,0,0,0
+access_odoo_module_manager,odoo_module manager,model_odoo_module,github_connector.group_github_connector_manager,1,1,1,1
+access_odoo_module_version_reader,odoo_module_version reader,model_odoo_module_version,,1,0,0,0
+access_odoo_module_version_manager,odoo_module_version manager,model_odoo_module_version,github_connector.group_github_connector_manager,1,1,1,1
+access_odoo_category_reader,odoo_category reader,model_odoo_category,,1,0,0,0
+access_odoo_category_manager,odoo_category manager,model_odoo_category,github_connector.group_github_connector_manager,1,1,1,1
