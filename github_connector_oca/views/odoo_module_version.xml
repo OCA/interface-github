@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--Copyright (C) 2018-Today: Odoo Community Association (OCA)-->
+<!-- @author: Roel Adriaans -->
+<!-- License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).-->
+<odoo>
+    <record id="view_odoo_module_version_development_status_form" model="ir.ui.view">
+        <field name="model">odoo.module.version</field>
+        <field
+            name="inherit_id"
+            ref="github_connector_odoo.view_odoo_module_version_form"
+        />
+        <field name="arch" type="xml">
+            <field name="module_id" position="after">
+                <field name="development_status" />
+            </field>
+        </field>
+    </record>
+</odoo>
