@@ -17,11 +17,11 @@ TODO: add repo description.
 
 Available addons
 ----------------
-addon | version | summary
---- | --- | ---
-[github_connector](github_connector/) | 14.0.1.0.0 | Synchronize information from Github repositories
-[github_connector_oca](github_connector_oca/) | 14.0.1.0.0 | Add OCA specific information to Odoo modules
-[github_connector_odoo](github_connector_odoo/) | 14.0.1.0.0 | Analyze Odoo modules information from Github repositories
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[github_connector](github_connector/) | 14.0.1.0.0 |  | Synchronize information from Github repositories
+[github_connector_oca](github_connector_oca/) | 14.0.1.0.0 |  | Add OCA specific information to Odoo modules
+[github_connector_odoo](github_connector_odoo/) | 14.0.1.0.0 |  | Analyze Odoo modules information from Github repositories
 
 [//]: # (end addons)
 
