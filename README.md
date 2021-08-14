@@ -11,10 +11,10 @@ Modules that allows Odoo to connect with Github API.
 
 Available addons
 ----------------
-addon | version | summary
---- | --- | ---
-[github_connector](github_connector/) | 10.0.1.0.0 | Synchronize information from Github repositories
-[github_connector_odoo](github_connector_odoo/) | 10.0.1.0.0 | Analyze Odoo modules information from Github repositories
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[github_connector](github_connector/) | 10.0.1.0.0 |  | Synchronize information from Github repositories
+[github_connector_odoo](github_connector_odoo/) | 10.0.1.0.0 |  | Analyze Odoo modules information from Github repositories
 
 [//]: # (end addons)
 
