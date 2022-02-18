@@ -347,7 +347,7 @@ class GithubRepository(models.Model):
     @api.depends("size")
     def _compute_mb_size(self):
         for branch in self:
-            branch.mb_size = float(branch.size) / (1024 ** 2)
+            branch.mb_size = float(branch.size) / (1024**2)
 
     @api.depends("organization_id", "name")
     def _compute_organization_serie_id(self):
