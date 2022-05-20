@@ -169,9 +169,9 @@ class GithubRepository(models.Model):
         return True
 
     def button_sync_branch(self):
-        gh_repo = self.find_related_github_object()
         branch_obj = self.env["github.repository.branch"]
         for repository in self.filtered(lambda r: not r.is_ignored):
+            gh_repo = repository.find_related_github_object()
             branch_ids = []
             correct_series = repository.organization_id.organization_serie_ids.mapped(
                 "name"
