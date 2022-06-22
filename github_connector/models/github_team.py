@@ -26,10 +26,9 @@ class GithubTeam(models.Model):
         ondelete="cascade",
     )
 
-    name = fields.Char(string="Name", index=True, required=True, readonly=True)
+    name = fields.Char(index=True, required=True, readonly=True)
 
     privacy = fields.Selection(
-        string="Privacy",
         selection=_PRIVACY_SELECTION,
         readonly=True,
         default="secret",
@@ -65,10 +64,9 @@ class GithubTeam(models.Model):
         string="Number of Repositories", compute="_compute_repository_qty", store=True
     )
 
-    description = fields.Char(string="Description", readonly=True)
+    description = fields.Char(readonly=True)
 
     complete_name = fields.Char(
-        string="Complete Name",
         readonly=True,
         compute="_compute_complete_name",
         store=True,
