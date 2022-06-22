@@ -31,9 +31,7 @@ class GithubTeamPartner(models.Model):
         ondelete="cascade",
     )
 
-    role = fields.Selection(
-        selection=_ROLE_SELECTION, string="Role", required=True, readonly=True
-    )
+    role = fields.Selection(selection=_ROLE_SELECTION, required=True, readonly=True)
 
     context_search_default_team_id = fields.Integer(
         compute="_compute_context_search_default"

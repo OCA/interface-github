@@ -196,12 +196,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 widget="one2many_list"
                                 colspan="4"
                             >
-                                <tree
-                                    string="Rule info (Repository)"
-                                    create="false"
-                                    delete="false"
-                                    editable="false"
-                                >
+                                <tree create="false" delete="false" editable="false">
                                     <field name="group_id" />
                                     <field name="analysis_rule_id" />
                                     <field name="code_count" sum="Total code" />

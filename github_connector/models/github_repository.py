@@ -28,18 +28,17 @@ class GithubRepository(models.Model):
         ondelete="cascade",
     )
 
-    name = fields.Char(string="Name", index=True, required=True, readonly=True)
+    name = fields.Char(index=True, required=True, readonly=True)
 
     complete_name = fields.Char(
-        string="Complete Name",
         readonly=True,
         compute="_compute_complete_name",
         store=True,
     )
 
-    description = fields.Char(string="Description", readonly=True)
+    description = fields.Char(readonly=True)
 
-    website = fields.Char(string="Website", readonly=True)
+    website = fields.Char(readonly=True)
 
     repository_branch_ids = fields.One2many(
         comodel_name="github.repository.branch",
@@ -66,7 +65,6 @@ class GithubRepository(models.Model):
     )
 
     is_ignored = fields.Boolean(
-        string="Is Ignored",
         compute="_compute_ignore",
         help="If checked, the branches will not be synchronized, and the"
         " code source will this way not be downloaded and analyzed. To ignore"
