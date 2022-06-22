@@ -158,7 +158,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 colspan="4"
                                 nolabel="1"
                             >
-                                <tree string="organization_serie_ids" editable="bottom">
+                                <tree editable="bottom">
                                     <field name="sequence" />
                                     <field name="name" />
                                 </tree>

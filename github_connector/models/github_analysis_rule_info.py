@@ -22,7 +22,7 @@ class GithubAnalysisRuleInfoMixin(models.AbstractModel):
     total_count = fields.Integer(
         string="# Total", store=True, compute="_compute_total_count"
     )
-    scanned_files = fields.Integer(string="Scanned files")
+    scanned_files = fields.Integer()
 
     @api.depends("code_count", "documentation_count", "empty_count", "string_count")
     def _compute_total_count(self):
