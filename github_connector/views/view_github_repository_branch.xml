@@ -200,12 +200,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 colspan="4"
                                 attrs="{'invisible': [('analysis_rule_info_ids', '=', [])]}"
                             >
-                                <tree
-                                    string="Rule info (Repository)"
-                                    create="false"
-                                    delete="false"
-                                    editable="false"
-                                >
+                                <tree create="false" delete="false" editable="false">
                                     <field name="group_id" />
                                     <field name="analysis_rule_id" />
                                     <field name="code_count" sum="Total code" />

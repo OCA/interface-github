@@ -34,7 +34,7 @@ class GithubRepositoryBranchRuleInfoReport(models.Model):
     empty_count = fields.Integer(string="# Empty")
     string_count = fields.Integer(string="# String")
     total_count = fields.Integer(string="# Total")
-    scanned_files = fields.Integer(string="Scanned files")
+    scanned_files = fields.Integer()
 
     def _query(self, with_clause="", fields=None, groupby="", from_clause=""):
         if fields is None:

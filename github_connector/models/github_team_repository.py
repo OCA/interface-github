@@ -38,7 +38,6 @@ class GithubTeamRepository(models.Model):
 
     permission = fields.Selection(
         selection=_PERMISSION_SELECTION,
-        string="Permission",
         required=True,
         readonly=True,
     )

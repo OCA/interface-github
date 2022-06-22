@@ -11,9 +11,9 @@ class GithubOrganizationSerie(models.Model):
     _order = "sequence, name"
 
     # Columns Section
-    name = fields.Char(string="Name", required=True)
+    name = fields.Char(required=True)
 
-    sequence = fields.Integer(string="Sequence", required=True)
+    sequence = fields.Integer(required=True)
 
     organization_id = fields.Many2one(
         comodel_name="github.organization",
