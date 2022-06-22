@@ -8,4 +8,4 @@ class GithubAnalysisRule(models.Model):
     _name = "github.analysis.rule.group"
     _description = "Github Analysis Rule Group"
 
-    name = fields.Char(string="Name", required=True)
+    name = fields.Char(required=True)
