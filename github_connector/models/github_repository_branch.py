@@ -36,7 +36,7 @@ class GithubRepository(models.Model):
     ]
 
     # Column Section
-    name = fields.Char(string="Name", readonly=True, index=True)
+    name = fields.Char(readonly=True, index=True)
 
     size = fields.Integer(string="Size (Byte) ", readonly=True)
 
@@ -44,9 +44,7 @@ class GithubRepository(models.Model):
         string="Size (Megabyte)", store=True, compute="_compute_mb_size"
     )
 
-    complete_name = fields.Char(
-        string="Complete Name", store=True, compute="_compute_complete_name"
-    )
+    complete_name = fields.Char(store=True, compute="_compute_complete_name")
 
     repository_id = fields.Many2one(
         comodel_name="github.repository",
@@ -76,15 +74,13 @@ class GithubRepository(models.Model):
         string="Sequence Serie", store=True, related="organization_serie_id.sequence"
     )
 
-    local_path = fields.Char(string="Local Path", compute="_compute_local_path")
+    local_path = fields.Char(compute="_compute_local_path")
 
-    state = fields.Selection(
-        string="State", selection=_SELECTION_STATE, default="to_download"
-    )
+    state = fields.Selection(selection=_SELECTION_STATE, default="to_download")
 
-    last_download_date = fields.Datetime(string="Last Download Date")
+    last_download_date = fields.Datetime()
 
-    last_analyze_date = fields.Datetime(string="Last Analyze Date")
+    last_analyze_date = fields.Datetime()
 
     coverage_url = fields.Char(
         string="Coverage URL", store=True, compute="_compute_coverage_url"
@@ -113,8 +109,8 @@ class GithubRepository(models.Model):
             except Exception as e:
                 _logger.error(
                     _(
-                        "Error when trying to create the main folder %s\n"
-                        " Please check Odoo Access Rights.\n %s"
+                        "Error when trying to create the main folder{0}\n"
+                        " Please check Odoo Access Rights.\n {1}"
                     ),
                     source_path,
                     e,
@@ -172,7 +168,7 @@ class GithubRepository(models.Model):
                             " Please check Odoo Access Rights."
                         )
                         % (branch.local_path)
-                    )
+                    ) from None
                 command = ("git clone %s -b %s %s") % (
                     gh_repo.clone_url,
                     branch.name,
@@ -202,8 +198,8 @@ class GithubRepository(models.Model):
                     # Trying to clean the local folder
                     _logger.warning(
                         _(
-                            "Error when updating the branch %s in the local folder"
-                            " %s.\n Deleting the local folder and trying"
+                            "Error when updating the branch {0} in the local folder"
+                            " {1}.\n Deleting the local folder and trying"
                             " again."
                         ),
                         branch.name,

@@ -11,7 +11,7 @@ class GithubAnalysisRule(models.Model):
     _name = "github.analysis.rule"
     _description = "Github Analysis Rule"
 
-    name = fields.Char(string="Name", required=True)
+    name = fields.Char(required=True)
     group_id = fields.Many2one(
         string="Group", comodel_name="github.analysis.rule.group", required=True
     )
@@ -19,7 +19,6 @@ class GithubAnalysisRule(models.Model):
     Example paths: https://git-scm.com/docs/gitignore#_pattern_format
     """
     paths = fields.Text(
-        string="Paths",
         help="Define with pathspec especification",
         default="*",
         required=True,

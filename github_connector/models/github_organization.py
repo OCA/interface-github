@@ -20,15 +20,15 @@ class GithubOrganization(models.Model):
     # Columns Section
     name = fields.Char(string="Organization Name", required=True, readonly=True)
 
-    image = fields.Image(string="Image", readonly=True)
+    image = fields.Image(readonly=True)
 
-    description = fields.Char(string="Description", readonly=True)
+    description = fields.Char(readonly=True)
 
-    email = fields.Char(string="Email", readonly=True)
+    email = fields.Char(readonly=True)
 
-    website_url = fields.Char(string="Website URL", readonly=True)
+    website_url = fields.Char(readonly=True)
 
-    location = fields.Char(string="Location", readonly=True)
+    location = fields.Char(readonly=True)
 
     ignored_repository_names = fields.Text(
         string="Ignored Repositories",
@@ -195,9 +195,10 @@ class GithubOrganization(models.Model):
                     raise exceptions.AccessError(
                         _(
                             "The provided Github Token must have admin read:org"
-                            " permissions to the organization '%s'" % self.name
+                            " permissions to the organization '%s'"
                         )
-                    )
+                        % self.name
+                    ) from None
 
     def action_github_repository(self):
         self.ensure_one()
