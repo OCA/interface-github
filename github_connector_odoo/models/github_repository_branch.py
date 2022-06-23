@@ -20,7 +20,6 @@ class GithubRepositoryBranch(models.Model):
     _name = "github.repository.branch"
 
     module_paths = fields.Text(
-        string="Module Paths",
         help="Set here extra relative paths"
         " you want to scan to find modules. If not set, root path will be"
         " scanned. One repository per line. Example:\n"

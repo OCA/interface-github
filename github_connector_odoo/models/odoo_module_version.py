@@ -45,20 +45,17 @@ class OdooModuleVersion(models.Model):
     ]
 
     # Column Section
-    name = fields.Char(string="Name", readonly=True, index=True)
+    name = fields.Char(readonly=True, index=True)
 
     technical_name = fields.Char(
-        string="Technical Name",
         readonly=True,
         index=True,
         help="Technical Name of the Module (Folder name).",
     )
 
-    complete_name = fields.Char(
-        string="Complete Name", compute="_compute_complete_name", store=True
-    )
+    complete_name = fields.Char(compute="_compute_complete_name", store=True)
 
-    auto_install = fields.Boolean(string="Auto Install", readonly=True)
+    auto_install = fields.Boolean(readonly=True)
 
     icon = fields.Char(string="Icon Path (Manifest)", readonly=True)
 
@@ -186,7 +183,6 @@ class OdooModuleVersion(models.Model):
     )
 
     odoo_type = fields.Selection(
-        string="Odoo Type",
         selection=_ODOO_TYPE_SELECTION,
         store=True,
         compute="_compute_odoo_type",
@@ -341,9 +337,7 @@ class OdooModuleVersion(models.Model):
                     authors.append(odoo_author_obj.create_if_not_exist(item))
             authors = set(authors)
             version.author_ids = [x.id for x in authors]
-            version.author_ids_description = ", ".join(
-                sorted(x.name for x in authors)
-            )
+            version.author_ids_description = ", ".join(sorted(x.name for x in authors))
 
     @api.depends(
         "repository_branch_id",
