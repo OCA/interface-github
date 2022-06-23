@@ -12,7 +12,7 @@ class OdooLicense(models.Model):
     _order = "name"
 
     # Column Section
-    name = fields.Char(string="Name", index=True, required=True, readonly=True)
+    name = fields.Char(index=True, required=True, readonly=True)
 
     module_version_ids = fields.One2many(
         comodel_name="odoo.module.version",
@@ -26,13 +26,13 @@ class OdooLicense(models.Model):
         store=True,
     )
 
-    website = fields.Char(string="Website")
+    website = fields.Char()
 
     image = fields.Binary(string="Icon Image", attachment=True)
 
-    description = fields.Text(string="Description")
+    description = fields.Text()
 
-    active = fields.Boolean(string="Active", default=True)
+    active = fields.Boolean(default=True)
 
     # Constrains Section
     _sql_constraints = [

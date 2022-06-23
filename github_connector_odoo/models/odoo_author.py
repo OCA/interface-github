@@ -12,7 +12,7 @@ class OdooAuthor(models.Model):
     _order = "module_qty desc, name"
 
     # Column Section
-    name = fields.Char(string="Name", store=True, readonly=True, index=True)
+    name = fields.Char(store=True, readonly=True, index=True)
 
     module_version_ids = fields.Many2many(
         string="Module Versions",
