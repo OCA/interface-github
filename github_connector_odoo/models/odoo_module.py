@@ -13,13 +13,9 @@ class OdooModule(models.Model):
     _order = "technical_name, name"
 
     # Column Section
-    name = fields.Char(
-        string="Name", store=True, readonly=True, compute="_compute_name"
-    )
+    name = fields.Char(store=True, readonly=True, compute="_compute_name")
 
-    technical_name = fields.Char(
-        string="Technical Name", index=True, required=True, readonly=True
-    )
+    technical_name = fields.Char(index=True, required=True, readonly=True)
 
     module_version_ids = fields.One2many(
         comodel_name="odoo.module.version",
