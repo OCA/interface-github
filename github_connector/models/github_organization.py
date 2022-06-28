@@ -201,7 +201,9 @@ class GithubOrganization(models.Model):
 
     def action_github_repository(self):
         self.ensure_one()
-        action = self.env.ref("github_connector.action_github_repository").read()[0]
+        action = (
+            self.sudo().env.ref("github_connector.action_github_repository").read()[0]
+        )
         action["context"] = dict(self.env.context)
         action["context"].pop("group_by", None)
         action["context"]["search_default_organization_id"] = self.id
@@ -209,7 +211,7 @@ class GithubOrganization(models.Model):
 
     def action_github_team(self):
         self.ensure_one()
-        action = self.env.ref("github_connector.action_github_team").read()[0]
+        action = self.sudo().env.ref("github_connector.action_github_team").read()[0]
         action["context"] = dict(self.env.context)
         action["context"].pop("group_by", None)
         action["context"]["search_default_organization_id"] = self.id
@@ -217,7 +219,7 @@ class GithubOrganization(models.Model):
 
     def action_res_partner(self):
         self.ensure_one()
-        action = self.env.ref("github_connector.action_res_partner").read()[0]
+        action = self.sudo().env.ref("github_connector.action_res_partner").read()[0]
         action["context"] = dict(self.env.context)
         action["context"].pop("group_by", None)
         action["context"]["search_default_organization_ids"] = self.id

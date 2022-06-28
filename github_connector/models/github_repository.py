@@ -195,9 +195,11 @@ class GithubRepository(models.Model):
 
     def action_github_team_repository_from_repository(self):
         self.ensure_one()
-        action = self.env.ref(
-            "github_connector.action_github_team_repository_from_repository"
-        ).read()[0]
+        action = (
+            self.sudo()
+            .env.ref("github_connector.action_github_team_repository_from_repository")
+            .read()[0]
+        )
         action["context"] = dict(self.env.context)
         action["context"].pop("group_by", None)
         action["context"]["search_default_repository_id"] = self.id
@@ -205,9 +207,11 @@ class GithubRepository(models.Model):
 
     def action_github_repository_branch(self):
         self.ensure_one()
-        action = self.env.ref(
-            "github_connector.action_github_repository_branch"
-        ).read()[0]
+        action = (
+            self.sudo()
+            .env.ref("github_connector.action_github_repository_branch")
+            .read()[0]
+        )
         action["context"] = dict(self.env.context)
         action["context"].pop("group_by", None)
         action["context"]["search_default_repository_id"] = self.id
