@@ -25,13 +25,15 @@ class GithubAnalysisRule(models.Model):
         required=True,
     )
 
+    def _set_spec(self, lines):
+        return pathspec.PathSpec.from_lines("gitwildmatch", lines)
+
     def _get_matches(self, path):
         """
         Get all matches from rule paths (multiple per line allow in rule)
         in a local path
         """
-        spec = pathspec.PathSpec.from_lines("gitwildmatch", self.paths.splitlines())
-        return spec.match_tree(path)
+        return self._set_spec(self.paths.splitlines()).match_tree(path)
 
     def _analysis_file(self, path):
         file_res = SourceAnalysis.from_file(path, "")

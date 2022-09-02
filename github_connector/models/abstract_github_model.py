@@ -11,7 +11,7 @@ from urllib.request import urlopen
 from github import Github
 from github.GithubException import UnknownObjectException
 
-from odoo import _, api, exceptions, fields, models, tools
+from odoo import _, api, fields, models, tools
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -51,7 +51,7 @@ class AbstractGithubModel(models.AbstractModel):
     # Overloadable Section
     def github_login_field(self):
         if self._github_login_field is None:
-            raise exceptions.Warning(
+            raise UserError(
                 _(
                     "Feature not Implemented : Please define 'github_login_field'"
                     " function in child model."
@@ -101,7 +101,7 @@ class AbstractGithubModel(models.AbstractModel):
         Usefull only if your model implements creation in github
         """
         self.ensure_one()
-        raise exceptions.Warning(
+        raise UserError(
             _(
                 "Feature not Implemented : Please define"
                 " 'get_github_base_obj_for_creation' function in child model."
@@ -260,7 +260,7 @@ class AbstractGithubModel(models.AbstractModel):
             except Exception as err:
                 _logger.warning("URL Call Error. %s" % (err.__str__()))
         else:
-            raise exceptions.Warning(_("Maximum attempts reached."))
+            raise UserError(_("Maximum attempts reached."))
         return base64.standard_b64encode(stream)
 
     # Custom Private Function
@@ -295,7 +295,7 @@ class AbstractGithubModel(models.AbstractModel):
             "github.access_token", default=""
         )
         if not token:
-            raise exceptions.Warning(
+            raise UserError(
                 _(
                     "Please add the 'github_token' in Odoo configuration file"
                     " or as the 'github.access_token' configuration parameter."

@@ -6,6 +6,7 @@
 from github.GithubException import UnknownObjectException
 
 from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class ResPartner(models.Model):
@@ -61,7 +62,7 @@ class ResPartner(models.Model):
     def _check_login_company(self):
         for partner in self:
             if partner.is_company and partner.github_name:
-                raise Warning(
+                raise UserError(
                     _("A company ('%s') can not have a Github login" " associated.")
                     % partner.name
                 )
