@@ -196,10 +196,8 @@ class GithubTeam(models.Model):
 
     def action_github_team_partner_from_team(self):
         self.ensure_one()
-        action = (
-            self.sudo()
-            .env.ref("github_connector.action_github_team_partner_from_team")
-            .read()[0]
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "github_connector.action_github_team_partner_from_team"
         )
         action["context"] = dict(self.env.context)
         action["context"].pop("group_by", None)
@@ -208,10 +206,8 @@ class GithubTeam(models.Model):
 
     def action_github_team_repository_from_team(self):
         self.ensure_one()
-        action = (
-            self.sudo()
-            .env.ref("github_connector.action_github_team_repository_from_team")
-            .read()[0]
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "github_connector.action_github_team_repository_from_team"
         )
         action["context"] = dict(self.env.context)
         action["context"].pop("group_by", None)
