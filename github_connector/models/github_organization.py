@@ -135,20 +135,42 @@ class GithubOrganization(models.Model):
 
     @api.depends("repository_ids.organization_id")
     def _compute_repository_qty(self):
-        for organization in self:
-            organization.repository_qty = len(organization.repository_ids)
+        data = self.env["github.repository"].read_group(
+            [("organization_id", "in", self.ids)],
+            ["organization_id"],
+            ["organization_id"],
+        )
+        mapping = {
+            data["organization_id"][0]: data["organization_id_count"] for data in data
+        }
+        for item in self:
+            item.repository_qty = mapping.get(item.id, 0)
 
     @api.depends("team_ids.organization_id")
     def _compute_team_qty(self):
-        for organization in self:
-            organization.team_qty = len(organization.team_ids)
+        data = self.env["github.team"].read_group(
+            [("organization_id", "in", self.ids)],
+            ["organization_id"],
+            ["organization_id"],
+        )
+        mapping = {
+            data["organization_id"][0]: data["organization_id_count"] for data in data
+        }
+        for item in self:
+            item.team_qty = mapping.get(item.id, 0)
 
     @api.depends("organization_serie_ids.organization_id")
     def _compute_organization_serie_qty(self):
-        for organization in self:
-            organization.organization_serie_qty = len(
-                organization.organization_serie_ids
-            )
+        data = self.env["github.organization.serie"].read_group(
+            [("organization_id", "in", self.ids)],
+            ["organization_id"],
+            ["organization_id"],
+        )
+        mapping = {
+            data["organization_id"][0]: data["organization_id_count"] for data in data
+        }
+        for item in self:
+            item.organization_serie_qty = mapping.get(item.id, 0)
 
     def find_related_github_object(self, obj_id=None):
         """Query Github API to find the related object"""
