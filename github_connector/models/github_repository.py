@@ -89,8 +89,14 @@ class GithubRepository(models.Model):
 
     @api.depends("team_ids")
     def _compute_team_qty(self):
-        for repository in self:
-            repository.team_qty = len(repository.team_ids)
+        data = self.env["github.team.repository"].read_group(
+            [("repository_id", "in", self.ids)], ["repository_id"], ["repository_id"]
+        )
+        mapping = {
+            data["repository_id"][0]: data["repository_id_count"] for data in data
+        }
+        for item in self:
+            item.team_qty = mapping.get(item.id, 0)
 
     @api.depends("name", "organization_id.github_name")
     def _compute_complete_name(self):
@@ -104,8 +110,14 @@ class GithubRepository(models.Model):
 
     @api.depends("repository_branch_ids.repository_id")
     def _compute_repository_branch_qty(self):
-        for repository in self:
-            repository.repository_branch_qty = len(repository.repository_branch_ids)
+        data = self.env["github.repository.branch"].read_group(
+            [("repository_id", "in", self.ids)], ["repository_id"], ["repository_id"]
+        )
+        mapping = {
+            data["repository_id"][0]: data["repository_id_count"] for data in data
+        }
+        for item in self:
+            item.repository_branch_qty = mapping.get(item.id, 0)
 
     # Overloadable Section
     @api.model

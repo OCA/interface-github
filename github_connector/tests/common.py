@@ -2,10 +2,10 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 import responses
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestGithubConnectorCommon(SavepointCase):
+class TestGithubConnectorCommon(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
