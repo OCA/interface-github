@@ -75,8 +75,12 @@ class ResPartner(models.Model):
 
     @api.depends("github_team_partner_ids")
     def _compute_github_team_qty(self):
-        for partner in self:
-            partner.github_team_qty = len(partner.github_team_partner_ids)
+        data = self.env["github.team.partner"].read_group(
+            [("partner_id", "in", self.ids)], ["partner_id"], ["partner_id"]
+        )
+        mapping = {data["partner_id"][0]: data["partner_id_count"] for data in data}
+        for item in self:
+            item.github_team_qty = mapping.get(item.id, 0)
 
     # Custom Section
     @api.model
