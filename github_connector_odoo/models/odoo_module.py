@@ -157,7 +157,7 @@ class OdooModule(models.Model):
                 authors += version.author_ids
             authors = set(authors)
             module.author_ids = [x.id for x in authors]
-            module.author_ids_description = ", ".join(sorted([x.name for x in authors]))
+            module.author_ids_description = ", ".join(sorted(x.name for x in authors))
 
     @api.depends("module_version_ids.organization_serie_id")
     def _compute_organization_serie(self):
