@@ -23,7 +23,7 @@ class TestGithubConnectorOdooAnalysisRule(TestGithubConnectorAnalysisRuleBase):
         cls._download_and_analyze(cls, cls.repo_branch_item)
 
     def _set_github_responses(self):
-        super()._set_github_responses(self)
+        res = super()._set_github_responses(self)
         with open(
             get_resource_path(
                 "github_connector_odoo",
@@ -39,6 +39,7 @@ class TestGithubConnectorOdooAnalysisRule(TestGithubConnectorAnalysisRuleBase):
                 json=test_file.read(),
                 status=200,
             )
+        return res
 
     def test_github_module_version_analysis_rule_info(self):
         info_ids = self.repo_branch_item.module_version_analysis_rule_info_ids
