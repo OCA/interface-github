@@ -21,7 +21,6 @@ class GithubAnalysisRule(models.Model):
             spec = self._set_spec(["*"])
             file_paths = []
             for path_item in spec.match_tree(path):
-                # file_paths.append(path + "/" + path_item)
                 file_paths.append("{}/{}".format(path, path_item))
             spec = self._set_spec(self.paths.splitlines())
             return spec.match_files(file_paths)
