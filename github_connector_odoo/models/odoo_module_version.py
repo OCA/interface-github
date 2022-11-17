@@ -341,11 +341,11 @@ class OdooModuleVersion(models.Model):
 
             version.lib_python_ids = [x.id for x in python_libs]
             version.lib_python_ids_description = ", ".join(
-                sorted([x.name for x in python_libs])
+                sorted(x.name for x in python_libs)
             )
             version.lib_bin_ids = [x.id for x in bin_libs]
             version.lib_bin_ids_description = ", ".join(
-                sorted([x.name for x in bin_libs])
+                sorted(x.name for x in bin_libs)
             )
 
     @api.depends("license")
@@ -369,9 +369,7 @@ class OdooModuleVersion(models.Model):
                     authors.append(odoo_author_obj.create_if_not_exist(item))
             authors = set(authors)
             version.author_ids = [x.id for x in authors]
-            version.author_ids_description = ", ".join(
-                sorted([x.name for x in authors])
-            )
+            version.author_ids_description = ", ".join(sorted(x.name for x in authors))
 
     @api.depends(
         "repository_branch_id",
