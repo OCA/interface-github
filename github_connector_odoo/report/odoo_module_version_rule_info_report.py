@@ -29,12 +29,12 @@ class OdooModuleVersionRuleInfoReport(models.Model):
         string="Organization serie",
         comodel_name="github.organization.serie",
     )
-    code_count = fields.Integer(string="Code Count")
-    documentation_count = fields.Integer(string="Documentation Count")
-    empty_count = fields.Integer(string="Empty Count")
-    string_count = fields.Integer(string="String Count")
-    total_count = fields.Integer(string="Total Count")
-    scanned_files = fields.Integer(string="Scanned files")
+    code_count = fields.Integer()
+    documentation_count = fields.Integer()
+    empty_count = fields.Integer()
+    string_count = fields.Integer()
+    total_count = fields.Integer()
+    scanned_files = fields.Integer()
 
     def init(self):
         tools.drop_view_if_exists(self._cr, "odoo_module_version_rule_info_report")
