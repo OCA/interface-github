@@ -20,7 +20,7 @@ class TestGithubConnectorCommon(TransactionCase):
         cls.model_gr = cls.env["github.repository"]
         cls.model_grb = cls.env["github.repository.branch"]
         cls.oca = cls.env.ref("github_connector.oca_organization")
-        cls.serie_13 = cls.env.ref("github_connector.oca_organization_serie_13")
+        cls.serie_15 = cls.env.ref("github_connector.oca_organization_serie_15")
         cls.repository_ocb = cls.model_gr.create(
             {
                 "name": "OCB",
@@ -36,20 +36,20 @@ class TestGithubConnectorCommon(TransactionCase):
             }
         )
         # repository branch
-        cls.repository_ocb_13 = cls.model_grb.create(
+        cls.repository_ocb_15 = cls.model_grb.create(
             {
-                "name": cls.serie_13.name,
+                "name": cls.serie_15.name,
                 "organization_id": cls.oca.id,
                 "repository_id": cls.repository_ocb.id,
-                "organization_serie_id": cls.serie_13.id,
+                "organization_serie_id": cls.serie_15.id,
             }
         )
-        cls.repository_interface_github_13 = cls.model_grb.create(
+        cls.repository_interface_github_15 = cls.model_grb.create(
             {
-                "name": cls.serie_13.name,
+                "name": cls.serie_15.name,
                 "organization_id": cls.oca.id,
                 "repository_id": cls.repository_interface_github.id,
-                "organization_serie_id": cls.serie_13.id,
+                "organization_serie_id": cls.serie_15.id,
             }
         )
         cls.env["ir.config_parameter"].set_param("github.access_token", "test")

@@ -46,10 +46,10 @@ class TestGithubConnectorAnalysisRuleBase(TestGithubConnectorCommon):
             }
         )
         cls.repository_ocb.write({"analysis_rule_ids": [(6, 0, cls.rule_ocb.ids)]})
-        cls.repository_interface_github_13.write(
+        cls.repository_interface_github_15.write(
             {"analysis_rule_ids": [(6, 0, cls.rule_custom.ids)]}
         )
-        cls.repo_branch_item = cls.repository_interface_github_13
+        cls.repo_branch_item = cls.repository_interface_github_15
         # Create appropriate responses for the API calls
         cls._set_github_responses(cls)
 

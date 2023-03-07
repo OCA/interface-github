@@ -16,10 +16,10 @@ class TestGithubConnectorOdooAnalysisRule(TestGithubConnectorAnalysisRuleBase):
         cls.rule_has_odoo_addons = cls.env.ref(
             "github_connector_odoo.github_analysis_rule_python_has_odoo_addons"
         )
-        cls.repository_interface_github_13.write(
+        cls.repository_interface_github_15.write(
             {"analysis_rule_ids": [(6, 0, cls.rule_has_odoo_addons.ids)]}
         )
-        cls.repo_branch_item = cls.repository_interface_github_13
+        cls.repo_branch_item = cls.repository_interface_github_15
         cls._download_and_analyze(cls, cls.repo_branch_item)
 
     def _set_github_responses(self):
