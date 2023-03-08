@@ -9,7 +9,7 @@ from odoo.addons.github_connector.tests.test_github_analysis_rule import (
 )
 
 
-class TestGithubConnectorOdooAnalysisRule(TestGithubConnectorAnalysisRuleBase):
+class TestGithubConnectorOdooAnalysisRuleBase(TestGithubConnectorAnalysisRuleBase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -20,7 +20,6 @@ class TestGithubConnectorOdooAnalysisRule(TestGithubConnectorAnalysisRuleBase):
             {"analysis_rule_ids": [(6, 0, cls.rule_has_odoo_addons.ids)]}
         )
         cls.repo_branch_item = cls.repository_interface_github_13
-        cls._download_and_analyze(cls, cls.repo_branch_item)
 
     def _set_github_responses(self):
         res = super()._set_github_responses(self)
@@ -40,6 +39,13 @@ class TestGithubConnectorOdooAnalysisRule(TestGithubConnectorAnalysisRuleBase):
                 status=200,
             )
         return res
+
+
+class TestGithubConnectorOdooAnalysisRule(TestGithubConnectorOdooAnalysisRuleBase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls._download_and_analyze(cls, cls.repo_branch_item)
 
     def test_github_module_version_analysis_rule_info(self):
         info_ids = self.repo_branch_item.module_version_analysis_rule_info_ids
