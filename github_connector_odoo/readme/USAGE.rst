@@ -65,3 +65,14 @@ This module provide a new reporting.
 **Modules by Serie (and Licenses)**
 
 .. image:: /github_connector_odoo/static/description/reporting_module_by_serie.png
+
+**Branches/series extra options**
+
+To use this module, you need to:
+
+#. Go to the "Organisation Series" tab of the Organisation
+#. Activate "Fetch all branches" checkbox.
+#. If necessary, select the "Automatic series creation" checkbox.
+#. Sync repo branches afterwards.
+#. Go to branch form and select "Organization Serie" for branches
+#. where it was not determined automatically.

@@ -14,3 +14,15 @@ class GithubOrganization(models.Model):
     default_author_text = fields.Char(string="Default Author Text")
 
     runbot_url_pattern = fields.Char(string="Runbot URL Pattern")
+
+    create_series = fields.Boolean(
+        string="Auto Create Series",
+        help="If checked, during synchronization for branches"
+        " for which no series have been created,"
+        "they will be created automatically.",
+    )
+
+    fetch_branches = fields.Boolean(
+        string="Fetch all branches",
+        help="If checked, Fetch all repo branches even if no series are defined",
+    )

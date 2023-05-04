@@ -13,3 +13,5 @@ from . import github_analysis_rule
 from . import github_organization
 from . import github_repository
 from . import github_repository_branch
+from . import res_config_settings
+from . import github_organization_serie

@@ -46,6 +46,14 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <group name="group_technical_paths" position="inside">
                 <field name="module_paths" />
             </group>
+            <field name="organization_serie_id" position="after">
+                <field name="odoo_version" invisible="1" />
+            </field>
+            <field name="organization_serie_id" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'readonly' : [('odoo_version', '!=', False)]}</attribute>
+            </field>
             <page name="code_analysis" position="inside">
                 <field
                     name="module_version_analysis_rule_info_ids"
