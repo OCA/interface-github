@@ -14,3 +14,8 @@ class GithubOrganization(models.Model):
         " for which no series have been created,"
         "they will be created automatically.",
     )
+
+    fetch_branches = fields.Boolean(
+        string="Fetch all branches",
+        help="If checked, Fetch all repo branches even " "if no series are defined",
+    )

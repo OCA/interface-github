@@ -30,8 +30,10 @@ class GithubRepository(models.Model):
                 }
             )
 
-    def button_sync_branch(self):
+    def _fetch_all_branches(self):
+        """Fetch all repo branches"""
         if self.organization_id.create_series is False:
+            # sync without creating a series
             branch_obj = self.env["github.repository.branch"]
             for repository in self.filtered(lambda r: not r.is_ignored):
                 gh_repo = repository.find_related_github_object()
@@ -43,6 +45,7 @@ class GithubRepository(models.Model):
                     branch_ids.append(branch.id)
                 repository.repository_branch_ids = [(6, 0, branch_ids)]
         else:
+            # sync with the creation of a series
             branch_obj = self.env["github.repository.branch"]
             for repository in self.filtered(lambda r: not r.is_ignored):
                 gh_repo = repository.find_related_github_object()
@@ -65,4 +68,32 @@ class GithubRepository(models.Model):
                             repository.id, gh_branch.name
                         )
                         branch_ids.append(branch.id)
+                repository.repository_branch_ids = [(6, 0, branch_ids)]
+
+    def button_sync_branch(self):
+        if self.organization_id.fetch_branches is True:
+            self._fetch_all_branches()
+        else:
+            branch_obj = self.env["github.repository.branch"]
+            for repository in self.filtered(lambda r: not r.is_ignored):
+                gh_repo = repository.find_related_github_object()
+                branch_ids = []
+                correct_series = (
+                    repository.organization_id.organization_serie_ids.mapped("name")
+                )
+                for gh_branch in gh_repo.get_branches():
+                    if gh_branch.name in correct_series:
+                        # We don't use get_from_id_or_create because repository
+                        # branches does not have any ids. (very basic object in the
+                        # Github API)
+                        branch = branch_obj.create_or_update_from_name(
+                            repository.id, gh_branch.name
+                        )
+                        branch_ids.append(branch.id)
+                    else:
+                        _logger.warning(
+                            "the branch '%s'/'%s' has been ignored.",
+                            repository.name,
+                            gh_branch.name,
+                        )
                 repository.repository_branch_ids = [(6, 0, branch_ids)]
