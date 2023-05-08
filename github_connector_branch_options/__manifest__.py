@@ -15,5 +15,6 @@
     ],
     "data": [
         "views/view_github_organization.xml",
+        "views/view_github_repository_branch.xml",
     ],
 }

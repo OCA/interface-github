@@ -7,6 +7,34 @@ from odoo import models
 
 _logger = logging.getLogger(__name__)
 
+_odoo_version = [
+    "5.0",
+    "6.0",
+    "6.1",
+    "7.0",
+    "8.0",
+    "9.0",
+    "10.0",
+    "11.0",
+    "12.0",
+    "13.0",
+    "14.0",
+    "15.0",
+    "16.0",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
+    "15",
+    "16",
+]
+
 
 class GithubRepository(models.Model):
     _name = "github.repository"
@@ -14,18 +42,22 @@ class GithubRepository(models.Model):
 
     def create_series(self, branch_name=False, repository=False):
         """Create github organization series"""
-        sequence = repository.organization_id.organization_serie_ids.mapped("sequence")
-        if sequence:
-            seq = max(sequence) + 1
-        else:
-            seq = 1
-        series_name = branch_name.split("-", 1)[0]
+        branch_serie = branch_name.split("-", 1)[0]
+        if "." not in list(branch_serie):
+            branch_serie += ".0"
         exist_series = repository.organization_id.organization_serie_ids.mapped("name")
-        if series_name not in exist_series:
+        if branch_serie in _odoo_version and branch_serie not in exist_series:
+            sequence = repository.organization_id.organization_serie_ids.mapped(
+                "sequence"
+            )
+            if sequence:
+                seq = max(sequence) + 1
+            else:
+                seq = 1
             repository.organization_id.write(
                 {
                     "organization_serie_ids": [
-                        (0, 0, {"name": series_name, "sequence": seq})
+                        (0, 0, {"name": branch_serie, "sequence": seq})
                     ]
                 }
             )

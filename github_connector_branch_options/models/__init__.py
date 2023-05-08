@@ -3,3 +3,4 @@
 
 from . import github_repository
 from . import github_organization
+from . import github_repository_branch
