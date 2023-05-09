@@ -38,25 +38,28 @@ class GithubRepository(models.Model):
     _inherit = "github.repository.branch"
 
     # If name is not equal odoo version, but it is specified there
-    series_name = fields.Char(readonly=True, index=True, compute="_compute_series_name")
+    serie_name = fields.Char(readonly=True, index=True, compute="_compute_serie_name")
 
-    def _compute_series_name(self):
+    def _compute_serie_name(self):
         """Defines the series_name for the branch name"""
         for branch in self:
+            split_name = branch.name.split("-")
             # get odoo version from branch name
-            get_version = branch.name.split("-", 1)[0]
-            if get_version in _odoo_version:
-                if "." not in list(get_version):
-                    get_version += ".0"
-                    branch.series_name = get_version
+            for i in split_name:
+                if i in _odoo_version:
+                    # if odoo version is written without '.0'
+                    if "." not in list(i):
+                        i += ".0"
+                        branch.serie_name = i
+                    else:
+                        branch.serie_name = i
+                    break
                 else:
-                    branch.series_name = get_version
-            else:
-                branch.series_name = "Not defined"
+                    branch.serie_name = "Not defined"
 
     @api.depends("organization_id", "name")
     def _compute_organization_serie_id(self):
         for branch in self:
             for serie in branch.organization_id.organization_serie_ids:
-                if serie.name == branch.name or serie.name == branch.series_name:
+                if serie.name == branch.name or serie.name == branch.serie_name:
                     branch.organization_serie_id = serie

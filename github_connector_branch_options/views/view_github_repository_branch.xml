@@ -12,12 +12,12 @@ License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
         />
         <field name="arch" type="xml">
             <field name="organization_serie_id" position="after">
-                <field name="series_name" invisible="1" />
+                <field name="serie_name" invisible="1" />
             </field>
             <field name="organization_serie_id" position="attributes">
                 <attribute
                     name="attrs"
-                >{'readonly' : [('series_name', '!=', 'Not defined')]}</attribute>
+                >{'readonly' : [('serie_name', '!=', 'Not defined')]}</attribute>
             </field>
         </field>
     </record>

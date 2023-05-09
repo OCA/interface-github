@@ -41,26 +41,33 @@ class GithubRepository(models.Model):
     _inherit = "github.repository"
 
     def create_series(self, branch_name=False, repository=False):
-        """Create github organization series"""
-        branch_serie = branch_name.split("-", 1)[0]
-        if "." not in list(branch_serie):
-            branch_serie += ".0"
-        exist_series = repository.organization_id.organization_serie_ids.mapped("name")
-        if branch_serie in _odoo_version and branch_serie not in exist_series:
-            sequence = repository.organization_id.organization_serie_ids.mapped(
-                "sequence"
-            )
-            if sequence:
-                seq = max(sequence) + 1
-            else:
-                seq = 1
-            repository.organization_id.write(
-                {
-                    "organization_serie_ids": [
-                        (0, 0, {"name": branch_serie, "sequence": seq})
-                    ]
-                }
-            )
+        """Create github organization serie"""
+        split_name = branch_name.split("-")
+        # find odoo version in branch name
+        for i in split_name:
+            if i in _odoo_version:
+                # if odoo version is written without '.0'
+                if "." not in list(i):
+                    i += ".0"
+                exist_series = repository.organization_id.organization_serie_ids.mapped(
+                    "name"
+                )
+                if i not in exist_series:
+                    sequence = repository.organization_id.organization_serie_ids.mapped(
+                        "sequence"
+                    )
+                    if sequence:
+                        seq = max(sequence) + 1
+                    else:
+                        seq = 1
+                    repository.organization_id.write(
+                        {
+                            "organization_serie_ids": [
+                                (0, 0, {"name": i, "sequence": seq})
+                            ]
+                        }
+                    )
+                break
 
     def _fetch_all_branches(self):
         """Fetch all repo branches"""
