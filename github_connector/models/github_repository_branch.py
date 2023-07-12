@@ -233,9 +233,18 @@ class GithubRepository(models.Model):
             + self.analysis_rule_ids
         )
         for rule_id in rule_ids:
-            self._delete_analysis_rule_model_info(rule_id)
-            for vals in self._prepare_analysis_rule_info_vals(rule_id):
-                self.env[self._prepare_analysis_rule_model_info(rule_id)].create(vals)
+            self._process_analysis_rule_info(rule_id)
+
+    def _process_analysis_rule_info(self, rule_id):
+        """Process to specific rule (Create or update info record)."""
+        analysis_rule_item = self.analysis_rule_info_ids.filtered(
+            lambda x: x.analysis_rule_id == rule_id
+        )
+        vals = self._prepare_analysis_rule_info_vals(rule_id)
+        if analysis_rule_item:
+            self.analysis_rule_info_ids = [(1, analysis_rule_item.id, vals)]
+        else:
+            self.analysis_rule_info_ids = [(0, 0, vals)]
 
     def analyze_code_one(self):
         """Overload Me in custom Module that manage Source Code analysis."""
@@ -287,38 +296,18 @@ class GithubRepository(models.Model):
                     )
         return True
 
-    def _prepare_analysis_rule_model_info(self, analysis_rule_id):
-        """Define model data info that override with other addons"""
-        return "github.repository.branch.rule.info"
-
-    def _delete_analysis_rule_model_info(self, analysis_rule_id):
-        """Remove existing info data to create new records"""
-        return (
-            self.env[self._prepare_analysis_rule_model_info(analysis_rule_id)]
-            .search(
-                [
-                    ("analysis_rule_id", "=", analysis_rule_id.id),
-                    ("repository_branch_id", "=", self.id),
-                ]
-            )
-            .sudo()
-            .unlink()
-        )
-
     def _prepare_analysis_rule_info_vals(self, analysis_rule_id):
         """Prepare info vals"""
         res = self._operation_analysis_rule_id(analysis_rule_id)
-        return [
-            {
-                "analysis_rule_id": analysis_rule_id.id,
-                "repository_branch_id": self.id,
-                "code_count": res["code"],
-                "documentation_count": res["documentation"],
-                "empty_count": res["empty"],
-                "string_count": res["string"],
-                "scanned_files": len(res["paths"]),
-            }
-        ]
+        return {
+            "analysis_rule_id": analysis_rule_id.id,
+            "repository_branch_id": self.id,
+            "code_count": res["code"],
+            "documentation_count": res["documentation"],
+            "empty_count": res["empty"],
+            "string_count": res["string"],
+            "scanned_files": len(res["paths"]),
+        }
 
     def _operation_analysis_rule_id(self, analysis_rule_id):
         """This function allow to override with other addons that need
