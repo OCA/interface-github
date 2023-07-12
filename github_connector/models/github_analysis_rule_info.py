@@ -11,6 +11,7 @@ class GithubAnalysisRuleInfoMixin(models.AbstractModel):
     analysis_rule_id = fields.Many2one(
         string="Analysis Rule",
         comodel_name="github.analysis.rule",
+        ondelete="cascade",
     )
     group_id = fields.Many2one(
         string="Group", related="analysis_rule_id.group_id", readonly=True
