@@ -535,8 +535,10 @@ class OdooModuleVersionRuleInfo(models.TransientModel):
     module_version_id = fields.Many2one(
         string="Module Version",
         comodel_name="odoo.module.version",
+        ondelete="cascade",
     )
     repository_branch_id = fields.Many2one(
         string="Repository Branch",
         comodel_name="github.repository.branch",
+        ondelete="cascade",
     )

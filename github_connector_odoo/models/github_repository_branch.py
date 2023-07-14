@@ -148,51 +148,39 @@ class GithubRepositoryBranch(models.Model):
 
         return map(clean, filter(is_really_module, os.listdir(directory)))
 
-    def _prepare_analysis_rule_model_info(self, analysis_rule_id):
-        if analysis_rule_id.has_odoo_addons:
-            return "odoo.module.version.rule.info"
+    def _process_analysis_rule_info(self, rule_id):
+        if rule_id.has_odoo_addons:
+            for module_version in self.module_version_ids:
+                self._process_analysis_rule_info_module_version(rule_id, module_version)
         else:
-            return super()._prepare_analysis_rule_model_info(analysis_rule_id)
+            return super()._process_analysis_rule_info(rule_id)
 
-    def _delete_analysis_rule_model_info(self, analysis_rule_id):
-        if not analysis_rule_id.has_odoo_addons:
-            return super()._delete_analysis_rule_model_info(analysis_rule_id)
-        return False
+    def _process_analysis_rule_info_module_version(self, rule_id, module_version):
+        analysis_rule_item = module_version.analysis_rule_info_ids.filtered(
+            lambda x: x.analysis_rule_id == rule_id and x.repository_branch_id == self
+        )
+        vals = self._prepare_analysis_module_version_rule_info_vals(
+            rule_id, module_version
+        )
+        if analysis_rule_item:
+            module_version.analysis_rule_info_ids = [(1, analysis_rule_item.id, vals)]
+        else:
+            module_version.analysis_rule_info_ids = [(0, 0, vals)]
 
-    def _prepare_analysis_rule_info_vals(self, analysis_rule_id):
-        if analysis_rule_id.has_odoo_addons:
-            if self.module_version_ids:
-                vals = []
-                for module_version_id in self.module_version_ids:
-                    res = self._operation_analysis_rule_id_by_module_version_id(
-                        analysis_rule_id, module_version_id
-                    )
-                    # remove
-                    self.env[
-                        self._prepare_analysis_rule_model_info(analysis_rule_id)
-                    ].search(
-                        [
-                            ("analysis_rule_id", "=", analysis_rule_id.id),
-                            ("repository_branch_id", "=", self.id),
-                            ("module_version_id", "=", module_version_id.id),
-                        ]
-                    ).sudo().unlink()
-                    # vals
-                    vals.append(
-                        {
-                            "analysis_rule_id": analysis_rule_id.id,
-                            "repository_branch_id": self.id,
-                            "module_version_id": module_version_id.id,
-                            "code_count": res["code"],
-                            "documentation_count": res["documentation"],
-                            "empty_count": res["empty"],
-                            "string_count": res["string"],
-                            "scanned_files": len(res["paths"]),
-                        }
-                    )
-                return vals
-
-        return super()._prepare_analysis_rule_info_vals(analysis_rule_id)
+    def _prepare_analysis_module_version_rule_info_vals(self, rule_id, module_version):
+        res = self._operation_analysis_rule_id_by_module_version_id(
+            rule_id, module_version
+        )
+        return {
+            "analysis_rule_id": rule_id.id,
+            "repository_branch_id": self.id,
+            "module_version_id": module_version.id,
+            "code_count": res["code"],
+            "documentation_count": res["documentation"],
+            "empty_count": res["empty"],
+            "string_count": res["string"],
+            "scanned_files": len(res["paths"]),
+        }
 
     def _operation_analysis_rule_id_by_module_version_id(
         self, analysis_rule_id, module_version_id
