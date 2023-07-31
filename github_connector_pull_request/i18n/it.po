@@ -1,0 +1,206 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* github_connector_pull_request
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-09-26 12:39+0000\n"
+"PO-Revision-Date: 2023-09-26 12:39+0000\n"
+"Last-Translator: Simone Rubino <simone.rubino@aion-tech.it>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: github_connector_pull_request
+#: model_terms:ir.ui.view,arch_db:github_connector_pull_request.view_github_repository_form
+msgid ""
+"<span class=\"o_stat_text\" attrs=\"{                                 'invisible': [                                     ('pull_request_qty', '&lt;', 2),                                 ],                             }\">\n"
+"                            Pull Requests\n"
+"                        </span>\n"
+"                        <span class=\"o_stat_text\" attrs=\"{                                 'invisible': [                                     ('pull_request_qty', '&gt;', 1),                                 ],                             }\">\n"
+"                            Pull Request\n"
+"                        </span>"
+msgstr ""
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__base_ref
+msgid "Base Ref"
+msgstr ""
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__base_url
+msgid "Base URL"
+msgstr ""
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__github_create_date
+msgid "Create Date on Github"
+msgstr "Data di creazione in GitHub"
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__description
+msgid "Description"
+msgstr "Descrizione"
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__display_name
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_repository__display_name
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_wizard_load_github_model__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: github_connector_pull_request
+#: model:ir.model,name:github_connector_pull_request.model_github_pull_request
+msgid "GitHub Pull Request"
+msgstr "Pull Request di GitHub"
+
+#. module: github_connector_pull_request
+#: model_terms:ir.ui.view,arch_db:github_connector_pull_request.github_pull_request_view_form
+msgid "Github"
+msgstr ""
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__github_id_external
+msgid "Github Id"
+msgstr "ID in GitHub"
+
+#. module: github_connector_pull_request
+#: model:ir.model,name:github_connector_pull_request.model_github_repository
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__repository_id
+msgid "Github Repository"
+msgstr "Repository in GitHub"
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__github_name
+msgid "Github Technical Name"
+msgstr "Nome tecnico in GitHub"
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_wizard_load_github_model__github_type
+msgid "Github Type Name"
+msgstr "Nome del tipo in GitHub"
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__github_url
+msgid "Github URL"
+msgstr "URL in GitHub"
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__head_ref
+msgid "Head Ref"
+msgstr ""
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__head_url
+msgid "Head URL"
+msgstr ""
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__id
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_repository__id
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_wizard_load_github_model__id
+msgid "ID"
+msgstr ""
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request____last_update
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_repository____last_update
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_wizard_load_github_model____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__github_last_sync_date
+msgid "Last Sync Date with Github"
+msgstr "Data dell'ultima sincronizzazione con GitHub"
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__github_write_date
+msgid "Last Write Date on Github"
+msgstr "Data dell'ultima scrittura in GitHub"
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__name
+msgid "Number"
+msgstr "Numero"
+
+#. module: github_connector_pull_request
+#: code:addons/github_connector_pull_request/models/pull_request.py:0
+#: code:addons/interface-github/github_connector_pull_request/models/pull_request.py:0
+#, python-format
+msgid "Pull Request %s not found"
+msgstr "Pull Request %s non trovata"
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_repository__pull_request_qty
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_wizard_create_repository__pull_request_qty
+msgid "Pull Request Quantity"
+msgstr "Numero di Pull Requests"
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields.selection,name:github_connector_pull_request.selection__wizard_load_github_model__github_type__pr
+msgid "Pull Request URL"
+msgstr "Url della Pull Request"
+
+#. module: github_connector_pull_request
+#: code:addons/github_connector_pull_request/models/pull_request.py:0
+#: code:addons/interface-github/github_connector_pull_request/models/pull_request.py:0
+#, python-format
+msgid "Pull Request URL %(pr_url)s cannot be parsed"
+msgstr "Impossibile processare l'URL %(pr_url)s della Pull Request"
+
+#. module: github_connector_pull_request
+#: model:ir.actions.act_window,name:github_connector_pull_request.github_pull_request_action
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_repository__pull_request_ids
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_wizard_create_repository__pull_request_ids
+msgid "Pull Requests"
+msgstr ""
+
+#. module: github_connector_pull_request
+#: model_terms:ir.ui.view,arch_db:github_connector_pull_request.view_github_repository_form
+msgid "Pull Requests Sync."
+msgstr "Sinc. Pull Requests"
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__state
+msgid "State"
+msgstr "Stato"
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__title
+msgid "Title"
+msgstr "Titolo"
+
+#. module: github_connector_pull_request
+#: model:ir.model.fields,field_description:github_connector_pull_request.field_github_pull_request__user
+msgid "User"
+msgstr "Utente"
+
+#. module: github_connector_pull_request
+#: model:ir.model,name:github_connector_pull_request.model_wizard_load_github_model
+msgid "Wizard Load Github Model"
+msgstr "Procedura per caricare modelli di GitHub"

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  ~ Copyright 2023 Simone Rubino - Aion Tech
+  ~ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+  -->
+<odoo noupdate="1">
+    <record id="ir_cron_sync_pull_requests" model="ir.cron">
+        <field name="name">Synchronize Pull Requests for all Repositories</field>
+        <field name="active" eval="False" />
+        <field name="state">code</field>
+        <field name="model_id" ref="github_connector.model_github_repository" />
+        <field name="code">model.cron_sync_pull_request()</field>
+    </record>
+</odoo>

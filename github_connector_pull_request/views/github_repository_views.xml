@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  ~ Copyright 2023 Simone Rubino - Aion Tech
+  ~ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+  -->
+<odoo>
+    <record id="view_github_repository_form" model="ir.ui.view">
+        <field
+            name="name"
+        >Add Pull Request fields to GitHub Repository form view</field>
+        <field name="model">github.repository</field>
+        <field name="inherit_id" ref="github_connector.view_github_repository_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    name="button_sync_pull_request"
+                    type="object"
+                    string="Pull Requests Sync."
+                    class="btn btn-default"
+                    icon="fa-chevron-right"
+                    groups="github_connector.group_github_connector_manager"
+                />
+            </xpath>
+            <xpath expr="//div[@name='button_box']//button[last()]" position="after">
+                <button
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-arrow-down"
+                    name="action_github_pull_requests"
+                    attrs="{
+                        'invisible': [
+                            ('pull_request_qty', '=', False),
+                        ],
+                    }"
+                >
+                    <div class="o_stat_info">
+                        <field name="pull_request_qty" class="o_stat_value" />
+                        <span
+                            class="o_stat_text"
+                            attrs="{
+                                'invisible': [
+                                    ('pull_request_qty', '&lt;', 2),
+                                ],
+                            }"
+                        >
+                            Pull Requests
+                        </span>
+                        <span
+                            class="o_stat_text"
+                            attrs="{
+                                'invisible': [
+                                    ('pull_request_qty', '&gt;', 1),
+                                ],
+                            }"
+                        >
+                            Pull Request
+                        </span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>
