@@ -91,6 +91,13 @@ class GithubRepository(models.Model):
     github_url = fields.Char(
         string="Github URL", store=True, compute="_compute_github_url"
     )
+    inhibit_inherited_rules = fields.Boolean(
+        string="Inhibit inherited rules",
+        default=False,
+        help="If checked, the analysis rules to be used will be only those set here."
+        "\n If unchecked, the analysis rules to be used will be those set in the"
+        " organization, repository and those set here.",
+    )
     analysis_rule_ids = fields.Many2many(
         string="Analysis Rules", comodel_name="github.analysis.rule"
     )
@@ -226,13 +233,13 @@ class GithubRepository(models.Model):
                         res.append(os.path.join(root, fic))
         return res
 
+    def _get_analysis_rules(self):
+        if self.inhibit_inherited_rules:
+            return self.analysis_rule_ids
+        return self.repository_id._get_analysis_rules() + self.analysis_rule_ids
+
     def set_analysis_rule_info(self):
-        rule_ids = (
-            self.repository_id.organization_id.analysis_rule_ids
-            + self.repository_id.analysis_rule_ids
-            + self.analysis_rule_ids
-        )
-        for rule_id in rule_ids:
+        for rule_id in self._get_analysis_rules():
             self._process_analysis_rule_info(rule_id)
 
     def _process_analysis_rule_info(self, rule_id):
