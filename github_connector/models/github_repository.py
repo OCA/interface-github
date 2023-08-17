@@ -73,6 +73,13 @@ class GithubRepository(models.Model):
     )
 
     color = fields.Integer(string="Color Index", compute="_compute_ignore")
+    inhibit_inherited_rules = fields.Boolean(
+        string="Inhibit inherited rules",
+        default=False,
+        help="If checked, the analysis rules to be used will be only those set here."
+        "\n If unchecked, the analysis rules to be used will be those set in the"
+        " organization and those set here.",
+    )
     analysis_rule_ids = fields.Many2many(
         string="Analysis Rules", comodel_name="github.analysis.rule"
     )
@@ -153,6 +160,11 @@ class GithubRepository(models.Model):
         self.ensure_one()
         gh_api = self.get_github_connector()
         return gh_api.get_organization(self.organization_id.github_name)
+
+    def _get_analysis_rules(self):
+        if self.inhibit_inherited_rules:
+            return self.analysis_rule_ids
+        return self.organization_id.analysis_rule_ids + self.analysis_rule_ids
 
     def create_in_github(self):
         """Create an object in Github through the API"""
