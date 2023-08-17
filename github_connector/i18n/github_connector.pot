@@ -666,6 +666,21 @@ msgid "ID"
 msgstr ""
 
 #. module: github_connector
+#: model:ir.model.fields,help:github_connector.field_github_repository__inhibit_inherited_rules
+#: model:ir.model.fields,help:github_connector.field_wizard_create_repository__inhibit_inherited_rules
+msgid ""
+"If checked, the analysis rules to be used will be only those set here.\n"
+" If unchecked, the analysis rules to be used will be those set in the organization and those set here."
+msgstr ""
+
+#. module: github_connector
+#: model:ir.model.fields,help:github_connector.field_github_repository_branch__inhibit_inherited_rules
+msgid ""
+"If checked, the analysis rules to be used will be only those set here.\n"
+" If unchecked, the analysis rules to be used will be those set in the organization, repository and those set here."
+msgstr ""
+
+#. module: github_connector
 #: model:ir.model.fields,help:github_connector.field_github_repository__is_ignored
 #: model:ir.model.fields,help:github_connector.field_wizard_create_repository__is_ignored
 msgid ""
@@ -683,6 +698,13 @@ msgstr ""
 #. module: github_connector
 #: model:ir.model.fields,field_description:github_connector.field_github_organization__image
 msgid "Image"
+msgstr ""
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__inhibit_inherited_rules
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__inhibit_inherited_rules
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__inhibit_inherited_rules
+msgid "Inhibit inherited rules"
 msgstr ""
 
 #. module: github_connector
