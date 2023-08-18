@@ -82,6 +82,71 @@ class TestGithubConnectorAnalysisRule(TestGithubConnectorAnalysisRuleBase):
         self.assertEqual(len(self.repository_ocb.analysis_rule_ids), 1)
         self.assertEqual(len(self.repo_branch_item.analysis_rule_info_ids), 4)
 
+    def test_inhibit_analysis_rule_info_01(self):
+        # Rules available from repository branch
+        rules = self.repo_branch_item._get_analysis_rules()
+        self.assertIn(self.rule_custom, rules)
+        self.assertNotIn(self.rule_ocb, rules)
+        self.assertIn(self.rule_python, rules)
+        self.assertIn(self.rule_xml, rules)
+        self.assertIn(self.rule_js, rules)
+        # Rules from OCB repository
+        rules = self.repository_ocb._get_analysis_rules()
+        self.assertNotIn(self.rule_custom, rules)
+        self.assertIn(self.rule_ocb, rules)
+        self.assertIn(self.rule_python, rules)
+        self.assertIn(self.rule_xml, rules)
+        self.assertIn(self.rule_js, rules)
+        # Rules from interface-gitbub repository
+        rules = self.repository_interface_github._get_analysis_rules()
+        self.assertNotIn(self.rule_custom, rules)
+        self.assertNotIn(self.rule_ocb, rules)
+        self.assertIn(self.rule_python, rules)
+        self.assertIn(self.rule_xml, rules)
+        self.assertIn(self.rule_js, rules)
+
+    def test_inhibit_analysis_rule_info_02(self):
+        # Only repository branch rule available
+        self.repo_branch_item.inhibit_inherited_rules = True
+        rules = self.repo_branch_item._get_analysis_rules()
+        self.assertIn(self.rule_custom, rules)
+        self.assertNotIn(self.rule_ocb, rules)
+        self.assertNotIn(self.rule_python, rules)
+        self.assertNotIn(self.rule_xml, rules)
+        self.assertNotIn(self.rule_js, rules)
+        # Remove rule from repository branch
+        self.repo_branch_item.analysis_rule_ids = [(5, 0, 0)]
+        rules = self.repo_branch_item._get_analysis_rules()
+        self.assertNotIn(self.rule_custom, rules)
+        self.assertNotIn(self.rule_ocb, rules)
+        self.assertNotIn(self.rule_python, rules)
+        self.assertNotIn(self.rule_xml, rules)
+        self.assertNotIn(self.rule_js, rules)
+
+    def test_inhibit_analysis_rule_info_03(self):
+        # Only repository rules available
+        self.repo_branch_item.analysis_rule_ids = [(5, 0, 0)]
+        self.repository_interface_github.write(
+            {
+                "inhibit_inherited_rules": True,
+                "analysis_rule_ids": [(6, 0, self.rule_custom.ids)],
+            }
+        )
+        rules = self.repo_branch_item._get_analysis_rules()
+        self.assertIn(self.rule_custom, rules)
+        self.assertNotIn(self.rule_ocb, rules)
+        self.assertNotIn(self.rule_python, rules)
+        self.assertNotIn(self.rule_xml, rules)
+        self.assertNotIn(self.rule_js, rules)
+        # Remove rules from repository branch
+        self.repository_interface_github.analysis_rule_ids = [(5, 0, 0)]
+        rules = self.repo_branch_item._get_analysis_rules()
+        self.assertNotIn(self.rule_custom, rules)
+        self.assertNotIn(self.rule_ocb, rules)
+        self.assertNotIn(self.rule_python, rules)
+        self.assertNotIn(self.rule_xml, rules)
+        self.assertNotIn(self.rule_js, rules)
+
     def test_analysis_rule_info_python(self):
         rule_info = self.repo_branch_item.analysis_rule_info_ids.filtered(
             lambda x: x.analysis_rule_id.id == self.rule_python.id

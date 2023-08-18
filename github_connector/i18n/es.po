@@ -6,15 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-08-17 18:11+0000\n"
+"POT-Creation-Date: 2023-08-18 06:55+0000\n"
+"PO-Revision-Date: 2023-08-18 08:56+0200\n"
 "Last-Translator: Víctor Martínez <victor.martinez@tecnativa.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #. module: github_connector
 #: model:ir.model,name:github_connector.model_github_repository_branch_rule_info
@@ -69,7 +70,8 @@ msgstr "# Total"
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_kanban
 msgid ""
 "<span class=\"badge\">\n"
-"                                            <i class=\"fa fa-fw fa-github-alt\" title=\"Github\"/>\n"
+"                                            <i class=\"fa fa-fw fa-github-"
+"alt\" title=\"Github\"/>\n"
 "                                        </span>"
 msgstr ""
 "<span class=\"badge\">\n"
@@ -81,12 +83,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_kanban
 msgid ""
 "<span class=\"badge\">\n"
-"                                        <i class=\"fa fa-fw fa-ban\" title=\"Ignored\"/>\n"
+"                                        <i class=\"fa fa-fw fa-ban\" "
+"title=\"Ignored\"/>\n"
 "                                    </span>"
 msgstr ""
 "<span class=\"badge\">\n"
-"                                        <i class=\"fa fa-fw fa-ban\" title="
-"\"Ignored\"/>\n"
+"                                        <i class=\"fa fa-fw fa-ban\" "
+"title=\"Ignored\"/>\n"
 "                                    </span>"
 
 #. module: github_connector
@@ -94,7 +97,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_kanban
 msgid ""
 "<span class=\"badge\">\n"
-"                                        <i class=\"fa fa-fw fa-github-alt\" title=\"Github\"/>\n"
+"                                        <i class=\"fa fa-fw fa-github-alt\" "
+"title=\"Github\"/>\n"
 "                                    </span>"
 msgstr ""
 "<span class=\"badge\">\n"
@@ -105,57 +109,69 @@ msgstr ""
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
 msgid ""
-"<span class=\"o_stat_text\" attrs=\"{'invisible': [('member_qty', '&lt;', 2)]}\"> Members</span>\n"
-"                                <span class=\"o_stat_text\" attrs=\"{'invisible': [('member_qty', '&gt;', 1)]}\"> Member</span>"
+"<span class=\"o_stat_text\" attrs=\"{'invisible': [('member_qty', '&lt;', "
+"2)]}\"> Members</span>\n"
+"                                <span class=\"o_stat_text\" "
+"attrs=\"{'invisible': [('member_qty', '&gt;', 1)]}\"> Member</span>"
 msgstr ""
 "<span class=\"o_stat_text\" attrs=\"{'invisible': [('member_qty', '&lt;', "
 "2)]}\"> Miembros</span>\n"
-"                                <span class=\"o_stat_text\" attrs=\""
-"{'invisible': [('member_qty', '&gt;', 1)]}\"> Miembro</span>"
+"                                <span class=\"o_stat_text\" "
+"attrs=\"{'invisible': [('member_qty', '&gt;', 1)]}\"> Miembro</span>"
 
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_form
 msgid ""
-"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_branch_qty', '&lt;', 2)]}\"> Branches</span>\n"
-"                                <span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Branch</span>"
+"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_branch_qty', "
+"'&lt;', 2)]}\"> Branches</span>\n"
+"                                <span class=\"o_stat_text\" "
+"attrs=\"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Branch</"
+"span>"
 msgstr ""
 "<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_branch_qty', "
 "'&lt;', 2)]}\"> Ramas</span>\n"
-"                                <span class=\"o_stat_text\" attrs=\""
-"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Rama</span>"
+"                                <span class=\"o_stat_text\" "
+"attrs=\"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Rama</span>"
 
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_form
 msgid ""
-"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_branch_qty', '&lt;', 2)]}\"> Teams</span>\n"
-"                                <span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Team</span>"
+"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_branch_qty', "
+"'&lt;', 2)]}\"> Teams</span>\n"
+"                                <span class=\"o_stat_text\" "
+"attrs=\"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Team</span>"
 msgstr ""
 "<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_branch_qty', "
 "'&lt;', 2)]}\"> Equipos</span>\n"
-"                                <span class=\"o_stat_text\" attrs=\""
-"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Equipo</span>"
+"                                <span class=\"o_stat_text\" "
+"attrs=\"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Equipo</"
+"span>"
 
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
 msgid ""
-"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_qty', '&lt;', 2)]}\"> Repositories</span>\n"
-"                                <span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_qty', '&gt;', 1)]}\"> Repository</span>"
+"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_qty', "
+"'&lt;', 2)]}\"> Repositories</span>\n"
+"                                <span class=\"o_stat_text\" "
+"attrs=\"{'invisible': [('repository_qty', '&gt;', 1)]}\"> Repository</span>"
 msgstr ""
-"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_qty', '&lt;"
-"', 2)]}\"> Repositorios</span>\n"
-"                                <span class=\"o_stat_text\" attrs=\""
-"{'invisible': [('repository_qty', '&gt;', 1)]}\"> Repositorio</span>"
+"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_qty', "
+"'&lt;', 2)]}\"> Repositorios</span>\n"
+"                                <span class=\"o_stat_text\" "
+"attrs=\"{'invisible': [('repository_qty', '&gt;', 1)]}\"> Repositorio</span>"
 
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
 msgid ""
-"<span class=\"o_stat_text\" attrs=\"{'invisible': [('team_qty', '&lt;', 2)]}\"> Teams</span>\n"
-"                                <span class=\"o_stat_text\" attrs=\"{'invisible': [('team_qty', '&gt;', 1)]}\"> Team</span>"
+"<span class=\"o_stat_text\" attrs=\"{'invisible': [('team_qty', '&lt;', "
+"2)]}\"> Teams</span>\n"
+"                                <span class=\"o_stat_text\" "
+"attrs=\"{'invisible': [('team_qty', '&gt;', 1)]}\"> Team</span>"
 msgstr ""
-"<span class=\"o_stat_text\" attrs=\"{'invisible': [('team_qty', '&lt;', 2)]}"
-"\"> Equipos</span>\n"
-"                                <span class=\"o_stat_text\" attrs=\""
-"{'invisible': [('team_qty', '&gt;', 1)]}\"> Equipo</span>"
+"<span class=\"o_stat_text\" attrs=\"{'invisible': [('team_qty', '&lt;', "
+"2)]}\"> Equipos</span>\n"
+"                                <span class=\"o_stat_text\" "
+"attrs=\"{'invisible': [('team_qty', '&gt;', 1)]}\"> Equipo</span>"
 
 #. module: github_connector
 #: code:addons/github_connector/models/res_partner.py:0
@@ -701,6 +717,31 @@ msgid "ID"
 msgstr "ID"
 
 #. module: github_connector
+#: model:ir.model.fields,help:github_connector.field_github_repository__inhibit_inherited_rules
+#: model:ir.model.fields,help:github_connector.field_wizard_create_repository__inhibit_inherited_rules
+msgid ""
+"If checked, the analysis rules to be used will be only those set here.\n"
+" If unchecked, the analysis rules to be used will be those set in the "
+"organization and those set here."
+msgstr ""
+"Si está marcada, las reglas de análisis que se utilizarán serán sólo las "
+"definidas aquí.\n"
+" Si no está marcada, las reglas de análisis que se utilizarán serán las "
+"definidas en la organización y las definidas aquí."
+
+#. module: github_connector
+#: model:ir.model.fields,help:github_connector.field_github_repository_branch__inhibit_inherited_rules
+msgid ""
+"If checked, the analysis rules to be used will be only those set here.\n"
+" If unchecked, the analysis rules to be used will be those set in the "
+"organization, repository and those set here."
+msgstr ""
+"Si está marcada, las reglas de análisis que se utilizarán serán sólo las "
+"definidas aquí.\n"
+" Si no está marcada, las reglas de análisis que se utilizarán serán las "
+"definidas en la organización, el repositorio y las definidas aquí."
+
+#. module: github_connector
 #: model:ir.model.fields,help:github_connector.field_github_repository__is_ignored
 #: model:ir.model.fields,help:github_connector.field_wizard_create_repository__is_ignored
 msgid ""
@@ -719,6 +760,13 @@ msgstr "Repositorios ignorados"
 #: model:ir.model.fields,field_description:github_connector.field_github_organization__image
 msgid "Image"
 msgstr "Imagen"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__inhibit_inherited_rules
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__inhibit_inherited_rules
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__inhibit_inherited_rules
+msgid "Inhibit inherited rules"
+msgstr "Inhibir reglas heredadas"
 
 #. module: github_connector
 #: code:addons/github_connector/models/abstract_github_model.py:0
@@ -1023,8 +1071,8 @@ msgstr "Permiso"
 #: code:addons/github_connector/models/abstract_github_model.py:0
 #, python-format
 msgid ""
-"Please add the 'github_token' in Odoo configuration file or as the "
-"'github.access_token' configuration parameter."
+"Please add the 'github_token' in Odoo configuration file or as the 'github."
+"access_token' configuration parameter."
 msgstr ""
 
 #. module: github_connector
@@ -1134,7 +1182,9 @@ msgstr "Serie"
 #. module: github_connector
 #: model:ir.model.fields,help:github_connector.field_github_organization__ignored_repository_names
 msgid ""
-"Set here repository names you want to ignore. One repository per line. If set, the repositories will be created, but branches synchronization and source code download will be disabled. Exemple:\n"
+"Set here repository names you want to ignore. One repository per line. If "
+"set, the repositories will be created, but branches synchronization and "
+"source code download will be disabled. Exemple:\n"
 "purchase-workflow\n"
 "OCB\n"
 "OpenUpgrade\n"
