@@ -32,7 +32,6 @@ class GithubRepositoryBranchRuleInfoReport(models.Model):
     code_count = fields.Integer(string="# Code")
     documentation_count = fields.Integer(string="# Documentation")
     empty_count = fields.Integer(string="# Empty")
-    string_count = fields.Integer(string="# String")
     total_count = fields.Integer(string="# Total")
     scanned_files = fields.Integer()
 
@@ -50,7 +49,6 @@ class GithubRepositoryBranchRuleInfoReport(models.Model):
             gos.id as organization_serie_id,
             sum(grbri.code_count) as code_count,
             sum(grbri.documentation_count) as documentation_count,
-            sum(grbri.string_count) as string_count,
             sum(grbri.empty_count) as empty_count,
             sum(grbri.total_count) as total_count,
             sum(grbri.scanned_files) as scanned_files

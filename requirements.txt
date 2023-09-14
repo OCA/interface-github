@@ -2,4 +2,3 @@
 GitPython
 pathspec
 PyGithub
-pygount
