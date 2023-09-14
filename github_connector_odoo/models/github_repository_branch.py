@@ -1,4 +1,5 @@
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
+# Copyright 2020-2023 Tecnativa - Víctor Martínez
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -148,60 +149,67 @@ class GithubRepositoryBranch(models.Model):
 
         return map(clean, filter(is_really_module, os.listdir(directory)))
 
-    def _process_analysis_rule_info(self, rule_id):
-        if rule_id.has_odoo_addons:
+    def _process_analysis_rule_info(self, rule, cloc_response):
+        """Overwrite this method so that rules that have addons are processed by each
+        module to obtain information from each one."""
+        if rule.has_odoo_addons:
             for module_version in self.module_version_ids:
-                self._process_analysis_rule_info_module_version(rule_id, module_version)
+                self._process_analysis_rule_info_module_version(
+                    rule, module_version, cloc_response
+                )
         else:
-            return super()._process_analysis_rule_info(rule_id)
+            return super()._process_analysis_rule_info(rule, cloc_response)
 
-    def _process_analysis_rule_info_module_version(self, rule_id, module_version):
+    def _process_analysis_rule_info_module_version(
+        self, rule, module_version, cloc_response
+    ):
+        """Process to specific rule + module version (Create or update info record)."""
         analysis_rule_item = module_version.analysis_rule_info_ids.filtered(
-            lambda x: x.analysis_rule_id == rule_id and x.repository_branch_id == self
+            lambda x: x.analysis_rule_id == rule and x.repository_branch_id == self
         )
         vals = self._prepare_analysis_module_version_rule_info_vals(
-            rule_id, module_version
+            rule, module_version, cloc_response
         )
         if analysis_rule_item:
-            module_version.analysis_rule_info_ids = [(1, analysis_rule_item.id, vals)]
+            analysis_rule_item.write(vals)
         else:
             module_version.analysis_rule_info_ids = [(0, 0, vals)]
 
-    def _prepare_analysis_module_version_rule_info_vals(self, rule_id, module_version):
-        res = self._operation_analysis_rule_id_by_module_version_id(
-            rule_id, module_version
+    def _prepare_analysis_module_version_rule_info_vals(
+        self, rule, module_version, cloc_response
+    ):
+        """Prepare the analysis information values of a rule + module version."""
+        res = self._operation_analysis_rule_by_module_version(
+            rule, module_version, cloc_response
         )
         return {
-            "analysis_rule_id": rule_id.id,
+            "analysis_rule_id": rule.id,
             "repository_branch_id": self.id,
             "module_version_id": module_version.id,
             "code_count": res["code"],
             "documentation_count": res["documentation"],
             "empty_count": res["empty"],
-            "string_count": res["string"],
             "scanned_files": len(res["paths"]),
         }
 
-    def _operation_analysis_rule_id_by_module_version_id(
-        self, analysis_rule_id, module_version_id
+    def _operation_analysis_rule_by_module_version(
+        self, rule, module_version, cloc_response
     ):
-        res = {
-            "paths": [],
-            "code": 0,
-            "documentation": 0,
-            "empty": 0,
-            "string": 0,
-        }
+        """This function (similar to _operation_analysis_rule() of github_connector)
+        processes the result of cloc and defines the values for the corresponding rule
+        and module version.
+        The matchs that are used have the complete path, for that reason we set
+        path=False is passed to the _action_analysis_process_cloc() method."""
         matchs = []
-        full_path = module_version_id.full_module_path
-        if analysis_rule_id.has_odoo_addons and analysis_rule_id.manifest_key_ids:
-            manifest_keys_find = module_version_id.manifest_key_ids.filtered(
-                lambda x: x.id in analysis_rule_id.manifest_key_ids.ids
+        full_path = module_version.full_module_path
+        if rule.has_odoo_addons and rule.manifest_key_ids:
+            manifest_keys_find = module_version.manifest_key_ids.filtered(
+                lambda x: x.id in rule.manifest_key_ids.ids
             )
             module_info = load_information_from_description_file(
-                module_version_id.technical_name, full_path
+                module_version.technical_name, full_path
             )
-            spec = analysis_rule_id._set_spec(analysis_rule_id.paths.splitlines())
+            spec = rule._set_spec(rule.paths.splitlines())
             for manifest_key_find in manifest_keys_find:
                 if manifest_key_find.name in module_info:
                     key_paths = module_info[manifest_key_find.name]
@@ -210,15 +218,8 @@ class GithubRepositoryBranch(models.Model):
                         path_items.append("{}/{}".format(full_path, key_path))
                     matchs += spec.match_files(path_items)
         else:
-            matchs = analysis_rule_id._get_matches(full_path)
-        # operations related to matchs
-        for match in matchs:
-            res_file = analysis_rule_id._analysis_file(match)
-            res["paths"].append(res_file["path"])
-            # define values
-            for key in ("code", "documentation", "empty", "string"):
-                res[key] += res_file[key]
-        return res
+            matchs = rule._get_matches(full_path)
+        return self._action_analysis_process_cloc(False, matchs, cloc_response)
 
     def _analyze_module_name(self, path, module_name):
         self.ensure_one()

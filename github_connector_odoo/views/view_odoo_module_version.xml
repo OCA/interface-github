@@ -205,7 +205,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="code_count" sum="Total code" />
                 <field name="documentation_count" sum="Total documentation" />
                 <field name="empty_count" sum="Total empty" />
-                <field name="string_count" sum="Total string" />
                 <field name="total_count" sum="Total total" />
                 <field name="scanned_files" sum="Total scanned" />
             </tree>
