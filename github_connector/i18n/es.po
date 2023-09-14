@@ -53,13 +53,6 @@ msgid "# Empty"
 msgstr "# Vacío"
 
 #. module: github_connector
-#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__string_count
-#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__string_count
-#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__string_count
-msgid "# String"
-msgstr "# Cadena"
-
-#. module: github_connector
 #: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__total_count
 #: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__total_count
 #: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__total_count
@@ -1362,11 +1355,6 @@ msgstr "Total escaneado"
 
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
-msgid "Total string"
-msgstr "Total cadena"
-
-#. module: github_connector
-#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
 msgid "Total total"
 msgstr "Total total"
 
@@ -1461,3 +1449,9 @@ msgstr "o"
 #, python-format
 msgid "source_code_local_path should be defined in your  configuration file"
 msgstr "source_code_local_path debe definirse en su archivo de configuración"
+
+#~ msgid "# String"
+#~ msgstr "# Cadena"
+
+#~ msgid "Total string"
+#~ msgstr "Total cadena"

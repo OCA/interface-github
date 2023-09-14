@@ -159,7 +159,7 @@ class TestGithubConnectorAnalysisRule(TestGithubConnectorAnalysisRuleBase):
             lambda x: x.analysis_rule_id.id == self.rule_xml.id
         )
         for info_key in self.info_keys:
-            if info_key in ("empty_count", "string_count"):
+            if info_key == "empty_count":
                 self.assertEqual(rule_info[info_key], 0)
             else:
                 self.assertGreater(rule_info[info_key], 0)

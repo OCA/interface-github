@@ -1,9 +1,10 @@
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
-# Copyright 2020 Tecnativa - Víctor Martínez
+# Copyright 2020-2023 Tecnativa - Víctor Martínez
 # Copyright 2021 Tecnativa - João Marques
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import json
 import logging
 import os
 import shutil
@@ -237,20 +238,71 @@ class GithubRepository(models.Model):
             return self.analysis_rule_ids
         return self.repository_id._get_analysis_rules() + self.analysis_rule_ids
 
-    def set_analysis_rule_info(self):
-        for rule_id in self._get_analysis_rules():
-            self._process_analysis_rule_info(rule_id)
+    def _call_cloc_command(self):
+        """Execute the cloc command and save the result temporarily to access it in
+        multiple places."""
+        res = check_output(["cloc", "--by-file", "--json", self.local_path])
+        return json.loads(res)
 
-    def _process_analysis_rule_info(self, rule_id):
+    def set_analysis_rule_info(self):
+        """Do the cloc command only once and perform the analysis process."""
+        rules = self._get_analysis_rules()
+        if rules:
+            cloc_response = self._call_cloc_command()
+        for rule in rules:
+            self._process_analysis_rule_info(rule, cloc_response)
+
+    def _process_analysis_rule_info(self, rule, cloc_response):
         """Process to specific rule (Create or update info record)."""
         analysis_rule_item = self.analysis_rule_info_ids.filtered(
-            lambda x: x.analysis_rule_id == rule_id
+            lambda x: x.analysis_rule_id == rule
         )
-        vals = self._prepare_analysis_rule_info_vals(rule_id)
+        vals = self._prepare_analysis_rule_info_vals(rule, cloc_response)
         if analysis_rule_item:
-            self.analysis_rule_info_ids = [(1, analysis_rule_item.id, vals)]
+            analysis_rule_item.write(vals)
         else:
             self.analysis_rule_info_ids = [(0, 0, vals)]
+
+    def _prepare_analysis_rule_info_vals(self, rule, cloc_response):
+        """Prepare analysis information values of a rule."""
+        res = self._operation_analysis_rule(rule, cloc_response)
+        return {
+            "analysis_rule_id": rule.id,
+            "repository_branch_id": self.id,
+            "code_count": res["code"],
+            "documentation_count": res["documentation"],
+            "empty_count": res["empty"],
+            "scanned_files": len(res["paths"]),
+        }
+
+    def _operation_analysis_rule(self, rule, cloc_response):
+        """This function processes the result of cloc."""
+        matchs = rule._get_matches(self.local_path)
+        return self._action_analysis_process_cloc(
+            self.local_path, matchs, cloc_response
+        )
+
+    def _action_analysis_process_cloc(self, path, matchs, cloc_response):
+        """Abstract method to be used in other modules. Values are returned by
+        iterating each match if it exists in the (already defined) cloc response."""
+        res = {
+            "paths": [],
+            "code": 0,
+            "documentation": 0,
+            "empty": 0,
+        }
+        for match in matchs:
+            if path:
+                path_item = path + "/" + match
+            else:
+                path_item = match
+            if path_item in cloc_response:
+                res_file = cloc_response[path_item]
+                res["paths"].append(path_item)
+                res["code"] += res_file["code"]
+                res["documentation"] += res_file["comment"]
+                res["empty"] += res_file["blank"]
+        return res
 
     def analyze_code_one(self):
         """Overload Me in custom Module that manage Source Code analysis."""
@@ -301,38 +353,6 @@ class GithubRepository(models.Model):
                         e,
                     )
         return True
-
-    def _prepare_analysis_rule_info_vals(self, analysis_rule_id):
-        """Prepare info vals"""
-        res = self._operation_analysis_rule_id(analysis_rule_id)
-        return {
-            "analysis_rule_id": analysis_rule_id.id,
-            "repository_branch_id": self.id,
-            "code_count": res["code"],
-            "documentation_count": res["documentation"],
-            "empty_count": res["empty"],
-            "string_count": res["string"],
-            "scanned_files": len(res["paths"]),
-        }
-
-    def _operation_analysis_rule_id(self, analysis_rule_id):
-        """This function allow to override with other addons that need
-        to change this analysis
-        """
-        res = {
-            "paths": [],
-            "code": 0,
-            "documentation": 0,
-            "empty": 0,
-            "string": 0,
-        }
-        for match in analysis_rule_id._get_matches(self.local_path):
-            res_file = analysis_rule_id._analysis_file(self.local_path + "/" + match)
-            res["paths"].append(res_file["path"])
-            # define values
-            for key in ("code", "documentation", "empty", "string"):
-                res[key] += res_file[key]
-        return res
 
     # Compute Section
     @api.depends("name", "repository_id.name")
