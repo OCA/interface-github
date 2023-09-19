@@ -192,15 +192,10 @@ class GithubRepository(models.Model):
                     res = check_output(
                         ["git", "pull", "origin", branch.name], cwd=branch.local_path
                     )
-                    if branch.state == "to_download" or b"up-to-date" not in res:
-                        branch.write(
-                            {
-                                "last_download_date": datetime.today(),
-                                "state": "to_analyze",
-                            }
-                        )
-                    else:
-                        branch.write({"last_download_date": datetime.today()})
+                    vals = {"last_download_date": datetime.today()}
+                    if b"up to date" not in res:
+                        vals["state"] = "to_analyze"
+                    branch.write(vals)
                 except Exception:
                     # Trying to clean the local folder
                     _logger.warning(
