@@ -8,7 +8,7 @@ import logging
 from datetime import datetime
 from urllib.request import urlopen
 
-from github import Github
+from github import Auth, Github
 from github.GithubException import UnknownObjectException
 
 from odoo import _, api, fields, models, tools
@@ -301,7 +301,7 @@ class AbstractGithubModel(models.AbstractModel):
                     " or as the 'github.access_token' configuration parameter."
                 )
             )
-        return Github(token)
+        return Github(auth=Auth.Token(token))
 
     def create_in_github(self):
         """Create an object in Github through the API
