@@ -717,7 +717,8 @@ msgstr "Series (Texto)"
 #. module: github_connector_odoo
 #: model:ir.model.fields,help:github_connector_odoo.field_github_repository_branch__module_paths
 msgid ""
-"Set here extra relative paths you want to scan to find modules. If not set, root path will be scanned. One repository per line. Example:\n"
+"Set here extra relative paths you want to scan to find modules. If not set, "
+"root path will be scanned. One repository per line. Example:\n"
 "./addons/\n"
 "./openerp/addons/"
 msgstr ""
