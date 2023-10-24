@@ -8,7 +8,8 @@ import logging
 from datetime import datetime
 from urllib.request import urlopen
 
-from github import Github
+import pytz
+from github import Auth, Github
 from github.GithubException import UnknownObjectException
 
 from odoo import _, api, fields, models, tools
@@ -77,8 +78,11 @@ class AbstractGithubModel(models.AbstractModel):
 
     def process_timezone_fields(self, res):
         for k, v in res.items():
-            if self._fields[k].type == "datetime" and isinstance(v, str):
-                res[k] = datetime.strptime(v, "%Y-%m-%dT%H:%M:%SZ")
+            if self._fields[k].type == "datetime":
+                if isinstance(v, str):
+                    res[k] = datetime.strptime(v, "%Y-%m-%dT%H:%M:%SZ")
+                elif isinstance(v, datetime) and v.tzinfo:
+                    res[k] = v.astimezone(pytz.utc).replace(tzinfo=None)
 
     @api.model
     def get_odoo_data_from_github(self, data):
@@ -301,7 +305,7 @@ class AbstractGithubModel(models.AbstractModel):
                     " or as the 'github.access_token' configuration parameter."
                 )
             )
-        return Github(token)
+        return Github(auth=Auth.Token(token))
 
     def create_in_github(self):
         """Create an object in Github through the API
