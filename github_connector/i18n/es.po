@@ -501,23 +501,23 @@ msgstr ""
 #: code:addons/github_connector/models/github_repository_branch.py:0
 #, python-format
 msgid ""
-"Error when trying to create the main folder{0}\n"
+"Error when trying to create the main folder %(path)s\n"
 " Please check Odoo Access Rights.\n"
-" {1}"
+" %(error)s"
 msgstr ""
-"Error al intentar crear la carpeta principal{0}\n"
+"Error al intentar crear la carpeta principal %(path)s\n"
 " Por favor, compruebe los derechos de acceso de Odoo.\n"
-" {1}"
+" %(error)s"
 
 #. module: github_connector
 #: code:addons/github_connector/models/github_repository_branch.py:0
 #, python-format
 msgid ""
-"Error when updating the branch {0} in the local folder {1}.\n"
-" Deleting the local folder and trying again."
+"Error when updating the branch %(branch)s in the local folder %(path)s.\n"
+"Deleting the local folder and trying again."
 msgstr ""
-"Error al actualizar la rama {0} en la carpeta local {1}.\n"
-" Borrar la carpeta local e intentarlo de nuevo."
+"Error al actualizar la rama %(branch)s en la carpeta local %(path)s.\n"
+"Borrando la carpeta local e intentándolo de nuevo."
 
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form

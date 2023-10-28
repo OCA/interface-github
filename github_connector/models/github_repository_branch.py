@@ -116,11 +116,13 @@ class GithubRepository(models.Model):
             except Exception as e:
                 _logger.error(
                     _(
-                        "Error when trying to create the main folder{0}\n"
-                        " Please check Odoo Access Rights.\n {1}"
-                    ),
-                    source_path,
-                    e,
+                        "Error when trying to create the main folder %(path)s\n"
+                        " Please check Odoo Access Rights.\n %(error)s"
+                    )
+                    % {
+                        "path": source_path,
+                        "error": e,
+                    }
                 )
         if source_path and source_path not in addons.__path__:
             addons.__path__.append(source_path)
@@ -200,12 +202,14 @@ class GithubRepository(models.Model):
                     # Trying to clean the local folder
                     _logger.warning(
                         _(
-                            "Error when updating the branch {0} in the local folder"
-                            " {1}.\n Deleting the local folder and trying"
+                            "Error when updating the branch %(branch)s in the local "
+                            "folder %(path)s.\nDeleting the local folder and trying"
                             " again."
-                        ),
-                        branch.name,
-                        branch.local_path,
+                        )
+                        % {
+                            "branch": branch.name,
+                            "path": branch.local_path,
+                        }
                     )
                     try:
                         shutil.rmtree(branch.local_path)
