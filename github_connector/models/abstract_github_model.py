@@ -9,8 +9,10 @@ from datetime import datetime
 from urllib.request import urlopen
 
 import pytz
-from github import Auth, Github
-from github.GithubException import UnknownObjectException
+from github import Auth, Github  # pylint: disable=missing-manifest-dependency
+from github.GithubException import (  # pylint: disable=missing-manifest-dependency
+    UnknownObjectException,
+)
 
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import UserError
