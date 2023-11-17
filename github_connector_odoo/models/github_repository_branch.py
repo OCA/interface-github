@@ -170,6 +170,9 @@ class GithubRepositoryBranch(models.Model):
         vals = self._prepare_analysis_module_version_rule_info_vals(
             rule, module_version, cloc_response
         )
+        # Do not create lines if no file has been scanned
+        if vals["scanned_files"] == 0:
+            return False
         if analysis_rule_item:
             analysis_rule_item.write(vals)
         else:
