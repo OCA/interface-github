@@ -258,6 +258,9 @@ class GithubRepository(models.Model):
             lambda x: x.analysis_rule_id == rule
         )
         vals = self._prepare_analysis_rule_info_vals(rule, cloc_response)
+        # Do not create lines if no file has been scanned
+        if vals["scanned_files"] == 0:
+            return False
         if analysis_rule_item:
             analysis_rule_item.write(vals)
         else:

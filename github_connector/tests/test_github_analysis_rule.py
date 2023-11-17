@@ -80,7 +80,7 @@ class TestGithubConnectorAnalysisRule(TestGithubConnectorAnalysisRuleBase):
     def test_analysis_rule_info(self):
         self.assertEqual(len(self.oca.analysis_rule_ids), 3)
         self.assertEqual(len(self.repository_ocb.analysis_rule_ids), 1)
-        self.assertEqual(len(self.repo_branch_item.analysis_rule_info_ids), 4)
+        self.assertEqual(len(self.repo_branch_item.analysis_rule_info_ids), 2)
 
     def test_inhibit_analysis_rule_info_01(self):
         # Rules available from repository branch
@@ -165,8 +165,7 @@ class TestGithubConnectorAnalysisRule(TestGithubConnectorAnalysisRuleBase):
                 self.assertGreater(rule_info[info_key], 0)
 
     def test_analysis_rule_info_js(self):
-        rule_info = self.repo_branch_item.analysis_rule_info_ids.filtered(
-            lambda x: x.analysis_rule_id.id == self.rule_js.id
+        self.assertNotIn(
+            self.rule_js,
+            self.repo_branch_item.analysis_rule_info_ids.mapped("analysis_rule_id"),
         )
-        for info_key in self.info_keys:
-            self.assertEqual(rule_info[info_key], 0)
