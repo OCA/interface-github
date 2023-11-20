@@ -228,7 +228,7 @@ class AbstractGithubModel(models.AbstractModel):
         return self.update_from_github(child_update=True)
 
     @api.model
-    def find_related_github_object(self, id=None):
+    def find_related_github_object(self, obj_id=None):
         """Query Github API to find the related object
 
         This function should be overwritten in the child classes.

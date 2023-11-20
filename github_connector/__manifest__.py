@@ -43,6 +43,6 @@
     ],
     "installable": True,
     "external_dependencies": {
-        "python": ["GitPython", "pygount", "pathspec", "PyGithub"]
+        "python": ["GitPython", "pygount", "pathspec", "PyGithub", "github"]
     },
 }
