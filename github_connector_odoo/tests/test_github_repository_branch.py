@@ -47,7 +47,7 @@ class TestGithubRepositoryBranch(SavepointCase):
         )
 
         # branch name contains valid odoo version with decimal point
-        branch_name = "6.1_test_branch-17-test_module"
+        branch_name = "6.1_test_branch-test_module"
         expected_version = "6.1"
         actual_version = self.repository_branch.get_branch_version(branch_name)
         self.assertEqual(
@@ -72,7 +72,12 @@ class TestGithubRepositoryBranch(SavepointCase):
         )
 
         # branch name does not contain version
-        branch_name = "test_branch-17.1"
+        exist_versions = self.env["res.config.settings"].get_odoo_versions()
+        # find latest avaliable odoo version
+        latest_version = exist_versions[-2:]
+        branch_name = "test_branch-" + (
+            latest_version[:-1] + str(int(latest_version[-1]) + 1)
+        )
         expected_version = False
         actual_version = self.repository_branch.get_branch_version(branch_name)
         self.assertEqual(
