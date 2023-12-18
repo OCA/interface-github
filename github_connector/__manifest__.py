@@ -43,6 +43,9 @@
     ],
     "installable": True,
     "external_dependencies": {
-        "python": ["GitPython", "pygount", "pathspec", "PyGithub"]
+        "python": ["GitPython", "pathspec", "PyGithub"],
+        "bin": ["cloc"],
+        # special definition used by OCA to install packages
+        "deb": ["cloc"],
     },
 }

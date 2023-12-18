@@ -13,7 +13,6 @@ class TestGithubConnectorCommon(TransactionCase):
             "code_count",
             "documentation_count",
             "empty_count",
-            "string_count",
             "scanned_files",
         ]
         cls.model_gos = cls.env["github.organization.serie"]

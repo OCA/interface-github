@@ -3,7 +3,7 @@ To install this addon, you need to install some python dependencies
 .. code-block:: bash
 
    sudo pip install PyGitHub
-   sudo pip install pygount
+   sudo apt install cloc
    sudo pip install pathspec
    sudo pip install GitPython
 

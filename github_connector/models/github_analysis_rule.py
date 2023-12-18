@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import pathspec
-from pygount import SourceAnalysis
 
 from odoo import fields, models
 
@@ -33,14 +32,3 @@ class GithubAnalysisRule(models.Model):
         in a local path
         """
         return self._set_spec(self.paths.splitlines()).match_tree(path)
-
-    def _analysis_file(self, path):
-        file_res = SourceAnalysis.from_file(path, "")
-        return {
-            "path": file_res._path,
-            "language": file_res._language,
-            "code": file_res._code,
-            "documentation": file_res._documentation,
-            "empty": file_res._empty,
-            "string": file_res._string,
-        }

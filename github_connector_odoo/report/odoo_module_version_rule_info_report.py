@@ -32,7 +32,6 @@ class OdooModuleVersionRuleInfoReport(models.Model):
     code_count = fields.Integer()
     documentation_count = fields.Integer()
     empty_count = fields.Integer()
-    string_count = fields.Integer()
     total_count = fields.Integer()
     scanned_files = fields.Integer()
 
@@ -51,7 +50,6 @@ class OdooModuleVersionRuleInfoReport(models.Model):
                 omv.name AS module_version_name,
                 SUM(omvri.code_count) AS code_count,
                 SUM(omvri.documentation_count) AS documentation_count,
-                SUM(omvri.string_count) AS string_count,
                 SUM(omvri.empty_count) AS empty_count,
                 SUM(omvri.total_count) AS total_count,
                 SUM(omvri.scanned_files) AS scanned_files
