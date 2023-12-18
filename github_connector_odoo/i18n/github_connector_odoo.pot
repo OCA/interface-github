@@ -29,11 +29,6 @@ msgid "# Empty"
 msgstr ""
 
 #. module: github_connector_odoo
-#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__string_count
-msgid "# String"
-msgstr ""
-
-#. module: github_connector_odoo
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__total_count
 msgid "# Total"
 msgstr ""
@@ -720,11 +715,6 @@ msgid ""
 msgstr ""
 
 #. module: github_connector_odoo
-#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info_report__string_count
-msgid "String Count"
-msgstr ""
-
-#. module: github_connector_odoo
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__summary
 msgid "Summary (Manifest)"
 msgstr ""
@@ -780,12 +770,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:github_connector_odoo.odoo_module_version_rule_info_tree
 #: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_github_repository_branch_form
 msgid "Total scanned"
-msgstr ""
-
-#. module: github_connector_odoo
-#: model_terms:ir.ui.view,arch_db:github_connector_odoo.odoo_module_version_rule_info_tree
-#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_github_repository_branch_form
-msgid "Total string"
 msgstr ""
 
 #. module: github_connector_odoo
