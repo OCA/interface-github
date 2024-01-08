@@ -97,7 +97,6 @@ class AbstractGithubModel(models.AbstractModel):
             if hasattr(self, k) and hasattr(data, v):
                 res.update({k: getattr(data, v)})
         res.update({"github_last_sync_date": fields.Datetime.now()})
-        # res.update({"github_type": type(data).__name__})
         self.process_timezone_fields(res)
         return res
 
@@ -140,51 +139,42 @@ class AbstractGithubModel(models.AbstractModel):
             data={'id': 7600578, 'url': 'https://api.github.com/orgs/OCA'})
         """
         extra_data = extra_data or {}
+        # If gh_data is provided but data is not, extract data from gh_data
         if gh_data and not data:
-            # Get a dictionary of data corresponding to the Github object
             data = self.get_odoo_data_from_github(gh_data)
-        # We try to search object by id
-        existing_object = None
-        if "github_id_external" in data:
-            existing_object = self.with_context(active_test=False).search(
-                [("github_id_external", "=", data["github_id_external"])]
-            )
+        # Try to find existing object by github_id_external
+        existing_object = self._find_existing_object(data)
         if existing_object:
             return existing_object
-        # We try to search the object by name (instead of id)
         if self._github_login_field and self._github_login_field in data:
-            existing_object = self.with_context(active_test=False).search(
+            existing_object = self._find_existing_object_by_name(data)
+            if existing_object:
+                return existing_object
+        # Create a new object if not found
+        return self._create_from_github_data(data, extra_data)
+
+    def _find_existing_object(self, data):
+        """Find existing object based on github_id_external."""
+        if "github_id_external" in data:
+            return self.with_context(active_test=False).search(
+                [("github_id_external", "=", data["github_id_external"])]
+            )
+        return None
+
+    def _find_existing_object_by_name(self, data):
+        """Find existing object based on github_name."""
+        if self._github_login_field and self._github_login_field in data:
+            existing_objects = self.with_context(active_test=False).search(
                 [("github_name", "=", data[self._github_login_field])]
             )
-            if len(existing_object) == 1:
-                # Update the existing object
-                existing_object.github_id_external = (
-                    data["github_id_external"]
-                    if "github_id_external" in data
-                    else existing_object.find_related_github_object().id
-                )
-                _logger.info(
-                    "Existing object %s#%d with Github name '%s' has been"
-                    " updated from a '%s' object with unique Github id %s",
-                    self._name,
-                    existing_object.id,
-                    data[self._github_login_field],
-                    type(data).__name__,
-                    existing_object.github_id_external,
-                )
-                return existing_object
-            elif len(existing_object) > 1:
+            if len(existing_objects) == 1:
+                return existing_objects
+            elif len(existing_objects) > 1:
                 raise UserError(
                     _("Duplicate object with Github login %s")
                     % (data[self._github_login_field],)
                 )
-        # if self._need_individual_call:
-        #     github_connector = self.get_github_connector(self.github_type())
-        #     data = github_connector.get_by_url(data["url"], "get")
-        # Create a new object otherwise
-        # The _create function already parses the Github object to obtain the full
-        # Odoo dictionary, so we need to pass the full gh_data object.
-        return self._create_from_github_data(data, extra_data)
+        return None
 
     @api.model
     def create_from_name(self, name):

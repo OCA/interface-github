@@ -1,7 +1,8 @@
 # Copyright 2020 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+from psycopg2 import sql
 
-from odoo import fields, models, tools
+from odoo import api, fields, models, tools
 
 
 class GithubRepositoryBranchRuleInfoReport(models.Model):
@@ -35,60 +36,52 @@ class GithubRepositoryBranchRuleInfoReport(models.Model):
     total_count = fields.Integer(string="# Total")
     scanned_files = fields.Integer()
 
-    def _query(self, with_clause="", fields=None, groupby="", from_clause=""):
-        if fields is None:
-            fields = {}
-        with_ = ("WITH %s" % with_clause) if with_clause else ""
+    @property
+    def _table_query(self):
+        return "%s %s %s" % (self._select(), self._from(), self._group_by())
 
-        select_ = """
-            min(grbri.id) as id,
-            gar.id as analysis_rule_id,
-            garg.id as group_id,
-            grb.id as repository_branch_id,
-            gr.id as repository_id,
-            gos.id as organization_serie_id,
-            sum(grbri.code_count) as code_count,
-            sum(grbri.documentation_count) as documentation_count,
-            sum(grbri.empty_count) as empty_count,
-            sum(grbri.total_count) as total_count,
-            sum(grbri.scanned_files) as scanned_files
+    @api.model
+    def _select(self):
+        return """
+            SELECT
+                min(grbri.id) as id,
+                gar.id as analysis_rule_id,
+                garg.id as group_id,
+                grb.id as repository_branch_id,
+                gr.id as repository_id,
+                gos.id as organization_serie_id,
+                sum(grbri.code_count) as code_count,
+                sum(grbri.documentation_count) as documentation_count,
+                sum(grbri.empty_count) as empty_count,
+                sum(grbri.total_count) as total_count,
+                sum(grbri.scanned_files) as scanned_files
         """
 
-        from_ = (
-            """
-                github_repository_branch_rule_info as grbri
-                left join github_analysis_rule as gar on grbri.analysis_rule_id = gar.id
-                left join github_analysis_rule_group as garg on gar.group_id = garg.id
-                left join github_repository_branch as grb
-                on grbri.repository_branch_id = grb.id
-                left join github_organization_serie as gos
-                on grb.organization_serie_id = gos.id
-                left join github_repository as gr on grb.repository_id = gr.id
-                %s
+    @api.model
+    def _from(self):
+        return """
+            FROM github_repository_branch_rule_info as grbri
+                LEFT JOIN github_analysis_rule as gar ON grbri.analysis_rule_id = gar.id
+                LEFT JOIN github_analysis_rule_group as garg ON gar.group_id = garg.id
+                LEFT JOIN github_repository_branch as grb ON grbri.repository_branch_id = grb.id
+                LEFT JOIN github_organization_serie as gos ON grb.organization_serie_id = gos.id
+                LEFT JOIN github_repository as gr ON grb.repository_id = gr.id
         """
-            % from_clause
-        )
 
-        groupby_ = """
-            gar.id,
-            garg.id,
-            grb.id,
-            gr.id,
-            gos.id %s
-        """ % (
-            groupby
-        )
-
-        return "{} (SELECT {} FROM {} WHERE grbri.id > 0 GROUP BY {})".format(
-            with_,
-            select_,
-            from_,
-            groupby_,
-        )
+    def _group_by(self):
+        return """
+            GROUP BY
+                gar.id,
+                garg.id,
+                grb.id,
+                gr.id,
+                gos.id
+        """
 
     def init(self):
         tools.drop_view_if_exists(self.env.cr, self._table)
-        # pylint: disable=E8103
         self.env.cr.execute(
-            """CREATE or REPLACE VIEW {} as ({})""".format(self._table, self._query())
+            sql.SQL("CREATE or REPLACE VIEW {} as ({})").format(
+                sql.Identifier(self._table), sql.SQL(self._table_query)
+            )
         )
