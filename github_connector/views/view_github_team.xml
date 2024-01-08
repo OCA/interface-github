@@ -104,27 +104,31 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     </group>
                     <notebook>
                         <page name="github" string="Github">
-                            <group col="4">
-                                <field name="github_url" widget="url" colspan="4" />
-                                <field name="github_id_external" />
-                                <field name="github_name" />
-                                <field name="github_last_sync_date" />
-                                <button
-                                    name="button_update_from_github_light"
-                                    type="object"
-                                    string="Light Sync"
-                                    class="btn btn-default"
-                                    icon="fa-angle-right"
-                                    groups="github_connector.group_github_connector_manager"
-                                />
-                                <button
-                                    name="button_update_from_github_full"
-                                    type="object"
-                                    string="Full Sync"
-                                    class="btn btn-default"
-                                    icon="fa-angle-double-right"
-                                    groups="github_connector.group_github_connector_manager"
-                                />
+                            <group>
+                                <group>
+                                    <field name="github_url" widget="url" />
+                                    <field name="github_id_external" />
+                                    <field name="github_last_sync_date" />
+                                </group>
+                                <group>
+                                    <field name="github_name" />
+                                    <button
+                                        name="button_update_from_github_light"
+                                        type="object"
+                                        string="Light Sync"
+                                        class="btn btn-default"
+                                        icon="fa-angle-right"
+                                        groups="github_connector.group_github_connector_manager"
+                                    />
+                                    <button
+                                        name="button_update_from_github_full"
+                                        type="object"
+                                        string="Full Sync"
+                                        class="btn btn-default"
+                                        icon="fa-angle-double-right"
+                                        groups="github_connector.group_github_connector_manager"
+                                    />
+                                </group>
                             </group>
                         </page>
                     </notebook>
