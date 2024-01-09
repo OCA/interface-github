@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -118,7 +118,6 @@ msgstr ""
 #. module: github_connector_odoo
 #: model:ir.actions.server,name:github_connector_odoo.cron_clean_odoo_module_version_ir_actions_server
 #: model:ir.cron,cron_name:github_connector_odoo.cron_clean_odoo_module_version
-#: model:ir.cron,name:github_connector_odoo.cron_clean_odoo_module_version
 msgid "Clean Odoo Module Version"
 msgstr ""
 
@@ -318,6 +317,7 @@ msgid "Icon Path (Manifest)"
 msgstr ""
 
 #. module: github_connector_odoo
+#. odoo-python
 #: code:addons/github_connector_odoo/models/odoo_module_version.py:0
 #, python-format
 msgid "Incorrect RST Description"
@@ -480,6 +480,7 @@ msgid "Name already exists !"
 msgstr ""
 
 #. module: github_connector_odoo
+#. odoo-python
 #: code:addons/github_connector_odoo/models/odoo_module.py:0
 #: code:addons/github_connector_odoo/models/odoo_module_version.py:0
 #, python-format
