@@ -327,13 +327,22 @@ class OdooModuleVersion(models.Model):
         for version in self:
             python_libs = []
             bin_libs = []
-            my_eval = {}
+            my_eval = []
             if version.external_dependencies:
                 my_eval = safe_eval(version.external_dependencies)
-            for python_name in my_eval.get("python", []):
-                python_libs.append(lib_python_obj.create_if_not_exist(python_name))
-            for bin_name in my_eval.get("bin", []):
-                bin_libs.append(lib_bin_obj.create_if_not_exist(bin_name))
+                if isinstance(my_eval, list):
+                    for item in my_eval:
+                        if isinstance(item, dict):
+                            python_names = item.get("python", [])
+                            bin_names = item.get("bin", [])
+                            for python_name in python_names:
+                                python_libs.append(
+                                    lib_python_obj.create_if_not_exist(python_name)
+                                )
+                            for bin_name in bin_names:
+                                bin_libs.append(
+                                    lib_bin_obj.create_if_not_exist(bin_name)
+                                )
 
             version.lib_python_ids = [x.id for x in python_libs]
             version.lib_python_ids_description = ", ".join(
