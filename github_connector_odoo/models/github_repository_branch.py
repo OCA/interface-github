@@ -7,7 +7,7 @@ import logging
 import os
 
 from odoo import api, fields, models
-from odoo.modules import load_information_from_description_file
+from odoo.modules.module import load_information_from_description_file
 
 # Hard define this value to make this module working with or without
 # the patch (that backports V10 manifests analysis code.

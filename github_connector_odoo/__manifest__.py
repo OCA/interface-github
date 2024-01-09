@@ -1,10 +1,11 @@
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+# Copyright 2024 Tecnativa - Carolina Fernandez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     "name": "Github Connector - Odoo",
     "summary": "Analyze Odoo modules information from Github repositories",
-    "version": "15.0.2.0.1",
+    "version": "16.0.1.0.0",
     "category": "Connector",
     "license": "AGPL-3",
     "author": "Odoo Community Association (OCA), Sylvain LE GAL, GRAP",
