@@ -15,6 +15,7 @@ class GithubRepository(models.Model):
     _inherit = ["abstract.github.model"]
     _order = "organization_id, name"
     _description = "Github Repository"
+    _rec_name = "complete_name"
 
     _github_login_field = "full_name"
 

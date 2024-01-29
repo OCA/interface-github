@@ -26,6 +26,7 @@ class GithubRepository(models.Model):
     _inherit = ["abstract.github.model"]
     _order = "repository_id, sequence_serie"
     _description = "Github Repository Branch"
+    _rec_name = "complete_name"
 
     _github_login_field = False
 
@@ -146,6 +147,12 @@ class GithubRepository(models.Model):
         branches = self.search([("state", "=", "to_analyze")])
         branches._analyze_code()
         return True
+
+    def find_related_github_object(self, obj_id=None):
+        self.ensure_one()
+        gh_repo = self.repository_id.find_related_github_object()
+        gh_branch = gh_repo.get_branch(self.name)
+        return gh_branch
 
     # Custom
     def create_or_update_from_name(self, repository_id, name):
@@ -344,10 +351,12 @@ class GithubRepository(models.Model):
         return res
 
     # Compute Section
-    @api.depends("name", "repository_id.name")
+    @api.depends("name", "repository_id.complete_name")
     def _compute_complete_name(self):
         for branch in self:
-            branch.complete_name = branch.repository_id.name + "/" + branch.name
+            branch.complete_name = (
+                branch.repository_id.complete_name + "/" + branch.name
+            )
 
     @api.depends("size")
     def _compute_mb_size(self):
@@ -373,7 +382,8 @@ class GithubRepository(models.Model):
             )
         for branch in self:
             branch.local_path = os.path.join(
-                source_path, branch.organization_id.github_name, branch.complete_name
+                source_path,
+                branch.complete_name,
             )
 
     @api.depends(
