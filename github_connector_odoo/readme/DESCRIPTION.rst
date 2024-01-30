@@ -5,3 +5,5 @@ It extends 'Analysis' features to parse code files (readme / manifest files)
 and add new models and menus.
 
 .. image:: /github_connector_odoo/static/description/menu.png
+
+Allows to fetch all repo branches even if no series are defined or create them automatically

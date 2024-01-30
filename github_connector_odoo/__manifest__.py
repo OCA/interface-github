@@ -29,6 +29,7 @@
         "data/odoo_licence.xml",
         "data/odoo_category_data.xml",
         "data/odoo_manifest_key_data.xml",
+        "data/ir_config_parameter.xml",
         "data/ir_cron.xml",
         "report/odoo_module_version_rule_info_report_view.xml",
     ],

@@ -4,6 +4,7 @@
 
 import logging
 import os
+import re
 
 from odoo import api, fields, models
 from odoo.modules import load_information_from_description_file
@@ -48,6 +49,13 @@ class GithubRepositoryBranch(models.Model):
         column1="repository_branch_id",
         column2="module_version_id",
         readonly=True,
+    )
+
+    odoo_version = fields.Char(
+        readonly=True,
+        index=True,
+        compute="_compute_odoo_version",
+        store=True,
     )
 
     @api.depends("module_version_ids")
@@ -252,3 +260,62 @@ class GithubRepositoryBranch(models.Model):
             _logger.error(
                 "Cannot process module with name %s, error " "is: %s", module_name, e
             )
+
+    def get_branch_version(self, branch_name=False):
+        """Defines the odoo version from the branch name
+        Args:
+            branch_name - name of the synchronized branch
+        """
+        get_version = ""
+        versions_list = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("github_connector_odoo.odoo_versions")
+        )
+        if not versions_list:
+            versions_list = self.env["res.config.settings"].get_odoo_versions()
+        versions_list = [ver.strip() for ver in versions_list.split(",")]
+        # Both options work well, but need feedback, which option is better
+        # option 1
+        # pattern = (
+        #     r"(?<!\d)(?:"
+        #     + "|".join([re.escape(ver) for ver in versions_list])
+        #     + r")(?!\d)"
+        # )
+        # version = re.search(pattern, branch_name)
+        # if version and version.group(0) in versions_list:
+        #     get_version = version.group(0)
+        #     if "." not in list(get_version):
+        #         get_version += ".0"
+        # else:
+        #     get_version = False
+        # option 2
+        split_name = branch_name.split("-")
+        for i in split_name:
+            pattern = (
+                r"(?<!\d)(?:"
+                + "|".join([re.escape(ver) for ver in versions_list])
+                + r")(?!\d)"
+            )
+            version = re.search(pattern, i)
+            if version and version.group(0) in versions_list:
+                get_version = version.group(0)
+                if "." not in list(get_version):
+                    get_version += ".0"
+                break
+            else:
+                get_version = False
+        return get_version
+
+    @api.depends("name")
+    def _compute_odoo_version(self):
+        """Compute the odoo version for the branch"""
+        for branch in self:
+            branch.odoo_version = self.get_branch_version(branch_name=branch.name)
+
+    @api.depends("organization_id", "name")
+    def _compute_organization_serie_id(self):
+        for branch in self:
+            for serie in branch.organization_id.organization_serie_ids:
+                if serie.name == branch.name or serie.name == branch.odoo_version:
+                    branch.organization_serie_id = serie

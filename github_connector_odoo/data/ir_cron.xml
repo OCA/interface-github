@@ -17,4 +17,16 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model_id" ref="model_odoo_module_version" />
         <field name="code">model.cron_clean_odoo_module_version()</field>
     </record>
+    <record model="ir.cron" id="cron_get_odoo_versions">
+        <field name="name">Get Odoo Versions</field>
+        <field name="interval_number">1</field>
+        <field name="active" eval="True" />
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_type">months</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False" />
+        <field name="state">code</field>
+        <field name="model_id" ref="model_res_config_settings" />
+        <field name="code">model.cron_get_odoo_versions()</field>
+    </record>
 </odoo>

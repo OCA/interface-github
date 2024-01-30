@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Default Odoo Github repository -->
+        <record id="github_connector_odoo_branches_url" model="ir.config_parameter">
+            <field name="key">github_connector_odoo.odoo_branches_url</field>
+            <field name="value">https://api.github.com/repos/odoo/odoo/branches</field>
+        </record>
+
+    </data>
+</odoo>

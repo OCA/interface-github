@@ -18,6 +18,15 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     <field name="default_author_text" />
                 </group>
             </group>
+            <field name="organization_serie_ids" position="before">
+                <group>
+                    <field name="fetch_branches" />
+                    <field
+                        name="create_series"
+                        attrs="{'invisible' : [('fetch_branches', '=', False)]}"
+                    />
+                </group>
+            </field>
         </field>
     </record>
 </odoo>
