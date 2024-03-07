@@ -165,6 +165,7 @@ msgstr ""
 "\"{'invisible': [('team_qty', '&gt;', 1)]}\"> Equipo</span>"
 
 #. module: github_connector
+#. odoo-python
 #: code:addons/github_connector/models/res_partner.py:0
 #, python-format
 msgid "A company ('%s') can not have a Github login associated."
@@ -224,7 +225,6 @@ msgstr "Analizar el código fuente"
 #. module: github_connector
 #: model:ir.actions.server,name:github_connector.cron_analyze_code_ir_actions_server
 #: model:ir.cron,cron_name:github_connector.cron_analyze_code
-#: model:ir.cron,name:github_connector.cron_analyze_code
 msgid "Analyze Source Code for All Github Branches"
 msgstr "Analizar el código fuente de todas las ramas de Github"
 
@@ -465,11 +465,11 @@ msgstr "Descargar código fuente"
 #. module: github_connector
 #: model:ir.actions.server,name:github_connector.cron_download_code_ir_actions_server
 #: model:ir.cron,cron_name:github_connector.cron_download_code
-#: model:ir.cron,name:github_connector.cron_download_code
 msgid "Download Source Code for All Github Branches"
 msgstr "Descargar código fuente de todas las ramas de Github"
 
 #. module: github_connector
+#. odoo-python
 #: code:addons/github_connector/models/abstract_github_model.py:0
 #, python-format
 msgid "Duplicate object with Github login %s"
@@ -481,6 +481,7 @@ msgid "Email"
 msgstr "Email"
 
 #. module: github_connector
+#. odoo-python
 #: code:addons/github_connector/models/github_repository_branch.py:0
 #, python-format
 msgid ""
@@ -491,6 +492,7 @@ msgstr ""
 " Por favor revise los Derechos de Acceso de Odoo."
 
 #. module: github_connector
+#. odoo-python
 #: code:addons/github_connector/models/github_repository_branch.py:0
 #, python-format
 msgid ""
@@ -503,6 +505,7 @@ msgstr ""
 " %(error)s"
 
 #. module: github_connector
+#. odoo-python
 #: code:addons/github_connector/models/github_repository_branch.py:0
 #, python-format
 msgid ""
@@ -519,6 +522,7 @@ msgid "External Services"
 msgstr "Servicios externos"
 
 #. module: github_connector
+#. odoo-python
 #: code:addons/github_connector/models/abstract_github_model.py:0
 #, python-format
 msgid ""
@@ -529,6 +533,7 @@ msgstr ""
 "'get_github_base_obj_for_creation' en el modelo hijo."
 
 #. module: github_connector
+#. odoo-python
 #: code:addons/github_connector/models/abstract_github_model.py:0
 #, python-format
 msgid ""
@@ -774,6 +779,7 @@ msgid "Inhibit inherited rules"
 msgstr "Inhibir reglas heredadas"
 
 #. module: github_connector
+#. odoo-python
 #: code:addons/github_connector/models/abstract_github_model.py:0
 #, python-format
 msgid "Invalid name '%s' provided"
@@ -915,6 +921,7 @@ msgid "Maintainer"
 msgstr "Mantenedor"
 
 #. module: github_connector
+#. odoo-python
 #: code:addons/github_connector/models/abstract_github_model.py:0
 #, python-format
 msgid "Maximum attempts reached."
@@ -1073,6 +1080,7 @@ msgid "Permission"
 msgstr "Permiso"
 
 #. module: github_connector
+#. odoo-python
 #: code:addons/github_connector/models/abstract_github_model.py:0
 #, python-format
 msgid ""
@@ -1240,14 +1248,12 @@ msgstr "Sincronización de objeto"
 #. module: github_connector
 #: model:ir.actions.server,name:github_connector.cron_update_organization_ir_actions_server
 #: model:ir.cron,cron_name:github_connector.cron_update_organization
-#: model:ir.cron,name:github_connector.cron_update_organization
 msgid "Synchronize All Organizations and Teams"
 msgstr "Sincronizar todas las organizaciones y equipos"
 
 #. module: github_connector
 #: model:ir.actions.server,name:github_connector.cron_update_branch_list_ir_actions_server
 #: model:ir.cron,cron_name:github_connector.cron_update_branch_list
-#: model:ir.cron,name:github_connector.cron_update_branch_list
 msgid "Synchronize Branches List for All Repositories"
 msgstr "Sincronizar el listado de ramas de todos los repositorios"
 
@@ -1307,6 +1313,7 @@ msgstr ""
 "* cerrado: visible para todos los miembros de la organización."
 
 #. module: github_connector
+#. odoo-python
 #: code:addons/github_connector/models/github_organization.py:0
 #, python-format
 msgid ""
@@ -1445,6 +1452,7 @@ msgid "or"
 msgstr "o"
 
 #. module: github_connector
+#. odoo-python
 #: code:addons/github_connector/models/github_repository_branch.py:0
 #, python-format
 msgid "source_code_local_path should be defined in your  configuration file"
