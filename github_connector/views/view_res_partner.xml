@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="view_res_partner_search" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
+        <field name="arch" type="xml">
+            <filter name="type_company" position="after">
+                <filter
+                    string="Has Github Account"
+                    name="has_github_account"
+                    domain="[('github_name', '!=', False)]"
+                />
+            </filter>
+            <field name="name" position="after">
+                <field
+                    name="github_name"
+                    string="Github Login"
+                    filter_domain="[('github_name','ilike', self)]"
+                />
+                <field name="organization_ids" />
+                <field name="github_team_partner_ids" />
+            </field>
+        </field>
+    </record>
+    <record id="view_res_partner_kanban" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view" />
+        <field name="arch" type="xml">
+            <!-- load data -->
+            <field name="mobile" position="after">
+                <field name="github_name" />
+            </field>
+            <!-- Display Data -->
+            <xpath expr="//li[@t-if='record.email.raw_value']" position="after">
+                <li t-if="record.github_name.raw_value">
+                    <field name="github_name" />
+                </li>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_res_partner_tree" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree" />
+        <field name="arch" type="xml">
+            <field name="display_name" position="after">
+                <field name="github_name" />
+                <field name="github_team_qty" />
+            </field>
+        </field>
+    </record>
+    <record id="view_res_partner_form" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    type="object"
+                    name="action_github_organization"
+                    class="oe_stat_button"
+                    icon="fa-institution"
+                    attrs="{'invisible': ['|', ('github_name', '=', False), ('is_company', '=', True)]}"
+                >
+                    <field
+                        name="organization_qty"
+                        string="Organizations"
+                        widget="statinfo"
+                    />
+                </button>
+                <button
+                    type="object"
+                    name="action_github_team_partner_from_partner"
+                    class="oe_stat_button"
+                    icon="fa-users"
+                    attrs="{'invisible': ['|', ('github_name', '=', False), ('is_company', '=', True)]}"
+                >
+                    <field name="github_team_qty" string="Teams" widget="statinfo" />
+                </button>
+            </div>
+            <page name="internal_notes" position="before">
+                <page
+                    name="github"
+                    string="Github"
+                    attrs="{'invisible': [('github_name', '=', False)]}"
+                >
+                    <group col="4">
+                        <field name="is_bot_account" />
+                        <newline />
+                        <field name="github_url" widget="url" colspan="4" />
+                        <field name="github_id_external" />
+                        <field name="github_name" />
+                        <field name="github_create_date" />
+                        <field name="github_write_date" />
+                        <field name="github_last_sync_date" />
+                        <button
+                            name="button_update_from_github_light"
+                            type="object"
+                            string="Light Sync"
+                            class="btn btn-default"
+                            icon="fa-angle-right"
+                            groups="github_connector.group_github_connector_manager"
+                        />
+                        <button
+                            name="button_update_from_github_full"
+                            type="object"
+                            string="Full Sync"
+                            class="btn btn-default"
+                            icon="fa-angle-double-right"
+                            groups="github_connector.group_github_connector_manager"
+                        />
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+</odoo>
