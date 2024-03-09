@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo-addon-github_connector>=16.0dev,<16.1dev',
+        'odoo-addon-github_connector_odoo>=16.0dev,<16.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
