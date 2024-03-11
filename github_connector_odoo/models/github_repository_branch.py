@@ -7,7 +7,7 @@ import logging
 import os
 
 from odoo import api, fields, models
-from odoo.modules.module import load_information_from_description_file
+from odoo.modules.module import get_manifest
 
 # Hard define this value to make this module working with or without
 # the patch (that backports V10 manifests analysis code.
@@ -209,9 +209,7 @@ class GithubRepositoryBranch(models.Model):
             manifest_keys_find = module_version.manifest_key_ids.filtered(
                 lambda x: x.id in rule.manifest_key_ids.ids
             )
-            module_info = load_information_from_description_file(
-                module_version.technical_name, full_path
-            )
+            module_info = get_manifest(module_version.technical_name, full_path)
             spec = rule._set_spec(rule.paths.splitlines())
             for manifest_key_find in manifest_keys_find:
                 if manifest_key_find.name in module_info:
@@ -229,9 +227,7 @@ class GithubRepositoryBranch(models.Model):
         module_version_obj = self.env["odoo.module.version"]
         try:
             full_module_path = os.path.join(path, module_name)
-            module_info = load_information_from_description_file(
-                module_name, full_module_path
-            )
+            module_info = get_manifest(module_name, full_module_path)
             # Create module version, if the module is installable
             # in the serie
             if module_info.get("installable", False):
