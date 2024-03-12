@@ -386,6 +386,12 @@ msgid "Localization"
 msgstr ""
 
 #. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__maintainers
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__maintainers
+msgid "Maintainers (Manifest)"
+msgstr ""
+
+#. module: github_connector_odoo
 #: model:ir.model.fields,field_description:github_connector_odoo.field_github_analysis_rule__manifest_key_ids
 #: model:ir.model.fields,field_description:github_connector_odoo.field_github_repository_branch_rule_info_report__manifest_key_ids
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__manifest_key_ids
