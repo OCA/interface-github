@@ -44,6 +44,10 @@ class OdooModule(models.Model):
         string="Authors (Text)", compute="_compute_author", store=True
     )
 
+    maintainers = fields.Char(
+        string="Maintainers (Manifest)", compute="_compute_maintainers", store=True
+    )
+
     organization_serie_ids = fields.Many2many(
         string="Series",
         comodel_name="github.organization.serie",
@@ -154,6 +158,16 @@ class OdooModule(models.Model):
             authors = set(authors)
             module.author_ids = [x.id for x in authors]
             module.author_ids_description = ", ".join(sorted(x.name for x in authors))
+
+    @api.depends("module_version_ids.maintainers")
+    def _compute_maintainers(self):
+        for module in self:
+            maintainers = []
+            for version in module.module_version_ids.filtered("maintainers"):
+                for maintainer in version.maintainers.split(","):
+                    if maintainer not in maintainers:
+                        maintainers.append(maintainer)
+            module.maintainers = ", ".join(maintainers)
 
     @api.depends("module_version_ids.organization_serie_id")
     def _compute_organization_serie(self):
