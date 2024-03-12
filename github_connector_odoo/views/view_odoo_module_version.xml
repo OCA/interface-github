@@ -19,6 +19,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="repository_id" />
                 <field name="license_id" />
                 <field name="author_ids" />
+                <field name="maintainers" />
                 <field name="organization_serie_id" />
                 <group expand="0" string="Group By">
                     <filter
@@ -54,6 +55,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="technical_name" />
                 <field name="name" />
                 <field name="author_ids_description" />
+                <field name="maintainers" />
                 <field name="lib_python_ids_description" string="Python Lib" />
                 <field name="lib_bin_ids_description" string="Bin Lib" />
                 <field name="license_id" />
@@ -115,6 +117,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                         <page string="Technical information (Manifest)">
                             <group col="4">
                                 <field name="author" />
+                                <field name="maintainers" />
                                 <field name="license" />
                                 <field name="website" />
                                 <field name="manifest_keys" />

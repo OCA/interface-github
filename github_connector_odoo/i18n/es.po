@@ -6,15 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-08-18 08:49+0000\n"
+"POT-Creation-Date: 2024-03-13 11:14+0000\n"
+"PO-Revision-Date: 2024-03-13 12:14+0100\n"
 "Last-Translator: Víctor Martínez <victor.martinez@tecnativa.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #. module: github_connector_odoo
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__code_count
@@ -121,7 +122,6 @@ msgstr "Categoría"
 #. module: github_connector_odoo
 #: model:ir.actions.server,name:github_connector_odoo.cron_clean_odoo_module_version_ir_actions_server
 #: model:ir.cron,cron_name:github_connector_odoo.cron_clean_odoo_module_version
-#: model:ir.cron,name:github_connector_odoo.cron_clean_odoo_module_version
 msgid "Clean Odoo Module Version"
 msgstr "Limpiar la versión del módulo de Odoo"
 
@@ -321,6 +321,7 @@ msgid "Icon Path (Manifest)"
 msgstr "Ruta de icono (Manifiesto)"
 
 #. module: github_connector_odoo
+#. odoo-python
 #: code:addons/github_connector_odoo/models/odoo_module_version.py:0
 #, python-format
 msgid "Incorrect RST Description"
@@ -387,6 +388,12 @@ msgstr "Licencia (Manifiesto)"
 #: model:ir.model.fields.selection,name:github_connector_odoo.selection__odoo_module_version__odoo_type__localization
 msgid "Localization"
 msgstr "Localización"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__maintainers
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__maintainers
+msgid "Maintainers (Manifest)"
+msgstr "Mantenedores (Manifiesto)"
 
 #. module: github_connector_odoo
 #: model:ir.model.fields,field_description:github_connector_odoo.field_github_analysis_rule__manifest_key_ids
@@ -483,6 +490,7 @@ msgid "Name already exists !"
 msgstr "¡El nombre ya existe!"
 
 #. module: github_connector_odoo
+#. odoo-python
 #: code:addons/github_connector_odoo/models/odoo_module.py:0
 #: code:addons/github_connector_odoo/models/odoo_module_version.py:0
 #, python-format
@@ -822,12 +830,3 @@ msgstr "Sitio web (Manifiesto)"
 #: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_search
 msgid "With Version"
 msgstr "Con versión"
-
-#~ msgid "# String"
-#~ msgstr "# Cadena"
-
-#~ msgid "String Count"
-#~ msgstr "Total de cadenas"
-
-#~ msgid "Total string"
-#~ msgstr "Total cadena"
