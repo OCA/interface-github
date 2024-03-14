@@ -5,7 +5,7 @@
 {
     "name": "Github Connector - Odoo",
     "summary": "Analyze Odoo modules information from Github repositories",
-    "version": "16.0.1.0.1",
+    "version": "16.0.1.1.0",
     "category": "Connector",
     "license": "AGPL-3",
     "author": "Odoo Community Association (OCA), Sylvain LE GAL, GRAP",
