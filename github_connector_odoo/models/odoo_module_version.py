@@ -151,6 +151,8 @@ class OdooModuleVersion(models.Model):
         string="Authors (Text)", compute="_compute_author", store=True
     )
 
+    maintainers = fields.Char(string="Maintainers (Manifest)", readonly=True)
+
     lib_python_ids = fields.Many2many(
         comodel_name="odoo.lib.python",
         string="Python Lib Dependencies",
@@ -439,6 +441,7 @@ class OdooModuleVersion(models.Model):
             "description_rst": info["description"],
             "external_dependencies": info.get("external_dependencies", {}),
             "author": ",".join([x.strip() for x in sorted(author_list) if x.strip()]),
+            "maintainers": ",".join(info.get("maintainers", [])),
             "depends": ",".join([x for x in sorted(info["depends"]) if x]),
             "manifest_keys": ",".join([x for x in sorted(manifest_keys) if x]),
             "repository_branch_id": repository_branch.id,
