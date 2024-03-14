@@ -122,7 +122,6 @@ msgstr "Categoría"
 #. module: github_connector_odoo
 #: model:ir.actions.server,name:github_connector_odoo.cron_clean_odoo_module_version_ir_actions_server
 #: model:ir.cron,cron_name:github_connector_odoo.cron_clean_odoo_module_version
-#: model:ir.cron,name:github_connector_odoo.cron_clean_odoo_module_version
 msgid "Clean Odoo Module Version"
 msgstr "Limpiar la versión del módulo de Odoo"
 
@@ -322,6 +321,7 @@ msgid "Icon Path (Manifest)"
 msgstr "Ruta de icono (Manifiesto)"
 
 #. module: github_connector_odoo
+#. odoo-python
 #: code:addons/github_connector_odoo/models/odoo_module_version.py:0
 #, python-format
 msgid "Incorrect RST Description"
@@ -490,6 +490,7 @@ msgid "Name already exists !"
 msgstr "¡El nombre ya existe!"
 
 #. module: github_connector_odoo
+#. odoo-python
 #: code:addons/github_connector_odoo/models/odoo_module.py:0
 #: code:addons/github_connector_odoo/models/odoo_module_version.py:0
 #, python-format
