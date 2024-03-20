@@ -1,0 +1,1441 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* github_connector
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-04-03 15:37+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_github_repository_branch_rule_info
+msgid " Github Repository Branch Rule Info"
+msgstr " Informazioni regola branch repository GitHub"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_tree
+msgid "# Branches"
+msgstr "N° branch"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__code_count
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__code_count
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__code_count
+msgid "# Code"
+msgstr "N° codice"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__documentation_count
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__documentation_count
+msgid "# Doc."
+msgstr "N° doc."
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__documentation_count
+msgid "# Documentation"
+msgstr "N° documentazione"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__empty_count
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__empty_count
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__empty_count
+msgid "# Empty"
+msgstr "N° vuoti"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__total_count
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__total_count
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__total_count
+msgid "# Total"
+msgstr "N° totali"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_kanban
+msgid ""
+"<span class=\"badge\">\n"
+"                                            <i class=\"fa fa-fw fa-github-alt\" title=\"Github\"/>\n"
+"                                        </span>"
+msgstr ""
+"<span class=\"badge\">\n"
+"                                            <i class=\"fa fa-fw fa-github-"
+"alt\" title=\"Github\"/>\n"
+"                                        </span>"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_kanban
+msgid ""
+"<span class=\"badge\">\n"
+"                                        <i class=\"fa fa-fw fa-ban\" title=\"Ignored\"/>\n"
+"                                    </span>"
+msgstr ""
+"<span class=\"badge\">\n"
+"                                        <i class=\"fa fa-fw fa-ban\" title="
+"\"Ignorato\"/>\n"
+"                                    </span>"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_kanban
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_kanban
+msgid ""
+"<span class=\"badge\">\n"
+"                                        <i class=\"fa fa-fw fa-github-alt\" title=\"Github\"/>\n"
+"                                    </span>"
+msgstr ""
+"<span class=\"badge\">\n"
+"                                        <i class=\"fa fa-fw fa-github-alt\" "
+"title=\"Github\"/>\n"
+"                                    </span>"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
+msgid ""
+"<span class=\"o_stat_text\" attrs=\"{'invisible': [('member_qty', '&lt;', 2)]}\"> Members</span>\n"
+"                                <span class=\"o_stat_text\" attrs=\"{'invisible': [('member_qty', '&gt;', 1)]}\"> Member</span>"
+msgstr ""
+"<span class=\"o_stat_text\" attrs=\"{'invisible': [('member_qty', '&lt;', "
+"2)]}\"> Membri</span>\n"
+"                                <span class=\"o_stat_text\" attrs=\""
+"{'invisible': [('member_qty', '&gt;', 1)]}\"> Membro</span>"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_form
+msgid ""
+"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_branch_qty', '&lt;', 2)]}\"> Branches</span>\n"
+"                                <span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Branch</span>"
+msgstr ""
+"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_branch_qty', "
+"'&lt;', 2)]}\"> Branch</span>\n"
+"                                <span class=\"o_stat_text\" attrs=\""
+"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Branch</span>"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_form
+msgid ""
+"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_branch_qty', '&lt;', 2)]}\"> Teams</span>\n"
+"                                <span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Team</span>"
+msgstr ""
+"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_branch_qty', "
+"'&lt;', 2)]}\"> Team</span>\n"
+"                                <span class=\"o_stat_text\" attrs=\""
+"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Team</span>"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
+msgid ""
+"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_qty', '&lt;', 2)]}\"> Repositories</span>\n"
+"                                <span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_qty', '&gt;', 1)]}\"> Repository</span>"
+msgstr ""
+"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_qty', '&lt;"
+"', 2)]}\"> Repository</span>\n"
+"                                <span class=\"o_stat_text\" attrs=\""
+"{'invisible': [('repository_qty', '&gt;', 1)]}\"> Repository</span>"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
+msgid ""
+"<span class=\"o_stat_text\" attrs=\"{'invisible': [('team_qty', '&lt;', 2)]}\"> Teams</span>\n"
+"                                <span class=\"o_stat_text\" attrs=\"{'invisible': [('team_qty', '&gt;', 1)]}\"> Team</span>"
+msgstr ""
+"<span class=\"o_stat_text\" attrs=\"{'invisible': [('team_qty', '&lt;', 2)]}"
+"\"> Team</span>\n"
+"                                <span class=\"o_stat_text\" attrs=\""
+"{'invisible': [('team_qty', '&gt;', 1)]}\"> Team</span>"
+
+#. module: github_connector
+#. odoo-python
+#: code:addons/github_connector/models/res_partner.py:0
+#, python-format
+msgid "A company ('%s') can not have a Github login associated."
+msgstr "Una azienda ('%s') non può avere un accesso GitHub associato."
+
+#. module: github_connector
+#: model:ir.model.fields.selection,name:github_connector.selection__github_team_repository__permission__admin
+msgid "Admin"
+msgstr "Amministratore"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__analysis_rule_id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__analysis_rule_id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__analysis_rule_id
+msgid "Analysis Rule"
+msgstr "Regola analisi"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__analysis_rule_ids
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__analysis_rule_ids
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__analysis_rule_ids
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__analysis_rule_ids
+msgid "Analysis Rules"
+msgstr "Regole analisi"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__analysis_rule_info_ids
+msgid "Analysis Rules (info)"
+msgstr "Regole analisi (informazioni)"
+
+#. module: github_connector
+#: model:ir.actions.act_window,name:github_connector.action_github_analysis_rule
+msgid "Analysis rule"
+msgstr "Regola analisi"
+
+#. module: github_connector
+#: model:ir.actions.act_window,name:github_connector.action_github_analysis_rule_group
+msgid "Analysis rule group"
+msgstr "Gruppo regola analisi"
+
+#. module: github_connector
+#: model:ir.ui.menu,name:github_connector.menu_github_analysis_rule_group
+msgid "Analysis rule groups"
+msgstr "Gruppi regola analisi"
+
+#. module: github_connector
+#: model:ir.ui.menu,name:github_connector.menu_github_analysis_rule
+msgid "Analysis rules"
+msgstr "Regole analisi"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_tree
+msgid "Analyze Source Code"
+msgstr "Analizza codice sorgente"
+
+#. module: github_connector
+#: model:ir.actions.server,name:github_connector.cron_analyze_code_ir_actions_server
+#: model:ir.cron,cron_name:github_connector.cron_analyze_code
+msgid "Analyze Source Code for All Github Branches"
+msgstr "Analizza codice sorgente per tutti i branch di GitHub"
+
+#. module: github_connector
+#: model:ir.model.fields.selection,name:github_connector.selection__github_repository_branch__state__analyzed
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_search
+msgid "Analyzed"
+msgstr "Analizzato"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_partner_from_team_kanban
+msgid "Avatar"
+msgstr "Avatar"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__repository_branch_ids
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__repository_branch_ids
+msgid "Branches"
+msgstr "Branch"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_form
+msgid "Branches Sync."
+msgstr "Sincronizza branch"
+
+#. module: github_connector
+#: model:ir.actions.act_window,name:github_connector.action_github_branch_by_serie
+#: model:ir.ui.menu,name:github_connector.menu_branch_by_serie
+msgid "Branches by Serie"
+msgstr "Branch per serie"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__ci_url
+msgid "CI URL"
+msgstr "URL CI"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__ci_url_pattern
+msgid "CI URL Pattern"
+msgstr "Schema URL CI"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_wizard_create_repository_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_wizard_create_team_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_wizard_load_github_model_form
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: github_connector
+#: model:ir.model.fields,help:github_connector.field_res_partner__is_bot_account
+#: model:ir.model.fields,help:github_connector.field_res_users__is_bot_account
+msgid "Check this box if this account is a bot or similar."
+msgstr "Selezionare questa opzione se questo profilo è un bot o simile."
+
+#. module: github_connector
+#: model:ir.model.fields.selection,name:github_connector.selection__github_team__privacy__closed
+#: model:ir.model.fields.selection,name:github_connector.selection__wizard_create_team__privacy__closed
+msgid "Closed"
+msgstr "Chiuso"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_form
+msgid "Code Analysis"
+msgstr "Analisi codice"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__color
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__color
+msgid "Color Index"
+msgstr "Indice colore"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__complete_name
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__complete_name
+#: model:ir.model.fields,field_description:github_connector.field_github_team__complete_name
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__complete_name
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__complete_name
+msgid "Complete Name"
+msgstr "Nome completo"
+
+#. module: github_connector
+#: model:res.groups,name:github_connector.group_github_connector_manager
+msgid "Connector Github Manager"
+msgstr "Gestore connettore GitHub"
+
+#. module: github_connector
+#: model:res.groups,name:github_connector.group_github_connector_user
+msgid "Connector Github User"
+msgstr "Utente connettore GutHub"
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_res_partner
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_team_partner__context_search_default_partner_id
+msgid "Context Search Default Partner"
+msgstr "Partner predefinito ricerca contenuto"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_team_repository__context_search_default_repository_id
+msgid "Context Search Default Repository"
+msgstr "Repository predefinito ricerca contenuto"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_team_partner__context_search_default_team_id
+#: model:ir.model.fields,field_description:github_connector.field_github_team_repository__context_search_default_team_id
+msgid "Context Search Default Team"
+msgstr "Team predefinito ricerca contenuto"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__coverage_url
+msgid "Coverage URL"
+msgstr "URL copertura"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__coverage_url_pattern
+msgid "Coverage URL Pattern"
+msgstr "Schema URL copertura"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_abstract_github_model__github_create_date
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__github_create_date
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__github_create_date
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__github_create_date
+#: model:ir.model.fields,field_description:github_connector.field_github_team__github_create_date
+#: model:ir.model.fields,field_description:github_connector.field_res_partner__github_create_date
+#: model:ir.model.fields,field_description:github_connector.field_res_users__github_create_date
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__github_create_date
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__github_create_date
+msgid "Create Date on Github"
+msgstr "Crea data in GitHub"
+
+#. module: github_connector
+#: model:ir.ui.menu,name:github_connector.menu_wizard_create_repository
+msgid "Create Repo in Github"
+msgstr "Crea repository in GitHub"
+
+#. module: github_connector
+#: model:ir.actions.act_window,name:github_connector.action_wizard_create_repository
+msgid "Create Repo in Github Wizard"
+msgstr "Procedura guidata creazione repository in GitHub"
+
+#. module: github_connector
+#: model:ir.ui.menu,name:github_connector.menu_wizard_create_team
+msgid "Create Team in Github"
+msgstr "Crea team in GitHub"
+
+#. module: github_connector
+#: model:ir.actions.act_window,name:github_connector.action_wizard_create_team
+msgid "Create Team in Github Wizard"
+msgstr "Procedura guidata creazione team in GitHub"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_wizard_create_repository_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_wizard_create_team_form
+msgid "Create in Github"
+msgstr "Crea in GitHub"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__create_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_group__create_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__create_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_organization_serie__create_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__create_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__create_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__create_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__create_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_team__create_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_team_partner__create_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_team_repository__create_uid
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__create_uid
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__create_uid
+#: model:ir.model.fields,field_description:github_connector.field_wizard_load_github_model__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__create_date
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_group__create_date
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__create_date
+#: model:ir.model.fields,field_description:github_connector.field_github_organization_serie__create_date
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__create_date
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__create_date
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__create_date
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__create_date
+#: model:ir.model.fields,field_description:github_connector.field_github_team__create_date
+#: model:ir.model.fields,field_description:github_connector.field_github_team_partner__create_date
+#: model:ir.model.fields,field_description:github_connector.field_github_team_repository__create_date
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__create_date
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__create_date
+#: model:ir.model.fields,field_description:github_connector.field_wizard_load_github_model__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: github_connector
+#: model:ir.model.fields,help:github_connector.field_github_analysis_rule__paths
+#: model:ir.model.fields,help:github_connector.field_github_repository_branch_rule_info_report__paths
+msgid "Define with pathspec especification"
+msgstr "Definito con speficica pathspec"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__description
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__description
+#: model:ir.model.fields,field_description:github_connector.field_github_team__description
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__description
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__description
+msgid "Description"
+msgstr "Descrizione"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__display_name
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_group__display_name
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__display_name
+#: model:ir.model.fields,field_description:github_connector.field_github_organization_serie__display_name
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__display_name
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__display_name
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__display_name
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__display_name
+#: model:ir.model.fields,field_description:github_connector.field_github_team__display_name
+#: model:ir.model.fields,field_description:github_connector.field_github_team_partner__display_name
+#: model:ir.model.fields,field_description:github_connector.field_github_team_repository__display_name
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__display_name
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__display_name
+#: model:ir.model.fields,field_description:github_connector.field_wizard_load_github_model__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_tree
+msgid "Download Source Code"
+msgstr "Scarica codice sorgente"
+
+#. module: github_connector
+#: model:ir.actions.server,name:github_connector.cron_download_code_ir_actions_server
+#: model:ir.cron,cron_name:github_connector.cron_download_code
+msgid "Download Source Code for All Github Branches"
+msgstr "Scarica codice sorgente per tutti i branch di GitHub"
+
+#. module: github_connector
+#. odoo-python
+#: code:addons/github_connector/models/abstract_github_model.py:0
+#, python-format
+msgid "Duplicate object with Github login %s"
+msgstr "Duplica codice con accesso %s GitHub"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__email
+msgid "Email"
+msgstr "E-mail"
+
+#. module: github_connector
+#. odoo-python
+#: code:addons/github_connector/models/github_repository_branch.py:0
+#, python-format
+msgid ""
+"Error when trying to create the folder %s\n"
+" Please check Odoo Access Rights."
+msgstr ""
+"Errore nella creazione della cartella %s\n"
+" Verificare le autorizzazioni di accesso Odoo."
+
+#. module: github_connector
+#. odoo-python
+#: code:addons/github_connector/models/github_repository_branch.py:0
+#, python-format
+msgid ""
+"Error when trying to create the main folder %(path)s\n"
+" Please check Odoo Access Rights.\n"
+" %(error)s"
+msgstr ""
+"Errore nella creazione della cartella principale %(path)s\n"
+" Verificare le autorizzazioni di accesso Odoo.\n"
+" %(error)s"
+
+#. module: github_connector
+#. odoo-python
+#: code:addons/github_connector/models/github_repository_branch.py:0
+#, python-format
+msgid ""
+"Error when updating the branch %(branch)s in the local folder %(path)s.\n"
+"Deleting the local folder and trying again."
+msgstr ""
+"Errore nell'aggiornamento del branch %(branch)s nella cartella locale "
+"%(path)s.\n"
+"Cancellare la cartella locale e riprovare."
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+msgid "External Services"
+msgstr "Servizi esterni"
+
+#. module: github_connector
+#. odoo-python
+#: code:addons/github_connector/models/abstract_github_model.py:0
+#, python-format
+msgid ""
+"Feature not Implemented : Please define 'get_github_base_obj_for_creation' "
+"function in child model."
+msgstr ""
+"Funzionalità non implementata: definire il metodo "
+"'get_github_base_obj_for_creation' nel modello figlio."
+
+#. module: github_connector
+#. odoo-python
+#: code:addons/github_connector/models/abstract_github_model.py:0
+#, python-format
+msgid ""
+"Feature not Implemented : Please define 'github_login_field' function in "
+"child model."
+msgstr ""
+"Funzionalità non implementata: definire il metodo 'github_login_field' nel "
+"modello figlio."
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_res_partner_form
+msgid "Full Sync"
+msgstr "Sincronizzazione completa"
+
+#. module: github_connector
+#: model:ir.ui.menu,name:github_connector.menu_github
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_res_partner_form
+msgid "Github"
+msgstr "GitHub"
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_github_analysis_rule
+msgid "Github Analysis Rule"
+msgstr "Regola analisi GitHub"
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_github_analysis_rule_group
+msgid "Github Analysis Rule Group"
+msgstr "Gruppo regola analisi GitHub"
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_github_analysis_rule_info_mixin
+msgid "Github Analysis Rule Mixin"
+msgstr "Mixin regola analisi GitHub"
+
+#. module: github_connector
+#: model:ir.ui.menu,name:github_connector.menu_github_community
+msgid "Github Community"
+msgstr "Comunità GitHub"
+
+#. module: github_connector
+#: model:ir.module.category,name:github_connector.module_category_github_connector
+msgid "Github Connector"
+msgstr "Connettore GitHub"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_abstract_github_model__github_id_external
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__github_id_external
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__github_id_external
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__github_id_external
+#: model:ir.model.fields,field_description:github_connector.field_github_team__github_id_external
+#: model:ir.model.fields,field_description:github_connector.field_res_partner__github_id_external
+#: model:ir.model.fields,field_description:github_connector.field_res_users__github_id_external
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__github_id_external
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__github_id_external
+msgid "Github Id"
+msgstr "ID GitHub"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_res_partner_search
+msgid "Github Login"
+msgstr "Login GitHub"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_wizard_load_github_model__name
+msgid "Github Name"
+msgstr "Nome GitHub"
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_github_organization_serie
+msgid "Github Organization Serie"
+msgstr "Serie organizzazione GitHub"
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_github_repository
+#: model:ir.ui.menu,name:github_connector.menu_github_repository_root
+msgid "Github Repository"
+msgstr "Repository GitHub"
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_github_repository_branch
+msgid "Github Repository Branch"
+msgstr "Branch repository GitHub"
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_github_repository_branch_rule_info_report
+msgid "Github Repository Branch Rule Info Report"
+msgstr "Informazioni regola branch repository GitHub"
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_github_team
+msgid "Github Team"
+msgstr "Team GitHub"
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_github_team_partner
+msgid "Github Team Partner"
+msgstr "Partner team GitHub"
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_github_team_repository
+msgid "Github Team Repository"
+msgstr "Repository team GitHub"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_abstract_github_model__github_name
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__github_name
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__github_name
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__github_name
+#: model:ir.model.fields,field_description:github_connector.field_github_team__github_name
+#: model:ir.model.fields,field_description:github_connector.field_res_partner__github_name
+#: model:ir.model.fields,field_description:github_connector.field_res_users__github_name
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__github_name
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__github_name
+msgid "Github Technical Name"
+msgstr "Nome tecnico GitHub"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_wizard_load_github_model__github_type
+msgid "Github Type Name"
+msgstr "Nome tipo GitHub"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_abstract_github_model__github_url
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__github_url
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__github_url
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__github_url
+#: model:ir.model.fields,field_description:github_connector.field_github_team__github_url
+#: model:ir.model.fields,field_description:github_connector.field_res_partner__github_url
+#: model:ir.model.fields,field_description:github_connector.field_res_users__github_url
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__github_url
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__github_url
+msgid "Github URL"
+msgstr "URL GitHub"
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_abstract_github_model
+msgid "Github abstract model"
+msgstr "Modello astratto GitHub"
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_github_organization
+msgid "Github organization"
+msgstr "Organizzazione GitHub"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__group_id
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__group_id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__group_id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__group_id
+msgid "Group"
+msgstr "Gruppo"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_search
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_search
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_search
+msgid "Group By"
+msgstr "Raggruppa per"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_res_partner_search
+msgid "Has Github Account"
+msgstr "Ha un account GitHub"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__id
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_group__id
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__id
+#: model:ir.model.fields,field_description:github_connector.field_github_organization_serie__id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__id
+#: model:ir.model.fields,field_description:github_connector.field_github_team__id
+#: model:ir.model.fields,field_description:github_connector.field_github_team_partner__id
+#: model:ir.model.fields,field_description:github_connector.field_github_team_repository__id
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__id
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__id
+#: model:ir.model.fields,field_description:github_connector.field_wizard_load_github_model__id
+msgid "ID"
+msgstr "ID"
+
+#. module: github_connector
+#: model:ir.model.fields,help:github_connector.field_github_repository__inhibit_inherited_rules
+#: model:ir.model.fields,help:github_connector.field_wizard_create_repository__inhibit_inherited_rules
+msgid ""
+"If checked, the analysis rules to be used will be only those set here.\n"
+" If unchecked, the analysis rules to be used will be those set in the organization and those set here."
+msgstr ""
+"Se selezionata, le regole di analisi da utilizzare saranno solo quelle "
+"impostate qui.\n"
+"Se deselezionata, le regole di analisi da usare saranno quelle impostate "
+"nell'organizzazione e quelle impostate qui."
+
+#. module: github_connector
+#: model:ir.model.fields,help:github_connector.field_github_repository_branch__inhibit_inherited_rules
+msgid ""
+"If checked, the analysis rules to be used will be only those set here.\n"
+" If unchecked, the analysis rules to be used will be those set in the organization, repository and those set here."
+msgstr ""
+"Se selezionata, le regole di analisi da utilizzare saranno solo quelle "
+"impostate qui.\n"
+"Se deselezionata, le regole di analisi da usare saranno quelle impostate "
+"nell'organizzazione, repository e quelle impostate qui."
+
+#. module: github_connector
+#: model:ir.model.fields,help:github_connector.field_github_repository__is_ignored
+#: model:ir.model.fields,help:github_connector.field_wizard_create_repository__is_ignored
+msgid ""
+"If checked, the branches will not be synchronized, and the code source will "
+"this way not be downloaded and analyzed. To ignore a repository, go to the "
+"organization and add the file 'Ignored Repositories'."
+msgstr ""
+"Se selezionata, i branch non verranno sincronizzati e il codice sorgente non "
+"sarà scaricato e analizzato. Per ignorare un repository, accedere "
+"all'organizzazione e aggiungere il file 'Repository ignorati'."
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__ignored_repository_names
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
+msgid "Ignored Repositories"
+msgstr "Repository ignorati"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__image
+msgid "Image"
+msgstr "Immagine"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__inhibit_inherited_rules
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__inhibit_inherited_rules
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__inhibit_inherited_rules
+msgid "Inhibit inherited rules"
+msgstr "Inibisce regole ereditate"
+
+#. module: github_connector
+#. odoo-python
+#: code:addons/github_connector/models/abstract_github_model.py:0
+#, python-format
+msgid "Invalid name '%s' provided"
+msgstr "Fornito un nome '%s' non valido"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_res_partner__is_bot_account
+#: model:ir.model.fields,field_description:github_connector.field_res_users__is_bot_account
+msgid "Is Bot Github Account"
+msgstr "È un account bot GitHub"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__is_ignored
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__is_ignored
+msgid "Is Ignored"
+msgstr "È ignorato"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__last_analyze_date
+msgid "Last Analyze Date"
+msgstr "Ultima data analisi"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__last_download_date
+msgid "Last Download Date"
+msgstr "Ultima data scaricamento"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule____last_update
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_group____last_update
+#: model:ir.model.fields,field_description:github_connector.field_github_organization____last_update
+#: model:ir.model.fields,field_description:github_connector.field_github_organization_serie____last_update
+#: model:ir.model.fields,field_description:github_connector.field_github_repository____last_update
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch____last_update
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info____last_update
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report____last_update
+#: model:ir.model.fields,field_description:github_connector.field_github_team____last_update
+#: model:ir.model.fields,field_description:github_connector.field_github_team_partner____last_update
+#: model:ir.model.fields,field_description:github_connector.field_github_team_repository____last_update
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository____last_update
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team____last_update
+#: model:ir.model.fields,field_description:github_connector.field_wizard_load_github_model____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_abstract_github_model__github_last_sync_date
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__github_last_sync_date
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__github_last_sync_date
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__github_last_sync_date
+#: model:ir.model.fields,field_description:github_connector.field_github_team__github_last_sync_date
+#: model:ir.model.fields,field_description:github_connector.field_res_partner__github_last_sync_date
+#: model:ir.model.fields,field_description:github_connector.field_res_users__github_last_sync_date
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__github_last_sync_date
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__github_last_sync_date
+msgid "Last Sync Date with Github"
+msgstr "Ultima data sincronizzazione con GitHub"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__write_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_group__write_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__write_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_organization_serie__write_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__write_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__write_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__write_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__write_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_team__write_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_team_partner__write_uid
+#: model:ir.model.fields,field_description:github_connector.field_github_team_repository__write_uid
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__write_uid
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__write_uid
+#: model:ir.model.fields,field_description:github_connector.field_wizard_load_github_model__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__write_date
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_group__write_date
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__write_date
+#: model:ir.model.fields,field_description:github_connector.field_github_organization_serie__write_date
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__write_date
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__write_date
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__write_date
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__write_date
+#: model:ir.model.fields,field_description:github_connector.field_github_team__write_date
+#: model:ir.model.fields,field_description:github_connector.field_github_team_partner__write_date
+#: model:ir.model.fields,field_description:github_connector.field_github_team_repository__write_date
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__write_date
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__write_date
+#: model:ir.model.fields,field_description:github_connector.field_wizard_load_github_model__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_abstract_github_model__github_write_date
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__github_write_date
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__github_write_date
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__github_write_date
+#: model:ir.model.fields,field_description:github_connector.field_github_team__github_write_date
+#: model:ir.model.fields,field_description:github_connector.field_res_partner__github_write_date
+#: model:ir.model.fields,field_description:github_connector.field_res_users__github_write_date
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__github_write_date
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__github_write_date
+msgid "Last Write Date on Github"
+msgstr "Ultima data scrittura su GitHub"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_res_partner_form
+msgid "Light Sync"
+msgstr "Sincronizzazioene leggera"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_wizard_load_github_model_form
+msgid "Load From Github"
+msgstr "Carica da GitHub"
+
+#. module: github_connector
+#: model:ir.actions.act_window,name:github_connector.action_wizard_load_github_model
+msgid "Load from Github Wizard"
+msgstr "Procedura guidata caricamento da GitHub"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__local_path
+msgid "Local Path"
+msgstr "Percorso locale"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__location
+msgid "Location"
+msgstr "Ubicazione"
+
+#. module: github_connector
+#: model:ir.model.fields.selection,name:github_connector.selection__github_team_partner__role__maintainer
+msgid "Maintainer"
+msgstr "Maintainer"
+
+#. module: github_connector
+#. odoo-python
+#: code:addons/github_connector/models/abstract_github_model.py:0
+#, python-format
+msgid "Maximum attempts reached."
+msgstr "Raggiunto numero massimo tentativi."
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_kanban
+msgid "Mb"
+msgstr "MB"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_team_partner__partner_id
+#: model:ir.model.fields.selection,name:github_connector.selection__github_team_partner__role__member
+msgid "Member"
+msgstr "Membro"
+
+#. module: github_connector
+#: model:ir.actions.act_window,name:github_connector.action_github_team_partner_from_team
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__member_ids
+#: model:ir.model.fields,field_description:github_connector.field_github_team__partner_ids
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__partner_ids
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_form
+msgid "Members"
+msgstr "Membri"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_form
+msgid "Members Sync."
+msgstr "Sincronizza membri"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__name
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_group__name
+#: model:ir.model.fields,field_description:github_connector.field_github_organization_serie__name
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__name
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__name
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__name
+#: model:ir.model.fields,field_description:github_connector.field_github_team__name
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__name
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__name
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_search
+msgid "Name"
+msgstr "Nome"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_search
+msgid "Name or Description"
+msgstr "Nome o descrizione"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_search
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_search
+msgid "Name or Github Name"
+msgstr "Nome o nome GitHub"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__repository_branch_qty
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__repository_branch_qty
+msgid "Number of Branches"
+msgstr "Numero di branch"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__member_qty
+#: model:ir.model.fields,field_description:github_connector.field_github_team__partner_qty
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__partner_qty
+msgid "Number of Members"
+msgstr "Numero di membri"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_res_partner__organization_qty
+#: model:ir.model.fields,field_description:github_connector.field_res_users__organization_qty
+msgid "Number of Organizations"
+msgstr "Numero di organizzazioni"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__repository_qty
+#: model:ir.model.fields,field_description:github_connector.field_github_team__repository_qty
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__repository_qty
+msgid "Number of Repositories"
+msgstr "Numero di repository"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__organization_serie_qty
+msgid "Number of Series"
+msgstr "Numero di serie"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__team_qty
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__team_qty
+#: model:ir.model.fields,field_description:github_connector.field_res_partner__github_team_qty
+#: model:ir.model.fields,field_description:github_connector.field_res_users__github_team_qty
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__team_qty
+msgid "Number of Teams"
+msgstr "Numero di team"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_organization_serie__organization_id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__organization_id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__organization_id
+#: model:ir.model.fields,field_description:github_connector.field_github_team__organization_id
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__organization_id
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__organization_id
+#: model:ir.model.fields.selection,name:github_connector.selection__wizard_load_github_model__github_type__organization
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_search
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_search
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_search
+msgid "Organization"
+msgstr "Organizzazione"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__name
+msgid "Organization Name"
+msgstr "Nome organizzazione"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__organization_serie_id
+msgid "Organization Serie"
+msgstr "Serie organizzazione"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__organization_serie_ids
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
+msgid "Organization Series"
+msgstr "Serie organizzazione"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__organization_serie_id
+msgid "Organization serie"
+msgstr "Serie organizzazione"
+
+#. module: github_connector
+#: model:ir.actions.act_window,name:github_connector.action_github_organization
+#: model:ir.model.fields,field_description:github_connector.field_res_partner__organization_ids
+#: model:ir.model.fields,field_description:github_connector.field_res_users__organization_ids
+#: model:ir.ui.menu,name:github_connector.menu_github_organization
+#: model_terms:ir.ui.view,arch_db:github_connector.view_res_partner_form
+msgid "Organizations"
+msgstr "Organizzazioni"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_team__parent_id
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__parent_id
+msgid "Parent Team"
+msgstr "Team padre"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__paths
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__paths
+msgid "Paths"
+msgstr "Percorsi"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_team_repository__permission
+msgid "Permission"
+msgstr "Permesso"
+
+#. module: github_connector
+#. odoo-python
+#: code:addons/github_connector/models/abstract_github_model.py:0
+#, python-format
+msgid ""
+"Please add the 'github_token' in Odoo configuration file or as the "
+"'github.access_token' configuration parameter."
+msgstr ""
+"Aggiungere il 'github_token' nel file configurazione Odoo o come parametro "
+"configurazione 'github.access_token'."
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_team__privacy
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__privacy
+msgid "Privacy"
+msgstr "Privacy"
+
+#. module: github_connector
+#: model:ir.model.fields.selection,name:github_connector.selection__github_team_repository__permission__read
+msgid "Read"
+msgstr "Leggi"
+
+#. module: github_connector
+#: model:ir.ui.menu,name:github_connector.menu_reporting
+msgid "Reports"
+msgstr "Resoconti"
+
+#. module: github_connector
+#: model:ir.actions.act_window,name:github_connector.action_github_repository
+#: model:ir.actions.act_window,name:github_connector.action_github_team_repository_from_team
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__repository_ids
+#: model:ir.model.fields,field_description:github_connector.field_github_team__repository_ids
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__repository_ids
+#: model:ir.ui.menu,name:github_connector.menu_github_repository
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_form
+msgid "Repositories"
+msgstr "Repository"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
+msgid "Repositories Sync."
+msgstr "Sincronizza repository"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__repository_id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__repository_id
+#: model:ir.model.fields,field_description:github_connector.field_github_team_repository__repository_id
+#: model:ir.model.fields.selection,name:github_connector.selection__wizard_load_github_model__github_type__repository
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_search
+msgid "Repository"
+msgstr "Repository"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__repository_branch_id
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__repository_branch_id
+msgid "Repository Branch"
+msgstr "Branch repository"
+
+#. module: github_connector
+#: model:ir.actions.act_window,name:github_connector.action_github_repository_branch
+#: model:ir.ui.menu,name:github_connector.menu_github_repository_branch
+msgid "Repository Branches"
+msgstr "Branch repository"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_form
+msgid "Repository Sync."
+msgstr "Sincronizza repository"
+
+#. module: github_connector
+#: model:ir.actions.act_window,name:github_connector.action_github_repository_branch_rule_info_report
+#: model:ir.ui.menu,name:github_connector.menu_action_github_repository_branch_rule_info_report
+#: model_terms:ir.ui.view,arch_db:github_connector.action_github_repository_branch_rule_info_report_graph
+#: model_terms:ir.ui.view,arch_db:github_connector.action_github_repository_branch_rule_info_report_pivot
+msgid "Repository branch analysis rule"
+msgstr "Regola analisi branch repository"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_team_partner__role
+msgid "Role"
+msgstr "Ruolo"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_info_mixin__scanned_files
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info__scanned_files
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__scanned_files
+msgid "Scanned Files"
+msgstr "File scansionati"
+
+#. module: github_connector
+#: model:ir.model.fields.selection,name:github_connector.selection__github_team__privacy__secret
+#: model:ir.model.fields.selection,name:github_connector.selection__wizard_create_team__privacy__secret
+msgid "Secret"
+msgstr "Segreto"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_organization_serie__sequence
+msgid "Sequence"
+msgstr "Sequenza"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__sequence_serie
+msgid "Sequence Serie"
+msgstr "Serie sequenza"
+
+#. module: github_connector
+#: model:ir.model.constraint,message:github_connector.constraint_github_organization_serie_sequence_organization_uniq
+msgid "Sequence serie must be unique by organization."
+msgstr "La serie seuenza deve essere univoca per organizzazione."
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_search
+msgid "Serie"
+msgstr "Serie"
+
+#. module: github_connector
+#: model:ir.model.fields,help:github_connector.field_github_organization__ignored_repository_names
+msgid ""
+"Set here repository names you want to ignore. One repository per line. If set, the repositories will be created, but branches synchronization and source code download will be disabled. Exemple:\n"
+"purchase-workflow\n"
+"OCB\n"
+"OpenUpgrade\n"
+msgstr ""
+"Impostare qui i nomi repositori che si vogliono ignorare. Un repository per "
+"riga. Se impostata, il repository verrà creato ma la singronizzazione dei "
+"branch e lo scaricamento del codice sorgente saranno disabilitati. Esempio:\n"
+"purchase-workflow\n"
+"OCB\n"
+"OpenUpgrade\n"
+
+#. module: github_connector
+#: model:ir.ui.menu,name:github_connector.menu_github_settings
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
+msgid "Settings"
+msgstr "Impostazioni"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__size
+msgid "Size (Byte) "
+msgstr "Dimensione (Byte) "
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__mb_size
+msgid "Size (Megabyte)"
+msgstr "Dimensione (Megabyte)"
+
+#. module: github_connector
+#: model:ir.actions.act_window,name:github_connector.action_github_size_by_serie
+#: model:ir.ui.menu,name:github_connector.menu_size_by_serie
+msgid "Sizes by Serie"
+msgstr "Dimensione per serie"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__state
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_search
+msgid "State"
+msgstr "Stato"
+
+#. module: github_connector
+#: model:ir.ui.menu,name:github_connector.menu_wizard_load_github_model
+msgid "Sync Object"
+msgstr "Sincronizza oggetto"
+
+#. module: github_connector
+#: model:ir.actions.server,name:github_connector.cron_update_organization_ir_actions_server
+#: model:ir.cron,cron_name:github_connector.cron_update_organization
+msgid "Synchronize All Organizations and Teams"
+msgstr "Sincronizza tutte le organizzazioni e i team"
+
+#. module: github_connector
+#: model:ir.actions.server,name:github_connector.cron_update_branch_list_ir_actions_server
+#: model:ir.cron,cron_name:github_connector.cron_update_branch_list
+msgid "Synchronize Branches List for All Repositories"
+msgstr "Sincronizza la lista branch per tutti i repository"
+
+#. module: github_connector
+#: model:ir.actions.act_window,name:github_connector.action_github_team_repository_from_repository
+#: model:ir.model.fields,field_description:github_connector.field_github_team_partner__team_id
+#: model:ir.model.fields,field_description:github_connector.field_github_team_repository__team_id
+msgid "Team"
+msgstr "Team"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__wizard_partner_ids
+msgid "Team Members"
+msgstr "Membri del team"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team__wizard_repository_ids
+msgid "Team Repositories"
+msgstr "Repository del team"
+
+#. module: github_connector
+#: model:ir.actions.act_window,name:github_connector.action_github_team
+#: model:ir.actions.act_window,name:github_connector.action_github_team_partner_from_partner
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__team_ids
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__team_ids
+#: model:ir.model.fields,field_description:github_connector.field_res_partner__github_team_partner_ids
+#: model:ir.model.fields,field_description:github_connector.field_res_users__github_team_partner_ids
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__team_ids
+#: model:ir.ui.menu,name:github_connector.menu_github_team
+#: model_terms:ir.ui.view,arch_db:github_connector.view_res_partner_form
+msgid "Teams"
+msgstr "Team"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
+msgid "Teams Sync."
+msgstr "Sincronizza team"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_analysis_rule_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+msgid "Technical Settings"
+msgstr "Impostazioni tecniche"
+
+#. module: github_connector
+#: model:ir.model.fields,help:github_connector.field_github_team__privacy
+#: model:ir.model.fields,help:github_connector.field_wizard_create_team__privacy
+msgid ""
+"The level of privacy this team should have. Can be one of:\n"
+"* secret - only visible to organization owners and members of this team.\n"
+"* closed - visible to all members of this organization."
+msgstr ""
+"Il livello di privacy che dovrebbe avere questo team. Può essere uno di:\n"
+"* segreto - visibile solo ai proprietari dell'organizzazione e ai membri di "
+"questo team\n"
+"* chiuso - visibile a tutti i membri di questa organizzazione."
+
+#. module: github_connector
+#. odoo-python
+#: code:addons/github_connector/models/github_organization.py:0
+#, python-format
+msgid ""
+"The provided Github Token must have admin read:org permissions to the "
+"organization '%s'"
+msgstr ""
+"Il token Github fornito deve disporre delle autorizzazioni di amministratore "
+"read:org per l'organizzazione '%s'"
+
+#. module: github_connector
+#: model:ir.model.fields.selection,name:github_connector.selection__github_repository_branch__state__to_analyze
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_search
+msgid "To Analyze"
+msgstr "Da analizzare"
+
+#. module: github_connector
+#: model:ir.model.fields.selection,name:github_connector.selection__github_repository_branch__state__to_download
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_search
+msgid "To Download"
+msgstr "Da scaricare"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_tree
+msgid "Total"
+msgstr "Totale"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+msgid "Total code"
+msgstr "Codice totale"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+msgid "Total documentation"
+msgstr "Totale documentazione"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+msgid "Total empty"
+msgstr "Totale vuoti"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+msgid "Total scanned"
+msgstr "Totale scansionati"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+msgid "Total total"
+msgstr "Totale totali"
+
+#. module: github_connector
+#: model:ir.model.constraint,message:github_connector.constraint_res_partner_github_login_uniq
+msgid "Two different partners cannot have the same Github Login"
+msgstr "Due partner differenti non possono avere lo stesso login GitHub"
+
+#. module: github_connector
+#: model:ir.model.fields.selection,name:github_connector.selection__github_team_repository__permission__undefined
+msgid "Undefined"
+msgstr "Non definito"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_wizard_load_github_model__child_update
+msgid "Update Child Objects"
+msgstr "Aggiorna oggetti figli"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_tree
+msgid "Update Source Code"
+msgstr "Aggirona codice sorgente"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_tree
+msgid "Update Source Code Analyzis"
+msgstr "Aggiorna analisi codice sorgente"
+
+#. module: github_connector
+#: model:ir.model.fields.selection,name:github_connector.selection__wizard_load_github_model__github_type__user
+msgid "User"
+msgstr "Utente"
+
+#. module: github_connector
+#: model:ir.actions.act_window,name:github_connector.action_res_partner
+#: model:ir.ui.menu,name:github_connector.menu_res_partner
+msgid "Users"
+msgstr "Utenti"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_repository__website
+#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository__website
+msgid "Website"
+msgstr "Sito web"
+
+#. module: github_connector
+#: model:ir.model.fields,field_description:github_connector.field_github_organization__website_url
+msgid "Website Url"
+msgstr "URL sito web"
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_wizard_create_repository
+msgid "Wizard Create Repository"
+msgstr "Procedura guidata creazione repository"
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_wizard_create_team
+msgid "Wizard Create Team"
+msgstr "Procedura guidata creazione team"
+
+#. module: github_connector
+#: model:ir.model,name:github_connector.model_wizard_load_github_model
+msgid "Wizard Load Github Model"
+msgstr "Procedura guidata caricamento modello GitHub"
+
+#. module: github_connector
+#: model:ir.model.fields.selection,name:github_connector.selection__github_team_repository__permission__write
+msgid "Write"
+msgstr "Scrivi"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_analysis_rule_form
+msgid "You can see reference documentation and some examples in:"
+msgstr "Si può trovare la documentazione di riferimento e qualche esempio in:"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_analysis_rule_form
+msgid "https://git-scm.com/docs/gitignore#_pattern_format"
+msgstr "https://git-scm.com/docs/gitignore#_pattern_format"
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_wizard_create_repository_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_wizard_create_team_form
+#: model_terms:ir.ui.view,arch_db:github_connector.view_wizard_load_github_model_form
+msgid "or"
+msgstr "o"
+
+#. module: github_connector
+#. odoo-python
+#: code:addons/github_connector/models/github_repository_branch.py:0
+#, python-format
+msgid "source_code_local_path should be defined in your  configuration file"
+msgstr ""
+"source_code_local_path dovrebbe essere difinito nel file di configurazione"
