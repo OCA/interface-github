@@ -1,5 +1,6 @@
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+# Copyright 2024 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import base64
@@ -495,11 +496,11 @@ class OdooModuleVersion(models.Model):
             try:
                 with open(icon_path, "rb") as f:
                     image = f.read()
-                image_enc = base64.b64encode(image)
                 if resize:
-                    image = tools.image.ImageProcess(image_enc, False)
-                    image.resize(96, 96)
-                    image_enc = image.image_base64(output_format="PNG")
+                    process = tools.image.ImageProcess(image, False)
+                    process.resize(96, 96)
+                    image = process.image_quality()
+                image_enc = base64.b64encode(image)
             except Exception:
                 _logger.warning("Unable to read or resize %s", icon_path)
             module_version.write({"image": image_enc})
