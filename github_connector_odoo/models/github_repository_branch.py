@@ -1,5 +1,6 @@
 # Copyright (C) 2016-Today: Odoo Community Association (OCA)
 # Copyright 2020-2023 Tecnativa - Víctor Martínez
+# Copyright 2024 Tecnativa - Pedro M. Baeza
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -8,6 +9,8 @@ import os
 
 from odoo import api, fields, models
 from odoo.modules.module import get_manifest
+
+import odoo.addons
 
 # Hard define this value to make this module working with or without
 # the patch (that backports V10 manifests analysis code.
@@ -209,7 +212,9 @@ class GithubRepositoryBranch(models.Model):
             manifest_keys_find = module_version.manifest_key_ids.filtered(
                 lambda x: x.id in rule.manifest_key_ids.ids
             )
+            odoo.addons.__path__.append(full_path)  # HACK: to get file_open working
             module_info = get_manifest(module_version.technical_name, full_path)
+            odoo.addons.__path__.remove(full_path)
             spec = rule._set_spec(rule.paths.splitlines())
             for manifest_key_find in manifest_keys_find:
                 if manifest_key_find.name in module_info:
@@ -227,7 +232,9 @@ class GithubRepositoryBranch(models.Model):
         module_version_obj = self.env["odoo.module.version"]
         try:
             full_module_path = os.path.join(path, module_name)
+            odoo.addons.__path__.append(path)  # HACK: to get file_open working
             module_info = get_manifest(module_name, full_module_path)
+            odoo.addons.__path__.remove(path)
             # Create module version, if the module is installable
             # in the serie
             if module_info.get("installable", False):
