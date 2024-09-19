@@ -116,9 +116,10 @@ class GithubOrganization(models.Model):
         return res
 
     def full_update(self):
-        self.button_sync_member()
-        self.button_sync_repository()
-        self.button_sync_team()
+        for rec in self :
+            rec.button_sync_member()
+            rec.button_sync_repository()
+            rec.button_sync_team()
 
     @api.model
     def cron_update_organization_team(self):
