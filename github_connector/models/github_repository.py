@@ -161,7 +161,8 @@ class GithubRepository(models.Model):
         return new_item
 
     def full_update(self):
-        self.button_sync_branch()
+        for rec in self:
+            rec.button_sync_branch()
 
     @api.model
     def cron_update_branch_list(self):
