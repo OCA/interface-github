@@ -167,6 +167,8 @@ class GithubRepository(models.Model):
         for branch in self:
             repository = branch.repository_id
             gh_repo = repository.find_related_github_object()
+            if not gh_repo:
+                continue
             if not os.path.exists(branch.local_path):
                 _logger.info("Cloning new repository into %s ..." % branch.local_path)
                 # Cloning the repository

@@ -4,6 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
+from github.GithubException import GithubException
 
 from odoo import api, fields, models
 
@@ -137,8 +138,16 @@ class GithubRepository(models.Model):
 
     def find_related_github_object(self, obj_id=None):
         """Query Github API to find the related object"""
-        gh_api = self.get_github_connector()
-        return gh_api.get_repo(int(obj_id or self.github_id_external))
+        try:
+            gh_api = self.get_github_connector()
+            return gh_api.get_repo(int(obj_id or self.github_id_external))
+        except GithubException as e:
+            _logger.error(
+                "An error occurred while trying to fetch the repository %s: %s",
+                self.complete_name,
+                e,
+            )
+            return False
 
     def get_github_base_obj_for_creation(self):
         self.ensure_one()
@@ -174,6 +183,8 @@ class GithubRepository(models.Model):
         branch_obj = self.env["github.repository.branch"]
         for repository in self.filtered(lambda r: not r.is_ignored):
             gh_repo = repository.find_related_github_object()
+            if not gh_repo:
+                continue
             branch_ids = []
             correct_series = repository.organization_id.organization_serie_ids.mapped(
                 "name"
