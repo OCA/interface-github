@@ -4,9 +4,13 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import logging
+
 from github.GithubException import GithubException
 
-from odoo import _, api, exceptions, fields, models
+from odoo import api, fields, models
+
+_logger = logging.getLogger(__name__)
 
 
 class GithubOrganization(models.Model):
@@ -116,9 +120,10 @@ class GithubOrganization(models.Model):
         return res
 
     def full_update(self):
-        self.button_sync_member()
-        self.button_sync_repository()
-        self.button_sync_team()
+        for rec in self:
+            rec.button_sync_member()
+            rec.button_sync_repository()
+            rec.button_sync_team()
 
     @api.model
     def cron_update_organization_team(self):
@@ -192,11 +197,9 @@ class GithubOrganization(models.Model):
                 organization.team_ids = team_ids
             except GithubException as e:
                 if e.status == 403:
-                    raise exceptions.AccessError(
-                        _(
-                            "The provided Github Token must have admin read:org"
-                            " permissions to the organization '%s'" % self.name
-                        )
+                    _logger.error(
+                        "The provided Github Token must have admin read:org"
+                        " permissions to the organization '%s'" % self.name
                     )
 
     def action_github_repository(self):

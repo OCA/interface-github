@@ -148,8 +148,9 @@ class GithubTeam(models.Model):
         return new_item
 
     def full_update(self):
-        self.button_sync_member()
-        self.button_sync_repository()
+        for rec in self:
+            rec.button_sync_member()
+            rec.button_sync_repository()
 
     def find_related_github_object(self, obj_id=None):
         """Query Github API to find the related object"""
