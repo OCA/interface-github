@@ -4,6 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
+
 from github.GithubException import GithubException
 
 from odoo import api, fields, models
@@ -141,7 +142,7 @@ class GithubRepository(models.Model):
         try:
             gh_api = self.get_github_connector()
             return gh_api.get_repo(int(obj_id or self.github_id_external))
-        except GithubException as e:
+        except GithubException as e:g
             _logger.error(
                 "An error occurred while trying to fetch the repository %s: %s",
                 self.complete_name,
