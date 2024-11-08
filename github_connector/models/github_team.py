@@ -81,11 +81,8 @@ class GithubTeam(models.Model):
     def _compute_github_url(self):
         for team in self:
             team.github_url = (
-                "https://github.com/orgs/{organization_name}/"
-                "teams/{team_name}".format(
-                    organization_name=team.organization_id.github_name,
-                    team_name=team.github_name,
-                )
+                f"https://github.com/orgs/{team.organization_id.github_name}/"
+                f"teams/{team.github_name}"
             )
 
     @api.depends("name", "organization_id.github_name")
