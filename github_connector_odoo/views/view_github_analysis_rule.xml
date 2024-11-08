@@ -17,7 +17,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <field name="paths" position="after">
                 <field
                     name="manifest_key_ids"
-                    attrs="{'invisible': [('has_odoo_addons', '=', False)]}"
+                    invisible="not has_odoo_addons"
                     colspan="4"
                 />
             </field>

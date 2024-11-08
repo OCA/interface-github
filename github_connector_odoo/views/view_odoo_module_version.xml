@@ -83,8 +83,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     <div class="oe_clear" />
                     <notebook>
                         <page string="Information">
-                            <group col="4">
-                                <field name="github_url" colspan="4" widget="url" />
+                            <group>
+                                <field name="github_url" colspan="2" widget="url" />
                                 <field name="repository_id" />
                                 <field name="repository_branch_id" />
                                 <field name="module_id" />
@@ -115,7 +115,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             </group>
                         </page>
                         <page string="Technical information (Manifest)">
-                            <group col="4">
+                            <group>
                                 <field name="author" />
                                 <field name="maintainers" />
                                 <field name="license" />
@@ -124,7 +124,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 <field name="depends" />
                                 <field name="external_dependencies" />
                                 <newline />
-                                <field name="description_rst" nolabel="1" colspan="4" />
+                                <field name="description_rst" nolabel="1" colspan="2" />
                             </group>
                         </page>
                         <page name="code_analysis" string="Code Analysis">

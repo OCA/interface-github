@@ -47,7 +47,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             name="action_open"
                             class="oe_stat_button"
                             icon="fa-cube"
-                            attrs="{'invisible': [('module_version_qty', '=', False)]}"
+                            invisible="not module_version_qty"
                             context="{'xml_id': 'action_odoo_module_version', 'field_name': 'module_id'}"
                         >
                             <field
@@ -61,7 +61,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             name="action_open"
                             class="oe_stat_button"
                             icon="fa-arrows-v"
-                            attrs="{'invisible': [('dependence_module_version_qty', '=', False)]}"
+                            invisible="not dependence_module_version_qty"
                             context="{'xml_id': 'action_odoo_module_version', 'field_name': 'dependency_module_ids'}"
                         >
                             <field
@@ -91,10 +91,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     </group>
                     <notebook>
                         <page string="Descriptions">
-                            <group col="4">
+                            <group>
                                 <field
                                     name="description_rst_html"
-                                    colspan="4"
+                                    colspan="2"
                                     nolabel="1"
                                     class="oe_styling_v8"
                                 />

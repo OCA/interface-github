@@ -33,7 +33,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             name="action_open"
                             class="oe_stat_button"
                             icon="fa-cube"
-                            attrs="{'invisible': [('module_version_qty', '=', False)]}"
+                            invisible="not module_version_qty"
                             context="{'xml_id': 'action_odoo_module_version', 'field_name': 'license_id'}"
                         >
                             <field
@@ -48,7 +48,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                         name="web_ribbon"
                         title="Archived"
                         bg_color="bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
+                        invisible="active"
                     />
                     <field name="image" widget="image" class="oe_avatar" />
                     <div class="oe_title">
@@ -62,7 +62,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 <field name="website" widget="url" />
                             </group>
                             <group string="Description">
-                                <field name="description" nolabel="1" />
+                                <field name="description" nolabel="1" colspan="2" />
                             </group>
                         </page>
                     </notebook>

@@ -30,7 +30,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     class="oe_stat_button"
                     icon="fa-cube"
                     name="action_open"
-                    attrs="{'invisible': [('module_version_qty', '=', False)]}"
+                    invisible="not module_version_qty"
                     context="{'xml_id': 'action_odoo_module_version', 'field_name': 'repository_branch_id'}"
                 >
                     <field
@@ -51,7 +51,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     name="module_version_analysis_rule_info_ids"
                     widget="one2many_list"
                     colspan="4"
-                    attrs="{'invisible': [('module_version_analysis_rule_info_ids', '=', [])]}"
+                    invisible="not module_version_analysis_rule_info_ids"
                 >
                     <tree create="false" delete="false" editable="false">
                         <field name="group_id" />
