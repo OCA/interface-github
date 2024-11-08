@@ -430,10 +430,7 @@ class GithubRepository(models.Model):
     @api.depends("name", "repository_id.complete_name")
     def _compute_github_url(self):
         for branch in self:
-            branch.github_url = "{}/tree/{}".format(
-                branch.repository_id.github_url,
-                branch.name,
-            )
+            branch.github_url = f"{branch.repository_id.github_url}/tree/{branch.name}"
 
 
 class GithubRepositoryBranchRuleInfo(models.TransientModel):
