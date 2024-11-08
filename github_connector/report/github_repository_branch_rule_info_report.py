@@ -38,7 +38,7 @@ class GithubRepositoryBranchRuleInfoReport(models.Model):
 
     @property
     def _table_query(self):
-        return "%s %s %s" % (self._select(), self._from(), self._group_by())
+        return f"{self._select()} {self._from()} {self._group_by()}"
 
     @api.model
     def _select(self):
@@ -63,8 +63,10 @@ class GithubRepositoryBranchRuleInfoReport(models.Model):
             FROM github_repository_branch_rule_info as grbri
                 LEFT JOIN github_analysis_rule as gar ON grbri.analysis_rule_id = gar.id
                 LEFT JOIN github_analysis_rule_group as garg ON gar.group_id = garg.id
-                LEFT JOIN github_repository_branch as grb ON grbri.repository_branch_id = grb.id
-                LEFT JOIN github_organization_serie as gos ON grb.organization_serie_id = gos.id
+                LEFT JOIN github_repository_branch as grb
+                    ON grbri.repository_branch_id = grb.id
+                LEFT JOIN github_organization_serie as gos
+                    ON grb.organization_serie_id = gos.id
                 LEFT JOIN github_repository as gr ON grb.repository_id = gr.id
         """
 

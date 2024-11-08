@@ -9,7 +9,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">wizard.load.github.model</field>
         <field name="arch" type="xml">
             <form>
-                <group col="4">
+                <group>
                     <field name="github_type" />
                     <field name="name" />
                     <field name="child_update" />
@@ -21,7 +21,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                         type="object"
                         class="oe_highlight"
                     />
-                    or
                     <button string="Cancel" class="oe_link" special="cancel" />
                 </footer>
             </form>

@@ -108,11 +108,8 @@ class GithubRepository(models.Model):
     @api.depends("name", "organization_id.github_name")
     def _compute_complete_name(self):
         for repository in self:
-            repository.complete_name = "%(login)s/%(rep_name)s" % (
-                {
-                    "login": repository.organization_id.github_name,
-                    "rep_name": repository.name or "",
-                }
+            repository.complete_name = (
+                f"{repository.organization_id.github_name}/{repository.name or ''}"
             )
 
     @api.depends("repository_branch_ids.repository_id")

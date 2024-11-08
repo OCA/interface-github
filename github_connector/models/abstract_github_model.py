@@ -200,7 +200,8 @@ class AbstractGithubModel(models.AbstractModel):
             else:
                 try:
                     # Try to get an organization 1st.
-                    # An organization is always an user, but a user is not necessarily an org.
+                    # An organization is always an user, but a user is not necessarily
+                    # an org.
                     gh_obj = gh_api.get_organization(p_name)
                 except UnknownObjectException:
                     # Try to get an user.

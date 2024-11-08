@@ -22,13 +22,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 decoration-warning="permission == 'admin'"
                 decoration-info="permission == 'read'"
             >
-                <field
-                    name="team_id"
-                    attrs="{'invisible': [('context_search_default_team_id', '!=', 0)]}"
-                />
+                <field name="team_id" invisible="context_search_default_team_id!=0" />
                 <field
                     name="repository_id"
-                    attrs="{'invisible': [('context_search_default_repository_id', '!=', 0)]}"
+                    invisible="context_search_default_repository_id!=0"
                 />
                 <field name="permission" />
                 <field name="context_search_default_team_id" invisible="1" />

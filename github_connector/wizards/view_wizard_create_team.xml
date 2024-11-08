@@ -9,21 +9,13 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">wizard.create.team</field>
         <field name="arch" type="xml">
             <form>
-                <group col="4">
-                    <field name="organization_id" colspan="4" />
+                <group>
+                    <field name="organization_id" />
                     <field name="name" />
                     <field name="privacy" />
-                    <field name="description" colspan="4" />
-                    <field
-                        name="wizard_partner_ids"
-                        colspan="4"
-                        widget="many2many_tags"
-                    />
-                    <field
-                        name="wizard_repository_ids"
-                        colspan="4"
-                        widget="many2many_tags"
-                    />
+                    <field name="description" />
+                    <field name="wizard_partner_ids" widget="many2many_tags" />
+                    <field name="wizard_repository_ids" widget="many2many_tags" />
                 </group>
                 <footer>
                     <button
@@ -32,7 +24,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                         type="object"
                         class="oe_highlight"
                     />
-                    or
                     <button string="Cancel" class="oe_link" special="cancel" />
                 </footer>
             </form>

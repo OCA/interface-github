@@ -1457,9 +1457,3 @@ msgstr "o"
 #, python-format
 msgid "source_code_local_path should be defined in your  configuration file"
 msgstr "source_code_local_path debe definirse en su archivo de configuración"
-
-#~ msgid "# String"
-#~ msgstr "# Cadena"
-
-#~ msgid "Total string"
-#~ msgstr "Total cadena"
