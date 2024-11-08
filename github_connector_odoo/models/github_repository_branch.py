@@ -221,7 +221,7 @@ class GithubRepositoryBranch(models.Model):
                     key_paths = module_info[manifest_key_find.name]
                     path_items = []
                     for key_path in key_paths:
-                        path_items.append("{}/{}".format(full_path, key_path))
+                        path_items.append(f"{full_path}/{key_path}")
                     matchs += spec.match_files(path_items)
         else:
             matchs = rule._get_matches(full_path)
