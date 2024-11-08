@@ -420,9 +420,9 @@ class OdooModuleVersion(models.Model):
     @api.model
     def manifest_2_odoo(self, info, repository_branch, module):
         author_list = (
-            (type(info["author"]) == list)
+            isinstance(info["author"], list)
             and info["author"]
-            or (type(info["author"]) == tuple)
+            or (isinstance(info["author"], tuple))
             and [x for x in info["author"]]
             or info["author"].split(",")
         )

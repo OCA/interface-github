@@ -2,7 +2,7 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 import responses
 
-from odoo.modules.module import get_resource_path
+from odoo.tools.misc import file_path
 
 from odoo.addons.github_connector.tests.test_github_analysis_rule import (
     TestGithubConnectorAnalysisRuleBase,
@@ -23,21 +23,16 @@ class TestGithubConnectorOdooAnalysisRuleBase(TestGithubConnectorAnalysisRuleBas
 
     def _set_github_responses(self):
         res = super()._set_github_responses(self)
-        with open(
-            get_resource_path(
-                "github_connector_odoo",
-                "tests",
-                "res",
-                "github_maintainer_tools_repos_with_ids.txt",
-            )
-        ) as test_file:
-            domain = "https://raw.githubusercontent.com"
-            responses.add(
-                responses.GET,
-                "%s/OCA/maintainer-tools/master/tools/repos_with_ids.txt" % domain,
-                json=test_file.read(),
-                status=200,
-            )
+        test_file = file_path(
+            "github_connector_odoo/tests/res/github_maintainer_tools_repos_with_ids.txt"
+        )
+        domain = "https://raw.githubusercontent.com"
+        responses.add(
+            responses.GET,
+            "%s/OCA/maintainer-tools/master/tools/repos_with_ids.txt" % domain,
+            json=open(test_file, "rb").read().decode("utf-8"),
+            status=200,
+        )
         return res
 
 

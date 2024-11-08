@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -117,7 +117,6 @@ msgstr ""
 
 #. module: github_connector_odoo
 #: model:ir.actions.server,name:github_connector_odoo.cron_clean_odoo_module_version_ir_actions_server
-#: model:ir.cron,cron_name:github_connector_odoo.cron_clean_odoo_module_version
 msgid "Clean Odoo Module Version"
 msgstr ""
 
@@ -327,20 +326,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_license_form
 #: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_version_form
 msgid "Information"
-msgstr ""
-
-#. module: github_connector_odoo
-#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_author____last_update
-#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_category____last_update
-#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_bin____last_update
-#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_python____last_update
-#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_license____last_update
-#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_manifest_key____last_update
-#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module____last_update
-#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version____last_update
-#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info____last_update
-#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info_report____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: github_connector_odoo

@@ -1,16 +1,16 @@
 **Odoo Modules**
 
-![image](/github_connector_odoo/static/description/odoo_module_kanban.png)
+![odoo_module_kanban](static/description/odoo_module_kanban.png)
 
 In each module, you can see the description of the module, the authors,
 the available series, and the list of the modules that depend on the
 current module.
 
-![image](/github_connector_odoo/static/description/odoo_module_form.png)
+![odoo_module_form](static/description/odoo_module_form.png)
 
 **Odoo Authors**
 
-![image](/github_connector_odoo/static/description/odoo_author.png)
+![odoo_author](static/description/odoo_author.png)
 
 This list is based on the 'author' key of the manifest file.
 
@@ -18,21 +18,21 @@ This list is based on the 'author' key of the manifest file.
 
 This list is based on the 'license' key of the manifest file.
 
-![image](/github_connector_odoo/static/description/odoo_license.png)
+![odoo_license](static/description/odoo_license.png)
 
 **Odoo Bin Libs**
 
 This list is based on the 'external_dependencies' / 'bin' key of the
 manifest file.
 
-![image](/github_connector_odoo/static/description/odoo_bin_libs.png)
+![odoo_bin_libs](static/description/odoo_bin_libs.png)
 
 **Odoo Python Libs**
 
 This list is based on the 'external_dependencies' / 'python' key of the
 manifest file.
 
-![image](/github_connector_odoo/static/description/odoo_python_libs.png)
+![odoo_python_libs](static/description/odoo_python_libs.png)
 
 **Analysis source code**
 
@@ -55,4 +55,4 @@ This module provide a new reporting.
 
 **Modules by Serie (and Licenses)**
 
-![image](/github_connector_odoo/static/description/reporting_module_by_serie.png)
+![reporting_module_by_serie](static/description/reporting_module_by_serie.png)
