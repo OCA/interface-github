@@ -66,11 +66,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 decoration-warning="state == 'to_analyze'"
             >
                 <field name="complete_name" />
-                <field
-                    name="mb_size"
-                    attrs="{'invisible': [('size', '=', 0)]}"
-                    sum="Total"
-                />
+                <field name="mb_size" invisible="size==0" sum="Total" />
                 <field name="size" invisible="1" />
                 <field name="repository_id" invisible="1" />
                 <field name="last_download_date" />
@@ -78,7 +74,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <button
                     name="button_download_code"
                     type="object"
-                    states="to_download"
+                    invisible="state!='to_download'"
                     string="Download Source Code"
                     icon="fa-download"
                     groups="github_connector.group_github_connector_manager"
@@ -86,7 +82,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <button
                     name="button_download_code"
                     type="object"
-                    states="to_analyze,analyzed"
+                    invisible="state not in ('to_analyze','analyzed')"
                     string="Update Source Code"
                     icon="fa-download"
                     groups="github_connector.group_github_connector_manager"
@@ -94,7 +90,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <button
                     name="button_analyze_code"
                     type="object"
-                    states="to_analyze"
+                    invisible="state!='to_analyze'"
                     string="Analyze Source Code"
                     icon="fa-refresh"
                     groups="github_connector.group_github_connector_manager"
@@ -102,7 +98,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <button
                     name="button_analyze_code"
                     type="object"
-                    states="analyzed"
+                    invisible="state!='analyzed'"
                     string="Update Source Code Analyzis"
                     icon="fa-refresh"
                     groups="github_connector.group_github_connector_manager"
@@ -119,7 +115,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     <button
                         name="button_download_code"
                         type="object"
-                        states="to_download"
+                        invisible="state!='to_download'"
                         string="Download Source Code"
                         class="btn btn-primary"
                         icon="fa-download"
@@ -128,7 +124,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     <button
                         name="button_download_code"
                         type="object"
-                        states="to_analyze,analyzed"
+                        invisible="state not in ('to_analyze','analyzed')"
                         string="Update Source Code"
                         class="btn btn-default"
                         icon="fa-download"
@@ -137,7 +133,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     <button
                         name="button_analyze_code"
                         type="object"
-                        states="to_analyze"
+                        invisible="state!='to_analyze'"
                         string="Analyze Source Code"
                         class="btn btn-primary"
                         icon="fa-refresh"
@@ -146,7 +142,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     <button
                         name="button_analyze_code"
                         type="object"
-                        states="analyzed"
+                        invisible="state!='analyzed'"
                         string="Update Source Code Analyzis"
                         class="btn btn-default"
                         icon="fa-refresh"
@@ -195,13 +191,13 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             <field name="analysis_rule_ids" colspan="4" />
                             <label
                                 for="analysis_rule_info_ids"
-                                attrs="{'invisible': [('analysis_rule_info_ids', '=', [])]}"
+                                invisible="analysis_rule_info_ids == []"
                             />
                             <field
                                 name="analysis_rule_info_ids"
                                 widget="one2many_list"
                                 colspan="4"
-                                attrs="{'invisible': [('analysis_rule_info_ids', '=', [])]}"
+                                invisible="analysis_rule_info_ids == []"
                             >
                                 <tree create="false" delete="false" editable="false">
                                     <field name="group_id" />

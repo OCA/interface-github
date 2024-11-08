@@ -68,7 +68,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             name="action_github_team_partner_from_team"
                             class="oe_stat_button"
                             icon="fa-user"
-                            attrs="{'invisible': [('partner_qty', '=', False)]}"
+                            invisible="not partner_qty"
                         >
                             <field
                                 name="partner_qty"
@@ -81,7 +81,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             name="action_github_team_repository_from_team"
                             class="oe_stat_button"
                             icon="fa-folder-o"
-                            attrs="{'invisible': [('repository_qty', '=', False)]}"
+                            invisible="not repository_qty"
                         >
                             <field
                                 name="repository_qty"

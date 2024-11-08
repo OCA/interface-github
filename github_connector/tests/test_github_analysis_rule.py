@@ -4,7 +4,7 @@ import json
 
 import responses
 
-from odoo.modules.module import get_resource_path
+from odoo.tools.misc import file_path
 
 from .common import TestGithubConnectorCommon
 
@@ -55,20 +55,15 @@ class TestGithubConnectorAnalysisRuleBase(TestGithubConnectorCommon):
 
     def _set_github_responses(self):
         for github_id in self.oca.mapped("repository_ids.github_id_external"):
-            with open(
-                get_resource_path(
-                    "github_connector",
-                    "tests",
-                    "res",
-                    "github_repo_%s_response.json" % github_id,
-                )
-            ) as jsonfile:
-                responses.add(
-                    responses.GET,
-                    "https://api.github.com:443/repositories/%s" % github_id,
-                    json=json.loads(jsonfile.read()),
-                    status=200,
-                )
+            jsonfile = file_path(
+                f"github_connector/tests/res/github_repo_{github_id}_response.json"
+            )
+            responses.add(
+                responses.GET,
+                "https://api.github.com:443/repositories/%s" % github_id,
+                json=json.loads(open(jsonfile, "rb").read()),
+                status=200,
+            )
 
 
 class TestGithubConnectorAnalysisRule(TestGithubConnectorAnalysisRuleBase):

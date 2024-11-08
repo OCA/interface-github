@@ -179,11 +179,7 @@ class GithubRepository(models.Model):
                         )
                         % (branch.local_path)
                     ) from None
-                command = ("git clone %s -b %s %s") % (
-                    gh_repo.clone_url,
-                    branch.name,
-                    branch.local_path,
-                )
+                command = f"git clone {gh_repo.clone_url} -b {branch.name} {branch.local_path}"  # noqa: E501
                 os.system(command)
                 branch.write(
                     {"last_download_date": datetime.today(), "state": "to_analyze"}

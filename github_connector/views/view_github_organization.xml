@@ -66,17 +66,17 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             name="action_github_repository"
                             class="oe_stat_button"
                             icon="fa-folder-o"
-                            attrs="{'invisible': [('repository_qty', '=', False)]}"
+                            invisible="not repository_qty"
                         >
                             <div class="o_stat_info">
                                 <field name="repository_qty" class="o_stat_value" />
                                 <span
                                     class="o_stat_text"
-                                    attrs="{'invisible': [('repository_qty', '&lt;', 2)]}"
+                                    invisible="repository_qty &lt; 2"
                                 > Repositories</span>
                                 <span
                                     class="o_stat_text"
-                                    attrs="{'invisible': [('repository_qty', '&gt;', 1)]}"
+                                    invisible="repository_qty &gt; 1"
                                 > Repository</span>
                             </div>
                         </button>
@@ -85,17 +85,17 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             name="action_github_team"
                             class="oe_stat_button"
                             icon="fa-users"
-                            attrs="{'invisible': [('team_qty', '=', False)]}"
+                            invisible="not team_qty"
                         >
                             <div class="o_stat_info">
                                 <field name="team_qty" class="o_stat_value" />
                                 <span
                                     class="o_stat_text"
-                                    attrs="{'invisible': [('team_qty', '&lt;', 2)]}"
+                                    invisible="team_qty &lt; 2"
                                 > Teams</span>
                                 <span
                                     class="o_stat_text"
-                                    attrs="{'invisible': [('team_qty', '&gt;', 1)]}"
+                                    invisible="team_qty &gt; 1"
                                 > Team</span>
                             </div>
                         </button>
@@ -104,17 +104,17 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             name="action_res_partner"
                             class="oe_stat_button"
                             icon="fa-user"
-                            attrs="{'invisible': [('member_qty', '=', False)]}"
+                            invisible="not member_qty"
                         >
                             <div class="o_stat_info">
                                 <field name="member_qty" class="o_stat_value" />
                                 <span
                                     class="o_stat_text"
-                                    attrs="{'invisible': [('member_qty', '&lt;', 2)]}"
+                                    invisible="member_qty &lt; 2"
                                 > Members</span>
                                 <span
                                     class="o_stat_text"
-                                    attrs="{'invisible': [('member_qty', '&gt;', 1)]}"
+                                    invisible="member_qty &gt; 1"
                                 > Member</span>
                             </div>
                         </button>
