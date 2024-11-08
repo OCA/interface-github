@@ -191,13 +191,13 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             <field name="analysis_rule_ids" colspan="4" />
                             <label
                                 for="analysis_rule_info_ids"
-                                invisible="analysis_rule_info_ids == []"
+                                invisible="not analysis_rule_info_ids"
                             />
                             <field
                                 name="analysis_rule_info_ids"
                                 widget="one2many_list"
                                 colspan="4"
-                                invisible="analysis_rule_info_ids == []"
+                                invisible="not analysis_rule_info_ids"
                             >
                                 <tree create="false" delete="false" editable="false">
                                     <field name="group_id" />
