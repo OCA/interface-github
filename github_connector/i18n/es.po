@@ -63,26 +63,26 @@ msgstr "# Total"
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_kanban
 msgid ""
 "<span class=\"badge\">\n"
-"                                            <i class=\"fa fa-fw fa-github-alt"
-"\" title=\"Github\"/>\n"
+"                                            <i class=\"fa fa-fw fa-github-"
+"alt\" title=\"Github\"/>\n"
 "                                        </span>"
 msgstr ""
 "<span class=\"badge\">\n"
-"                                            <i class=\"fa fa-fw fa-github-alt"
-"\" title=\"Github\"/>\n"
+"                                            <i class=\"fa fa-fw fa-github-"
+"alt\" title=\"Github\"/>\n"
 "                                        </span>"
 
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_kanban
 msgid ""
 "<span class=\"badge\">\n"
-"                                        <i class=\"fa fa-fw fa-ban\" title="
-"\"Ignored\"/>\n"
+"                                        <i class=\"fa fa-fw fa-ban\" "
+"title=\"Ignored\"/>\n"
 "                                    </span>"
 msgstr ""
 "<span class=\"badge\">\n"
-"                                        <i class=\"fa fa-fw fa-ban\" title="
-"\"Ignored\"/>\n"
+"                                        <i class=\"fa fa-fw fa-ban\" "
+"title=\"Ignored\"/>\n"
 "                                    </span>"
 
 #. module: github_connector
@@ -102,67 +102,45 @@ msgstr ""
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
 msgid ""
-"<span class=\"o_stat_text\" attrs=\"{'invisible': [('member_qty', '&lt;', "
-"2)]}\"> Members</span>\n"
-"                                <span class=\"o_stat_text\" attrs="
-"\"{'invisible': [('member_qty', '&gt;', 1)]}\"> Member</span>"
+"<span class=\"o_stat_text\" invisible=\"member_qty &lt; 2\"> Members</span>\n"
+"                                <span class=\"o_stat_text\" "
+"invisible=\"member_qty &gt; 1\"> Member</span>"
 msgstr ""
-"<span class=\"o_stat_text\" attrs=\"{'invisible': [('member_qty', '&lt;', "
-"2)]}\"> Miembros</span>\n"
-"                                <span class=\"o_stat_text\" attrs="
-"\"{'invisible': [('member_qty', '&gt;', 1)]}\"> Miembro</span>"
 
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_form
 msgid ""
-"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_branch_qty', "
-"'&lt;', 2)]}\"> Branches</span>\n"
-"                                <span class=\"o_stat_text\" attrs="
-"\"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Branch</span>"
+"<span class=\"o_stat_text\" invisible=\"repository_branch_qty &lt; 2\"> "
+"Branches</span>\n"
+"                                <span class=\"o_stat_text\" "
+"invisible=\"repository_branch_qty &gt; 1\"> Branch</span>"
 msgstr ""
-"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_branch_qty', "
-"'&lt;', 2)]}\"> Ramas</span>\n"
-"                                <span class=\"o_stat_text\" attrs="
-"\"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Rama</span>"
 
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_form
 msgid ""
-"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_branch_qty', "
-"'&lt;', 2)]}\"> Teams</span>\n"
-"                                <span class=\"o_stat_text\" attrs="
-"\"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Team</span>"
+"<span class=\"o_stat_text\" invisible=\"repository_branch_qty &lt; 2\"> "
+"Teams</span>\n"
+"                                <span class=\"o_stat_text\" "
+"invisible=\"repository_branch_qty &gt; 1\"> Team</span>"
 msgstr ""
-"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_branch_qty', "
-"'&lt;', 2)]}\"> Equipos</span>\n"
-"                                <span class=\"o_stat_text\" attrs="
-"\"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Equipo</span>"
 
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
 msgid ""
-"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_qty', "
-"'&lt;', 2)]}\"> Repositories</span>\n"
-"                                <span class=\"o_stat_text\" attrs="
-"\"{'invisible': [('repository_qty', '&gt;', 1)]}\"> Repository</span>"
+"<span class=\"o_stat_text\" invisible=\"repository_qty &lt; 2\"> "
+"Repositories</span>\n"
+"                                <span class=\"o_stat_text\" "
+"invisible=\"repository_qty &gt; 1\"> Repository</span>"
 msgstr ""
-"<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_qty', "
-"'&lt;', 2)]}\"> Repositorios</span>\n"
-"                                <span class=\"o_stat_text\" attrs="
-"\"{'invisible': [('repository_qty', '&gt;', 1)]}\"> Repositorio</span>"
 
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
 msgid ""
-"<span class=\"o_stat_text\" attrs=\"{'invisible': [('team_qty', '&lt;', "
-"2)]}\"> Teams</span>\n"
-"                                <span class=\"o_stat_text\" attrs="
-"\"{'invisible': [('team_qty', '&gt;', 1)]}\"> Team</span>"
+"<span class=\"o_stat_text\" invisible=\"team_qty &lt; 2\"> Teams</span>\n"
+"                                <span class=\"o_stat_text\" "
+"invisible=\"team_qty &gt; 1\"> Team</span>"
 msgstr ""
-"<span class=\"o_stat_text\" attrs=\"{'invisible': [('team_qty', '&lt;', "
-"2)]}\"> Equipos</span>\n"
-"                                <span class=\"o_stat_text\" attrs="
-"\"{'invisible': [('team_qty', '&gt;', 1)]}\"> Equipo</span>"
 
 #. module: github_connector
 #. odoo-python
@@ -224,7 +202,6 @@ msgstr "Analizar el código fuente"
 
 #. module: github_connector
 #: model:ir.actions.server,name:github_connector.cron_analyze_code_ir_actions_server
-#: model:ir.cron,cron_name:github_connector.cron_analyze_code
 msgid "Analyze Source Code for All Github Branches"
 msgstr "Analizar el código fuente de todas las ramas de Github"
 
@@ -464,7 +441,6 @@ msgstr "Descargar código fuente"
 
 #. module: github_connector
 #: model:ir.actions.server,name:github_connector.cron_download_code_ir_actions_server
-#: model:ir.cron,cron_name:github_connector.cron_download_code
 msgid "Download Source Code for All Github Branches"
 msgstr "Descargar código fuente de todas las ramas de Github"
 
@@ -806,24 +782,6 @@ msgstr "Última fecha de análisis"
 #: model:ir.model.fields,field_description:github_connector.field_github_repository_branch__last_download_date
 msgid "Last Download Date"
 msgstr "Última fecha de descarga"
-
-#. module: github_connector
-#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule____last_update
-#: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule_group____last_update
-#: model:ir.model.fields,field_description:github_connector.field_github_organization____last_update
-#: model:ir.model.fields,field_description:github_connector.field_github_organization_serie____last_update
-#: model:ir.model.fields,field_description:github_connector.field_github_repository____last_update
-#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch____last_update
-#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info____last_update
-#: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report____last_update
-#: model:ir.model.fields,field_description:github_connector.field_github_team____last_update
-#: model:ir.model.fields,field_description:github_connector.field_github_team_partner____last_update
-#: model:ir.model.fields,field_description:github_connector.field_github_team_repository____last_update
-#: model:ir.model.fields,field_description:github_connector.field_wizard_create_repository____last_update
-#: model:ir.model.fields,field_description:github_connector.field_wizard_create_team____last_update
-#: model:ir.model.fields,field_description:github_connector.field_wizard_load_github_model____last_update
-msgid "Last Modified on"
-msgstr "Última modificación el"
 
 #. module: github_connector
 #: model:ir.model.fields,field_description:github_connector.field_abstract_github_model__github_last_sync_date
@@ -1247,13 +1205,11 @@ msgstr "Sincronización de objeto"
 
 #. module: github_connector
 #: model:ir.actions.server,name:github_connector.cron_update_organization_ir_actions_server
-#: model:ir.cron,cron_name:github_connector.cron_update_organization
 msgid "Synchronize All Organizations and Teams"
 msgstr "Sincronizar todas las organizaciones y equipos"
 
 #. module: github_connector
 #: model:ir.actions.server,name:github_connector.cron_update_branch_list_ir_actions_server
-#: model:ir.cron,cron_name:github_connector.cron_update_branch_list
 msgid "Synchronize Branches List for All Repositories"
 msgstr "Sincronizar el listado de ramas de todos los repositorios"
 
@@ -1445,15 +1401,75 @@ msgid "https://git-scm.com/docs/gitignore#_pattern_format"
 msgstr "https://git-scm.com/docs/gitignore#_pattern_format"
 
 #. module: github_connector
-#: model_terms:ir.ui.view,arch_db:github_connector.view_wizard_create_repository_form
-#: model_terms:ir.ui.view,arch_db:github_connector.view_wizard_create_team_form
-#: model_terms:ir.ui.view,arch_db:github_connector.view_wizard_load_github_model_form
-msgid "or"
-msgstr "o"
-
-#. module: github_connector
 #. odoo-python
 #: code:addons/github_connector/models/github_repository_branch.py:0
 #, python-format
 msgid "source_code_local_path should be defined in your  configuration file"
 msgstr "source_code_local_path debe definirse en su archivo de configuración"
+
+#~ msgid ""
+#~ "<span class=\"o_stat_text\" attrs=\"{'invisible': [('member_qty', '&lt;', "
+#~ "2)]}\"> Members</span>\n"
+#~ "                                <span class=\"o_stat_text\" "
+#~ "attrs=\"{'invisible': [('member_qty', '&gt;', 1)]}\"> Member</span>"
+#~ msgstr ""
+#~ "<span class=\"o_stat_text\" attrs=\"{'invisible': [('member_qty', '&lt;', "
+#~ "2)]}\"> Miembros</span>\n"
+#~ "                                <span class=\"o_stat_text\" "
+#~ "attrs=\"{'invisible': [('member_qty', '&gt;', 1)]}\"> Miembro</span>"
+
+#~ msgid ""
+#~ "<span class=\"o_stat_text\" attrs=\"{'invisible': "
+#~ "[('repository_branch_qty', '&lt;', 2)]}\"> Branches</span>\n"
+#~ "                                <span class=\"o_stat_text\" "
+#~ "attrs=\"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Branch</"
+#~ "span>"
+#~ msgstr ""
+#~ "<span class=\"o_stat_text\" attrs=\"{'invisible': "
+#~ "[('repository_branch_qty', '&lt;', 2)]}\"> Ramas</span>\n"
+#~ "                                <span class=\"o_stat_text\" "
+#~ "attrs=\"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Rama</"
+#~ "span>"
+
+#~ msgid ""
+#~ "<span class=\"o_stat_text\" attrs=\"{'invisible': "
+#~ "[('repository_branch_qty', '&lt;', 2)]}\"> Teams</span>\n"
+#~ "                                <span class=\"o_stat_text\" "
+#~ "attrs=\"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Team</"
+#~ "span>"
+#~ msgstr ""
+#~ "<span class=\"o_stat_text\" attrs=\"{'invisible': "
+#~ "[('repository_branch_qty', '&lt;', 2)]}\"> Equipos</span>\n"
+#~ "                                <span class=\"o_stat_text\" "
+#~ "attrs=\"{'invisible': [('repository_branch_qty', '&gt;', 1)]}\"> Equipo</"
+#~ "span>"
+
+#~ msgid ""
+#~ "<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_qty', "
+#~ "'&lt;', 2)]}\"> Repositories</span>\n"
+#~ "                                <span class=\"o_stat_text\" "
+#~ "attrs=\"{'invisible': [('repository_qty', '&gt;', 1)]}\"> Repository</"
+#~ "span>"
+#~ msgstr ""
+#~ "<span class=\"o_stat_text\" attrs=\"{'invisible': [('repository_qty', "
+#~ "'&lt;', 2)]}\"> Repositorios</span>\n"
+#~ "                                <span class=\"o_stat_text\" "
+#~ "attrs=\"{'invisible': [('repository_qty', '&gt;', 1)]}\"> Repositorio</"
+#~ "span>"
+
+#~ msgid ""
+#~ "<span class=\"o_stat_text\" attrs=\"{'invisible': [('team_qty', '&lt;', "
+#~ "2)]}\"> Teams</span>\n"
+#~ "                                <span class=\"o_stat_text\" "
+#~ "attrs=\"{'invisible': [('team_qty', '&gt;', 1)]}\"> Team</span>"
+#~ msgstr ""
+#~ "<span class=\"o_stat_text\" attrs=\"{'invisible': [('team_qty', '&lt;', "
+#~ "2)]}\"> Equipos</span>\n"
+#~ "                                <span class=\"o_stat_text\" "
+#~ "attrs=\"{'invisible': [('team_qty', '&gt;', 1)]}\"> Equipo</span>"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación el"
+
+#~ msgid "or"
+#~ msgstr "o"
