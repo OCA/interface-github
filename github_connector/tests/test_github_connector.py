@@ -6,7 +6,7 @@ import json
 
 import responses
 
-from odoo.modules.module import get_resource_path
+from odoo.tools.misc import file_path
 
 from .common import TestGithubConnectorCommon
 
@@ -16,15 +16,10 @@ class TestGithubConnector(TestGithubConnectorCommon):
     def setUpClass(cls):
         super().setUpClass()
         # Create appropriate responses for the API calls
-        with open(
-            get_resource_path(
-                "github_connector",
-                "tests",
-                "res",
-                "github_user_OCA-git-bot_response.json",
-            )
-        ) as jsonfile:
-            cls.user_data = json.loads(jsonfile.read())
+        jsonfile = file_path(
+            "github_connector/tests/res/github_user_OCA-git-bot_response.json"
+        )
+        cls.user_data = json.loads(open(jsonfile, "rb").read())
         responses.add(
             responses.GET,
             "https://api.github.com:443/users/OCA-git-bot",

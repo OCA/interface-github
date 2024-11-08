@@ -88,8 +88,8 @@ class GithubTeam(models.Model):
     @api.depends("name", "organization_id.github_name")
     def _compute_complete_name(self):
         for team in self:
-            team.complete_name = "{}/{}".format(
-                team.organization_id.github_name, team.github_name
+            team.complete_name = (
+                f"{team.organization_id.github_name}/{team.github_name}"
             )
 
     @api.depends("partner_ids")

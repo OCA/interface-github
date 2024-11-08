@@ -6,18 +6,18 @@ To fetch information from Github, you have to:
 
 2.  Select the object type you want to synchronize and its Gthub name
 
-    ![image](../static/description/sync_organization.png)
+    ![sync_organization](static/description/sync_organization.png)
 
 3.  Once done for your organization(s), go to 'Github' / 'Github
     Commnunity' / 'Organizations'
 
-    ![image](../static/description/github_organization_kanban.png)
+    ![github_organization_kanban](static/description/github_organization_kanban.png)
 
 4.  Optionally, once organization is created, you can create series for
     your projects. Go to 'Github' / 'Organizations' / click on your
     organization / 'Organization Series' Tabs
 
-    ![image](../static/description/github_organization_series.png)
+    ![github_organization_series](static/description/github_organization_series.png)
 
 ## Select branches to download
 
@@ -31,13 +31,13 @@ only main branches (releases):
 2.  In the 'Settings' tab, set the URL of the 'External Services' you
     use for Continuous Integration and Coverage.
 
-    ![image](../static/description/github_organization_external_services.png)
+    ![github_organization_external_services](static/description/github_organization_external_services.png)
 
 3.  Once done, click on buttons 'Syncs', to synchronize repositories,
     teams and members. (This process can take a while depending of your
     size)
 
-    ![image](../static/description/github_organization_sync_buttons.png)
+    ![github_organization_sync_buttons](static/description/github_organization_sync_buttons.png)
 
 ## Team / members synchronization
 
@@ -45,17 +45,17 @@ You can synchronize members teams:
 
 1.  Go to 'Teams' / tree view / 'Actions' / 'Update from Github'.
 
-    ![image](../static/description/github_team_kanban.png)
+    ![github_team_kanban](static/description/github_team_kanban.png)
 
 2.  In each team, you can see the members list and the role of the
     members
 
-    ![image](../static/description/github_team_partner_kanban.png)
+    ![github_team_partner_kanban](static/description/github_team_partner_kanban.png)
 
 3.  In each team, you can see the repositories list but not the
     permissions of the team. (See 'Known Issues' Section)
 
-    ![image](../static/description/github_team_repository_kanban.png)
+    ![github_team_repository_kanban](static/description/github_team_repository_kanban.png)
 
 ## Repositories synchronization
 
@@ -63,12 +63,12 @@ You can synchronize the branches of your repositories:
 
 1.  Go to 'Repositories' / tree view / 'Actions' / 'Update from Github'
 
-    ![image](../static/description/github_repository_kanban.png)
+    ![github_repository_kanban](static/description/github_repository_kanban.png)
 
 2.  In each repository, you can see the main branches list and the size
     of code source.
 
-    ![image](../static/description/github_repository_branch_kanban.png)
+    ![github_repository_branch_kanban](static/description/github_repository_branch_kanban.png)
 
 ## Fetching the source code
 
@@ -77,12 +77,12 @@ Finally, you can download locally the source code of all your branches:
 1.  Go to 'Repository Branches' / tree view / 'Actions' / 'Download and
     Analyse Source Code'.
 
-    ![image](../static/description/wizard_download_analyze.png)
+    ![wizard_download_analyze](static/description/wizard_download_analyze.png)
 
 2.  In the tree view you can update manually source code or refresh
     analysis.
 
-    ![image](../static/description/github_repository_branch_list.png)
+    ![github_repository_branch_list](static/description/github_repository_branch_list.png)
 
 ## Analysis source code
 
@@ -133,14 +133,14 @@ Odoo
     4.  Later on, a synchronization will be performed, to create the
         according team in the Odoo instance.
 
-    ![image](../static/description/wizard_create_team.png)
+    ![wizard_create_team](static/description/wizard_create_team.png)
 
 2.  Repositories:
 
     1.  Go to 'Settings' / 'Create Team in Github'.
     2.  Set the information and click on Create in Github.
 
-    ![image](../static/description/wizard_create_repository.png)
+    ![wizard_create_repository](static/description/wizard_create_repository.png)
 
 ## Note
 
@@ -159,12 +159,12 @@ This module provides several reports
 
 **Branches by Serie**
 
-![image](../static/description/reporting_branches_by_serie.png)
+![reporting_branches_by_serie](static/description/reporting_branches_by_serie.png)
 
 **Sizes by Serie**
 
-![image](../static/description/reporting_sizes_by_serie.png)
+![reporting_sizes_by_serie](static/description/reporting_sizes_by_serie.png)
 
 **Repository branch analysis rule**
 
-![image](../static/description/github_repository_branch_rule_info_report.png)
+![github_repository_branch_rule_info_report](static/description/github_repository_branch_rule_info_report.png)

@@ -56,7 +56,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             class="oe_stat_button"
                             icon="fa-code-fork"
                             name="action_github_repository_branch"
-                            attrs="{'invisible': [('repository_branch_qty', '=', False)]}"
+                            invisible="not repository_branch_qty"
                         >
                             <div class="o_stat_info">
                                 <field
@@ -65,11 +65,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 />
                                 <span
                                     class="o_stat_text"
-                                    attrs="{'invisible': [('repository_branch_qty', '&lt;', 2)]}"
+                                    invisible="repository_branch_qty &lt; 2"
                                 > Branches</span>
                                 <span
                                     class="o_stat_text"
-                                    attrs="{'invisible': [('repository_branch_qty', '&gt;', 1)]}"
+                                    invisible="repository_branch_qty &gt; 1"
                                 > Branch</span>
                             </div>
                         </button>
@@ -78,17 +78,17 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             class="oe_stat_button"
                             icon="fa-users"
                             name="action_github_team_repository_from_repository"
-                            attrs="{'invisible': [('team_qty', '=', False)]}"
+                            invisible="not team_qty"
                         >
                             <div class="o_stat_info">
                                 <field name="team_qty" class="o_stat_value" />
                                 <span
                                     class="o_stat_text"
-                                    attrs="{'invisible': [('repository_branch_qty', '&lt;', 2)]}"
+                                    invisible="repository_branch_qty &lt; 2"
                                 > Teams</span>
                                 <span
                                     class="o_stat_text"
-                                    attrs="{'invisible': [('repository_branch_qty', '&gt;', 1)]}"
+                                    invisible="repository_branch_qty &gt; 1"
                                 > Team</span>
                             </div>
                         </button>
@@ -114,7 +114,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                     <field name="github_id_external" />
                                     <field name="github_create_date" />
                                     <field name="github_write_date" />
-
                                 </group>
                                 <group>
                                     <field name="github_name" />
