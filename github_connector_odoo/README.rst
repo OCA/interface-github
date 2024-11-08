@@ -17,24 +17,26 @@ Github Connector - Odoo
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Finterface--github-lightgray.png?logo=github
-    :target: https://github.com/OCA/interface-github/tree/16.0/github_connector_odoo
+    :target: https://github.com/OCA/interface-github/tree/17.0/github_connector_odoo
     :alt: OCA/interface-github
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/interface-github-16-0/interface-github-16-0-github_connector_odoo
+    :target: https://translation.odoo-community.org/projects/interface-github-17-0/interface-github-17-0-github_connector_odoo
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/interface-github&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/interface-github&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module was written to extend the functionality of 'Github Connector'
-Module if your repositories contain Odoo Modules.
+This module was written to extend the functionality of 'Github
+Connector' Module if your repositories contain Odoo Modules.
 
-It extends 'Analysis' features to parse code files (readme / manifest files)
-and add new models and menus.
+It extends 'Analysis' features to parse code files (readme / manifest
+files) and add new models and menus.
 
-.. image:: https://raw.githubusercontent.com/github_connector_odoo/static/description/menu.png
+|image|
+
+.. |image| image:: https://raw.githubusercontent.com/github_connector_odoo/static/description/menu.png
 
 **Table of contents**
 
@@ -44,80 +46,74 @@ and add new models and menus.
 Configuration
 =============
 
-* Once installed, go to your organization, and set extra settings:
+-  Once installed, go to your organization, and set extra settings:
 
 1. The name of your organization in the author keys of the manifest odoo
    modules (in the **Default Author Text** field)
-2. The URL of the file that contains IDs of your repositories for the runbot
+2. The URL of the file that contains IDs of your repositories for the
+   runbot
 
-.. image:: https://raw.githubusercontent.com/OCA/interface-github/16.0/github_connector_odoo/static/description/github_organization_form.png
+|image|
 
-If you had analyzed previously your repositories with the
-'github Connector' module, you should launch again the Analysis Process
-for all your Repository Branches.
+If you had analyzed previously your repositories with the 'github
+Connector' module, you should launch again the Analysis Process for all
+your Repository Branches.
+
+.. |image| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector_odoo/static/description/github_organization_form.png
 
 Usage
 =====
 
 **Odoo Modules**
 
-.. image:: https://raw.githubusercontent.com/github_connector_odoo/static/description/odoo_module_kanban.png
+|image|
 
 In each module, you can see the description of the module, the authors,
 the available series, and the list of the modules that depend on the
 current module.
 
-.. image:: https://raw.githubusercontent.com/github_connector_odoo/static/description/odoo_module_form.png
-
-
+|image1|
 
 **Odoo Authors**
 
-.. image:: https://raw.githubusercontent.com/github_connector_odoo/static/description/odoo_author.png
+|image2|
 
 This list is based on the 'author' key of the manifest file.
-
-
 
 **Odoo License**
 
 This list is based on the 'license' key of the manifest file.
 
-.. image:: https://raw.githubusercontent.com/github_connector_odoo/static/description/odoo_license.png
-
-
+|image3|
 
 **Odoo Bin Libs**
 
 This list is based on the 'external_dependencies' / 'bin' key of the
 manifest file.
 
-.. image:: https://raw.githubusercontent.com/github_connector_odoo/static/description/odoo_bin_libs.png
-
-
+|image4|
 
 **Odoo Python Libs**
 
 This list is based on the 'external_dependencies' / 'python' key of the
 manifest file.
 
-.. image:: https://raw.githubusercontent.com/github_connector_odoo/static/description/odoo_python_libs.png
-
-
+|image5|
 
 **Analysis source code**
 
-Implements Analysis source code in odoo module versions, now add new field called "has_odoo_addons" (boolean) in Analysis rule that allow (if defined) analyze odoo_module_versions and save info about it
-
-
+Implements Analysis source code in odoo module versions, now add new
+field called "has_odoo_addons" (boolean) in Analysis rule that allow (if
+defined) analyze odoo_module_versions and save info about it
 
 **Soource code analysis**
 
-Implements Source code analysis odoo module versions, now addiing new field called "has_odoo_addons" (boolean) in Analysis rule that (if defined) allows to analyze odoo_module_versions and save info about it
+Implements Source code analysis odoo module versions, now addiing new
+field called "has_odoo_addons" (boolean) in Analysis rule that (if
+defined) allows to analyze odoo_module_versions and save info about it
 
-In 'Repository Branch' / 'Code Analysis', shows the info related to odoo_module_versions rules analysis too.
-
-
+In 'Repository Branch' / 'Code Analysis', shows the info related to
+odoo_module_versions rules analysis too.
 
 **Reporting**
 
@@ -125,18 +121,28 @@ This module provide a new reporting.
 
 **Modules by Serie (and Licenses)**
 
-.. image:: https://raw.githubusercontent.com/github_connector_odoo/static/description/reporting_module_by_serie.png
+|image6|
+
+.. |image| image:: https://raw.githubusercontent.com/github_connector_odoo/static/description/odoo_module_kanban.png
+.. |image1| image:: https://raw.githubusercontent.com/github_connector_odoo/static/description/odoo_module_form.png
+.. |image2| image:: https://raw.githubusercontent.com/github_connector_odoo/static/description/odoo_author.png
+.. |image3| image:: https://raw.githubusercontent.com/github_connector_odoo/static/description/odoo_license.png
+.. |image4| image:: https://raw.githubusercontent.com/github_connector_odoo/static/description/odoo_bin_libs.png
+.. |image5| image:: https://raw.githubusercontent.com/github_connector_odoo/static/description/odoo_python_libs.png
+.. |image6| image:: https://raw.githubusercontent.com/github_connector_odoo/static/description/reporting_module_by_serie.png
 
 Known issues / Roadmap
 ======================
 
 Possible improvements :
 
-* Implement deep code source analysis, like the website http://odoo-code-search.com/
-  and specially:
+-  Implement deep code source analysis, like the website
+   http://odoo-code-search.com/ and specially:
 
-1. Possibility to search by field or by model name. (Ex: field:invoice_id)
-2. Possibility to display the number of XML, Python, Yaml, HTML, CSS lines
+1. Possibility to search by field or by model name. (Ex:
+   field:invoice_id)
+2. Possibility to display the number of XML, Python, Yaml, HTML, CSS
+   lines
 
 Bug Tracker
 ===========
@@ -144,7 +150,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/interface-github/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/interface-github/issues/new?body=module:%20github_connector_odoo%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/interface-github/issues/new?body=module:%20github_connector_odoo%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -152,26 +158,26 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Sylvain LE GAL
 * GRAP
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Sylvain LE GAL (https://twitter.com/legalsylvain)
-* `Tecnativa <https://www.tecnativa.com>`_:
+-  Sylvain LE GAL (https://twitter.com/legalsylvain)
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  * Vicent Cubells
-  * Alexandre Díaz
-  * Pedro M. Baeza
-  * Ernesto Tejeda
-  * Víctor Martínez
-  * Carolina Fernandez
+   -  Vicent Cubells
+   -  Alexandre Díaz
+   -  Pedro M. Baeza
+   -  Ernesto Tejeda
+   -  Víctor Martínez
+   -  Carolina Fernandez
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -183,6 +189,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/interface-github <https://github.com/OCA/interface-github/tree/16.0/github_connector_odoo>`_ project on GitHub.
+This module is part of the `OCA/interface-github <https://github.com/OCA/interface-github/tree/17.0/github_connector_odoo>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
