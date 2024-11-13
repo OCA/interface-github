@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-04-03 15:37+0000\n"
+"PO-Revision-Date: 2024-11-13 10:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: github_connector
 #: model:ir.model,name:github_connector.model_github_repository_branch_rule_info
@@ -105,6 +105,9 @@ msgid ""
 "                                <span class=\"o_stat_text\" "
 "invisible=\"member_qty &gt; 1\"> Member</span>"
 msgstr ""
+"<span class=\"o_stat_text\" invisible=\"member_qty &lt; 2\"> Membri</span>\n"
+"                                <span class=\"o_stat_text\" invisible="
+"\"member_qty &gt; 1\"> Membro</span>"
 
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_form
@@ -114,6 +117,10 @@ msgid ""
 "                                <span class=\"o_stat_text\" "
 "invisible=\"repository_branch_qty &gt; 1\"> Branch</span>"
 msgstr ""
+"<span class=\"o_stat_text\" invisible=\"repository_branch_qty &lt; 2\"> "
+"Branch</span>\n"
+"                                <span class=\"o_stat_text\" invisible="
+"\"repository_branch_qty &gt; 1\"> Branch</span>"
 
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_form
@@ -123,6 +130,10 @@ msgid ""
 "                                <span class=\"o_stat_text\" "
 "invisible=\"repository_branch_qty &gt; 1\"> Team</span>"
 msgstr ""
+"<span class=\"o_stat_text\" invisible=\"repository_branch_qty &lt; 2\"> "
+"Team</span>\n"
+"                                <span class=\"o_stat_text\" invisible="
+"\"repository_branch_qty &gt; 1\"> Team</span>"
 
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
@@ -132,6 +143,10 @@ msgid ""
 "                                <span class=\"o_stat_text\" "
 "invisible=\"repository_qty &gt; 1\"> Repository</span>"
 msgstr ""
+"<span class=\"o_stat_text\" invisible=\"repository_qty &lt; 2\"> "
+"Repository</span>\n"
+"                                <span class=\"o_stat_text\" invisible="
+"\"repository_qty &gt; 1\"> Repository</span>"
 
 #. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_form
@@ -140,6 +155,9 @@ msgid ""
 "                                <span class=\"o_stat_text\" "
 "invisible=\"team_qty &gt; 1\"> Team</span>"
 msgstr ""
+"<span class=\"o_stat_text\" invisible=\"team_qty &lt; 2\"> Team</span>\n"
+"                                <span class=\"o_stat_text\" invisible="
+"\"team_qty &gt; 1\"> Team</span>"
 
 #. module: github_connector
 #. odoo-python
