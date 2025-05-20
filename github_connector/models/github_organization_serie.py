@@ -12,9 +12,7 @@ class GithubOrganizationSerie(models.Model):
 
     # Columns Section
     name = fields.Char(required=True)
-
     sequence = fields.Integer(required=True)
-
     organization_id = fields.Many2one(
         comodel_name="github.organization",
         string="Organization",

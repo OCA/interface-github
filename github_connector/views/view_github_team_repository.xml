@@ -18,7 +18,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="view_github_team_repository_tree" model="ir.ui.view">
         <field name="model">github.team.repository</field>
         <field name="arch" type="xml">
-            <tree
+            <list
                 decoration-warning="permission == 'admin'"
                 decoration-info="permission == 'read'"
             >
@@ -30,7 +30,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="permission" />
                 <field name="context_search_default_team_id" invisible="1" />
                 <field name="context_search_default_repository_id" invisible="1" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_github_team_permission_form" model="ir.ui.view">
@@ -59,38 +59,54 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="repository_id" />
                 <field name="permission" />
                 <templates>
-                    <t t-name="kanban-box">
-                        <div class="o_res_partner_kanban oe_kanban_global_click">
+                    <t t-name="card" class="flex-row">
+                        <main class="ps-2 ps-md-0">
                             <div class="oe_module_desc">
                                 <h3>
                                     <field name="repository_id" />
                                 </h3>
                                 <t t-if="record.permission.raw_value == 'undefined'">
                                     <span class="badge">
-                                        <i class="fa fa-fw fa-question" />
-                                        <t t-esc="record.permission.value" />
+                                        <i
+                                            class="fa fa-fw fa-question"
+                                            aria-label="Permission"
+                                            title="Permission"
+                                        />
+                                        <field name="permission" />
                                     </span>
                                 </t>
                                 <t t-if="record.permission.raw_value == 'read'">
                                     <span class="badge">
-                                        <i class="fa fa-fw fa-file-o" />
-                                        <t t-esc="record.permission.value" />
+                                        <i
+                                            class="fa fa-fw fa-file-o"
+                                            aria-label="Permission"
+                                            title="Permission"
+                                        />
+                                        <field name="permission" />
                                     </span>
                                 </t>
                                 <t t-if="record.permission.raw_value == 'write'">
                                     <span class="badge">
-                                        <i class="fa fa-fw fa-save" />
-                                        <t t-esc="record.permission.value" />
+                                        <i
+                                            class="fa fa-fw fa-save"
+                                            aria-label="Permission"
+                                            title="Permission"
+                                        />
+                                        <field name="permission" />
                                     </span>
                                 </t>
                                 <t t-if="record.permission.raw_value == 'admin'">
                                     <span class="badge">
-                                        <i class="fa fa-fw fa-cog" />
-                                        <t t-esc="record.permission.value" />
+                                        <i
+                                            class="fa fa-fw fa-cog"
+                                            aria-label="Permission"
+                                            title="Permission"
+                                        />
+                                        <field name="permission" />
                                     </span>
                                 </t>
                             </div>
-                        </div>
+                        </main>
                     </t>
                 </templates>
             </kanban>
@@ -103,38 +119,54 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="team_id" />
                 <field name="permission" />
                 <templates>
-                    <t t-name="kanban-box">
-                        <div class="o_res_partner_kanban oe_kanban_global_click">
+                    <t t-name="card" class="flex-row">
+                        <main class="ps-2 ps-md-0">
                             <div class="oe_module_desc">
                                 <h3>
                                     <field name="team_id" />
                                 </h3>
                                 <t t-if="record.permission.raw_value == 'undefined'">
                                     <span class="badge">
-                                        <i class="fa fa-fw fa-question" />
-                                        <t t-esc="record.permission.value" />
+                                        <i
+                                            class="fa fa-fw fa-question"
+                                            aria-label="Permission"
+                                            title="Permission"
+                                        />
+                                        <field name="permission" />
                                     </span>
                                 </t>
                                 <t t-if="record.permission.raw_value == 'read'">
                                     <span class="badge">
-                                        <i class="fa fa-fw fa-file-o" />
-                                        <t t-esc="record.permission.value" />
+                                        <i
+                                            class="fa fa-fw fa-file-o"
+                                            aria-label="Permission"
+                                            title="Permission"
+                                        />
+                                        <field name="permission" />
                                     </span>
                                 </t>
                                 <t t-if="record.permission.raw_value == 'write'">
                                     <span class="badge">
-                                        <i class="fa fa-fw fa-save" />
-                                        <t t-esc="record.permission.value" />
+                                        <i
+                                            class="fa fa-fw fa-save"
+                                            aria-label="Permission"
+                                            title="Permission"
+                                        />
+                                        <field name="permission" />
                                     </span>
                                 </t>
                                 <t t-if="record.permission.raw_value == 'admin'">
                                     <span class="badge">
-                                        <i class="fa fa-fw fa-cog" />
-                                        <t t-esc="record.permission.value" />
+                                        <i
+                                            class="fa fa-fw fa-cog"
+                                            aria-label="Permission"
+                                            title="Permission"
+                                        />
+                                        <field name="permission" />
                                     </span>
                                 </t>
                             </div>
-                        </div>
+                        </main>
                     </t>
                 </templates>
             </kanban>

@@ -27,43 +27,34 @@ class GithubRepository(models.Model):
         readonly=True,
         ondelete="cascade",
     )
-
     name = fields.Char(index=True, required=True, readonly=True)
-
     complete_name = fields.Char(
         readonly=True,
         compute="_compute_complete_name",
         store=True,
     )
-
     description = fields.Char(readonly=True)
-
     website = fields.Char(readonly=True)
-
     repository_branch_ids = fields.One2many(
         comodel_name="github.repository.branch",
         inverse_name="repository_id",
         string="Branches",
         readonly=True,
     )
-
     repository_branch_qty = fields.Integer(
         string="Number of Branches",
         compute="_compute_repository_branch_qty",
         store=True,
     )
-
     team_ids = fields.One2many(
         string="Teams",
         comodel_name="github.team.repository",
         inverse_name="repository_id",
         readonly=True,
     )
-
     team_qty = fields.Integer(
         string="Number of Teams", compute="_compute_team_qty", store=True
     )
-
     is_ignored = fields.Boolean(
         compute="_compute_ignore",
         help="If checked, the branches will not be synchronized, and the"
@@ -71,7 +62,6 @@ class GithubRepository(models.Model):
         " a repository, go to the organization and add the file"
         " 'Ignored Repositories'.",
     )
-
     color = fields.Integer(string="Color Index", compute="_compute_ignore")
     inhibit_inherited_rules = fields.Boolean(
         string="Inhibit inherited rules",

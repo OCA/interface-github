@@ -32,11 +32,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="inherit_id" ref="base.res_partner_kanban_view" />
         <field name="arch" type="xml">
             <!-- load data -->
-            <field name="mobile" position="after">
+            <field name="is_company" position="after">
                 <field name="github_name" />
             </field>
             <!-- Display Data -->
-            <xpath expr="//li[@t-if='record.email.raw_value']" position="after">
+            <xpath expr="//field[@name='email']" position="after">
                 <li t-if="record.github_name.raw_value">
                     <field name="github_name" />
                 </li>
@@ -47,9 +47,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_tree" />
         <field name="arch" type="xml">
-            <field name="display_name" position="after">
-                <field name="github_name" />
-                <field name="github_team_qty" />
+            <field name="complete_name" position="after">
+                <field name="github_name" optional="hide" />
+                <field name="github_team_qty" optional="hide" />
             </field>
         </field>
     </record>

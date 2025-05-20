@@ -10,10 +10,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="arch" type="xml">
             <form>
                 <group>
-                    <field name="organization_id" />
+                    <field name="organization_id" options="{'no_create': 1}" />
                     <field name="name" />
                     <field name="description" />
-                    <field name="website" />
+                    <field name="website" required="1" />
                 </group>
                 <footer>
                     <button

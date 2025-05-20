@@ -61,7 +61,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="view_github_repository_branch_tree" model="ir.ui.view">
         <field name="model">github.repository.branch</field>
         <field name="arch" type="xml">
-            <tree
+            <list
                 decoration-info="state == 'to_download'"
                 decoration-warning="state == 'to_analyze'"
             >
@@ -104,7 +104,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     groups="github_connector.group_github_connector_manager"
                 />
                 <field name="state" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_github_repository_branch_form" model="ir.ui.view">
@@ -199,7 +199,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 colspan="4"
                                 invisible="not analysis_rule_info_ids"
                             >
-                                <tree create="false" delete="false" editable="false">
+                                <list create="false" delete="false" edit="false">
                                     <field name="group_id" />
                                     <field name="analysis_rule_id" />
                                     <field name="code_count" sum="Total code" />
@@ -210,7 +210,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                     <field name="empty_count" sum="Total empty" />
                                     <field name="total_count" sum="Total total" />
                                     <field name="scanned_files" sum="Total scanned" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                     </notebook>
@@ -228,8 +228,8 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="ci_url" />
                 <field name="github_url" />
                 <templates>
-                    <t t-name="kanban-box">
-                        <div class="o_res_partner_kanban oe_kanban_global_click">
+                    <t t-name="card" class="flex-row">
+                        <main class="ps-2 ps-md-0">
                             <div class="oe_kanban_details">
                                 <h4 class="oe_partner_heading">
                                     <field name="complete_name" />
@@ -251,7 +251,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                     /> Mb</span>
                                 </div>
                             </div>
-                        </div>
+                        </main>
                     </t>
                 </templates>
             </kanban>

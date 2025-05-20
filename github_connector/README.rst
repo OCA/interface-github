@@ -17,25 +17,25 @@ Github Connector
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Finterface--github-lightgray.png?logo=github
-    :target: https://github.com/OCA/interface-github/tree/17.0/github_connector
+    :target: https://github.com/OCA/interface-github/tree/18.0/github_connector
     :alt: OCA/interface-github
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/interface-github-17-0/interface-github-17-0-github_connector
+    :target: https://translation.odoo-community.org/projects/interface-github-18-0/interface-github-18-0-github_connector
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/interface-github&target_branch=17.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/interface-github&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module allows you to:
 
--  Fetch into Odoo social information from Github (Organizations, Teams,
-   Users)
--  Fetch into Odoo Code structure information from Github (Repositories,
-   Branches)
--  Download source code from Github
--  Analyze repository code from rules previously created
+- Fetch into Odoo social information from Github (Organizations, Teams,
+  Users)
+- Fetch into Odoo Code structure information from Github (Repositories,
+  Branches)
+- Download source code from Github
+- Analyze repository code from rules previously created
 
 **Table of contents**
 
@@ -66,14 +66,14 @@ Once installed, you have to:
    credentials, and the local path where the source code will be
    downloaded:
 
-   -  ``source_code_local_path = /workspace/source_code/``
+   - ``source_code_local_path = /workspace/source_code/``
 
 Note: you can define the route as environment variable using the key
 SOURCE_CODE_LOCAL_PATH
 
 Note: make sure that Odoo process has read / write access on that folder
 
-   -  ``github_token = your_github_access_token``
+   - ``github_token = your_github_access_token``
 
 Note: The login/password auth has been deprecated by GitHub.
 https://docs.github.com/en/rest/overview/other-authentication-methods#via-username-and-password
@@ -101,14 +101,13 @@ Technical Information
 
 This module provides 4 crons that you can enable:
 
--  Synchronize All Organizations and Teams
-   (``cron_update_organization``)
--  Synchronize Branches List for All repositories
-   (``cron_update_branch_list``)
--  Download Source Code for All Github Branches (``cron_download_code``)
--  Analyze Source Code for All Github Branches (``cron_analyze_code``)
+- Synchronize All Organizations and Teams (``cron_update_organization``)
+- Synchronize Branches List for All repositories
+  (``cron_update_branch_list``)
+- Download Source Code for All Github Branches (``cron_download_code``)
+- Analyze Source Code for All Github Branches (``cron_analyze_code``)
 
-.. |image| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_settings.png
+.. |image| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_settings.png
 
 Usage
 =====
@@ -295,50 +294,50 @@ This module provides several reports
 
 |github_repository_branch_rule_info_report|
 
-.. |sync_organization| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/sync_organization.png
-.. |github_organization_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_organization_kanban.png
-.. |github_organization_series| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_organization_series.png
-.. |github_organization_external_services| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_organization_external_services.png
-.. |github_organization_sync_buttons| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_organization_sync_buttons.png
-.. |github_team_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_team_kanban.png
-.. |github_team_partner_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_team_partner_kanban.png
-.. |github_team_repository_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_team_repository_kanban.png
-.. |github_repository_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_repository_kanban.png
-.. |github_repository_branch_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_repository_branch_kanban.png
-.. |wizard_download_analyze| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/wizard_download_analyze.png
-.. |github_repository_branch_list| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_repository_branch_list.png
-.. |wizard_create_team| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/wizard_create_team.png
-.. |wizard_create_repository| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/wizard_create_repository.png
-.. |reporting_branches_by_serie| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/reporting_branches_by_serie.png
-.. |reporting_sizes_by_serie| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/reporting_sizes_by_serie.png
-.. |github_repository_branch_rule_info_report| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_repository_branch_rule_info_report.png
+.. |sync_organization| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/sync_organization.png
+.. |github_organization_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_organization_kanban.png
+.. |github_organization_series| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_organization_series.png
+.. |github_organization_external_services| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_organization_external_services.png
+.. |github_organization_sync_buttons| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_organization_sync_buttons.png
+.. |github_team_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_team_kanban.png
+.. |github_team_partner_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_team_partner_kanban.png
+.. |github_team_repository_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_team_repository_kanban.png
+.. |github_repository_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_repository_kanban.png
+.. |github_repository_branch_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_repository_branch_kanban.png
+.. |wizard_download_analyze| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/wizard_download_analyze.png
+.. |github_repository_branch_list| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_repository_branch_list.png
+.. |wizard_create_team| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/wizard_create_team.png
+.. |wizard_create_repository| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/wizard_create_repository.png
+.. |reporting_branches_by_serie| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/reporting_branches_by_serie.png
+.. |reporting_sizes_by_serie| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/reporting_sizes_by_serie.png
+.. |github_repository_branch_rule_info_report| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_repository_branch_rule_info_report.png
 
 Known issues / Roadmap
 ======================
 
--  For the time being, Github API doesn't provide some informations that
-   are available by the classic UI, that includes:
+- For the time being, Github API doesn't provide some informations that
+  are available by the classic UI, that includes:
 
-   1. team hierarchy: the field is present in the model
-      github_team.parent_id, but unused.
+  1. team hierarchy: the field is present in the model
+     github_team.parent_id, but unused.
 
--  Possible improvements:
+- Possible improvements:
 
-   1. Create a new module github_connector_website, that could display
-      teams / repositories / branches informations for non logged users.
-   2. Analyze commits (author, quantity by series, etc...): this feature
-      has been partially implemented in a V8.0 PR.
-   3. Synchronize Pull Request, Issues, Comments: this feature has been
-      partially implemented in a V8.0 PR.
+  1. Create a new module github_connector_website, that could display
+     teams / repositories / branches informations for non logged users.
+  2. Analyze commits (author, quantity by series, etc...): this feature
+     has been partially implemented in a V8.0 PR.
+  3. Synchronize Pull Request, Issues, Comments: this feature has been
+     partially implemented in a V8.0 PR.
 
--  Refactor the github connector:
+- Refactor the github connector:
 
-   A python library called PyGitHub is available. It could be
-   interesting to use it, instead of using custom code. However, this
-   lib doesn't provide good access to child object, generating for the
-   time being, unnecessary API calls. For example, updating a repository
-   should call before a call to the parent organization (The current
-   module is so faster).
+  A python library called PyGitHub is available. It could be interesting
+  to use it, instead of using custom code. However, this lib doesn't
+  provide good access to child object, generating for the time being,
+  unnecessary API calls. For example, updating a repository should call
+  before a call to the parent organization (The current module is so
+  faster).
 
 Bug Tracker
 ===========
@@ -346,7 +345,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/interface-github/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/interface-github/issues/new?body=module:%20github_connector%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/interface-github/issues/new?body=module:%20github_connector%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -363,20 +362,20 @@ Authors
 Contributors
 ------------
 
--  Sylvain LE GAL (https://twitter.com/legalsylvain)
--  Sébastien BEAU (sebastien.beau@akretion.com)
--  Benoît GUILLOT (benoit.guillot@akretion.com)
--  Enrique Martín (enriquemartin@digital5.es)
--  `Tecnativa <https://www.tecnativa.com>`__:",
+- Sylvain LE GAL (https://twitter.com/legalsylvain)
+- Sébastien BEAU (sebastien.beau@akretion.com)
+- Benoît GUILLOT (benoit.guillot@akretion.com)
+- Enrique Martín (enriquemartin@digital5.es)
+- `Tecnativa <https://www.tecnativa.com>`__:",
 
-   -  Pedro M. Baeza
-   -  Vicent Cubells
-   -  Alexandre Díaz
-   -  Ernesto Tejeda
-   -  Carlos Roca
-   -  Víctor Martínez
-   -  João Marques
-   -  Carolina Fernandez
+  - Pedro M. Baeza
+  - Vicent Cubells
+  - Alexandre Díaz
+  - Ernesto Tejeda
+  - Carlos Roca
+  - Víctor Martínez
+  - João Marques
+  - Carolina Fernandez
 
 Maintainers
 -----------
@@ -391,6 +390,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/interface-github <https://github.com/OCA/interface-github/tree/17.0/github_connector>`_ project on GitHub.
+This module is part of the `OCA/interface-github <https://github.com/OCA/interface-github/tree/18.0/github_connector>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

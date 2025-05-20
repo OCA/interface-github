@@ -25,9 +25,7 @@ class GithubTeam(models.Model):
         readonly=True,
         ondelete="cascade",
     )
-
     name = fields.Char(index=True, required=True, readonly=True)
-
     privacy = fields.Selection(
         selection=_PRIVACY_SELECTION,
         readonly=True,
@@ -37,41 +35,33 @@ class GithubTeam(models.Model):
         " this team.\n"
         "* closed - visible to all members of this organization.",
     )
-
     parent_id = fields.Many2one(
         string="Parent Team", readonly=True, comodel_name="github.team"
     )
-
     partner_ids = fields.One2many(
         string="Members",
         comodel_name="github.team.partner",
         inverse_name="team_id",
         readonly=True,
     )
-
     partner_qty = fields.Integer(
         string="Number of Members", compute="_compute_partner_qty", store=True
     )
-
     repository_ids = fields.One2many(
         string="Repositories",
         comodel_name="github.team.repository",
         inverse_name="team_id",
         readonly=True,
     )
-
     repository_qty = fields.Integer(
         string="Number of Repositories", compute="_compute_repository_qty", store=True
     )
-
     description = fields.Char(readonly=True)
-
     complete_name = fields.Char(
         readonly=True,
         compute="_compute_complete_name",
         store=True,
     )
-
     github_url = fields.Char(
         string="Github URL", compute="_compute_github_url", readonly=True
     )

@@ -11,7 +11,7 @@ import shutil
 from datetime import datetime
 from subprocess import check_output
 
-from odoo import _, addons, api, exceptions, fields, models, tools
+from odoo import addons, api, exceptions, fields, models, tools
 from odoo.tools.safe_eval import safe_eval
 
 _logger = logging.getLogger(__name__)
@@ -22,7 +22,7 @@ except ImportError:
     _logger.debug("Cannot import 'git' python library.")
 
 
-class GithubRepository(models.Model):
+class GithubRepositoryBranch(models.Model):
     _name = "github.repository.branch"
     _inherit = ["abstract.github.model"]
     _order = "repository_id, sequence_serie"
@@ -38,15 +38,11 @@ class GithubRepository(models.Model):
 
     # Column Section
     name = fields.Char(readonly=True, index=True)
-
     size = fields.Integer(string="Size (Byte) ", readonly=True)
-
     mb_size = fields.Float(
         string="Size (Megabyte)", store=True, compute="_compute_mb_size"
     )
-
     complete_name = fields.Char(store=True, compute="_compute_complete_name")
-
     repository_id = fields.Many2one(
         comodel_name="github.repository",
         string="Repository",
@@ -55,7 +51,6 @@ class GithubRepository(models.Model):
         readonly=True,
         ondelete="cascade",
     )
-
     organization_id = fields.Many2one(
         comodel_name="github.organization",
         string="Organization",
@@ -63,32 +58,23 @@ class GithubRepository(models.Model):
         store=True,
         readonly=True,
     )
-
     organization_serie_id = fields.Many2one(
         comodel_name="github.organization.serie",
         string="Organization Serie",
         store=True,
         compute="_compute_organization_serie_id",
     )
-
     sequence_serie = fields.Integer(
         string="Sequence Serie", store=True, related="organization_serie_id.sequence"
     )
-
     local_path = fields.Char(compute="_compute_local_path")
-
     state = fields.Selection(selection=_SELECTION_STATE, default="to_download")
-
     last_download_date = fields.Datetime()
-
     last_analyze_date = fields.Datetime()
-
     coverage_url = fields.Char(
         string="Coverage URL", store=True, compute="_compute_coverage_url"
     )
-
     ci_url = fields.Char(string="CI URL", store=True, compute="_compute_ci_url")
-
     github_url = fields.Char(
         string="Github URL", store=True, compute="_compute_github_url"
     )
@@ -116,14 +102,12 @@ class GithubRepository(models.Model):
                 os.makedirs(source_path)
             except Exception as e:
                 _logger.error(
-                    _(
+                    self.env._(
                         "Error when trying to create the main folder %(path)s\n"
-                        " Please check Odoo Access Rights.\n %(error)s"
+                        " Please check Odoo Access Rights.\n %(error)s",
+                        path=source_path,
+                        error=e,
                     )
-                    % {
-                        "path": source_path,
-                        "error": e,
-                    }
                 )
         if source_path and source_path not in addons.__path__:
             addons.__path__.append(source_path)
@@ -167,17 +151,16 @@ class GithubRepository(models.Model):
             repository = branch.repository_id
             gh_repo = repository.find_related_github_object()
             if not os.path.exists(branch.local_path):
-                _logger.info("Cloning new repository into %s ..." % branch.local_path)
                 # Cloning the repository
                 try:
                     os.makedirs(branch.local_path)
                 except Exception:
                     raise exceptions.UserError(
-                        _(
+                        self.env._(
                             "Error when trying to create the folder %s\n"
-                            " Please check Odoo Access Rights."
+                            " Please check Odoo Access Rights.",
+                            branch.local_path,
                         )
-                        % (branch.local_path)
                     ) from None
                 command = f"git clone {gh_repo.clone_url} -b {branch.name} {branch.local_path}"  # noqa: E501
                 os.system(command)
@@ -186,7 +169,6 @@ class GithubRepository(models.Model):
                 )
             else:
                 # Update repository
-                _logger.info("Pulling existing repository %s ..." % branch.local_path)
                 try:
                     res = check_output(
                         ["git", "pull", "origin", branch.name], cwd=branch.local_path
@@ -198,15 +180,13 @@ class GithubRepository(models.Model):
                 except Exception:
                     # Trying to clean the local folder
                     _logger.warning(
-                        _(
+                        self.env._(
                             "Error when updating the branch %(branch)s in the local "
                             "folder %(path)s.\nDeleting the local folder and trying"
-                            " again."
+                            " again.",
+                            branch=branch.name,
+                            path=branch.local_path,
                         )
-                        % {
-                            "branch": branch.name,
-                            "path": branch.local_path,
-                        }
                     )
                     try:
                         shutil.rmtree(branch.local_path)
@@ -335,7 +315,6 @@ class GithubRepository(models.Model):
             if not os.path.exists(path):
                 _logger.warning("Warning Folder %s not found: Analysis skipped.", path)
             else:
-                _logger.info("Analyzing Source Code in %s ...", path)
                 try:
                     vals = branch.analyze_code_one()
                     vals.update(
@@ -376,7 +355,7 @@ class GithubRepository(models.Model):
         source_path = self._get_source_path()
         if not source_path and not tools.config["test_enable"]:
             raise exceptions.UserError(
-                _(
+                self.env._(
                     "source_code_local_path should be defined in your "
                     " configuration file"
                 )
