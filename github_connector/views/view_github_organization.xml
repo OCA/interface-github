@@ -20,13 +20,13 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="view_github_organization_tree" model="ir.ui.view">
         <field name="model">github.organization</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="github_name" />
                 <field name="name" />
                 <field name="member_qty" />
                 <field name="repository_qty" />
                 <field name="team_qty" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_github_organization_form" model="ir.ui.view">
@@ -158,10 +158,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 colspan="2"
                                 nolabel="1"
                             >
-                                <tree editable="bottom">
+                                <list editable="bottom">
                                     <field name="sequence" />
                                     <field name="name" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page name="github" string="Github">
@@ -218,14 +218,19 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="email" />
                 <field name="location" />
                 <templates>
-                    <t t-name="kanban-box">
-                        <div class="oe_module_vignette oe_kanban_global_click">
-                            <div class="o_kanban_image">
-                                <img
-                                    t-att-alt="record.name.value"
-                                    t-att-src="kanban_image('github.organization', 'image', record.id.raw_value)"
+                    <t t-name="card" class="flex-row">
+                        <aside class="o_kanban_aside_full">
+                            <div class="o_kanban_image_fill position-relative w-100">
+                                <field
+                                    name="image"
+                                    alt="Organization image"
+                                    class="h-100"
+                                    widget="image"
+                                    options="{'img_class': 'object-fit-cover'}"
                                 />
                             </div>
+                        </aside>
+                        <main class="ps-2 ps-md-0">
                             <div class="oe_kanban_details">
                                 <h3>
                                     <field name="name" />
@@ -273,7 +278,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                     <t t-esc="record.member_qty.value" />
                                 </span>
                             </div>
-                        </div>
+                        </main>
                     </t>
                 </templates>
             </kanban>

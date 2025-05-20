@@ -7,7 +7,7 @@
 # pylint: disable=missing-manifest-dependency
 from github.GithubException import GithubException
 
-from odoo import _, api, exceptions, fields, models
+from odoo import api, exceptions, fields, models
 
 
 class GithubOrganization(models.Model):
@@ -20,17 +20,11 @@ class GithubOrganization(models.Model):
 
     # Columns Section
     name = fields.Char(string="Organization Name", required=True, readonly=True)
-
     image = fields.Image(readonly=True)
-
     description = fields.Char(readonly=True)
-
     email = fields.Char(readonly=True)
-
     website_url = fields.Char(readonly=True)
-
     location = fields.Char(readonly=True)
-
     ignored_repository_names = fields.Text(
         string="Ignored Repositories",
         help="Set here repository names"
@@ -40,7 +34,6 @@ class GithubOrganization(models.Model):
         " Exemple:\n"
         "purchase-workflow\nOCB\nOpenUpgrade\n",
     )
-
     member_ids = fields.Many2many(
         string="Members",
         comodel_name="res.partner",
@@ -49,47 +42,37 @@ class GithubOrganization(models.Model):
         column2="partner_id",
         readonly=True,
     )
-
     member_qty = fields.Integer(
         string="Number of Members", compute="_compute_member_qty", store=True
     )
-
     repository_ids = fields.One2many(
         string="Repositories",
         comodel_name="github.repository",
         inverse_name="organization_id",
         readonly=True,
     )
-
     repository_qty = fields.Integer(
         string="Number of Repositories", compute="_compute_repository_qty", store=True
     )
-
     team_ids = fields.One2many(
         string="Teams",
         comodel_name="github.team",
         inverse_name="organization_id",
         readonly=True,
     )
-
     team_qty = fields.Integer(
         string="Number of Teams", compute="_compute_team_qty", store=True
     )
-
     organization_serie_ids = fields.One2many(
         string="Organization Series",
         comodel_name="github.organization.serie",
         inverse_name="organization_id",
     )
-
     organization_serie_qty = fields.Integer(
         string="Number of Series", store=True, compute="_compute_organization_serie_qty"
     )
-
     coverage_url_pattern = fields.Char(string="Coverage URL Pattern")
-
     ci_url_pattern = fields.Char(string="CI URL Pattern")
-
     analysis_rule_ids = fields.Many2many(
         string="Analysis Rules", comodel_name="github.analysis.rule"
     )
@@ -216,11 +199,11 @@ class GithubOrganization(models.Model):
             except GithubException as e:
                 if e.status == 403:
                     raise exceptions.AccessError(
-                        _(
+                        self.env._(
                             "The provided Github Token must have admin read:org"
-                            " permissions to the organization '%s'"
+                            " permissions to the organization '%s'",
+                            self.name,
                         )
-                        % self.name
                     ) from None
 
     def action_github_repository(self):

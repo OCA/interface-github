@@ -14,7 +14,7 @@ from github.GithubException import (  # pylint: disable=missing-manifest-depende
     UnknownObjectException,
 )
 
-from odoo import _, api, fields, models, tools
+from odoo import api, fields, models, tools
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -36,17 +36,12 @@ class AbstractGithubModel(models.AbstractModel):
     _field_list_prevent_overwrite = []
 
     github_id_external = fields.Char(string="Github Id", readonly=True, index=True)
-
     github_name = fields.Char(string="Github Technical Name", readonly=True, index=True)
-
     github_url = fields.Char(string="Github URL", readonly=True)
-
     github_create_date = fields.Datetime(string="Create Date on Github", readonly=True)
-
     github_write_date = fields.Datetime(
         string="Last Write Date on Github", readonly=True
     )
-
     github_last_sync_date = fields.Datetime(
         string="Last Sync Date with Github", readonly=True
     )
@@ -55,7 +50,7 @@ class AbstractGithubModel(models.AbstractModel):
     def github_login_field(self):
         if self._github_login_field is None:
             raise UserError(
-                _(
+                self.env._(
                     "Feature not Implemented : Please define 'github_login_field'"
                     " function in child model."
                 )
@@ -107,7 +102,7 @@ class AbstractGithubModel(models.AbstractModel):
         """
         self.ensure_one()
         raise UserError(
-            _(
+            self.env._(
                 "Feature not Implemented : Please define"
                 " 'get_github_base_obj_for_creation' function in child model."
             )
@@ -171,8 +166,10 @@ class AbstractGithubModel(models.AbstractModel):
                 return existing_objects
             elif len(existing_objects) > 1:
                 raise UserError(
-                    _("Duplicate object with Github login %s")
-                    % (data[self._github_login_field],)
+                    self.env._(
+                        "Duplicate object with Github login %s",
+                        data[self._github_login_field],
+                    )
                 )
         return None
 
@@ -207,7 +204,7 @@ class AbstractGithubModel(models.AbstractModel):
                     # Try to get an user.
                     gh_obj = gh_api.get_user(p_name)
         except UnknownObjectException:
-            raise UserError(_("Invalid name '%s' provided") % name) from None
+            raise UserError(self.env._("Invalid name '%s' provided", name)) from None
         res = self.get_odoo_data_from_github(gh_obj)
         # search if ID doesn't exist in database
         current_object = self.with_context(active_test=False).search(
@@ -255,9 +252,9 @@ class AbstractGithubModel(models.AbstractModel):
                 stream = urlopen(url, timeout=10).read()
                 break
             except Exception as err:
-                _logger.warning("URL Call Error. %s" % (err.__str__()))
+                _logger.warning("URL Call Error. %s", str(err))
         else:
-            raise UserError(_("Maximum attempts reached."))
+            raise UserError(self.env._("Maximum attempts reached."))
         return base64.standard_b64encode(stream)
 
     # Custom Private Function
@@ -293,7 +290,7 @@ class AbstractGithubModel(models.AbstractModel):
         )
         if not token:
             raise UserError(
-                _(
+                self.env._(
                     "Please add the 'github_token' in Odoo configuration file"
                     " or as the 'github.access_token' configuration parameter."
                 )

@@ -6,7 +6,7 @@
 # pylint: disable=missing-manifest-dependency
 from github.GithubException import UnknownObjectException
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -23,18 +23,15 @@ class ResPartner(models.Model):
         string="Is Bot Github Account",
         help="Check this box if this " "account is a bot or similar.",
     )
-
     github_team_partner_ids = fields.One2many(
         string="Teams",
         comodel_name="github.team.partner",
         inverse_name="partner_id",
         readonly=True,
     )
-
     github_team_qty = fields.Integer(
         string="Number of Teams", compute="_compute_github_team_qty", store=True
     )
-
     organization_ids = fields.Many2many(
         string="Organizations",
         comodel_name="github.organization",
@@ -43,7 +40,6 @@ class ResPartner(models.Model):
         column2="organization_id",
         readonly=True,
     )
-
     organization_qty = fields.Integer(
         string="Number of Organizations",
         compute="_compute_organization_qty",
@@ -64,8 +60,10 @@ class ResPartner(models.Model):
         for partner in self:
             if partner.is_company and partner.github_name:
                 raise UserError(
-                    _("A company ('%s') can not have a Github login" " associated.")
-                    % partner.name
+                    self.env._(
+                        "A company ('%s') can not have a Github login" " associated.",
+                        partner.name,
+                    )
                 )
 
     # Compute Section
@@ -93,7 +91,7 @@ class ResPartner(models.Model):
     @api.model
     def get_odoo_data_from_github(self, gh_data):
         res = super().get_odoo_data_from_github(gh_data)
-        res.update({"name": gh_data.name or "%s (Github)" % gh_data.login})
+        res.update({"name": gh_data.name or f"{gh_data.login} (Github)"})
         if hasattr(gh_data, "avatar_url"):
             res.update(
                 {"image_1920": self.get_base64_image_from_github(gh_data.avatar_url)}

@@ -11,8 +11,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="active" eval="False" />
         <field name="user_id" ref="base.user_root" />
         <field name="interval_type">days</field>
-        <field name="numbercall">-1</field>
-        <field name="doall" eval="False" />
         <field name="state">code</field>
         <field name="model_id" ref="model_github_organization" />
         <field name="code">model.cron_update_organization_team()</field>
@@ -23,8 +21,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="active" eval="False" />
         <field name="user_id" ref="base.user_root" />
         <field name="interval_type">days</field>
-        <field name="numbercall">-1</field>
-        <field name="doall" eval="False" />
         <field name="state">code</field>
         <field name="model_id" ref="model_github_repository" />
         <field name="code">model.cron_update_branch_list()</field>
@@ -35,8 +31,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="active" eval="False" />
         <field name="user_id" ref="base.user_root" />
         <field name="interval_type">days</field>
-        <field name="numbercall">-1</field>
-        <field name="doall" eval="False" />
         <field name="state">code</field>
         <field name="model_id" ref="model_github_repository_branch" />
         <field name="code">model.cron_download_all()</field>
@@ -47,8 +41,6 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="active" eval="False" />
         <field name="user_id" ref="base.user_root" />
         <field name="interval_type">days</field>
-        <field name="numbercall">-1</field>
-        <field name="doall" eval="False" />
         <field name="state">code</field>
         <field name="model_id" ref="model_github_repository_branch" />
         <field name="code">model.cron_analyze_all()</field>

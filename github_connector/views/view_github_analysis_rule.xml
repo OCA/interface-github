@@ -7,10 +7,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="view_github_analysis_rule_tree" model="ir.ui.view">
         <field name="model">github.analysis.rule</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="group_id" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_github_analysis_rule_form" model="ir.ui.view">

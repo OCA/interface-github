@@ -18,7 +18,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="view_github_team_partner_tree" model="ir.ui.view">
         <field name="model">github.team.partner</field>
         <field name="arch" type="xml">
-            <tree decoration-warning="role == 'member'">
+            <list decoration-warning="role == 'member'">
                 <field name="team_id" invisible="context_search_default_team_id != 0" />
                 <field
                     name="partner_id"
@@ -27,7 +27,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="role" />
                 <field name="context_search_default_team_id" invisible="1" />
                 <field name="context_search_default_partner_id" invisible="1" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_github_team_partner_form" model="ir.ui.view">
@@ -54,35 +54,35 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">github.team.partner</field>
         <field name="arch" type="xml">
             <kanban>
-                <field name="partner_id" />
                 <field name="role" />
                 <templates>
-                    <t t-name="kanban-box">
-                        <div class="oe_kanban_global_click">
-                            <div class="o_kanban_image">
-                                <img
-                                    alt="Avatar"
-                                    t-att-src="kanban_image('res.partner', 'image_128', record.partner_id.raw_value)"
+                    <t t-name="card" class="flex-row">
+                        <aside class="o_kanban_aside_full">
+                            <div class="o_kanban_image_fill position-relative w-100">
+                                <field
+                                    name="partner_id"
+                                    alt="Partner image"
+                                    class="h-100"
+                                    widget="image"
+                                    options="{'preview_image': 'avatar_128'}"
                                 />
                             </div>
+                        </aside>
+                        <main class="ps-2 ps-md-0">
                             <div class="oe_kanban_details">
                                 <h3>
                                     <field name="partner_id" />
                                 </h3>
-                                <t t-if="record.role.raw_value == 'member'">
-                                    <span class="badge">
-                                        <i class="fa fa-fw fa-user" />
-                                        <t t-esc="record.role.value" />
-                                    </span>
-                                </t>
-                                <t t-if="record.role.raw_value == 'maintainer'">
-                                    <span class="badge">
-                                        <i class="fa fa-fw fa-cog" />
-                                        <t t-esc="record.role.value" />
-                                    </span>
-                                </t>
+                                <span class="badge">
+                                    <i
+                                        t-attf-class="fa fa-fw #{record.role.raw_value == 'maintainer' ? 'fa-cog' : 'fa-user'}"
+                                        aria-label="Role"
+                                        title="Role"
+                                    />
+                                    <field name="role" />
+                                </span>
                             </div>
-                        </div>
+                        </main>
                     </t>
                 </templates>
             </kanban>
@@ -95,26 +95,33 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="team_id" />
                 <field name="role" />
                 <templates>
-                    <t t-name="kanban-box">
-                        <div class="o_res_partner_kanban oe_kanban_global_click">
+                    <t t-name="card" class="flex-row">
+                        <aside class="o_kanban_aside_full">
+                            <div class="o_kanban_image_fill position-relative w-100">
+                                <field
+                                    name="partner_id"
+                                    alt="Partner image"
+                                    class="h-100"
+                                    widget="image"
+                                    options="{'preview_image': 'avatar_128'}"
+                                />
+                            </div>
+                        </aside>
+                        <main class="ps-2 ps-md-0">
                             <div class="oe_module_desc">
                                 <h3>
                                     <field name="team_id" />
                                 </h3>
-                                <t t-if="record.role.raw_value == 'member'">
-                                    <span class="badge">
-                                        <i class="fa fa-fw fa-user" />
-                                        <t t-esc="record.role.value" />
-                                    </span>
-                                </t>
-                                <t t-if="record.role.raw_value == 'maintainer'">
-                                    <span class="badge">
-                                        <i class="fa fa-fw fa-cog" />
-                                        <t t-esc="record.role.value" />
-                                    </span>
-                                </t>
+                                <span class="badge">
+                                    <i
+                                        t-attf-class="fa fa-fw #{record.role.raw_value == 'maintainer' ? 'fa-cog' : 'fa-user'}"
+                                        aria-label="Role"
+                                        title="Role"
+                                    />
+                                    <field name="role" />
+                                </span>
                             </div>
-                        </div>
+                        </main>
                     </t>
                 </templates>
             </kanban>

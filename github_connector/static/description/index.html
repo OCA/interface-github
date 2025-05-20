@@ -369,7 +369,7 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! source digest: sha256:29c14b59b60246cac8e8b59309bf989c02dd1b2067ce1f395b45d31f5f29944f
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/interface-github/tree/17.0/github_connector"><img alt="OCA/interface-github" src="https://img.shields.io/badge/github-OCA%2Finterface--github-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/interface-github-17-0/interface-github-17-0-github_connector"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/interface-github&amp;target_branch=17.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/interface-github/tree/18.0/github_connector"><img alt="OCA/interface-github" src="https://img.shields.io/badge/github-OCA%2Finterface--github-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/interface-github-18-0/interface-github-18-0-github_connector"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/interface-github&amp;target_branch=18.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
 <p>This module allows you to:</p>
 <ul class="simple">
 <li>Fetch into Odoo social information from Github (Organizations, Teams,
@@ -455,7 +455,7 @@ each repository analysis. We recommend to set to <tt class="docutils literal">Tr
 perform the initial download (potentially with a lot of
 repositories) in order to reduce the size of the transaction</li>
 </ol>
-<p><img alt="image" src="https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_settings.png" /></p>
+<p><img alt="image" src="https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_settings.png" /></p>
 </li>
 <li><p class="first">Go to your(s) user(s) form to add them in the new ‘Connector Github
 Manager’ groups. The members of this group will have the possibility
@@ -466,8 +466,7 @@ to run Github synchronization.</p>
 <h2><a class="toc-backref" href="#toc-entry-3">Technical Information</a></h2>
 <p>This module provides 4 crons that you can enable:</p>
 <ul class="simple">
-<li>Synchronize All Organizations and Teams
-(<tt class="docutils literal">cron_update_organization</tt>)</li>
+<li>Synchronize All Organizations and Teams (<tt class="docutils literal">cron_update_organization</tt>)</li>
 <li>Synchronize Branches List for All repositories
 (<tt class="docutils literal">cron_update_branch_list</tt>)</li>
 <li>Download Source Code for All Github Branches (<tt class="docutils literal">cron_download_code</tt>)</li>
@@ -484,16 +483,16 @@ to run Github synchronization.</p>
 <li><p class="first">go to ‘Github’ / ‘Settings’ / ‘Sync Object’</p>
 </li>
 <li><p class="first">Select the object type you want to synchronize and its Gthub name</p>
-<p><img alt="sync_organization" src="https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/sync_organization.png" /></p>
+<p><img alt="sync_organization" src="https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/sync_organization.png" /></p>
 </li>
 <li><p class="first">Once done for your organization(s), go to ‘Github’ / ‘Github
 Commnunity’ / ‘Organizations’</p>
-<p><img alt="github_organization_kanban" src="https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_organization_kanban.png" /></p>
+<p><img alt="github_organization_kanban" src="https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_organization_kanban.png" /></p>
 </li>
 <li><p class="first">Optionally, once organization is created, you can create series for
 your projects. Go to ‘Github’ / ‘Organizations’ / click on your
 organization / ‘Organization Series’ Tabs</p>
-<p><img alt="github_organization_series" src="https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_organization_series.png" /></p>
+<p><img alt="github_organization_series" src="https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_organization_series.png" /></p>
 </li>
 </ol>
 </div>
@@ -508,12 +507,12 @@ set, ‘Ignored Repositories’ value is ignored.</p>
 </li>
 <li><p class="first">In the ‘Settings’ tab, set the URL of the ‘External Services’ you use
 for Continuous Integration and Coverage.</p>
-<p><img alt="github_organization_external_services" src="https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_organization_external_services.png" /></p>
+<p><img alt="github_organization_external_services" src="https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_organization_external_services.png" /></p>
 </li>
 <li><p class="first">Once done, click on buttons ‘Syncs’, to synchronize repositories,
 teams and members. (This process can take a while depending of your
 size)</p>
-<p><img alt="github_organization_sync_buttons" src="https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_organization_sync_buttons.png" /></p>
+<p><img alt="github_organization_sync_buttons" src="https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_organization_sync_buttons.png" /></p>
 </li>
 </ol>
 </div>
@@ -522,15 +521,15 @@ size)</p>
 <p>You can synchronize members teams:</p>
 <ol class="arabic">
 <li><p class="first">Go to ‘Teams’ / tree view / ‘Actions’ / ‘Update from Github’.</p>
-<p><img alt="github_team_kanban" src="https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_team_kanban.png" /></p>
+<p><img alt="github_team_kanban" src="https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_team_kanban.png" /></p>
 </li>
 <li><p class="first">In each team, you can see the members list and the role of the
 members</p>
-<p><img alt="github_team_partner_kanban" src="https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_team_partner_kanban.png" /></p>
+<p><img alt="github_team_partner_kanban" src="https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_team_partner_kanban.png" /></p>
 </li>
 <li><p class="first">In each team, you can see the repositories list but not the
 permissions of the team. (See ‘Known Issues’ Section)</p>
-<p><img alt="github_team_repository_kanban" src="https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_team_repository_kanban.png" /></p>
+<p><img alt="github_team_repository_kanban" src="https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_team_repository_kanban.png" /></p>
 </li>
 </ol>
 </div>
@@ -539,11 +538,11 @@ permissions of the team. (See ‘Known Issues’ Section)</p>
 <p>You can synchronize the branches of your repositories:</p>
 <ol class="arabic">
 <li><p class="first">Go to ‘Repositories’ / tree view / ‘Actions’ / ‘Update from Github’</p>
-<p><img alt="github_repository_kanban" src="https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_repository_kanban.png" /></p>
+<p><img alt="github_repository_kanban" src="https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_repository_kanban.png" /></p>
 </li>
 <li><p class="first">In each repository, you can see the main branches list and the size
 of code source.</p>
-<p><img alt="github_repository_branch_kanban" src="https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_repository_branch_kanban.png" /></p>
+<p><img alt="github_repository_branch_kanban" src="https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_repository_branch_kanban.png" /></p>
 </li>
 </ol>
 </div>
@@ -553,11 +552,11 @@ of code source.</p>
 <ol class="arabic">
 <li><p class="first">Go to ‘Repository Branches’ / tree view / ‘Actions’ / ‘Download and
 Analyse Source Code’.</p>
-<p><img alt="wizard_download_analyze" src="https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/wizard_download_analyze.png" /></p>
+<p><img alt="wizard_download_analyze" src="https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/wizard_download_analyze.png" /></p>
 </li>
 <li><p class="first">In the tree view you can update manually source code or refresh
 analysis.</p>
-<p><img alt="github_repository_branch_list" src="https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_repository_branch_list.png" /></p>
+<p><img alt="github_repository_branch_list" src="https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_repository_branch_list.png" /></p>
 </li>
 </ol>
 </div>
@@ -613,14 +612,14 @@ correct, the creation will be done directly in Github</li>
 <li>Later on, a synchronization will be performed, to create the
 according team in the Odoo instance.</li>
 </ol>
-<p><img alt="wizard_create_team" src="https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/wizard_create_team.png" /></p>
+<p><img alt="wizard_create_team" src="https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/wizard_create_team.png" /></p>
 </li>
 <li><p class="first">Repositories:</p>
 <ol class="arabic simple">
 <li>Go to ‘Settings’ / ‘Create Team in Github’.</li>
 <li>Set the information and click on Create in Github.</li>
 </ol>
-<p><img alt="wizard_create_repository" src="https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/wizard_create_repository.png" /></p>
+<p><img alt="wizard_create_repository" src="https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/wizard_create_repository.png" /></p>
 </li>
 </ol>
 </div>
@@ -637,11 +636,11 @@ repositories contain Odoo modules.</p>
 <h2><a class="toc-backref" href="#toc-entry-13">Reporting</a></h2>
 <p>This module provides several reports</p>
 <p><strong>Branches by Serie</strong></p>
-<p><img alt="reporting_branches_by_serie" src="https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/reporting_branches_by_serie.png" /></p>
+<p><img alt="reporting_branches_by_serie" src="https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/reporting_branches_by_serie.png" /></p>
 <p><strong>Sizes by Serie</strong></p>
-<p><img alt="reporting_sizes_by_serie" src="https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/reporting_sizes_by_serie.png" /></p>
+<p><img alt="reporting_sizes_by_serie" src="https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/reporting_sizes_by_serie.png" /></p>
 <p><strong>Repository branch analysis rule</strong></p>
-<p><img alt="github_repository_branch_rule_info_report" src="https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector/static/description/github_repository_branch_rule_info_report.png" /></p>
+<p><img alt="github_repository_branch_rule_info_report" src="https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_repository_branch_rule_info_report.png" /></p>
 </div>
 </div>
 <div class="section" id="known-issues-roadmap">
@@ -665,12 +664,12 @@ partially implemented in a V8.0 PR.</li>
 </ol>
 </li>
 <li><p class="first">Refactor the github connector:</p>
-<p>A python library called PyGitHub is available. It could be
-interesting to use it, instead of using custom code. However, this
-lib doesn’t provide good access to child object, generating for the
-time being, unnecessary API calls. For example, updating a repository
-should call before a call to the parent organization (The current
-module is so faster).</p>
+<p>A python library called PyGitHub is available. It could be interesting
+to use it, instead of using custom code. However, this lib doesn’t
+provide good access to child object, generating for the time being,
+unnecessary API calls. For example, updating a repository should call
+before a call to the parent organization (The current module is so
+faster).</p>
 </li>
 </ul>
 </div>
@@ -679,7 +678,7 @@ module is so faster).</p>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/interface-github/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-<a class="reference external" href="https://github.com/OCA/interface-github/issues/new?body=module:%20github_connector%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<a class="reference external" href="https://github.com/OCA/interface-github/issues/new?body=module:%20github_connector%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
@@ -721,7 +720,7 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>
-<p>This module is part of the <a class="reference external" href="https://github.com/OCA/interface-github/tree/17.0/github_connector">OCA/interface-github</a> project on GitHub.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/interface-github/tree/18.0/github_connector">OCA/interface-github</a> project on GitHub.</p>
 <p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
 </div>
 </div>
