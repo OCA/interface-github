@@ -49,7 +49,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="view_odoo_module_version_tree" model="ir.ui.view">
         <field name="model">odoo.module.version</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="repository_id" />
                 <field name="organization_serie_id" string="Serie" />
                 <field name="technical_name" />
@@ -59,7 +59,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="lib_python_ids_description" string="Python Lib" />
                 <field name="lib_bin_ids_description" string="Bin Lib" />
                 <field name="license_id" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_odoo_module_version_form" model="ir.ui.view">
@@ -131,7 +131,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                             <field
                                 name="analysis_rule_info_ids"
                                 colspan="4"
-                                context="{'tree_view_ref': 'github_connector_odoo.odoo_module_version_rule_info_tree'}"
+                                context="{'list_view_ref': 'github_connector_odoo.odoo_module_version_rule_info_list'}"
                             />
                         </page>
                     </notebook>
@@ -150,22 +150,26 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="github_url" />
                 <field name="repository_branch_id" />
                 <templates>
-                    <t t-name="kanban-box">
-                        <div class="oe_module_vignette oe_kanban_global_click">
-                            <t t-if="record.image.raw_value">
-                                <img
-                                    t-att-src="kanban_image('odoo.module.version', 'image', record.id.raw_value)"
-                                    class="oe_module_icon"
-                                    t-att-alt="record.name.raw_value"
+                    <t t-name="card" class="flex-row">
+                        <aside class="o_kanban_aside_full">
+                            <div class="o_kanban_image_fill position-relative w-100">
+                                <field
+                                    name="image"
+                                    alt="Module image"
+                                    class="h-100"
+                                    widget="image"
+                                    options="{'img_class': 'w-100 object-fit-contain'}"
+                                    invisible="not image"
                                 />
-                            </t>
-                            <t t-if="!record.image.raw_value">
                                 <img
-                                    t-att-src='_s + "/github_connector_odoo/static/src/img/default_image_module_version.png"'
-                                    class="oe_module_icon"
-                                    t-att-alt="record.name.raw_value"
+                                    t-if="!record.image.raw_value"
+                                    src="/github_connector_odoo/static/src/img/default_image_module_version.png"
+                                    class="w-100 object-fit-contain"
+                                    alt="Module image"
                                 />
-                            </t>
+                            </div>
+                        </aside>
+                        <main class="pe-2">
                             <div class="oe_module_desc">
                                 <h4>
                                     <field name="name" />
@@ -175,9 +179,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                         <field name="technical_name" />
                                         <br />
                                     </t>
-                                    <i>
-                                        <field name="repository_id" />
-                                    </i>
+                                    <field name="repository_id" class="fst-italic" />
                                 </p>
                                 <a
                                     target="_blank"
@@ -185,14 +187,17 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                     title="Open on github"
                                 >
                                     <span class="badge">
-                                        <i class="fa fa-fw fa-github-alt" />
+                                        <i
+                                            class="fa fa-fw fa-github-alt"
+                                            title="Github"
+                                        />
                                     </span>
                                 </a>
                                 <span class="badge">
                                     <t t-esc="record.repository_branch_id.value" />
                                 </span>
                             </div>
-                        </div>
+                        </main>
                     </t>
                 </templates>
             </kanban>
@@ -201,7 +206,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="odoo_module_version_rule_info_tree" model="ir.ui.view">
         <field name="model">odoo.module.version.rule.info</field>
         <field name="arch" type="xml">
-            <tree delete="false" create="false" edit="false">
+            <list delete="false" create="false" edit="false">
                 <field name="group_id" />
                 <field name="analysis_rule_id" />
                 <field name="repository_branch_id" />
@@ -210,7 +215,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="empty_count" sum="Total empty" />
                 <field name="total_count" sum="Total total" />
                 <field name="scanned_files" sum="Total scanned" />
-            </tree>
+            </list>
         </field>
     </record>
 </odoo>

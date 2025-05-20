@@ -13,25 +13,19 @@ class OdooLicense(models.Model):
 
     # Column Section
     name = fields.Char(index=True, required=True, readonly=True)
-
     module_version_ids = fields.One2many(
         comodel_name="odoo.module.version",
         inverse_name="license_id",
         string="Module Versions",
     )
-
     module_version_qty = fields.Integer(
         string="Number of Module Versions",
         compute="_compute_module_version_qty",
         store=True,
     )
-
     website = fields.Char()
-
     image = fields.Binary(string="Icon Image", attachment=True)
-
     description = fields.Text()
-
     active = fields.Boolean(default=True)
 
     # Constrains Section

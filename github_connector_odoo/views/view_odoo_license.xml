@@ -16,10 +16,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="view_odoo_license_tree" model="ir.ui.view">
         <field name="model">odoo.license</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="module_version_qty" sum="Total" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_odoo_license_form" model="ir.ui.view">
@@ -80,15 +80,20 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="website" />
                 <field name="module_version_qty" />
                 <templates>
-                    <t t-name="kanban-box">
-                        <div class="oe_module_vignette oe_kanban_global_click">
-                            <t t-if="record.image.raw_value">
-                                <img
-                                    t-att-src="kanban_image('odoo.license', 'image', record.id.raw_value)"
-                                    class="oe_module_icon"
-                                    t-att-alt="record.name.raw_value"
+                    <t t-name="card" class="flex-row">
+                        <aside class="o_kanban_aside_full">
+                            <div class="o_kanban_image_fill position-relative w-100">
+                                <field
+                                    name="image"
+                                    alt="License image"
+                                    class="h-100"
+                                    widget="image"
+                                    options="{'img_class': 'w-100 object-fit-contain'}"
+                                    invisible="not image"
                                 />
-                            </t>
+                            </div>
+                        </aside>
+                        <main class="pe-2">
                             <div class="oe_module_desc">
                                 <h3>
                                     <field name="name" />
@@ -105,7 +110,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                     <t t-esc="record.module_version_qty.value" />
                                 </span>
                             </div>
-                        </div>
+                        </main>
                     </t>
                 </templates>
             </kanban>

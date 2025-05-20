@@ -17,13 +17,13 @@ Github Connector - Odoo
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Finterface--github-lightgray.png?logo=github
-    :target: https://github.com/OCA/interface-github/tree/17.0/github_connector_odoo
+    :target: https://github.com/OCA/interface-github/tree/18.0/github_connector_odoo
     :alt: OCA/interface-github
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/interface-github-17-0/interface-github-17-0-github_connector_odoo
+    :target: https://translation.odoo-community.org/projects/interface-github-18-0/interface-github-18-0-github_connector_odoo
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/interface-github&target_branch=17.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/interface-github&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -36,7 +36,7 @@ files) and add new models and menus.
 
 |menu|
 
-.. |menu| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector_odoo/static/description/menu.png
+.. |menu| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector_odoo/static/description/menu.png
 
 **Table of contents**
 
@@ -46,7 +46,7 @@ files) and add new models and menus.
 Configuration
 =============
 
--  Once installed, go to your organization, and set extra settings:
+- Once installed, go to your organization, and set extra settings:
 
 1. The name of your organization in the author keys of the manifest odoo
    modules (in the **Default Author Text** field)
@@ -59,7 +59,7 @@ If you had analyzed previously your repositories with the 'github
 Connector' module, you should launch again the Analysis Process for all
 your Repository Branches.
 
-.. |github_organization_form| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector_odoo/static/description/github_organization_form.png
+.. |github_organization_form| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector_odoo/static/description/github_organization_form.png
 
 Usage
 =====
@@ -123,21 +123,21 @@ This module provide a new reporting.
 
 |reporting_module_by_serie|
 
-.. |odoo_module_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector_odoo/static/description/odoo_module_kanban.png
-.. |odoo_module_form| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector_odoo/static/description/odoo_module_form.png
-.. |odoo_author| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector_odoo/static/description/odoo_author.png
-.. |odoo_license| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector_odoo/static/description/odoo_license.png
-.. |odoo_bin_libs| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector_odoo/static/description/odoo_bin_libs.png
-.. |odoo_python_libs| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector_odoo/static/description/odoo_python_libs.png
-.. |reporting_module_by_serie| image:: https://raw.githubusercontent.com/OCA/interface-github/17.0/github_connector_odoo/static/description/reporting_module_by_serie.png
+.. |odoo_module_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector_odoo/static/description/odoo_module_kanban.png
+.. |odoo_module_form| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector_odoo/static/description/odoo_module_form.png
+.. |odoo_author| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector_odoo/static/description/odoo_author.png
+.. |odoo_license| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector_odoo/static/description/odoo_license.png
+.. |odoo_bin_libs| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector_odoo/static/description/odoo_bin_libs.png
+.. |odoo_python_libs| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector_odoo/static/description/odoo_python_libs.png
+.. |reporting_module_by_serie| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector_odoo/static/description/reporting_module_by_serie.png
 
 Known issues / Roadmap
 ======================
 
 Possible improvements :
 
--  Implement deep code source analysis, like the website
-   http://odoo-code-search.com/ and specially:
+- Implement deep code source analysis, like the website
+  http://odoo-code-search.com/ and specially:
 
 1. Possibility to search by field or by model name. (Ex:
    field:invoice_id)
@@ -150,7 +150,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/interface-github/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/interface-github/issues/new?body=module:%20github_connector_odoo%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/interface-github/issues/new?body=module:%20github_connector_odoo%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -166,15 +166,15 @@ Authors
 Contributors
 ------------
 
--  Sylvain LE GAL (https://twitter.com/legalsylvain)
--  `Tecnativa <https://www.tecnativa.com>`__:
+- Sylvain LE GAL (https://twitter.com/legalsylvain)
+- `Tecnativa <https://www.tecnativa.com>`__:
 
-   -  Vicent Cubells
-   -  Alexandre Díaz
-   -  Pedro M. Baeza
-   -  Ernesto Tejeda
-   -  Víctor Martínez
-   -  Carolina Fernandez
+  - Vicent Cubells
+  - Alexandre Díaz
+  - Pedro M. Baeza
+  - Ernesto Tejeda
+  - Víctor Martínez
+  - Carolina Fernandez
 
 Maintainers
 -----------
@@ -189,6 +189,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/interface-github <https://github.com/OCA/interface-github/tree/17.0/github_connector_odoo>`_ project on GitHub.
+This module is part of the `OCA/interface-github <https://github.com/OCA/interface-github/tree/18.0/github_connector_odoo>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

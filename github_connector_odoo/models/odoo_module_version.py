@@ -48,19 +48,14 @@ class OdooModuleVersion(models.Model):
 
     # Column Section
     name = fields.Char(readonly=True, index=True)
-
     technical_name = fields.Char(
         readonly=True,
         index=True,
         help="Technical Name of the Module (Folder name).",
     )
-
     complete_name = fields.Char(compute="_compute_complete_name", store=True)
-
     auto_install = fields.Boolean(readonly=True)
-
     icon = fields.Char(string="Icon Path (Manifest)", readonly=True)
-
     module_id = fields.Many2one(
         comodel_name="odoo.module",
         string="Module",
@@ -70,7 +65,6 @@ class OdooModuleVersion(models.Model):
         auto_join=True,
         readonly=True,
     )
-
     repository_branch_id = fields.Many2one(
         comodel_name="github.repository.branch",
         string="Repository Branch",
@@ -78,7 +72,6 @@ class OdooModuleVersion(models.Model):
         required=True,
         ondelete="cascade",
     )
-
     repository_id = fields.Many2one(
         comodel_name="github.repository",
         string="Repository",
@@ -86,7 +79,6 @@ class OdooModuleVersion(models.Model):
         related="repository_branch_id.repository_id",
         store=True,
     )
-
     organization_serie_id = fields.Many2one(
         comodel_name="github.organization.serie",
         string="Organization Serie",
@@ -94,9 +86,7 @@ class OdooModuleVersion(models.Model):
         store=True,
         compute="_compute_organization_serie_id",
     )
-
     license = fields.Char(string="License (Manifest)", readonly=True)
-
     license_id = fields.Many2one(
         comodel_name="odoo.license",
         string="License",
@@ -104,11 +94,8 @@ class OdooModuleVersion(models.Model):
         compute="_compute_license_id",
         store=True,
     )
-
     summary = fields.Char(string="Summary (Manifest)", readonly=True)
-
     depends = fields.Char(string="Dependencies (Manifest)", readonly=True)
-
     dependency_module_ids = fields.Many2many(
         comodel_name="odoo.module",
         string="Dependencies",
@@ -118,26 +105,19 @@ class OdooModuleVersion(models.Model):
         store=True,
         compute="_compute_dependency_module_ids",
     )
-
     website = fields.Char(string="Website (Manifest)", readonly=True)
-
     external_dependencies = fields.Char(
         string="External Dependencies (Manifest)", readonly=True
     )
-
     description_rst = fields.Char(string="RST Description (Manifest)", readonly=True)
-
     description_rst_html = fields.Html(
         string="HTML the RST Description",
         readonly=True,
         compute="_compute_description_rst_html",
         store=True,
     )
-
     version = fields.Char(string="Version (Manifest)", readonly=True)
-
     author = fields.Char(string="Author (Manifest)", readonly=True)
-
     author_ids = fields.Many2many(
         string="Authors",
         comodel_name="odoo.author",
@@ -147,13 +127,10 @@ class OdooModuleVersion(models.Model):
         compute="_compute_author",
         store=True,
     )
-
     author_ids_description = fields.Char(
         string="Authors (Text)", compute="_compute_author", store=True
     )
-
     maintainers = fields.Char(string="Maintainers (Manifest)", readonly=True)
-
     lib_python_ids = fields.Many2many(
         comodel_name="odoo.lib.python",
         string="Python Lib Dependencies",
@@ -163,13 +140,11 @@ class OdooModuleVersion(models.Model):
         compute="_compute_lib",
         store=True,
     )
-
     lib_python_ids_description = fields.Char(
         string="Python Lib Dependencies (Text)",
         compute="_compute_lib",
         store=True,
     )
-
     lib_bin_ids = fields.Many2many(
         comodel_name="odoo.lib.bin",
         string="Bin Lib Dependencies",
@@ -179,33 +154,26 @@ class OdooModuleVersion(models.Model):
         compute="_compute_lib",
         store=True,
     )
-
     lib_bin_ids_description = fields.Char(
         string="Bin Lib Dependencies (Text)",
         compute="_compute_lib",
         store=True,
     )
-
     odoo_type = fields.Selection(
         selection=_ODOO_TYPE_SELECTION,
         store=True,
         compute="_compute_odoo_type",
     )
-
     image = fields.Binary(string="Icon Image", readonly=True, attachment=True)
-
     github_url = fields.Char(
         string="Github URL", compute="_compute_github_url", store=True, readonly=True
     )
-
     category_id = fields.Many2one(
         comodel_name="odoo.category", string="Category", readonly=True
     )
-
     full_module_path = fields.Char(
         string="Full Local Path to the module",
     )
-
     manifest_keys = fields.Char(string="Manifest keys (Manifest)", readonly=True)
     manifest_key_ids = fields.Many2many(
         comodel_name="odoo.manifest.key",

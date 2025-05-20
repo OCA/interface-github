@@ -13,7 +13,6 @@ class OdooLibBin(models.Model):
 
     # Column Section
     name = fields.Char(index=True, required=True, readonly=True)
-
     module_version_ids = fields.Many2many(
         comodel_name="odoo.module.version",
         string="Module Versions",
@@ -22,7 +21,6 @@ class OdooLibBin(models.Model):
         column2="module_version_id",
         readonly=True,
     )
-
     module_version_qty = fields.Integer(
         string="Number of Module Versions",
         compute="_compute_module_version_qty",

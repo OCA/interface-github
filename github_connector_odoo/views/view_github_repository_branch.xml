@@ -53,7 +53,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     colspan="4"
                     invisible="not module_version_analysis_rule_info_ids"
                 >
-                    <tree create="false" delete="false" editable="false">
+                    <list create="false" delete="false" edit="false">
                         <field name="group_id" />
                         <field name="analysis_rule_id" />
                         <field name="module_version_id" />
@@ -62,7 +62,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                         <field name="empty_count" sum="Total empty" />
                         <field name="total_count" sum="Total total" />
                         <field name="scanned_files" sum="Total scanned" />
-                    </tree>
+                    </list>
                 </field>
             </page>
         </field>

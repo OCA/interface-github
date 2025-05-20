@@ -30,19 +30,15 @@ class GithubRepositoryBranch(models.Model):
         "./addons/\n"
         "./openerp/addons/",
     )
-
     module_version_ids = fields.One2many(
         comodel_name="odoo.module.version",
         inverse_name="repository_branch_id",
         string="Module Versions",
     )
-
     module_version_qty = fields.Integer(
         string="Number of Module Versions", compute="_compute_module_version_qty"
     )
-
     runbot_url = fields.Char(string="Runbot URL", compute="_compute_runbot_url")
-
     module_version_analysis_rule_info_ids = fields.Many2many(
         string="Analysis Rule Info ids (module version)",
         comodel_name="odoo.module.version.rule.info",
