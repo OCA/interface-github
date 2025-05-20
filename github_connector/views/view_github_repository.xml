@@ -126,7 +126,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                         icon="fa-angle-right"
                                         groups="github_connector.group_github_connector_manager"
                                     />
-                                <button
+                                    <button
                                         name="button_update_from_github_full"
                                         type="object"
                                         string="Full Sync"
