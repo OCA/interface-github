@@ -37,9 +37,9 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                 >
                                     You can see reference documentation and some examples in:
                                     <a
-                                        href="https://git-scm.com/docs/gitignore#_pattern_format"
-                                        target="_blank"
-                                    >https://git-scm.com/docs/gitignore#_pattern_format</a>
+                                    href="https://git-scm.com/docs/gitignore#_pattern_format"
+                                    target="_blank"
+                                >https://git-scm.com/docs/gitignore#_pattern_format</a>
                                 </div>
                             </group>
                         </page>
