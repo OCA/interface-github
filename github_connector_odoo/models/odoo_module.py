@@ -11,25 +11,22 @@ class OdooModule(models.Model):
     _name = "odoo.module"
     _description = "Odoo Module"
     _order = "technical_name, name"
+    _rec_name = "technical_name"
 
     # Column Section
     name = fields.Char(store=True, readonly=True, compute="_compute_name")
-
     technical_name = fields.Char(index=True, required=True, readonly=True)
-
     module_version_ids = fields.One2many(
         comodel_name="odoo.module.version",
         inverse_name="module_id",
         string="Versions",
         readonly=True,
     )
-
     module_version_qty = fields.Integer(
         string="Number of Module Versions",
         compute="_compute_module_version_qty",
         store=True,
     )
-
     author_ids = fields.Many2many(
         string="Authors",
         comodel_name="odoo.author",
@@ -39,15 +36,12 @@ class OdooModule(models.Model):
         column2="author_id",
         store=True,
     )
-
     author_ids_description = fields.Char(
         string="Authors (Text)", compute="_compute_author", store=True
     )
-
     maintainers = fields.Char(
         string="Maintainers (Manifest)", compute="_compute_maintainers", store=True
     )
-
     organization_serie_ids = fields.Many2many(
         string="Series",
         comodel_name="github.organization.serie",
@@ -57,27 +51,23 @@ class OdooModule(models.Model):
         column1="module_id",
         column2="organization_serie_id",
     )
-
     organization_serie_ids_description = fields.Char(
         string="Series (Text)",
         store=True,
         compute="_compute_organization_serie",
     )
-
     description_rst = fields.Char(
         string="RST Description of the last Version",
         store=True,
         readonly=True,
         compute="_compute_description",
     )
-
     description_rst_html = fields.Html(
         string="HTML of the RST Description of the last Version",
         store=True,
         readonly=True,
         compute="_compute_description",
     )
-
     dependence_module_version_ids = fields.Many2many(
         comodel_name="odoo.module.version",
         string="Module Versions that depend on this module",
@@ -85,13 +75,11 @@ class OdooModule(models.Model):
         column1="dependency_module_id",
         column2="module_version_id",
     )
-
     dependence_module_version_qty = fields.Integer(
         string="Number of Module Versions that depend on this module",
         compute="_compute_dependence_module_version_qty",
         store=True,
     )
-
     image = fields.Binary(
         string="Icon Image", compute="_compute_image", store=True, attachment=True
     )
@@ -188,6 +176,3 @@ class OdooModule(models.Model):
         if not module:
             module = self.create({"technical_name": technical_name})
         return module
-
-    def name_get(self):
-        return [(module.id, module.technical_name) for module in self]

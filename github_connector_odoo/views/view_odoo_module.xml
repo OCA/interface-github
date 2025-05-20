@@ -26,14 +26,14 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="view_odoo_module_tree" model="ir.ui.view">
         <field name="model">odoo.module</field>
         <field name="arch" type="xml">
-            <tree decoration-muted="module_version_qty == 0">
+            <list decoration-muted="module_version_qty == 0">
                 <field name="technical_name" />
                 <field name="name" />
                 <field name="organization_serie_ids_description" />
                 <field name="author_ids_description" />
                 <field name="maintainers" />
                 <field name="module_version_qty" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_odoo_module_form" model="ir.ui.view">
@@ -112,49 +112,51 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="id" />
                 <field name="image" />
                 <field name="name" />
-                <field name="technical_name" />
                 <field name="organization_serie_ids_description" />
                 <templates>
-                    <t t-name="kanban-box">
-                        <div class="oe_module_vignette oe_kanban_global_click">
-                            <t t-if="record.image.raw_value">
-                                <img
-                                    t-att-src="kanban_image('odoo.module', 'image', record.id.raw_value)"
-                                    class="oe_module_icon"
-                                    t-att-alt="record.name.raw_value"
+                    <t t-name="card" class="flex-row">
+                        <aside class="o_kanban_aside_full">
+                            <div class="o_kanban_image_fill position-relative w-100">
+                                <field
+                                    name="image"
+                                    alt="Module image"
+                                    class="h-100"
+                                    widget="image"
+                                    options="{'img_class': 'w-100 object-fit-contain'}"
+                                    invisible="not image"
                                 />
-                            </t>
-                            <t t-if="!record.image.raw_value">
                                 <img
-                                    t-att-src='_s + "/github_connector_odoo/static/src/img/default_image_module.png"'
-                                    class="oe_module_icon"
-                                    t-att-alt="record.name.raw_value"
+                                    t-if="!record.image.raw_value"
+                                    src="/github_connector_odoo/static/src/img/default_image_module_version.png"
+                                    class="w-100 object-fit-contain"
+                                    alt="Module image"
                                 />
-                            </t>
+                            </div>
+                        </aside>
+                        <main class="pe-2">
                             <div class="oe_module_desc">
                                 <h4>
                                     <field name="name" />
                                 </h4>
                                 <p class="oe_module_name">
-                                    <t t-if="record.technical_name.raw_value">
-                                        <field name="technical_name" />
-                                        <br />
-                                    </t>
+                                    <field name="technical_name" />
+                                    <br />
                                     <span
                                         class="badge"
                                         t-if="record.organization_serie_ids_description.raw_value"
                                     >
-                                        <t
-                                            t-esc="record.organization_serie_ids_description.value"
+                                        <field
+                                            name="organization_serie_ids_description"
                                         />
                                     </span>
                                     <br />
-                                    <i>
-                                        <field name="author_ids_description" />
-                                    </i>
+                                    <field
+                                        name="author_ids_description"
+                                        class="fst-italic"
+                                    />
                                 </p>
                             </div>
-                        </div>
+                        </main>
                     </t>
                 </templates>
             </kanban>

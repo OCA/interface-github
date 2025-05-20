@@ -16,10 +16,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="view_odoo_author_tree" model="ir.ui.view">
         <field name="model">odoo.author</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="module_qty" sum="Total" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_oca_author_form" model="ir.ui.view">

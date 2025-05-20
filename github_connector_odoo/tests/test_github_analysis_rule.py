@@ -29,7 +29,7 @@ class TestGithubConnectorOdooAnalysisRuleBase(TestGithubConnectorAnalysisRuleBas
         domain = "https://raw.githubusercontent.com"
         responses.add(
             responses.GET,
-            "%s/OCA/maintainer-tools/master/tools/repos_with_ids.txt" % domain,
+            f"{domain}/OCA/maintainer-tools/master/tools/repos_with_ids.txt",
             json=open(test_file, "rb").read().decode("utf-8"),
             status=200,
         )

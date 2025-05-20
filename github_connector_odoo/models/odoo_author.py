@@ -13,7 +13,6 @@ class OdooAuthor(models.Model):
 
     # Column Section
     name = fields.Char(store=True, readonly=True, index=True)
-
     module_version_ids = fields.Many2many(
         string="Module Versions",
         comodel_name="odoo.module.version",
@@ -22,7 +21,6 @@ class OdooAuthor(models.Model):
         column2="module_version_id",
         readonly=True,
     )
-
     module_ids = fields.Many2many(
         string="Modules",
         comodel_name="odoo.module",
@@ -31,7 +29,6 @@ class OdooAuthor(models.Model):
         column2="module_id",
         readonly=True,
     )
-
     module_qty = fields.Integer(
         string="Number of Modules", compute="_compute_module_qty", store=True
     )
