@@ -9,6 +9,7 @@ class GithubTeamRepository(models.Model):
     _name = "github.team.repository"
     _description = "Github Team Repository"
     _order = "team_id, repository_id"
+    _rec_name = "repository_id"
 
     _PERMISSION_SELECTION = [
         ("undefined", "Undefined"),
@@ -26,7 +27,6 @@ class GithubTeamRepository(models.Model):
         readonly=True,
         ondelete="cascade",
     )
-
     repository_id = fields.Many2one(
         comodel_name="github.repository",
         string="Repository",
@@ -35,13 +35,11 @@ class GithubTeamRepository(models.Model):
         readonly=True,
         ondelete="cascade",
     )
-
     permission = fields.Selection(
         selection=_PERMISSION_SELECTION,
         required=True,
         readonly=True,
     )
-
     context_search_default_team_id = fields.Integer(
         compute="_compute_context_search_default"
     )

@@ -9,6 +9,7 @@ class GithubTeamPartner(models.Model):
     _name = "github.team.partner"
     _description = "Github Team Partner"
     _order = "team_id, partner_id"
+    _rec_name = "partner_id"
 
     _ROLE_SELECTION = [("member", "Member"), ("maintainer", "Maintainer")]
 
@@ -21,7 +22,6 @@ class GithubTeamPartner(models.Model):
         readonly=True,
         ondelete="cascade",
     )
-
     partner_id = fields.Many2one(
         comodel_name="res.partner",
         string="Member",
@@ -30,9 +30,7 @@ class GithubTeamPartner(models.Model):
         readonly=True,
         ondelete="cascade",
     )
-
     role = fields.Selection(selection=_ROLE_SELECTION, required=True, readonly=True)
-
     context_search_default_team_id = fields.Integer(
         compute="_compute_context_search_default"
     )

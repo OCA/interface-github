@@ -31,12 +31,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
     <record id="view_github_team_tree" model="ir.ui.view">
         <field name="model">github.team</field>
         <field name="arch" type="xml">
-            <tree decoration-muted="partner_qty == 0">
+            <list decoration-muted="partner_qty == 0">
                 <field name="complete_name" />
                 <field name="name" />
                 <field name="partner_qty" />
                 <field name="repository_qty" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_github_team_form" model="ir.ui.view">
@@ -142,13 +142,10 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <kanban>
                 <field name="name" />
                 <field name="organization_id" />
-                <field name="github_name" />
                 <field name="github_url" />
-                <field name="partner_qty" />
-                <field name="repository_qty" />
                 <templates>
-                    <t t-name="kanban-box">
-                        <div class="oe_module_vignette oe_kanban_global_click">
+                    <t t-name="card" class="flex-row">
+                        <main class="ps-2 ps-md-0">
                             <div class="oe_module_desc">
                                 <h3>
                                     <field name="name" />
@@ -166,20 +163,29 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                                     <span class="badge">
                                         <i
                                             class="fa fa-fw fa-github-alt"
+                                            aria-label="Github"
                                             title="Github"
                                         />
                                     </span>
                                 </a>
                                 <span class="badge">
-                                    <i class="fa fa-fw fa-user" />
-                                    <t t-esc="record.partner_qty.value" />
+                                    <i
+                                        class="fa fa-fw fa-user"
+                                        aria-label="Members"
+                                        title="Members"
+                                    />
+                                    <field name="partner_qty" />
                                 </span>
                                 <span class="badge">
-                                    <i class="fa fa-fw fa-folder-o" />
-                                    <t t-esc="record.repository_qty.value" />
+                                    <i
+                                        class="fa fa-fw fa-folder-o"
+                                        aria-label="Repositories"
+                                        title="Repositories"
+                                    />
+                                    <field name="repository_qty" />
                                 </span>
                             </div>
-                        </div>
+                        </main>
                     </t>
                 </templates>
             </kanban>

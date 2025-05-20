@@ -60,7 +60,7 @@ class TestGithubConnectorAnalysisRuleBase(TestGithubConnectorCommon):
             )
             responses.add(
                 responses.GET,
-                "https://api.github.com:443/repositories/%s" % github_id,
+                f"https://api.github.com:443/repositories/{github_id}",
                 json=json.loads(open(jsonfile, "rb").read()),
                 status=200,
             )

@@ -44,5 +44,5 @@ class WizardCreateTeam(models.TransientModel):
 
     def button_create_in_github(self):
         self.ensure_one()
-        new_item = self.env["github.team"].create_in_github()
+        new_item = self.create_in_github()
         return new_item.get_action()
