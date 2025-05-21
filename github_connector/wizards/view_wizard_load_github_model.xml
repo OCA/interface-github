@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="view_wizard_load_github_model_form" model="ir.ui.view">
+        <field name="model">wizard.load.github.model</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="github_type" />
+                    <field name="name" />
+                    <field name="child_update" />
+                </group>
+                <footer>
+                    <button
+                        name="button_create_from_github"
+                        string="Load From Github"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

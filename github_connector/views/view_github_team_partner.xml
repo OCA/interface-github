@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="view_github_team_partner_search" model="ir.ui.view">
+        <field name="model">github.team.partner</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="team_id" />
+                <field name="partner_id" />
+                <field name="role" />
+            </search>
+        </field>
+    </record>
+    <record id="view_github_team_partner_tree" model="ir.ui.view">
+        <field name="model">github.team.partner</field>
+        <field name="arch" type="xml">
+            <list decoration-warning="role == 'member'">
+                <field name="team_id" invisible="context_search_default_team_id != 0" />
+                <field
+                    name="partner_id"
+                    invisible="context_search_default_partner_id != 0"
+                />
+                <field name="role" />
+                <field name="context_search_default_team_id" invisible="1" />
+                <field name="context_search_default_partner_id" invisible="1" />
+            </list>
+        </field>
+    </record>
+    <record id="view_github_team_partner_form" model="ir.ui.view">
+        <field name="model">github.team.partner</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="partner_id" />
+                        </h1>
+                        <h2>
+                            <field name="team_id" />
+                        </h2>
+                    </div>
+                    <field name="role" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_github_team_partner_from_team_kanban" model="ir.ui.view">
+        <field name="name">github.team.partner.kanban</field>
+        <field name="model">github.team.partner</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="role" />
+                <templates>
+                    <t t-name="card" class="flex-row">
+                        <aside class="o_kanban_aside_full">
+                            <div class="o_kanban_image_fill position-relative w-100">
+                                <field
+                                    name="partner_id"
+                                    alt="Partner image"
+                                    class="h-100"
+                                    widget="image"
+                                    options="{'preview_image': 'avatar_128'}"
+                                />
+                            </div>
+                        </aside>
+                        <main class="ps-2 ps-md-0">
+                            <div class="oe_kanban_details">
+                                <h3>
+                                    <field name="partner_id" />
+                                </h3>
+                                <span class="badge">
+                                    <i
+                                        t-attf-class="fa fa-fw #{record.role.raw_value == 'maintainer' ? 'fa-cog' : 'fa-user'}"
+                                        aria-label="Role"
+                                        title="Role"
+                                    />
+                                    <field name="role" />
+                                </span>
+                            </div>
+                        </main>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="view_github_team_partner_from_partner_kanban" model="ir.ui.view">
+        <field name="model">github.team.partner</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="team_id" />
+                <field name="role" />
+                <templates>
+                    <t t-name="card" class="flex-row">
+                        <aside class="o_kanban_aside_full">
+                            <div class="o_kanban_image_fill position-relative w-100">
+                                <field
+                                    name="partner_id"
+                                    alt="Partner image"
+                                    class="h-100"
+                                    widget="image"
+                                    options="{'preview_image': 'avatar_128'}"
+                                />
+                            </div>
+                        </aside>
+                        <main class="ps-2 ps-md-0">
+                            <div class="oe_module_desc">
+                                <h3>
+                                    <field name="team_id" />
+                                </h3>
+                                <span class="badge">
+                                    <i
+                                        t-attf-class="fa fa-fw #{record.role.raw_value == 'maintainer' ? 'fa-cog' : 'fa-user'}"
+                                        aria-label="Role"
+                                        title="Role"
+                                    />
+                                    <field name="role" />
+                                </span>
+                            </div>
+                        </main>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

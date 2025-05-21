@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Benoit GUILLOT <benoit.guillot@akretion.com>
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="base.group_no_one" model="res.groups">
+        <field name="users" eval="[(4, ref('base.user_root'))]" />
+    </record>
+    <record id="group_github_connector_user" model="res.groups">
+        <field name="name">Connector Github User</field>
+        <field name="category_id" ref="module_category_github_connector" />
+    </record>
+    <record id="group_github_connector_manager" model="res.groups">
+        <field name="name">Connector Github Manager</field>
+        <field name="category_id" ref="module_category_github_connector" />
+        <field
+            name="users"
+            eval="[(4, ref('base.user_admin')), (4, ref('base.user_root'))]"
+        />
+        <field
+            name="implied_ids"
+            eval="[(4, ref('github_connector.group_github_connector_user'))]"
+        />
+    </record>
+</odoo>
