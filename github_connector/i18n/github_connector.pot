@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -56,6 +56,47 @@ msgid "# Total"
 msgstr ""
 
 #. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_kanban
+msgid "<i class=\"fa fa-fw fa-code-fork\" title=\"Branches\"/>"
+msgstr ""
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_repository_from_repository_kanban
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_repository_from_team_kanban
+msgid "<i class=\"fa fa-fw fa-cog\" aria-label=\"Permission\" title=\"Permission\"/>"
+msgstr ""
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_repository_from_repository_kanban
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_repository_from_team_kanban
+msgid "<i class=\"fa fa-fw fa-file-o\" aria-label=\"Permission\" title=\"Permission\"/>"
+msgstr ""
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_kanban
+msgid ""
+"<i class=\"fa fa-fw fa-folder-o\" aria-label=\"Repositories\" "
+"title=\"Repositories\"/>"
+msgstr ""
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_repository_from_repository_kanban
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_repository_from_team_kanban
+msgid "<i class=\"fa fa-fw fa-question\" aria-label=\"Permission\" title=\"Permission\"/>"
+msgstr ""
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_repository_from_repository_kanban
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_repository_from_team_kanban
+msgid "<i class=\"fa fa-fw fa-save\" aria-label=\"Permission\" title=\"Permission\"/>"
+msgstr ""
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_kanban
+msgid "<i class=\"fa fa-fw fa-user\" aria-label=\"Members\" title=\"Members\"/>"
+msgstr ""
+
+#. module: github_connector
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_kanban
 msgid ""
 "<span class=\"badge\">\n"
@@ -72,8 +113,15 @@ msgid ""
 msgstr ""
 
 #. module: github_connector
-#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_kanban
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_kanban
+msgid ""
+"<span class=\"badge\">\n"
+"                                        <i class=\"fa fa-fw fa-github-alt\" aria-label=\"Github\" title=\"Github\"/>\n"
+"                                    </span>"
+msgstr ""
+
+#. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_kanban
 msgid ""
 "<span class=\"badge\">\n"
 "                                        <i class=\"fa fa-fw fa-github-alt\" title=\"Github\"/>\n"
@@ -118,7 +166,6 @@ msgstr ""
 #. module: github_connector
 #. odoo-python
 #: code:addons/github_connector/models/res_partner.py:0
-#, python-format
 msgid "A company ('%s') can not have a Github login associated."
 msgstr ""
 
@@ -182,11 +229,6 @@ msgstr ""
 #: model:ir.model.fields.selection,name:github_connector.selection__github_repository_branch__state__analyzed
 #: model_terms:ir.ui.view,arch_db:github_connector.view_github_repository_branch_search
 msgid "Analyzed"
-msgstr ""
-
-#. module: github_connector
-#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_partner_from_team_kanban
-msgid "Avatar"
 msgstr ""
 
 #. module: github_connector
@@ -420,7 +462,6 @@ msgstr ""
 #. module: github_connector
 #. odoo-python
 #: code:addons/github_connector/models/abstract_github_model.py:0
-#, python-format
 msgid "Duplicate object with Github login %s"
 msgstr ""
 
@@ -432,7 +473,6 @@ msgstr ""
 #. module: github_connector
 #. odoo-python
 #: code:addons/github_connector/models/github_repository_branch.py:0
-#, python-format
 msgid ""
 "Error when trying to create the folder %s\n"
 " Please check Odoo Access Rights."
@@ -441,7 +481,6 @@ msgstr ""
 #. module: github_connector
 #. odoo-python
 #: code:addons/github_connector/models/github_repository_branch.py:0
-#, python-format
 msgid ""
 "Error when trying to create the main folder %(path)s\n"
 " Please check Odoo Access Rights.\n"
@@ -451,7 +490,6 @@ msgstr ""
 #. module: github_connector
 #. odoo-python
 #: code:addons/github_connector/models/github_repository_branch.py:0
-#, python-format
 msgid ""
 "Error when updating the branch %(branch)s in the local folder %(path)s.\n"
 "Deleting the local folder and trying again."
@@ -466,7 +504,6 @@ msgstr ""
 #. module: github_connector
 #. odoo-python
 #: code:addons/github_connector/models/abstract_github_model.py:0
-#, python-format
 msgid ""
 "Feature not Implemented : Please define 'get_github_base_obj_for_creation' "
 "function in child model."
@@ -475,7 +512,6 @@ msgstr ""
 #. module: github_connector
 #. odoo-python
 #: code:addons/github_connector/models/abstract_github_model.py:0
-#, python-format
 msgid ""
 "Feature not Implemented : Please define 'github_login_field' function in "
 "child model."
@@ -706,7 +742,6 @@ msgstr ""
 #. module: github_connector
 #. odoo-python
 #: code:addons/github_connector/models/abstract_github_model.py:0
-#, python-format
 msgid "Invalid name '%s' provided"
 msgstr ""
 
@@ -830,7 +865,6 @@ msgstr ""
 #. module: github_connector
 #. odoo-python
 #: code:addons/github_connector/models/abstract_github_model.py:0
-#, python-format
 msgid "Maximum attempts reached."
 msgstr ""
 
@@ -956,6 +990,11 @@ msgid "Organization Series"
 msgstr ""
 
 #. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_organization_kanban
+msgid "Organization image"
+msgstr ""
+
+#. module: github_connector
 #: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__organization_serie_id
 msgid "Organization serie"
 msgstr ""
@@ -976,6 +1015,12 @@ msgid "Parent Team"
 msgstr ""
 
 #. module: github_connector
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_partner_from_partner_kanban
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_partner_from_team_kanban
+msgid "Partner image"
+msgstr ""
+
+#. module: github_connector
 #: model:ir.model.fields,field_description:github_connector.field_github_analysis_rule__paths
 #: model:ir.model.fields,field_description:github_connector.field_github_repository_branch_rule_info_report__paths
 msgid "Paths"
@@ -989,7 +1034,6 @@ msgstr ""
 #. module: github_connector
 #. odoo-python
 #: code:addons/github_connector/models/abstract_github_model.py:0
-#, python-format
 msgid ""
 "Please add the 'github_token' in Odoo configuration file or as the "
 "'github.access_token' configuration parameter."
@@ -1063,6 +1107,8 @@ msgstr ""
 
 #. module: github_connector
 #: model:ir.model.fields,field_description:github_connector.field_github_team_partner__role
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_partner_from_partner_kanban
+#: model_terms:ir.ui.view,arch_db:github_connector.view_github_team_partner_from_team_kanban
 msgid "Role"
 msgstr ""
 
@@ -1204,7 +1250,6 @@ msgstr ""
 #. module: github_connector
 #. odoo-python
 #: code:addons/github_connector/models/github_organization.py:0
-#, python-format
 msgid ""
 "The provided Github Token must have admin read:org permissions to the "
 "organization '%s'"
@@ -1334,6 +1379,5 @@ msgstr ""
 #. module: github_connector
 #. odoo-python
 #: code:addons/github_connector/models/github_repository_branch.py:0
-#, python-format
 msgid "source_code_local_path should be defined in your  configuration file"
 msgstr ""
