@@ -1,0 +1,830 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* github_connector_odoo
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-03-20 16:33+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__code_count
+msgid "# Code"
+msgstr "N° codice"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__documentation_count
+msgid "# Doc."
+msgstr "N° doc."
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__empty_count
+msgid "# Empty"
+msgstr "N° vuoti"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__total_count
+msgid "# Total"
+msgstr "N° totali"
+
+#. module: github_connector_odoo
+#: model:ir.model,name:github_connector_odoo.model_abstract_action_mixin
+msgid "Abstract Action Mixin"
+msgstr "Mixin azione astratto"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_license__active
+msgid "Active"
+msgstr "Attiva"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__analysis_rule_id
+msgid "Analysis Rule"
+msgstr "Regola analisi"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__analysis_rule_info_ids
+msgid "Analysis Rule Info ids"
+msgstr "ID informazione regola analisi"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_repository_branch__module_version_analysis_rule_info_ids
+msgid "Analysis Rule Info ids (module version)"
+msgstr "ID informazione regola analisi (versione modulo)"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info_report__analysis_rule_id
+msgid "Analysis Rule id"
+msgstr "ID regola analisi"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_license_form
+msgid "Archived"
+msgstr "In archivio"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__author
+msgid "Author (Manifest)"
+msgstr "Autore (manifest)"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__author_ids
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__author_ids
+msgid "Authors"
+msgstr "Autori"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__author_ids_description
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__author_ids_description
+msgid "Authors (Text)"
+msgstr "Autori (testo)"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__auto_install
+msgid "Auto Install"
+msgstr "Auto install"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_form
+msgid "Available for"
+msgstr "Disponibile per"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_version_tree
+msgid "Bin Lib"
+msgstr "Bin Lib"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__lib_bin_ids
+msgid "Bin Lib Dependencies"
+msgstr "Dipendenza bin lib"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__lib_bin_ids_description
+msgid "Bin Lib Dependencies (Text)"
+msgstr "Dipendenze bin lib (testo)"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__category_id
+msgid "Category"
+msgstr "Categoria"
+
+#. module: github_connector_odoo
+#: model:ir.actions.server,name:github_connector_odoo.cron_clean_odoo_module_version_ir_actions_server
+#: model:ir.cron,cron_name:github_connector_odoo.cron_clean_odoo_module_version
+msgid "Clean Odoo Module Version"
+msgstr "Pulisci versione modulo Odoo"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_version_form
+msgid "Code Analysis"
+msgstr "Analisi codice"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info_report__code_count
+msgid "Code Count"
+msgstr "Conteggio codice"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__complete_name
+msgid "Complete Name"
+msgstr "Nome completo"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields.selection,name:github_connector_odoo.selection__odoo_module_version__odoo_type__connector
+msgid "Connector"
+msgstr "Connettore"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_author__create_uid
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_category__create_uid
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_bin__create_uid
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_python__create_uid
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_license__create_uid
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_manifest_key__create_uid
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__create_uid
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__create_uid
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_author__create_date
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_category__create_date
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_bin__create_date
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_python__create_date
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_license__create_date
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_manifest_key__create_date
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__create_date
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__create_date
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_organization__default_author_text
+msgid "Default Author Text"
+msgstr "Testo autore predefinito"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__dependency_module_ids
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_form
+msgid "Dependencies"
+msgstr "Dipendenze"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__depends
+msgid "Dependencies (Manifest)"
+msgstr "Dipendenze (manifest)"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_license__description
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_license_form
+msgid "Description"
+msgstr "Descrizione"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_form
+msgid "Descriptions"
+msgstr "Descrizioni"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_author__display_name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_category__display_name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_bin__display_name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_python__display_name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_license__display_name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_manifest_key__display_name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__display_name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__display_name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__display_name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info_report__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info_report__documentation_count
+msgid "Documentation Count"
+msgstr "Conteggio documentazione"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info_report__empty_count
+msgid "Empty Count"
+msgstr "Conteggio vuoti"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__external_dependencies
+msgid "External Dependencies (Manifest)"
+msgstr "Dipendenze esterne (manifest)"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__full_module_path
+msgid "Full Local Path to the module"
+msgstr "Percorso locale completo al modulo"
+
+#. module: github_connector_odoo
+#: model:ir.model,name:github_connector_odoo.model_github_analysis_rule
+msgid "Github Analysis Rule"
+msgstr "Regola analisi GitHub"
+
+#. module: github_connector_odoo
+#: model:ir.model,name:github_connector_odoo.model_github_repository
+msgid "Github Repository"
+msgstr "Repository GitHub"
+
+#. module: github_connector_odoo
+#: model:ir.model,name:github_connector_odoo.model_github_repository_branch
+msgid "Github Repository Branch"
+msgstr "Branch repository GitHub"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__github_url
+msgid "Github URL"
+msgstr "URL GitHub"
+
+#. module: github_connector_odoo
+#: model:ir.model,name:github_connector_odoo.model_github_organization
+msgid "Github organization"
+msgstr "Organizzazione GitHub"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__group_id
+msgid "Group"
+msgstr "Gruppo"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_version_search
+msgid "Group By"
+msgstr "Raggruppa per"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info_report__group_id
+msgid "Group id"
+msgstr "ID gruppo"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__description_rst_html
+msgid "HTML of the RST Description of the last Version"
+msgstr "HTML della descrizione RST dell'ultima versione"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__description_rst_html
+msgid "HTML the RST Description"
+msgstr "HTML della descrizione RST"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_analysis_rule__has_odoo_addons
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_repository_branch_rule_info_report__has_odoo_addons
+msgid "Has odoo addons?"
+msgstr "Ha addons Odoo?"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_author__id
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_category__id
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_bin__id
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_python__id
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_license__id
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_manifest_key__id
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__id
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__id
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__id
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info_report__id
+msgid "ID"
+msgstr "ID"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_repository__runbot_id_external
+#: model:ir.model.fields,field_description:github_connector_odoo.field_wizard_create_repository__runbot_id_external
+msgid "ID For Runbot"
+msgstr "ID per Runbot"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_license__image
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__image
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__image
+msgid "Icon Image"
+msgstr "Immagine icona"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__icon
+msgid "Icon Path (Manifest)"
+msgstr "Percorso icona (manifest)"
+
+#. module: github_connector_odoo
+#. odoo-python
+#: code:addons/github_connector_odoo/models/odoo_module_version.py:0
+#, python-format
+msgid "Incorrect RST Description"
+msgstr "Descrizione RST errata"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_license_form
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_version_form
+msgid "Information"
+msgstr "Informazione"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_author____last_update
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_category____last_update
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_bin____last_update
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_python____last_update
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_license____last_update
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_manifest_key____last_update
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module____last_update
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version____last_update
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info____last_update
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info_report____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_author__write_uid
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_category__write_uid
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_bin__write_uid
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_python__write_uid
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_license__write_uid
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_manifest_key__write_uid
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__write_uid
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__write_uid
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_author__write_date
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_category__write_date
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_bin__write_date
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_python__write_date
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_license__write_date
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_manifest_key__write_date
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__write_date
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__write_date
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__license_id
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_version_search
+msgid "License"
+msgstr "Licenza"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__license
+msgid "License (Manifest)"
+msgstr "Licenza (manifest)"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields.selection,name:github_connector_odoo.selection__odoo_module_version__odoo_type__localization
+msgid "Localization"
+msgstr "Localizzazione"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__maintainers
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__maintainers
+msgid "Maintainers (Manifest)"
+msgstr "Maintainer (manifest)"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_analysis_rule__manifest_key_ids
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_repository_branch_rule_info_report__manifest_key_ids
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__manifest_key_ids
+msgid "Manifest keys"
+msgstr "Chiavi manifest"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__manifest_keys
+msgid "Manifest keys (Manifest)"
+msgstr "Chiavi manifest (manifest)"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_lib_bin_form
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_lib_python_form
+msgid "Mod. Versions"
+msgstr "Versioni modulo"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__module_id
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_version_search
+msgid "Module"
+msgstr "Modulo"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_repository_branch__module_paths
+msgid "Module Paths"
+msgstr "Percorso modulo"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__module_version_id
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info_report__module_version_id
+msgid "Module Version"
+msgstr "Versione modulo"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info_report__module_version_name
+msgid "Module Version name"
+msgstr "Nome versione modulo"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_repository_branch__module_version_ids
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_author__module_version_ids
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_bin__module_version_ids
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_python__module_version_ids
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_license__module_version_ids
+msgid "Module Versions"
+msgstr "Versioni modulo"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__dependence_module_version_ids
+msgid "Module Versions that depend on this module"
+msgstr "Versioni modulo che dipendono da questo modulo"
+
+#. module: github_connector_odoo
+#: model:ir.actions.act_window,name:github_connector_odoo.action_odoo_module_version_rule_info_report
+#: model:ir.ui.menu,name:github_connector_odoo.menu_action_odoo_module_version_rule_info_report
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.action_odoo_module_version_rule_info_report_graph
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.action_odoo_module_version_rule_info_report_pivot
+msgid "Module version analysis rule"
+msgstr "Regola analisi versione modulo"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_author__module_ids
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_github_repository_branch_form
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_github_repository_branch_kanban
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_oca_author_form
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_license_form
+msgid "Modules"
+msgstr "Moduli"
+
+#. module: github_connector_odoo
+#: model:ir.actions.act_window,name:github_connector_odoo.action_odoo_module_version_by_serie
+#: model:ir.ui.menu,name:github_connector_odoo.menu_odoo_module_version_by_serie
+msgid "Modules by Serie"
+msgstr "Moduli per serie"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_author__name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_category__name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_bin__name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_python__name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_license__name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_manifest_key__name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: github_connector_odoo
+#: model:ir.model.constraint,message:github_connector_odoo.constraint_odoo_license_name_uniq
+msgid "Name already exists !"
+msgstr "Il nome esiste già!"
+
+#. module: github_connector_odoo
+#. odoo-python
+#: code:addons/github_connector_odoo/models/odoo_module.py:0
+#: code:addons/github_connector_odoo/models/odoo_module_version.py:0
+#, python-format
+msgid "No Version Found"
+msgstr "Nessuna versione trovata"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_repository_branch__module_version_qty
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_bin__module_version_qty
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_lib_python__module_version_qty
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_license__module_version_qty
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__module_version_qty
+msgid "Number of Module Versions"
+msgstr "Numero di versioni modulo"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__dependence_module_version_qty
+msgid "Number of Module Versions that depend on this module"
+msgstr "Numero di versioni modulo che dipendono da questo modulo"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_author__module_qty
+msgid "Number of Modules"
+msgstr "Numero di moduli"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_github_repository_branch_kanban
+msgid "Number of modules"
+msgstr "Numero di moduli"
+
+#. module: github_connector_odoo
+#: model:ir.model,name:github_connector_odoo.model_odoo_author
+msgid "Odoo Author"
+msgstr "Autore Odoo"
+
+#. module: github_connector_odoo
+#: model:ir.actions.act_window,name:github_connector_odoo.action_odoo_lib_bin
+#: model:ir.ui.menu,name:github_connector_odoo.menu_odoo_lib_bin
+msgid "Odoo Bin Libs"
+msgstr "Bin lib Odoo"
+
+#. module: github_connector_odoo
+#: model:ir.model,name:github_connector_odoo.model_odoo_category
+msgid "Odoo Category"
+msgstr "Categoria Odoo"
+
+#. module: github_connector_odoo
+#: model:ir.model,name:github_connector_odoo.model_odoo_lib_bin
+msgid "Odoo Lib Bin"
+msgstr "Bon lib Odoo"
+
+#. module: github_connector_odoo
+#: model:ir.model,name:github_connector_odoo.model_odoo_lib_python
+msgid "Odoo Lib Python"
+msgstr "Lib Python Odoo"
+
+#. module: github_connector_odoo
+#: model:ir.model,name:github_connector_odoo.model_odoo_license
+msgid "Odoo License"
+msgstr "Licenza Odoo"
+
+#. module: github_connector_odoo
+#: model:ir.model,name:github_connector_odoo.model_odoo_manifest_key
+msgid "Odoo Manifest Key"
+msgstr "Chiave manifest Odoo"
+
+#. module: github_connector_odoo
+#: model:ir.model,name:github_connector_odoo.model_odoo_module
+msgid "Odoo Module"
+msgstr "Modulo Odoo"
+
+#. module: github_connector_odoo
+#: model:ir.actions.act_window,name:github_connector_odoo.action_odoo_author
+#: model:ir.ui.menu,name:github_connector_odoo.menu_odoo_author
+msgid "Odoo Module Authors"
+msgstr "Autori modulo Odoo"
+
+#. module: github_connector_odoo
+#: model:ir.actions.act_window,name:github_connector_odoo.action_odoo_license
+#: model:ir.ui.menu,name:github_connector_odoo.menu_odoo_license
+msgid "Odoo Module Licenses"
+msgstr "Licenze modulo Odoo"
+
+#. module: github_connector_odoo
+#: model:ir.model,name:github_connector_odoo.model_odoo_module_version
+msgid "Odoo Module Version"
+msgstr "Verisione modulo Odoo"
+
+#. module: github_connector_odoo
+#: model:ir.model,name:github_connector_odoo.model_odoo_module_version_rule_info_report
+msgid "Odoo Module Version Rule Info Report"
+msgstr "resoconto informazioni regola versione modulo Odoo"
+
+#. module: github_connector_odoo
+#: model:ir.actions.act_window,name:github_connector_odoo.action_odoo_module_version
+#: model:ir.ui.menu,name:github_connector_odoo.menu_odoo_module_version
+msgid "Odoo Module Versions"
+msgstr "Versioni modulo Odoo"
+
+#. module: github_connector_odoo
+#: model:ir.model,name:github_connector_odoo.model_odoo_module_version_rule_info
+msgid "Odoo Module Vesion Rule Info"
+msgstr "Informazioni regola versione modulo Odoo"
+
+#. module: github_connector_odoo
+#: model:ir.actions.act_window,name:github_connector_odoo.action_odoo_module
+#: model:ir.ui.menu,name:github_connector_odoo.menu_odoo_module
+msgid "Odoo Modules"
+msgstr "Moduli Odoo"
+
+#. module: github_connector_odoo
+#: model:ir.actions.act_window,name:github_connector_odoo.action_odoo_lib_python
+#: model:ir.ui.menu,name:github_connector_odoo.menu_odoo_lib_python
+msgid "Odoo Python Libs"
+msgstr "Python lib Odoo"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_github_organization_form
+msgid "Odoo Settings"
+msgstr "Impostazioni Odoo"
+
+#. module: github_connector_odoo
+#: model:ir.ui.menu,name:github_connector_odoo.menu_odoo
+msgid "Odoo Source Code"
+msgstr "Codice sorgente Odoo"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__odoo_type
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_version_search
+msgid "Odoo Type"
+msgstr "Tipo Odoo"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_version_kanban
+msgid "Open on github"
+msgstr "Apri su GitHub"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__organization_serie_id
+msgid "Organization Serie"
+msgstr "Serie organizzazione"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info_report__organization_serie_id
+msgid "Organization serie"
+msgstr "Serie organizzazione"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields.selection,name:github_connector_odoo.selection__odoo_module_version__odoo_type__other
+msgid "Other"
+msgstr "Altro"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_version_tree
+msgid "Python Lib"
+msgstr "Lib Python"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__lib_python_ids
+msgid "Python Lib Dependencies"
+msgstr "Dipendenza lib Python"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__lib_python_ids_description
+msgid "Python Lib Dependencies (Text)"
+msgstr "Dipendenze lib Python (testo)"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_github_repository_branch_tree
+msgid "Qty"
+msgstr "Q.tà"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__description_rst
+msgid "RST Description (Manifest)"
+msgstr "Descrizione RST (testo)"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__description_rst
+msgid "RST Description of the last Version"
+msgstr "Descrizione RST dell'ultima versione"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__repository_id
+msgid "Repository"
+msgstr "Repository"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__repository_branch_id
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__repository_branch_id
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info_report__repository_branch_id
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_version_search
+msgid "Repository Branch"
+msgstr "Branch repository"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_repository_branch__runbot_url
+msgid "Runbot URL"
+msgstr "URL Runbot"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_organization__runbot_url_pattern
+msgid "Runbot URL Pattern"
+msgstr "Schema URL Runbot"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__scanned_files
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info_report__scanned_files
+msgid "Scanned Files"
+msgstr "File scansionati"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_version_tree
+msgid "Serie"
+msgstr "Serie"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__organization_serie_ids
+msgid "Series"
+msgstr "Serie"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__organization_serie_ids_description
+msgid "Series (Text)"
+msgstr "Serie (testo)"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,help:github_connector_odoo.field_github_repository_branch__module_paths
+msgid ""
+"Set here extra relative paths you want to scan to find modules. If not set, root path will be scanned. One repository per line. Example:\n"
+"./addons/\n"
+"./openerp/addons/"
+msgstr ""
+"Impostare qui i percorsi relativi che si vogliono scansionare per cercare "
+"moduli. Se non impostato, verrà scansionato il percorso radice. Un "
+"repository per riga. Esempio:\n"
+"./addons/\n"
+"./openerp/addons/"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__summary
+msgid "Summary (Manifest)"
+msgstr "Riepilogo (manifest)"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__technical_name
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__technical_name
+msgid "Technical Name"
+msgstr "Nome tecnico"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,help:github_connector_odoo.field_odoo_module_version__technical_name
+msgid "Technical Name of the Module (Folder name)."
+msgstr "Nome tecnico del modulo (nome della cartella)."
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_version_form
+msgid "Technical information (Manifest)"
+msgstr "Informazioni tecniche (manifest)"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_author_tree
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_lib_bin_tree
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_lib_python_tree
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_license_tree
+msgid "Total"
+msgstr "Totale"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info_report__total_count
+msgid "Total Count"
+msgstr "Conteggio totale"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.odoo_module_version_rule_info_tree
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_github_repository_branch_form
+msgid "Total code"
+msgstr "Totale codice"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.odoo_module_version_rule_info_tree
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_github_repository_branch_form
+msgid "Total documentation"
+msgstr "Totale documentazione"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.odoo_module_version_rule_info_tree
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_github_repository_branch_form
+msgid "Total empty"
+msgstr "Totale vuoti"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.odoo_module_version_rule_info_tree
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_github_repository_branch_form
+msgid "Total scanned"
+msgstr "Totale scansionati"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.odoo_module_version_rule_info_tree
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_github_repository_branch_form
+msgid "Total total"
+msgstr "Totale totali"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_github_organization__runbot_parse_url
+msgid "URL For Runbot Ids"
+msgstr "ID degli URL per il Runbot"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__version
+msgid "Version (Manifest)"
+msgstr "Versione (manifest)"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module__module_version_ids
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_form
+msgid "Versions"
+msgstr "Versioni"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields.selection,name:github_connector_odoo.selection__odoo_module_version__odoo_type__verticalization
+msgid "Vertical Solutions"
+msgstr "Soluzione verticale"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_license__website
+msgid "Website"
+msgstr "Sito web"
+
+#. module: github_connector_odoo
+#: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__website
+msgid "Website (Manifest)"
+msgstr "Sito web (manifest)"
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_search
+msgid "With Version"
+msgstr "Con versione"

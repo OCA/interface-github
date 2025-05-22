@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="view_odoo_module_search" model="ir.ui.view">
+        <field name="model">odoo.module</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="technical_name" />
+                <field name="author_ids" />
+                <field name="maintainers" />
+                <field name="organization_serie_ids" />
+                <field name="description_rst" />
+                <filter
+                    name="filter_with_version"
+                    string="With Version"
+                    domain="[('module_version_qty', '!=', 0)]"
+                />
+            </search>
+        </field>
+    </record>
+    <record id="view_odoo_module_tree" model="ir.ui.view">
+        <field name="model">odoo.module</field>
+        <field name="arch" type="xml">
+            <list decoration-muted="module_version_qty == 0">
+                <field name="technical_name" />
+                <field name="name" />
+                <field name="organization_serie_ids_description" />
+                <field name="author_ids_description" />
+                <field name="maintainers" />
+                <field name="module_version_qty" />
+            </list>
+        </field>
+    </record>
+    <record id="view_odoo_module_form" model="ir.ui.view">
+        <field name="model">odoo.module</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="object"
+                            name="action_open"
+                            class="oe_stat_button"
+                            icon="fa-cube"
+                            invisible="not module_version_qty"
+                            context="{'xml_id': 'action_odoo_module_version', 'field_name': 'module_id'}"
+                        >
+                            <field
+                                name="module_version_qty"
+                                string="Versions"
+                                widget="statinfo"
+                            />
+                        </button>
+                        <button
+                            type="object"
+                            name="action_open"
+                            class="oe_stat_button"
+                            icon="fa-arrows-v"
+                            invisible="not dependence_module_version_qty"
+                            context="{'xml_id': 'action_odoo_module_version', 'field_name': 'dependency_module_ids'}"
+                        >
+                            <field
+                                name="dependence_module_version_qty"
+                                string="Dependencies"
+                                widget="statinfo"
+                            />
+                        </button>
+                    </div>
+                    <field name="image" widget="image" class="oe_avatar" />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                        <h2>
+                            <field name="technical_name" />
+                        </h2>
+                    </div>
+                    <group cols="4">
+                        <field
+                            name="organization_serie_ids"
+                            widget="many2many_tags"
+                            string="Available for"
+                        />
+                        <field name="author_ids" widget="many2many_tags" />
+                        <field name="maintainers" />
+                    </group>
+                    <notebook>
+                        <page string="Descriptions">
+                            <group>
+                                <field
+                                    name="description_rst_html"
+                                    colspan="2"
+                                    nolabel="1"
+                                    class="oe_styling_v8"
+                                />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_odoo_module_kanban" model="ir.ui.view">
+        <field name="model">odoo.module</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id" />
+                <field name="image" />
+                <field name="name" />
+                <field name="organization_serie_ids_description" />
+                <templates>
+                    <t t-name="card" class="flex-row">
+                        <aside class="o_kanban_aside_full">
+                            <div class="o_kanban_image_fill position-relative w-100">
+                                <field
+                                    name="image"
+                                    alt="Module image"
+                                    class="h-100"
+                                    widget="image"
+                                    options="{'img_class': 'w-100 object-fit-contain'}"
+                                    invisible="not image"
+                                />
+                                <img
+                                    t-if="!record.image.raw_value"
+                                    src="/github_connector_odoo/static/src/img/default_image_module_version.png"
+                                    class="w-100 object-fit-contain"
+                                    alt="Module image"
+                                />
+                            </div>
+                        </aside>
+                        <main class="pe-2">
+                            <div class="oe_module_desc">
+                                <h4>
+                                    <field name="name" />
+                                </h4>
+                                <p class="oe_module_name">
+                                    <field name="technical_name" />
+                                    <br />
+                                    <span
+                                        class="badge"
+                                        t-if="record.organization_serie_ids_description.raw_value"
+                                    >
+                                        <field
+                                            name="organization_serie_ids_description"
+                                        />
+                                    </span>
+                                    <br />
+                                    <field
+                                        name="author_ids_description"
+                                        class="fst-italic"
+                                    />
+                                </p>
+                            </div>
+                        </main>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+</odoo>

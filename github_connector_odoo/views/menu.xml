@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Copyright (C) 2016-Today: Odoo Community Association (OCA)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <menuitem
+        id="menu_odoo"
+        parent="github_connector.menu_github"
+        sequence="5"
+        name="Odoo Source Code"
+    />
+    <menuitem
+        id="menu_odoo_module"
+        parent="menu_odoo"
+        sequence="1"
+        action="action_odoo_module"
+    />
+    <menuitem
+        id="menu_odoo_module_version"
+        parent="menu_odoo"
+        sequence="2"
+        action="action_odoo_module_version"
+    />
+    <menuitem
+        id="menu_odoo_license"
+        parent="menu_odoo"
+        sequence="3"
+        action="action_odoo_license"
+    />
+    <menuitem
+        id="menu_odoo_author"
+        parent="menu_odoo"
+        sequence="4"
+        action="action_odoo_author"
+    />
+    <menuitem
+        id="menu_odoo_lib_bin"
+        parent="menu_odoo"
+        sequence="5"
+        action="action_odoo_lib_bin"
+    />
+    <menuitem
+        id="menu_odoo_lib_python"
+        parent="menu_odoo"
+        sequence="6"
+        action="action_odoo_lib_python"
+    />
+    <!-- Reporting Part -->
+    <menuitem
+        id="menu_odoo_module_version_by_serie"
+        parent="github_connector.menu_reporting"
+        sequence="10"
+        action="action_odoo_module_version_by_serie"
+    />
+</odoo>
