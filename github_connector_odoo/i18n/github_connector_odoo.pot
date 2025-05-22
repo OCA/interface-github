@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -31,6 +31,14 @@ msgstr ""
 #. module: github_connector_odoo
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__total_count
 msgid "# Total"
+msgstr ""
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_version_kanban
+msgid ""
+"<span class=\"badge\">\n"
+"                                        <i class=\"fa fa-fw fa-github-alt\" title=\"Github\"/>\n"
+"                                    </span>"
 msgstr ""
 
 #. module: github_connector_odoo
@@ -318,7 +326,6 @@ msgstr ""
 #. module: github_connector_odoo
 #. odoo-python
 #: code:addons/github_connector_odoo/models/odoo_module_version.py:0
-#, python-format
 msgid "Incorrect RST Description"
 msgstr ""
 
@@ -363,6 +370,11 @@ msgstr ""
 #. module: github_connector_odoo
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version__license
 msgid "License (Manifest)"
+msgstr ""
+
+#. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_license_kanban
+msgid "License image"
 msgstr ""
 
 #. module: github_connector_odoo
@@ -431,6 +443,12 @@ msgid "Module Versions that depend on this module"
 msgstr ""
 
 #. module: github_connector_odoo
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_kanban
+#: model_terms:ir.ui.view,arch_db:github_connector_odoo.view_odoo_module_version_kanban
+msgid "Module image"
+msgstr ""
+
+#. module: github_connector_odoo
 #: model:ir.actions.act_window,name:github_connector_odoo.action_odoo_module_version_rule_info_report
 #: model:ir.ui.menu,name:github_connector_odoo.menu_action_odoo_module_version_rule_info_report
 #: model_terms:ir.ui.view,arch_db:github_connector_odoo.action_odoo_module_version_rule_info_report_graph
@@ -474,7 +492,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/github_connector_odoo/models/odoo_module.py:0
 #: code:addons/github_connector_odoo/models/odoo_module_version.py:0
-#, python-format
 msgid "No Version Found"
 msgstr ""
 
