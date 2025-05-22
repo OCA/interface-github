@@ -1,8 +1,9 @@
 [project]
 name = "odoo-addons-oca-interface-github"
-version = "18.0.20250521.0"
+version = "18.0.20250522.0"
 dependencies = [
     "odoo-addon-github_connector==18.0.*",
+    "odoo-addon-github_connector_odoo==18.0.*",
 ]
 classifiers=[
     "Programming Language :: Python",
