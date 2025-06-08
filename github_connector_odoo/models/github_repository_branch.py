@@ -234,11 +234,22 @@ class GithubRepositoryBranch(models.Model):
             )
             # Create module version, if the module is installable
             # in the serie
-            if module_info.get("installable", False):
+            if module_info.get("installable", True):
                 module_info["technical_name"] = module_name
                 module_version_obj.create_or_update_from_manifest(
                     module_info, self, full_module_path
                 )
+            else:
+                # Otherwise remove module version if exist
+                module_version = self.search(
+                    [
+                        ("technical_name", "=", module_name),
+                        ("repository_branch_id", "=", self.id),
+                    ]
+                )
+                if module_version:
+                    module_version._process_clean_module_version()
+
         except Exception as e:
             _logger.error(
                 "Cannot process module with name %s, error " "is: %s", module_name, e
