@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-05-27 14:26+0000\n"
+"PO-Revision-Date: 2025-10-13 10:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -19,12 +19,12 @@ msgstr ""
 #. module: github_connector_oca
 #: model:ir.model.fields.selection,name:github_connector_oca.selection__odoo_module_version__development_status__alpha
 msgid "Alpha"
-msgstr ""
+msgstr "Alfa"
 
 #. module: github_connector_oca
 #: model:ir.model.fields.selection,name:github_connector_oca.selection__odoo_module_version__development_status__beta
 msgid "Beta"
-msgstr ""
+msgstr "Beta"
 
 #. module: github_connector_oca
 #: model:ir.model.fields,field_description:github_connector_oca.field_odoo_module_version__display_name
@@ -34,29 +34,29 @@ msgstr "Nome visualizzato"
 #. module: github_connector_oca
 #: model:ir.model.fields,field_description:github_connector_oca.field_odoo_module_version__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: github_connector_oca
 #: model:ir.model.fields,field_description:github_connector_oca.field_odoo_module_version____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: github_connector_oca
 #: model:ir.model.fields.selection,name:github_connector_oca.selection__odoo_module_version__development_status__mature
 msgid "Mature"
-msgstr ""
+msgstr "Maturo"
 
 #. module: github_connector_oca
 #: model:ir.model.fields,field_description:github_connector_oca.field_odoo_module_version__development_status
 msgid "Module maturity"
-msgstr ""
+msgstr "Maturità modulo"
 
 #. module: github_connector_oca
 #: model:ir.model,name:github_connector_oca.model_odoo_module_version
 msgid "Odoo Module Version"
-msgstr ""
+msgstr "Versione modulo Odoo"
 
 #. module: github_connector_oca
 #: model:ir.model.fields.selection,name:github_connector_oca.selection__odoo_module_version__development_status__production/stable
 msgid "Production/Stable"
-msgstr ""
+msgstr "Produzione/stabile"
