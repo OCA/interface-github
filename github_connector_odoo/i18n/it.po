@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-03-20 16:33+0000\n"
+"PO-Revision-Date: 2025-10-13 10:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: github_connector_odoo
 #: model:ir.model.fields,field_description:github_connector_odoo.field_odoo_module_version_rule_info__code_count
@@ -576,7 +576,7 @@ msgstr "Licenze modulo Odoo"
 #. module: github_connector_odoo
 #: model:ir.model,name:github_connector_odoo.model_odoo_module_version
 msgid "Odoo Module Version"
-msgstr "Verisione modulo Odoo"
+msgstr "Versione modulo Odoo"
 
 #. module: github_connector_odoo
 #: model:ir.model,name:github_connector_odoo.model_odoo_module_version_rule_info_report
