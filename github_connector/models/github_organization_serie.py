@@ -20,10 +20,7 @@ class GithubOrganizationSerie(models.Model):
         required=True,
     )
 
-    _sql_constraints = [
-        (
-            "sequence_organization_uniq",
-            "unique(organization_id, sequence)",
-            "Sequence serie must be unique by organization.",
-        )
-    ]
+    _sequence_organization_uniq = models.Constraint(
+        "unique(organization_id, sequence)",
+        "Sequence serie must be unique by organization.",
+    )

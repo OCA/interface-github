@@ -86,11 +86,11 @@ class GithubRepository(models.Model):
 
     @api.depends("team_ids")
     def _compute_team_qty(self):
-        data = self.env["github.team.repository"].read_group(
-            [("repository_id", "in", self.ids)], ["repository_id"], ["repository_id"]
+        data = self.env["github.team.repository"]._read_group(
+            [("repository_id", "in", self.ids)], groupby=["repository_id"], aggregates=["__count"]
         )
         mapping = {
-            data["repository_id"][0]: data["repository_id_count"] for data in data
+            repo.id: count for repo, count in data
         }
         for item in self:
             item.team_qty = mapping.get(item.id, 0)
@@ -104,11 +104,11 @@ class GithubRepository(models.Model):
 
     @api.depends("repository_branch_ids.repository_id")
     def _compute_repository_branch_qty(self):
-        data = self.env["github.repository.branch"].read_group(
-            [("repository_id", "in", self.ids)], ["repository_id"], ["repository_id"]
+        data = self.env["github.repository.branch"]._read_group(
+            [("repository_id", "in", self.ids)], groupby=["repository_id"], aggregates=["__count"]
         )
         mapping = {
-            data["repository_id"][0]: data["repository_id_count"] for data in data
+            repo.id: count for repo, count in data
         }
         for item in self:
             item.repository_branch_qty = mapping.get(item.id, 0)
@@ -196,9 +196,13 @@ class GithubRepository(models.Model):
                     branch_ids.append(branch.id)
                 else:
                     _logger.warning(
-                        "the branch '%s'/'%s' has been ignored.",
+                        "The branch '%s'/'%s' has been ignored because '%s' is not "
+                        "configured as a series for organization '%s'. "
+                        "Please add this series in the organization configuration.",
                         repository.name,
                         gh_branch.name,
+                        gh_branch.name,
+                        repository.organization_id.name,
                     )
             repository.repository_branch_ids = [(6, 0, branch_ids)]
 

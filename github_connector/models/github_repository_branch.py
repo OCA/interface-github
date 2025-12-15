@@ -8,8 +8,9 @@ import json
 import logging
 import os
 import shutil
+import subprocess
 from datetime import datetime
-from subprocess import check_output
+
 
 from odoo import addons, api, exceptions, fields, models, tools
 from odoo.tools.safe_eval import safe_eval
@@ -162,15 +163,41 @@ class GithubRepositoryBranch(models.Model):
                             branch.local_path,
                         )
                     ) from None
-                command = f"git clone {gh_repo.clone_url} -b {branch.name} {branch.local_path}"  # noqa: E501
-                os.system(command)
+
+                # Get GitHub token for authenticated cloning
+                token = tools.config.get("github_token") or self.env["ir.config_parameter"].sudo().get_param(
+                    "github.access_token", default=""
+                )
+
+                # Use authenticated URL if token is available
+                clone_url = gh_repo.clone_url
+                if token and clone_url.startswith("https://github.com/"):
+                    clone_url = clone_url.replace("https://github.com/", f"https://{token}@github.com/")
+
+                # Build git clone command
+                command = ["git", "clone", "-b", branch.name, clone_url, branch.local_path]
+
+                # Set environment to disable git credential prompts
+                env = os.environ.copy()
+                env['GIT_TERMINAL_PROMPT'] = '0'  # Disable credential prompts
+                env['GIT_ASKPASS'] = 'echo'  # Return empty string for password prompts
+
+                subprocess.run(
+                    command,
+                    capture_output=True,
+                    text=True,
+                    timeout=300,  # 5 minute timeout
+                    check=True,
+                    env=env,
+                    stdin=subprocess.DEVNULL  # Don't wait for input
+                )
                 branch.write(
                     {"last_download_date": datetime.today(), "state": "to_analyze"}
                 )
             else:
                 # Update repository
                 try:
-                    res = check_output(
+                    res = subprocess.check_output(
                         ["git", "pull", "origin", branch.name], cwd=branch.local_path
                     )
                     vals = {"last_download_date": datetime.today()}
@@ -217,7 +244,7 @@ class GithubRepositoryBranch(models.Model):
     def _call_cloc_command(self):
         """Execute the cloc command and save the result temporarily to access it in
         multiple places."""
-        res = check_output(["cloc", "--by-file", "--json", self.local_path])
+        res = subprocess.check_output(["cloc", "--by-file", "--json", self.local_path])
         return json.loads(res)
 
     def set_analysis_rule_info(self):
@@ -323,7 +350,7 @@ class GithubRepositoryBranch(models.Model):
                     # Mark the branch as analyzed
                     branch.write(vals)
                     if partial_commit:
-                        self._cr.commit()  # pylint: disable=invalid-commit
+                        self.env.cr.commit()  # pylint: disable=invalid-commit
                 except Exception as e:
                     _logger.warning(
                         "Cannot analyze branch %s so skipping it, error is: %s",

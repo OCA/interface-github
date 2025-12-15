@@ -284,8 +284,7 @@ class AbstractGithubModel(models.AbstractModel):
                 item.write(to_write)
 
     def get_github_connector(self):
-        ICP = self.env["ir.config_parameter"]
-        token = tools.config.get("github_token") or ICP.get_param(
+        token = tools.config.get("github_token") or self.env["ir.config_parameter"].sudo().get_param(
             "github.access_token", default=""
         )
         if not token:
