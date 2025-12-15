@@ -8,8 +8,12 @@ from odoo.addons.github_connector.tests.test_github_analysis_rule import (
     TestGithubConnectorAnalysisRuleBase,
 )
 
+from .common import GithubConnectorOdooDemoMixin
 
-class TestGithubConnectorOdooAnalysisRuleBase(TestGithubConnectorAnalysisRuleBase):
+
+class TestGithubConnectorOdooAnalysisRuleBase(
+    GithubConnectorOdooDemoMixin, TestGithubConnectorAnalysisRuleBase
+):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

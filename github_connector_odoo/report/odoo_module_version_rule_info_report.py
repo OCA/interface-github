@@ -36,8 +36,8 @@ class OdooModuleVersionRuleInfoReport(models.Model):
     scanned_files = fields.Integer()
 
     def init(self):
-        tools.drop_view_if_exists(self._cr, "odoo_module_version_rule_info_report")
-        self._cr.execute(
+        tools.drop_view_if_exists(self.env.cr, "odoo_module_version_rule_info_report")
+        self.env.cr.execute(
             """
             CREATE OR REPLACE VIEW odoo_module_version_rule_info_report AS (
                 SELECT

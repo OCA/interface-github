@@ -4,6 +4,7 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import ast
 import logging
 import os
 
@@ -208,9 +209,17 @@ class GithubRepositoryBranch(models.Model):
             manifest_keys_find = module_version.manifest_key_ids.filtered(
                 lambda x: x.id in rule.manifest_key_ids.ids
             )
-            odoo.addons.__path__.append(full_path)  # HACK: to get file_open working
-            module_info = get_manifest(module_version.technical_name, full_path)
-            odoo.addons.__path__.remove(full_path)
+            odoo.addons.__path__ = list(odoo.addons.__path__) + [
+                full_path
+            ]  # HACK: to get file_open working
+            try:
+                module_info = get_manifest(module_version.technical_name, full_path)
+            finally:
+                # Remove the path we added
+                paths = list(odoo.addons.__path__)
+                if full_path in paths:
+                    paths.remove(full_path)
+                    odoo.addons.__path__ = paths
             spec = rule._set_spec(rule.paths.splitlines())
             for manifest_key_find in manifest_keys_find:
                 if manifest_key_find.name in module_info:
@@ -228,19 +237,47 @@ class GithubRepositoryBranch(models.Model):
         module_version_obj = self.env["odoo.module.version"]
         try:
             full_module_path = os.path.join(path, module_name)
-            odoo.addons.__path__.append(path)  # HACK: to get file_open working
-            module_info = get_manifest(module_name, full_module_path)
-            odoo.addons.__path__.remove(path)
-            # Create module version, if the module is installable
-            # in the serie
+            odoo.addons.__path__ = list(odoo.addons.__path__) + [
+                path
+            ]  # HACK: to get file_open working
+            try:
+                module_info = get_manifest(module_name, full_module_path)
+                module_info = dict(module_info)
+            finally:
+                # Remove the path we added
+                paths = list(odoo.addons.__path__)
+                if path in paths:
+                    paths.remove(path)
+                    odoo.addons.__path__ = paths
+
+            # Manually check installable because get_manifest forces it
+            # to False on version mismatch
+            for mname in MANIFEST_NAMES:
+                manifest_path = os.path.join(full_module_path, mname)
+                if os.path.isfile(manifest_path):
+                    try:
+                        with open(manifest_path) as f:
+                            manifest_data = ast.literal_eval(f.read())
+                            if "installable" in manifest_data:
+                                module_info["installable"] = manifest_data[
+                                    "installable"
+                                ]
+                            else:
+                                module_info["installable"] = True
+                    except Exception as e:
+                        _logger.warning("Error reading manifest: %s", e)
+                    break
+
             if module_info.get("installable", True):
-                module_info["technical_name"] = module_name
+                # Convert Manifest object to dict and add technical_name
+                module_info_dict = module_info
+                module_info_dict["technical_name"] = module_name
                 module_version_obj.create_or_update_from_manifest(
-                    module_info, self, full_module_path
+                    module_info_dict, self, full_module_path
                 )
             else:
                 # Otherwise remove module version if exist
-                module_version = self.search(
+                module_version = module_version_obj.search(
                     [
                         ("technical_name", "=", module_name),
                         ("repository_branch_id", "=", self.id),

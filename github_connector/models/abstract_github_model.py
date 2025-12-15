@@ -9,8 +9,8 @@ from datetime import datetime
 from urllib.request import urlopen
 
 import pytz
-from github import Auth, Github  # pylint: disable=missing-manifest-dependency
-from github.GithubException import (  # pylint: disable=missing-manifest-dependency
+from github import Auth, Github
+from github.GithubException import (
     UnknownObjectException,
 )
 
@@ -284,10 +284,9 @@ class AbstractGithubModel(models.AbstractModel):
                 item.write(to_write)
 
     def get_github_connector(self):
-        ICP = self.env["ir.config_parameter"]
-        token = tools.config.get("github_token") or ICP.get_param(
-            "github.access_token", default=""
-        )
+        token = tools.config.get("github_token") or self.env[
+            "ir.config_parameter"
+        ].sudo().get_param("github.access_token", default="")
         if not token:
             raise UserError(
                 self.env._(

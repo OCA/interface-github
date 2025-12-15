@@ -13,6 +13,8 @@ def adapt_version(version):
     """
     serie = release.major_version
     if version == serie or not version.startswith(serie + "."):
+        if len(version.split(".")) >= 5:
+            return version
         return f"{serie}.{version}"  # Similar to 16.0
     return adapt_version_original(version)
 

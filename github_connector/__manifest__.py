@@ -7,12 +7,15 @@
 {
     "name": "Github Connector",
     "summary": "Synchronize information from Github repositories",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Connector",
     "license": "AGPL-3",
     "author": "Odoo Community Association (OCA), GRAP, Akretion, Tecnativa",
     "website": "https://github.com/OCA/interface-github",
-    "depends": ["base", "web"],
+    "depends": [
+        "base",
+        "web",
+    ],
     "data": [
         "security/ir_model_category.xml",
         "security/res_groups.xml",
@@ -44,9 +47,18 @@
     ],
     "installable": True,
     "external_dependencies": {
-        "python": ["GitPython", "pathspec", "PyGithub"],
-        "bin": ["cloc"],
+        "python": [
+            "GitPython",
+            "pathspec",
+            "PyGithub",
+            "responses",
+        ],
+        "bin": [
+            "cloc",
+        ],
         # special definition used by OCA to install packages
-        "deb": ["cloc"],
+        "deb": [
+            "cloc",
+        ],
     },
 }

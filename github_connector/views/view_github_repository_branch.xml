@@ -33,28 +33,22 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     name="analyzed"
                     domain="[('state','=', 'analyzed')]"
                 />
-                <group expand="1" string="Group By">
-                    <filter
-                        string="Organization"
-                        name="organization"
-                        context="{'group_by' : 'organization_id'}"
-                    />
-                    <filter
-                        string="Serie"
-                        name="serie"
-                        context="{'group_by' : 'organization_serie_id'}"
-                    />
-                    <filter
-                        string="Repository"
-                        name="repository"
-                        context="{'group_by' : 'repository_id'}"
-                    />
-                    <filter
-                        string="State"
-                        name="state"
-                        context="{'group_by' : 'state'}"
-                    />
-                </group>
+                <filter
+                    string="Organization"
+                    name="organization"
+                    context="{'group_by' : 'organization_id'}"
+                />
+                <filter
+                    string="Serie"
+                    name="serie"
+                    context="{'group_by' : 'organization_serie_id'}"
+                />
+                <filter
+                    string="Repository"
+                    name="repository"
+                    context="{'group_by' : 'repository_id'}"
+                />
+                <filter string="State" name="state" context="{'group_by' : 'state'}" />
             </search>
         </field>
     </record>

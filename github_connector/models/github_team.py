@@ -84,19 +84,19 @@ class GithubTeam(models.Model):
 
     @api.depends("partner_ids")
     def _compute_partner_qty(self):
-        data = self.env["github.team.partner"].read_group(
-            [("team_id", "in", self.ids)], ["team_id"], ["team_id"]
+        data = self.env["github.team.partner"]._read_group(
+            [("team_id", "in", self.ids)], groupby=["team_id"], aggregates=["__count"]
         )
-        mapping = {data["team_id"][0]: data["team_id_count"] for data in data}
+        mapping = {team.id: count for team, count in data}
         for item in self:
             item.partner_qty = mapping.get(item.id, 0)
 
     @api.depends("repository_ids")
     def _compute_repository_qty(self):
-        data = self.env["github.team.repository"].read_group(
-            [("team_id", "in", self.ids)], ["team_id"], ["team_id"]
+        data = self.env["github.team.repository"]._read_group(
+            [("team_id", "in", self.ids)], groupby=["team_id"], aggregates=["__count"]
         )
-        mapping = {data["team_id"][0]: data["team_id_count"] for data in data}
+        mapping = {team.id: count for team, count in data}
         for item in self:
             item.repository_qty = mapping.get(item.id, 0)
 

@@ -2,7 +2,7 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.tools import html_sanitize
 
 
@@ -122,7 +122,9 @@ class OdooModule(models.Model):
             else:
                 module.description_rst = ""
                 module.description_rst_html = html_sanitize(
-                    "<h1 style='color:gray;'>" + _("No Version Found") + "</h1>"
+                    "<h1 style='color:gray;'>"
+                    + self.env._("No Version Found")
+                    + "</h1>"
                 )
 
     @api.depends("dependence_module_version_ids.dependency_module_ids")

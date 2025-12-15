@@ -9,7 +9,7 @@ import os
 
 from docutils.core import publish_string
 
-from odoo import _, api, fields, models, tools
+from odoo import api, fields, models, tools
 from odoo.tools import html_sanitize
 from odoo.tools.safe_eval import safe_eval
 
@@ -62,7 +62,6 @@ class OdooModuleVersion(models.Model):
         required=True,
         ondelete="cascade",
         index=True,
-        auto_join=True,
         readonly=True,
     )
     repository_branch_id = fields.Many2one(
@@ -191,7 +190,7 @@ class OdooModuleVersion(models.Model):
     # Overload Section
     def unlink(self):
         # Analyzed repository branches should be reanalyzed
-        if not self._context.get("dont_change_repository_branch_state", False):
+        if not self.env.context.get("dont_change_repository_branch_state", False):
             repository_branch_obj = self.env["github.repository.branch"]
             repository_branch_obj.search(
                 [
@@ -259,12 +258,14 @@ class OdooModuleVersion(models.Model):
                 except Exception:
                     output = (
                         "<h1 style='color:red;'>"
-                        + _("Incorrect RST Description")
+                        + self.env._("Incorrect RST Description")
                         + "</h1>"
                     )
             else:
                 output = html_sanitize(
-                    "<h1 style='color:gray;'>" + _("No Version Found") + "</h1>"
+                    "<h1 style='color:gray;'>"
+                    + self.env._("No Version Found")
+                    + "</h1>"
                 )
             version.description_rst_html = html_sanitize(output)
 
@@ -485,6 +486,7 @@ class OdooModuleVersion(models.Model):
 
     @api.model
     def cron_clean_odoo_module_version(self):
+        # pylint: disable=no-search-all
         module_versions = self.search([])
         module_versions.clean_odoo_module_version()
 
@@ -509,9 +511,10 @@ class OdooModuleVersion(models.Model):
 
 
 class OdooModuleVersionRuleInfo(models.TransientModel):
+    # pylint: disable=no-wizard-in-models
     _inherit = "github.analysis.rule.info.mixin"
     _name = "odoo.module.version.rule.info"
-    _description = "Odoo Module Vesion Rule Info"
+    _description = "Odoo Module Version Rule Info"
 
     module_version_id = fields.Many2one(
         string="Module Version",

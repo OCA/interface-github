@@ -3,6 +3,8 @@
 import requests
 import responses
 
+from odoo.tools import convert_file
+
 from odoo.addons.base.tests.common import BaseCommon
 
 
@@ -16,6 +18,23 @@ class TestGithubConnectorCommon(BaseCommon):
     def setUpClass(cls):
         cls._super_send = requests.Session.send
         super().setUpClass()
+
+        # Load demo data
+        for demo_file in [
+            "demo/github_analysis_rule_group_demo.xml",
+            "demo/github_analysis_rule_demo.xml",
+            "demo/github_organization.xml",
+            "demo/github_organization_serie.xml",
+        ]:
+            convert_file(
+                cls.env,
+                "github_connector",
+                demo_file,
+                {},
+                "init",
+                False,
+            )
+
         cls.info_keys = [
             "code_count",
             "documentation_count",

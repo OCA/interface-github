@@ -3,7 +3,6 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-# pylint: disable=missing-manifest-dependency
 from github.GithubException import UnknownObjectException
 
 from odoo import api, fields, models
@@ -47,13 +46,10 @@ class ResPartner(models.Model):
     )
 
     # Constraints Section
-    _sql_constraints = [
-        (
-            "github_login_uniq",
-            "unique(github_name)",
-            "Two different partners cannot have the same Github Login",
-        )
-    ]
+    _github_login_uniq = models.Constraint(
+        "unique(github_name)",
+        "Two different partners cannot have the same Github Login",
+    )
 
     @api.constrains("github_name", "is_company")
     def _check_login_company(self):
@@ -74,10 +70,12 @@ class ResPartner(models.Model):
 
     @api.depends("github_team_partner_ids")
     def _compute_github_team_qty(self):
-        data = self.env["github.team.partner"].read_group(
-            [("partner_id", "in", self.ids)], ["partner_id"], ["partner_id"]
+        data = self.env["github.team.partner"]._read_group(
+            [("partner_id", "in", self.ids)],
+            groupby=["partner_id"],
+            aggregates=["__count"],
         )
-        mapping = {data["partner_id"][0]: data["partner_id_count"] for data in data}
+        mapping = {partner.id: count for partner, count in data}
         for item in self:
             item.github_team_qty = mapping.get(item.id, 0)
 

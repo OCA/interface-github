@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 ================
 Github Connector
 ================
@@ -13,17 +17,17 @@ Github Connector
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Finterface--github-lightgray.png?logo=github
-    :target: https://github.com/OCA/interface-github/tree/18.0/github_connector
+    :target: https://github.com/OCA/interface-github/tree/19.0/github_connector
     :alt: OCA/interface-github
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/interface-github-18-0/interface-github-18-0-github_connector
+    :target: https://translation.odoo-community.org/projects/interface-github-19-0/interface-github-19-0-github_connector
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/interface-github&target_branch=18.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/interface-github&target_branch=19.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -107,7 +111,7 @@ This module provides 4 crons that you can enable:
 - Download Source Code for All Github Branches (``cron_download_code``)
 - Analyze Source Code for All Github Branches (``cron_analyze_code``)
 
-.. |image| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_settings.png
+.. |image| image:: https://raw.githubusercontent.com/OCA/interface-github/19.0/github_connector/static/description/github_settings.png
 
 Usage
 =====
@@ -294,23 +298,23 @@ This module provides several reports
 
 |github_repository_branch_rule_info_report|
 
-.. |sync_organization| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/sync_organization.png
-.. |github_organization_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_organization_kanban.png
-.. |github_organization_series| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_organization_series.png
-.. |github_organization_external_services| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_organization_external_services.png
-.. |github_organization_sync_buttons| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_organization_sync_buttons.png
-.. |github_team_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_team_kanban.png
-.. |github_team_partner_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_team_partner_kanban.png
-.. |github_team_repository_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_team_repository_kanban.png
-.. |github_repository_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_repository_kanban.png
-.. |github_repository_branch_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_repository_branch_kanban.png
-.. |wizard_download_analyze| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/wizard_download_analyze.png
-.. |github_repository_branch_list| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_repository_branch_list.png
-.. |wizard_create_team| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/wizard_create_team.png
-.. |wizard_create_repository| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/wizard_create_repository.png
-.. |reporting_branches_by_serie| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/reporting_branches_by_serie.png
-.. |reporting_sizes_by_serie| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/reporting_sizes_by_serie.png
-.. |github_repository_branch_rule_info_report| image:: https://raw.githubusercontent.com/OCA/interface-github/18.0/github_connector/static/description/github_repository_branch_rule_info_report.png
+.. |sync_organization| image:: https://raw.githubusercontent.com/OCA/interface-github/19.0/github_connector/static/description/sync_organization.png
+.. |github_organization_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/19.0/github_connector/static/description/github_organization_kanban.png
+.. |github_organization_series| image:: https://raw.githubusercontent.com/OCA/interface-github/19.0/github_connector/static/description/github_organization_series.png
+.. |github_organization_external_services| image:: https://raw.githubusercontent.com/OCA/interface-github/19.0/github_connector/static/description/github_organization_external_services.png
+.. |github_organization_sync_buttons| image:: https://raw.githubusercontent.com/OCA/interface-github/19.0/github_connector/static/description/github_organization_sync_buttons.png
+.. |github_team_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/19.0/github_connector/static/description/github_team_kanban.png
+.. |github_team_partner_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/19.0/github_connector/static/description/github_team_partner_kanban.png
+.. |github_team_repository_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/19.0/github_connector/static/description/github_team_repository_kanban.png
+.. |github_repository_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/19.0/github_connector/static/description/github_repository_kanban.png
+.. |github_repository_branch_kanban| image:: https://raw.githubusercontent.com/OCA/interface-github/19.0/github_connector/static/description/github_repository_branch_kanban.png
+.. |wizard_download_analyze| image:: https://raw.githubusercontent.com/OCA/interface-github/19.0/github_connector/static/description/wizard_download_analyze.png
+.. |github_repository_branch_list| image:: https://raw.githubusercontent.com/OCA/interface-github/19.0/github_connector/static/description/github_repository_branch_list.png
+.. |wizard_create_team| image:: https://raw.githubusercontent.com/OCA/interface-github/19.0/github_connector/static/description/wizard_create_team.png
+.. |wizard_create_repository| image:: https://raw.githubusercontent.com/OCA/interface-github/19.0/github_connector/static/description/wizard_create_repository.png
+.. |reporting_branches_by_serie| image:: https://raw.githubusercontent.com/OCA/interface-github/19.0/github_connector/static/description/reporting_branches_by_serie.png
+.. |reporting_sizes_by_serie| image:: https://raw.githubusercontent.com/OCA/interface-github/19.0/github_connector/static/description/reporting_sizes_by_serie.png
+.. |github_repository_branch_rule_info_report| image:: https://raw.githubusercontent.com/OCA/interface-github/19.0/github_connector/static/description/github_repository_branch_rule_info_report.png
 
 Known issues / Roadmap
 ======================
@@ -345,7 +349,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/interface-github/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/interface-github/issues/new?body=module:%20github_connector%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/interface-github/issues/new?body=module:%20github_connector%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -390,6 +394,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/interface-github <https://github.com/OCA/interface-github/tree/18.0/github_connector>`_ project on GitHub.
+This module is part of the `OCA/interface-github <https://github.com/OCA/interface-github/tree/19.0/github_connector>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

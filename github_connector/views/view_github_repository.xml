@@ -15,13 +15,11 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                     filter_domain="['|', ('name', 'ilike', self), ('description', 'ilike', self)]"
                 />
                 <field name="organization_id" />
-                <group expand="1" string="Group By">
-                    <filter
-                        string="Organization"
-                        name="organization"
-                        context="{'group_by' : 'organization_id'}"
-                    />
-                </group>
+                <filter
+                    string="Organization"
+                    name="organization"
+                    context="{'group_by' : 'organization_id'}"
+                />
             </search>
         </field>
     </record>

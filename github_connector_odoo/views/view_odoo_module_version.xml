@@ -21,28 +21,26 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="author_ids" />
                 <field name="maintainers" />
                 <field name="organization_serie_id" />
-                <group expand="0" string="Group By">
-                    <filter
-                        string="Odoo Type"
-                        name="odoo_type"
-                        context="{'group_by' : 'odoo_type'}"
-                    />
-                    <filter
-                        string="License"
-                        name="license"
-                        context="{'group_by' : 'license_id'}"
-                    />
-                    <filter
-                        string="Module"
-                        name="module"
-                        context="{'group_by' : 'module_id'}"
-                    />
-                    <filter
-                        string="Repository Branch"
-                        name="repository_branch"
-                        context="{'group_by' : 'repository_branch_id'}"
-                    />
-                </group>
+                <filter
+                    string="Odoo Type"
+                    name="odoo_type"
+                    context="{'group_by' : 'odoo_type'}"
+                />
+                <filter
+                    string="License"
+                    name="license"
+                    context="{'group_by' : 'license_id'}"
+                />
+                <filter
+                    string="Module"
+                    name="module"
+                    context="{'group_by' : 'module_id'}"
+                />
+                <filter
+                    string="Repository Branch"
+                    name="repository_branch"
+                    context="{'group_by' : 'repository_branch_id'}"
+                />
             </search>
         </field>
     </record>

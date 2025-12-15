@@ -10,9 +10,11 @@ class AbstractActionMixin(models.AbstractModel):
     def action_open(self):
         self.ensure_one()
         action = self.env["ir.actions.act_window"]._for_xml_id(
-            f"github_connector_odoo.{self._context.get('xml_id')}"
+            f"github_connector_odoo.{self.env.context.get('xml_id')}"
         )
         action["context"] = dict(self.env.context)
         action["context"].pop("group_by", None)
-        action["context"]["search_default_" + self._context.get("field_name")] = self.id
+        action["context"]["search_default_" + self.env.context.get("field_name")] = (
+            self.id
+        )
         return action

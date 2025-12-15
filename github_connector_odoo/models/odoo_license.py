@@ -29,9 +29,10 @@ class OdooLicense(models.Model):
     active = fields.Boolean(default=True)
 
     # Constrains Section
-    _sql_constraints = [
-        ("name_uniq", "unique (name)", "Name already exists !"),
-    ]
+    _name_uniq = models.Constraint(
+        "unique (name)",
+        "Name already exists !",
+    )
 
     # Compute Section
     @api.depends("module_version_ids.license_id")
