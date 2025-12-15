@@ -21,7 +21,7 @@ class ResPartner(models.Model):
     # Column Section
     is_bot_account = fields.Boolean(
         string="Is Bot Github Account",
-        help="Check this box if this " "account is a bot or similar.",
+        help="Check this box if this account is a bot or similar.",
     )
     github_team_partner_ids = fields.One2many(
         string="Teams",
@@ -61,7 +61,7 @@ class ResPartner(models.Model):
             if partner.is_company and partner.github_name:
                 raise UserError(
                     self.env._(
-                        "A company ('%s') can not have a Github login" " associated.",
+                        "A company ('%s') can not have a Github login associated.",
                         partner.name,
                     )
                 )

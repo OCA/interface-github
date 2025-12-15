@@ -326,7 +326,7 @@ class GithubRepositoryBranch(models.Model):
                         self._cr.commit()  # pylint: disable=invalid-commit
                 except Exception as e:
                     _logger.warning(
-                        "Cannot analyze branch %s so skipping it, error " "is: %s",
+                        "Cannot analyze branch %s so skipping it, error is: %s",
                         branch.name,
                         e,
                     )

@@ -251,5 +251,5 @@ class GithubRepositoryBranch(models.Model):
 
         except Exception as e:
             _logger.error(
-                "Cannot process module with name %s, error " "is: %s", module_name, e
+                "Cannot process module with name %s, error is: %s", module_name, e
             )
