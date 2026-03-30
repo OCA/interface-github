@@ -24,11 +24,13 @@ class GithubAnalysisRule(models.Model):
     )
 
     def _set_spec(self, lines):
-        return pathspec.PathSpec.from_lines("gitwildmatch", lines)
+        return pathspec.PathSpec.from_lines("gitignore", lines)
 
     def _get_matches(self, path):
         """
         Get all matches from rule paths (multiple per line allow in rule)
         in a local path
         """
-        return self._set_spec(self.paths.splitlines()).match_tree(path)
+        patterns = self.paths.splitlines()
+        patterns = [p.strip() for p in patterns if p.strip()]  # Clean empty lines
+        return self._set_spec(patterns).match_tree_files(path)
