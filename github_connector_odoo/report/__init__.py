@@ -1,0 +1,1 @@
+from . import odoo_module_version_rule_info_report
