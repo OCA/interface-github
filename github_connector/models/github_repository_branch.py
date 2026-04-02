@@ -114,9 +114,15 @@ class GithubRepositoryBranch(models.Model):
         return super()._auto_init()
 
     def _get_source_path(self):
-        return tools.config.get("source_code_local_path", "") or os.environ.get(
-            "SOURCE_CODE_LOCAL_PATH", ""
+        ICP = self.env["ir.config_parameter"]
+
+        source_path = (
+            tools.config.get("source_code_local_path", "")
+            or os.environ.get("SOURCE_CODE_LOCAL_PATH", "")
+            or ICP.get_param("github.source_code_local_path", "")
         )
+
+        return source_path
 
     # Action Section
     def button_download_code(self):
@@ -176,12 +182,13 @@ class GithubRepositoryBranch(models.Model):
                         "https://github.com/", f"https://{token}@github.com/"
                     )
 
-                # Build git clone command
+                # Build git clone command (single branch for disk efficiency)
                 command = [
                     "git",
                     "clone",
                     "-b",
                     branch.name,
+                    "--single-branch",
                     clone_url,
                     branch.local_path,
                 ]
