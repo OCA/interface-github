@@ -1,5 +1,5 @@
 [project]
-name = "odoo-addons-oca-interface-github"
+name = "odoo-addons-oca-interface-git"
 version = "18.0.20250522.0"
 dependencies = [
     "odoo-addon-github_connector==18.0.*",
