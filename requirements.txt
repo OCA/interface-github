@@ -2,3 +2,4 @@
 GitPython
 PyGithub
 pathspec
+pygments
