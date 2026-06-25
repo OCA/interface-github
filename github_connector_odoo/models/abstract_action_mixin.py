@@ -14,5 +14,6 @@ class AbstractActionMixin(models.AbstractModel):
         )
         action["context"] = dict(self.env.context)
         action["context"].pop("group_by", None)
-        action["context"]["search_default_" + self._context.get("field_name")] = self.id
+        field_name = self._context.get("field_name")
+        action["domain"] = [(field_name, "in", self.ids)]
         return action
