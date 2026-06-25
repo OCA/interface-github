@@ -39,5 +39,5 @@
         "demo/github_organization.xml",
     ],
     "installable": True,
-    "external_dependencies": {"python": ["pathspec"]},
+    "external_dependencies": {"python": ["pathspec", "pygments"]},
 }
